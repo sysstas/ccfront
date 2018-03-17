@@ -3,20 +3,20 @@
   <button mat-button routerLink="admin\masters">Masters</button>
   <button mat-button routerLink="admin\cities">Cities</button>
 </mat-toolbar>
-<router-outlet></router-outlet>
-<!-- <p>
-Masters
-</p>
-<ul *ngFor="let master of masters">
-  <li>
-    {{master.name}}
-  </li>
-</ul>
+
 <p>
   cities
 </p>
 <ul *ngFor="let city of cities">
   <li>
     {{city.city}}
+    <p>
+    Masters in {{city.city}}
+    </p>
+    <ol *ngFor="let master of city.masters">
+      <li>
+        {{master.name}}
+      </li>
+    </ol>
   </li>
-</ul> -->
+</ul> 

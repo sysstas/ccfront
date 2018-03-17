@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'schedule',
@@ -7,38 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleComponent implements OnInit {
 
-  constructor() { }
+  constructor( private api: ApiService) { }
 
   ngOnInit() {
   }
-  
-  
-  cities = [
-    {
-      city: "Dnipro",
-      masters: [
-        { id: 1,
-          name: "Andrew",
-          rating: 5
-        },
-        { id: 2,
-          name: "Victor",
-          rating: 3
-        }       
-      ]
-    },
-    {
-      city: "Zhytomyr",
-      masters: [
-        { id: 3,
-          name: "Orest",
-          rating: 5
-        },
-        { id: 4,
-          name: "Lyashko",
-          rating: 2
-        }        
-      ]
-    }
-  ]
+
+  cities = this.api.getCities()
+
+
 }

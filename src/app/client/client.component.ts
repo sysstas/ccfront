@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'client',
@@ -10,11 +11,7 @@ export class ClientComponent implements OnInit {
 
   submitedForm = {}
 
-  cities = [
-    {city: "Dnipro"},
-    {city: "Uzhgorod"}
-  ]
-
+  
   clockSize =[
     {
       size: "big",
@@ -34,11 +31,11 @@ export class ClientComponent implements OnInit {
     this.isFormSubmitted = true;
     console.log(this.submitedForm);     
   }
-  constructor() { }
+  constructor( private api: ApiService) { }
 
   ngOnInit() {
   }
 
-
+  cities = this.api.getCities()
 
 }

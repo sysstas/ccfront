@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'admin',
@@ -7,19 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
   }
 
-masters =[
-  {name: "Andrew"},
-  {name: "Victor"},
-  {name: "Orest"}
-]
+masters = this.api.getCities()
 
-cities = [
-  {city: "Dnipro"},
-  {city: "Zhytomyr"}
-]
+
+cities = this.api.getCities()
+
 }

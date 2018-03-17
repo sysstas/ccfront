@@ -19,6 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MastersComponent } from './admin/masters/masters.component';
 import { ScheduleComponent } from './client/schedule/schedule.component';
+import { ApiService } from './api.service';
 
 
 const routes: Routes = [
@@ -51,7 +52,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

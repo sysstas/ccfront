@@ -1,3 +1,35 @@
-<p>
-  client works!
-</p>
+<div class="example-container" *ngIf="!isFormSubmitted">
+  <mat-form-field>
+    <input matInput placeholder="Name" [(ngModel)]="submitedForm.name" name="Name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" [(ngModel)]="submitedForm.email" name="Email" required>
+  </mat-form-field>  
+
+  <mat-form-field>
+    <mat-select placeholder="Clock size" [(ngModel)]="submitedForm.workTime" name="clocksize" required>
+      <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="City" [(ngModel)]="submitedForm.city" name="city" required>
+      <mat-option *ngFor="let city of cities" [value]="city.city" >{{city.city}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="submitedForm.date" name="date" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="time" [(ngModel)]="submitedForm.time" name="time" type="time" required>
+  </mat-form-field>
+
+  <button (click)="post()" mat-raised-button color="primary" type="submit" >Login</button>
+</div>
+
+<schedule *ngIf="isFormSubmitted"></schedule>

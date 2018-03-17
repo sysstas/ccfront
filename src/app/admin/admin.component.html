@@ -1,3 +1,22 @@
-<p>
-  admin works!
+<mat-toolbar id="background-color">
+  Admin panel
+  <button mat-button routerLink="admin\masters">Masters</button>
+  <button mat-button routerLink="admin\cities">Cities</button>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<!-- <p>
+Masters
 </p>
+<ul *ngFor="let master of masters">
+  <li>
+    {{master.name}}
+  </li>
+</ul>
+<p>
+  cities
+</p>
+<ul *ngFor="let city of cities">
+  <li>
+    {{city.city}}
+  </li>
+</ul> -->

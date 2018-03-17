@@ -12,4 +12,14 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
+masters =[
+  {name: "Andrew"},
+  {name: "Victor"},
+  {name: "Orest"}
+]
+
+cities = [
+  {city: "Dnipro"},
+  {city: "Zhytomyr"}
+]
 }

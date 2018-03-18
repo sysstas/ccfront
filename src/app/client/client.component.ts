@@ -11,7 +11,8 @@ export class ClientComponent implements OnInit {
 
   submitedForm = {}
 
-  
+  workHours
+
   clockSize =[
     {
       size: "big",

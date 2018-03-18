@@ -1,22 +1,55 @@
-<mat-toolbar id="background-color">
-  Admin panel
-  <button mat-button routerLink="admin\masters">Masters</button>
-  <button mat-button routerLink="admin\cities">Cities</button>
-</mat-toolbar>
-
-<p>
-  cities
-</p>
+<h1>
+  Cities
+</h1>
 <ul *ngFor="let city of cities">
   <li>
-    {{city.city}}
-    <p>
-    Masters in {{city.city}}
-    </p>
-    <ol *ngFor="let master of city.masters">
-      <li>
-        {{master.name}}
-      </li>
-    </ol>
+    <h2>
+      {{city.city}}
+    </h2>   
+    
+    <mat-list>  
+      <h3 mat-subheader>Masters in {{city.city}}</h3>
+      <mat-list-item *ngFor="let master of city.masters">
+        <h4 mat-line>Name: {{master.name }}</h4>
+        <p mat-line>Rating: {{master.rating | json}} stars</p>
+      </mat-list-item>
+    </mat-list>
   </li>
 </ul> 
+<mat-divider></mat-divider>
+
+<!-- <h1>Masters</h1>
+<mat-list *ngFor="let master of masters1">  
+  <mat-list-item>
+    <h4 mat-line>Name: {{master.name }}</h4>
+    <p mat-line>Rating: {{master.rating | json}} stars</p>
+  </mat-list-item>
+</mat-list>
+<mat-divider></mat-divider> -->
+ 
+<h1>Add new city</h1>
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
+  </mat-form-field>
+  <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
+</div>
+<mat-divider></mat-divider>
+
+<h1>Add new master</h1>
+<div class="example-container">
+  <mat-form-field>
+    <mat-select placeholder="City" [(ngModel)]="newMasterCity" name="city" required>
+      <mat-option *ngFor="let city of cities" [value]="city.city" >{{city.city}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Master name" [(ngModel)]="newMaster.name" name="newmaster">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Rating" [(ngModel)]="newMaster.rating" name="rating" required>
+      <mat-option *ngFor="let rating of masterRating" [value]="rating.mark" >{{rating.mark}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button (click)="addNewMaster()" mat-raised-button color="primary" type="submit" >Add new master</button>
+</div>

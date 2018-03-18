@@ -9,7 +9,8 @@ import {
   MatSelectModule,
   MatInputModule,
   MatDatepickerModule,
-  MatNativeDateModule} from '@angular/material';
+  MatNativeDateModule,
+  MatListModule} from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 
@@ -50,7 +51,8 @@ const routes: Routes = [
     MatSelectModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatListModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

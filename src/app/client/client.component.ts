@@ -59,7 +59,7 @@ export class ClientComponent implements OnInit {
   post() {     
     this.isFormSubmitted = true;
     this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
-    this.filterMasters(this.submitedForm.city)
+    this.filterMasters(this.submitedForm.city, this.submitedForm.date, this.submitedFormWithHours.busiHours)
         
   }
 
@@ -94,10 +94,22 @@ export class ClientComponent implements OnInit {
   // filter all masters to get all available masters
   filteredMasters =[]
  
-  filterMasters(city){
-    this.filteredMasters = this.allMasters.filter(function (el){
+  filterMasters(city, dateH, busiH){
+    var filteredByCity = this.allMasters.filter(function (el){
       return el.city === city
     })
+    
+    var isTrue = []
+
+    filteredByCity.forEach(function(master){
+      if (master.busy[0].date == JSON.stringify(dateH)) {
+        isTrue.push("true")
+      } else isTrue.push("false")
+      console.log(Date.parse(master.busy[0].date)+"asdfasdf")
+    })
+    console.log(isTrue)
+    console.log(Date.parse(dateH.toString()))
+
     // var newArray = homes.filter(function (el) {
     //   return el.price <= 1000 &&
     //          el.sqft >= 500 &&

@@ -55,7 +55,7 @@ export class ApiService {
       rating: 5,
       busy: [
         {
-        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        date:1521496800000,
         time: [8,9,10]
         }
       ]        
@@ -66,7 +66,7 @@ export class ApiService {
       rating: 3,
       busy: [
         {
-        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        date:1521410400000,
         time: [10,11,12]
         }
       ]        
@@ -77,7 +77,7 @@ export class ApiService {
       rating: 5,
       busy: [
         {
-        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        date:1521410400000,
         time: [13,14,15]
         }
       ]        
@@ -88,7 +88,7 @@ export class ApiService {
       rating: 2,
       busy: [
         {
-        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        date:1521410400000,
         time: [8,9,10,16,17]
         }
       ]        

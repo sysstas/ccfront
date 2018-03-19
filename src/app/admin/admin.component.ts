@@ -13,9 +13,10 @@ export class AdminComponent implements OnInit {
   ngOnInit() {
   }
 
-// masters = this.api.getCities()
 
-// masters1 = this.api.getMasters()
+
+masters = this.api.getMasters()
+
 cities = this.api.getCities()
 
 newCity: string 

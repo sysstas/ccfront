@@ -19,7 +19,7 @@ import { ClientComponent } from './client/client.component';
 import { AdminComponent } from './admin/admin.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { MastersComponent } from './admin/masters/masters.component';
-import { ScheduleComponent } from './client/schedule/schedule.component';
+import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 
 
@@ -38,7 +38,7 @@ const routes: Routes = [
     AdminComponent,
     NavigationComponent,
     MastersComponent,
-    ScheduleComponent
+    ChoseMasterComponent
   ],
   imports: [
     BrowserModule,

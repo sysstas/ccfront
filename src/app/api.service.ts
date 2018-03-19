@@ -48,22 +48,50 @@ export class ApiService {
     }
   ]
 
-  masters: [
+  masters = [
     { id: 1,
       name: "Andrew",
-      rating: 5
+      city: "Dnipro",
+      rating: 5,
+      busy: [
+        {
+        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        time: [8,9,10]
+        }
+      ]        
     },
     { id: 2,
       name: "Victor",
-      rating: 3
+      city: "Dnipro",
+      rating: 3,
+      busy: [
+        {
+        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        time: [10,11,12]
+        }
+      ]        
     },         
     { id: 3,
       name: "Orest",
-      rating: 5
+      city: "Zhytomyr",
+      rating: 5,
+      busy: [
+        {
+        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        time: [13,14,15]
+        }
+      ]        
     },
     { id: 4,
       name: "Lyashko",
-      rating: 2
+      city: "Zhytomyr",
+      rating: 2,
+      busy: [
+        {
+        date:"Mon Mar 19 2018 00:00:00 GMT+0200 (EET)",
+        time: [8,9,10,16,17]
+        }
+      ]        
     }        
   ]
 

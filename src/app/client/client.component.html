@@ -1,4 +1,4 @@
-<div class="example-container" *ngIf="!isFormSubmitted">
+<div class="example-container"  *ngIf="!isFormSubmitted">
   <mat-form-field>
     <input matInput placeholder="Name" [(ngModel)]="submitedForm.name" name="Name" required>
   </mat-form-field>
@@ -6,12 +6,6 @@
   <mat-form-field>
     <input matInput placeholder="Email" type="email" [(ngModel)]="submitedForm.email" name="Email" required>
   </mat-form-field>  
-
-  <mat-form-field>
-    <mat-select placeholder="Clock size" [(ngModel)]="submitedForm.workTime" name="clocksize" required>
-      <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
-    </mat-select>
-  </mat-form-field>
 
   <mat-form-field>
     <mat-select placeholder="City" [(ngModel)]="submitedForm.city" name="city" required>
@@ -26,10 +20,49 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="time" [(ngModel)]="submitedForm.time" name="time" type="time" required>
+    <mat-select placeholder="When to start" [(ngModel)]="submitedForm.startHour" name="workhour" required>
+      <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
+    </mat-select>
   </mat-form-field>
 
-  <button (click)="post()" mat-raised-button color="primary" type="submit" >Login</button>
+  <mat-form-field>
+    <mat-select placeholder="Clock size" [(ngModel)]="submitedForm.workTime" name="clocksize" required>
+      <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="post()" mat-raised-button color="primary" type="submit" >Submit</button>
 </div>
 
-<schedule *ngIf="isFormSubmitted"></schedule>
+
+<div class="example-container"  *ngIf="isFormSubmitted">
+
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Change time" [(ngModel)]="submitedForm.startHour" name="workhour1" required>
+      <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="post()" mat-raised-button color="primary" type="submit" >Try again</button>
+</div>
+<mat-divider></mat-divider>
+
+
+<h1>Please choose preferred master</h1>
+<mat-list *ngFor="let master of filteredMasters">  
+  <mat-list-item>
+    <h4 mat-line>Name: {{master.name }} from {{master.city}}</h4>
+    <p mat-line>Rating: {{master.rating | json}} stars</p>
+    <p mat-line>Busy on: {{master.busy | json}} stars</p>
+    <p mat-line>at: {{master.busy | json}} stars</p>
+  </mat-list-item>
+</mat-list>
+<mat-divider></mat-divider>
+
+<!-- <choosemaster *ngIf="isFormSubmitted"></choosemaster> -->

@@ -71,7 +71,6 @@ export class ClientComponent implements OnInit {
 
 
   cities = this.api.getCities()
-
   allMasters = this.api.getMasters()
 
 
@@ -86,52 +85,57 @@ export class ClientComponent implements OnInit {
     } else if (duration === 2){
       time.push(start+1)      
     } 
-    this.submitedFormWithHours.busiHours = time
-    console.log("busi hours: "+this.submitedFormWithHours.busiHours)      
+    this.submitedFormWithHours.busiHours = time    
   }
 
-
+  ///
   // filter all masters to get all available masters
   filteredMasters =[] 
-  filterMasters(city, dateH, busiH){
+  filterMasters(city, dateH, timeH){
     var filteredByCity = this.allMasters.filter(function (el){
       return el.city === city
-    })
-    
-    // Now dividing all masters to two groups - one is "free all day", second is "may be busy in choosen day" - for further filtering
-    var freeWholeDay = []
+    })   
+   
     var maybeBusy = []
+    var definetlyBusy = []
 
-    filteredByCity.forEach(function(master){
-      let isFree = 0
-      let mb = master.busy      
-      for (let i = 0; i < mb.length; i++) {
-        const element = mb[i];
-        if(isFree == 0){
-          if (element.date == Date.parse(dateH.toString())) {
-            maybeBusy.push(master)
-            isFree++          
+    filteredByCity.forEach(function(master){    
+      if(master.busy.find(fidnDate)){
+        let tmpMaster =  Object.assign({}, master)        
+        maybeBusy.push(
+          {id: master.id,
+          date: tmpMaster.busy.find(fidnDate).date,
+          time: tmpMaster.busy.find(fidnDate).time
           }
-        }
+        )        
       }
-      if (isFree == 0) {
-        freeWholeDay.push(master)
-      } 
-      isFree = 0 
+    })   
+
+    function fidnDate(StoredDate){
+      return StoredDate.date == Date.parse(dateH.toString())
+    }
+
+    /// now ned to filter masters in busy hours array
+    maybeBusy.forEach(function(master){
+      if( compare(master.time, timeH) ){
+        definetlyBusy.push(master.id)
+      }
     })
-    console.log("date: " + Date.parse(dateH.toString()))
-	  console.log("free: " + JSON.stringify(freeWholeDay))
-    console.log("maybeBusi: " + JSON.stringify(maybeBusy))
 
-    //console.log("Arr isTrue: " + isTrue)
-    //console.log("DataH: " + Date.parse(dateH.toString()))
-
-    // var newArray = homes.filter(function (el) {
-    //   return el.price <= 1000 &&
-    //          el.sqft >= 500 &&
-    //          el.num_of_beds >=2 &&
-    //          el.num_of_baths >= 2.5;
-    // });
+    function compare(arr1, arr2){
+      let busy = false
+      for (let i = 0; i  < arr1.length; i ++) {
+        const el1 = arr1[i];
+        for (let k = 0; k < arr2.length; k++) {
+          const el2 = arr2[k];
+          if (el1 == el2) {
+            busy = true
+          }
+        }        
+      }
+      return busy
+    }
+    console.log("Busy: " + JSON.stringify(definetlyBusy))
   }
 }
 

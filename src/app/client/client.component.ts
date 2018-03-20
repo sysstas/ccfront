@@ -76,7 +76,7 @@ export class ClientComponent implements OnInit {
 
 
  
-  // forms array of busi hours for sublitted form data
+  // forms array of busi hours for submitted form data
   workiHoursAnalizer(start:any, duration:any){
     let time = []
     time.push(start)
@@ -92,8 +92,7 @@ export class ClientComponent implements OnInit {
 
 
   // filter all masters to get all available masters
-  filteredMasters =[]
- 
+  filteredMasters =[] 
   filterMasters(city, dateH, busiH){
     var filteredByCity = this.allMasters.filter(function (el){
       return el.city === city
@@ -102,13 +101,16 @@ export class ClientComponent implements OnInit {
     var isTrue = []
 
     filteredByCity.forEach(function(master){
-      if (master.busy[0].date == JSON.stringify(dateH)) {
-        isTrue.push("true")
-      } else isTrue.push("false")
-      console.log(Date.parse(master.busy[0].date)+"asdfasdf")
+      master.busy.forEach(function(busiDate){
+	  	console.log(master.name + " " + busiDate.date)
+	  })
+	  
+	  //if (master.busy[0].date == Date.parse(dateH.toString())) {
+      //  isTrue.push("true")
+      //} else isTrue.push("false")     
     })
-    console.log(isTrue)
-    console.log(Date.parse(dateH.toString()))
+    //console.log("Arr isTrue: " + isTrue)
+    //console.log("DataH: " + Date.parse(dateH.toString()))
 
     // var newArray = homes.filter(function (el) {
     //   return el.price <= 1000 &&

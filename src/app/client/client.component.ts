@@ -98,17 +98,31 @@ export class ClientComponent implements OnInit {
       return el.city === city
     })
     
-    var isTrue = []
+    // Now dividing all masters to two groups - one is "free all day", second is "may be busy in choosen day" - for further filtering
+    var freeWholeDay = []
+    var maybeBusy = []
 
     filteredByCity.forEach(function(master){
-      master.busy.forEach(function(busiDate){
-	  	console.log(master.name + " " + busiDate.date)
-	  })
-	  
-	  //if (master.busy[0].date == Date.parse(dateH.toString())) {
-      //  isTrue.push("true")
-      //} else isTrue.push("false")     
+      let isFree = 0
+      let mb = master.busy      
+      for (let i = 0; i < mb.length; i++) {
+        const element = mb[i];
+        if(isFree == 0){
+          if (element.date == Date.parse(dateH.toString())) {
+            maybeBusy.push(master)
+            isFree++          
+          }
+        }
+      }
+      if (isFree == 0) {
+        freeWholeDay.push(master)
+      } 
+      isFree = 0 
     })
+    console.log("date: " + Date.parse(dateH.toString()))
+	  console.log("free: " + JSON.stringify(freeWholeDay))
+    console.log("maybeBusi: " + JSON.stringify(maybeBusy))
+
     //console.log("Arr isTrue: " + isTrue)
     //console.log("DataH: " + Date.parse(dateH.toString()))
 

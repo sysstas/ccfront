@@ -55,9 +55,13 @@ export class ApiService {
       rating: 5,
       busy: [
         {
-        date:1521496800000,
-        time: [8,9,10]
-        }
+          date:1521496800000,
+          time: [8,9,10]
+        },
+        {
+          date:1521410400000,
+          time: [8,9,10]
+        },
       ]        
     },
     { id: 2,

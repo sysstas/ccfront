@@ -59,8 +59,17 @@ export class ClientComponent implements OnInit {
   post() {     
     this.isFormSubmitted = true;
     this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
-    this.filterMasters(this.submitedForm.city, this.submitedForm.date, this.submitedFormWithHours.busiHours)
-        
+    let busiMasters = this.filterMasters(this.submitedForm.city, this.submitedForm.date, this.submitedFormWithHours.busiHours)
+    
+    this.filteredMasters = this.mastersFilteredByCity.filter(val =>{
+      return busiMasters.indexOf(val.id) == -1;
+    })
+  }
+
+  makeOrder(id) {
+    console.log(this.submitedFormWithHours.busiHours)
+    console.log(this.submitedForm.date.toString())
+    console.log(id)
   }
 
 
@@ -72,7 +81,8 @@ export class ClientComponent implements OnInit {
 
   cities = this.api.getCities()
   allMasters = this.api.getMasters()
-
+  mastersFilteredByCity = []
+  filteredMasters =[]
 
  
   // forms array of busi hours for submitted form data
@@ -90,16 +100,16 @@ export class ClientComponent implements OnInit {
 
   ///
   // filter all masters to get all available masters
-  filteredMasters =[] 
+ 
   filterMasters(city, dateH, timeH){
-    var filteredByCity = this.allMasters.filter(function (el){
+    this.mastersFilteredByCity = this.allMasters.filter(function (el){
       return el.city === city
     })   
    
     var maybeBusy = []
     var definetlyBusy = []
 
-    filteredByCity.forEach(function(master){    
+    this.mastersFilteredByCity.forEach(function(master){    
       if(master.busy.find(fidnDate)){
         let tmpMaster =  Object.assign({}, master)        
         maybeBusy.push(
@@ -135,7 +145,7 @@ export class ClientComponent implements OnInit {
       }
       return busy
     }
-    console.log("Busy: " + JSON.stringify(definetlyBusy))
+    return definetlyBusy
   }
 }
 

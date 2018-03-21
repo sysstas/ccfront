@@ -16,12 +16,9 @@ export class AdminComponent implements OnInit {
 
 
 masters = this.api.getMasters()
-
 cities = this.api.getCities()
 
-newCity: string 
-
-newMasterCity: string
+newCity: string
 
 masterRating = [
   {mark: 1},
@@ -31,12 +28,9 @@ masterRating = [
   {mark: 5}
 ]
 
-//newMaster : {
- // id: number,
- // name: string
- // rating: number
-//}
+
 newMaster = {
+  city: '',
   name : '',
   rating: ''
 }
@@ -47,9 +41,7 @@ addNewCity(){
 }
 
 addNewMaster(){
-  console.log(this.newMaster)
-  console.log(this.newMasterCity)
-  //this.api.addCity(this.newCity)
+  this.api.addMaster(this.newMaster)
 }
 
 }

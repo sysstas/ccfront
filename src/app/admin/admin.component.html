@@ -1,46 +1,23 @@
-<h1>
-  Cities
-</h1>
-<ul *ngFor="let city of cities">
-  <li>
-    <h2>
-      {{city.city}}
-    </h2>   
-    
-    <mat-list>  
-      <h3 mat-subheader>Masters in {{city.city}}</h3>
-      <mat-list-item *ngFor="let master of city.masters">
-        <h4 mat-line>Name: {{master.name }}</h4>
-        <p mat-line>Rating: {{master.rating | json}} stars</p>
-      </mat-list-item>
-    </mat-list>
-  </li>
-</ul> 
-<mat-divider></mat-divider>
+ <h1>Clients</h1>
+<mat-list> 
+  <mat-list-item *ngFor="let city of cities">
+    <h4 mat-line>{{city}}</h4>        
+  </mat-list-item>
+</mat-list>  
+<mat-divider></mat-divider>    
 
 <h1>Masters</h1>
-<mat-list *ngFor="let master of masters">  
-  <mat-list-item>
+<mat-list >  
+  <mat-list-item *ngFor="let master of masters">
     <h4 mat-line>Name: {{master.name }}</h4>
     <p mat-line>Rating: {{master.rating | json}} stars</p>
   </mat-list-item>
 </mat-list>
-<mat-divider></mat-divider>
- 
-<h1>Add new city</h1>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
-  </mat-form-field>
-  <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
-</div>
-<mat-divider></mat-divider>
-
 <h1>Add new master</h1>
 <div class="example-container">
   <mat-form-field>
-    <mat-select placeholder="City" [(ngModel)]="newMasterCity" name="city" required>
-      <mat-option *ngFor="let city of cities" [value]="city.city" >{{city.city}}</mat-option>
+    <mat-select placeholder="City" [(ngModel)]="newMaster.city" name="city" required>
+      <mat-option *ngFor="let city of cities" [value]="city" >{{city}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
@@ -53,3 +30,32 @@
   </mat-form-field>
   <button (click)="addNewMaster()" mat-raised-button color="primary" type="submit" >Add new master</button>
 </div>
+<mat-divider></mat-divider>
+
+<h1>Cities</h1>
+<mat-list>
+  <mat-list-item *ngFor="let city of cities">
+    <h4 mat-line>{{city}}</h4>        
+  </mat-list-item>
+</mat-list>
+<h3>Add new city</h3>
+<div class="example-container">
+  <mat-form-field>
+    <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
+  </mat-form-field>
+  <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
+</div>
+<mat-divider></mat-divider>
+
+<h1>Schedulle</h1>
+<mat-list *ngFor="let city of cities">
+  <h2>{{city}}</h2>
+  <mat-list-item *ngFor="let city of cities">
+    <h4 mat-line>{{city}}</h4>        
+  </mat-list-item>
+</mat-list>
+
+
+ 
+
+

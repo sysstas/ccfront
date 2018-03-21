@@ -17,6 +17,13 @@ export class ApiService {
     this.cities.push(cityName) 
   }
 
+  addMaster(newMaster){
+    let id = this.masters.length
+    // using thi construction to clone "newMaster" obj to "newobj"
+    const newobj = { id: id, ...newMaster}    
+    this.masters.push(newobj) 
+  }
+
   cities = ["Dnipro", "Zhytomyr"]
 
   masters = [

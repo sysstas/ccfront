@@ -48,10 +48,10 @@
 <mat-divider></mat-divider>
 
 <h1>Schedulle</h1>
-<mat-list *ngFor="let city of cities">
+<mat-list>
   <h2>{{city}}</h2>
-  <mat-list-item *ngFor="let city of cities">
-    <h4 mat-line>{{city}}</h4>        
+  <mat-list-item *ngFor="let master of masters">
+    <h4 mat-line>{{master.name}}</h4>        
   </mat-list-item>
 </mat-list>
 

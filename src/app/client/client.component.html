@@ -9,7 +9,7 @@
 
   <mat-form-field>
     <mat-select placeholder="City" [(ngModel)]="submitedForm.city" name="city" required>
-      <mat-option *ngFor="let city of cities" [value]="city.city" >{{city.city}}</mat-option>
+      <mat-option *ngFor="let city of cities" [value]="city" >{{city}}</mat-option>
     </mat-select>
   </mat-form-field>
 

@@ -14,39 +14,10 @@ export class ApiService {
   }
 
   addCity(cityName: string){
-    this.cities.push({city: cityName,
-      masters: []
-    }) 
+    this.cities.push(cityName) 
   }
 
-  cities = [
-    {
-      city: "Dnipro",
-      masters: [
-        { id: 1,
-          name: "Andrew",
-          rating: 5
-        },
-        { id: 2,
-          name: "Victor",
-          rating: 3
-        }       
-      ]
-    },
-    {
-      city: "Zhytomyr",
-      masters: [
-        { id: 3,
-          name: "Orest",
-          rating: 5
-        },
-        { id: 4,
-          name: "Lyashko",
-          rating: 2
-        }        
-      ]
-    }
-  ]
+  cities = ["Dnipro", "Zhytomyr"]
 
   masters = [
     { id: 1,

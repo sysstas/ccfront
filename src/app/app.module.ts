@@ -21,6 +21,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { MastersComponent } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
+import { HttpModule } from '@angular/http';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     FormsModule, 

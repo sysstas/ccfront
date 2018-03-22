@@ -59,32 +59,33 @@ export class ClientComponent implements OnInit {
   post() {     
     this.isFormSubmitted = true;
     this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
-    let busiMasters = this.filterMasters(this.submitedForm.city, this.submitedForm.date, this.submitedFormWithHours.busiHours)
+    let busyMasters = this.filterMasters(this.submitedForm.city, this.submitedForm.date, this.submitedFormWithHours.busiHours)
     
     this.filteredMasters = this.mastersFilteredByCity.filter(val =>{
-      return busiMasters.indexOf(val.id) == -1;
+      return busyMasters.indexOf(val.id) == -1;
     })
   }
 
-  makeOrder(id) {
+  makeOrder(userId) {
     console.log(this.submitedFormWithHours.busiHours)
     console.log(this.submitedForm.date.toString())
-    console.log(id)
+    console.log(userId)
   }
 
 
   constructor( private api: ApiService) { }
 
   ngOnInit() {
+   this.api.getMasters()
   }
 
 
   cities = this.api.getCities()
   allMasters = this.api.getMasters()
   mastersFilteredByCity = []
-  filteredMasters =[]
+  filteredMasters =[] 
 
- 
+   
   // forms array of busi hours for submitted form data
   workiHoursAnalizer(start:any, duration:any){
     let time = []

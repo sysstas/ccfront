@@ -8,14 +8,23 @@ import { ApiService } from '../api.service';
 })
 export class AdminComponent implements OnInit {
 
+  public masters
+
   constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.getMasters()
+  }
+  getMasters(){
+    this.api.getMasters().subscribe(function(data){
+      this.masters = data
+    }
+    );
+    console.log(this.masters)
   }
 
 
-
-masters = this.api.getMasters()
+//masters = this.api.getMasters()
 cities = this.api.getCities()
 
 newCity: string

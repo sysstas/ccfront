@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class ApiService {
 
@@ -14,7 +16,7 @@ export class ApiService {
   }
 
   getMasters(){
-    return  this.http.get('http://localhost:3000/masters')     
+    return  this.http.get('http://localhost:3000/masters').map( x => x.json())     
   }
  
 

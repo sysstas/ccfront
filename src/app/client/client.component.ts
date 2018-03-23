@@ -75,13 +75,14 @@ export class ClientComponent implements OnInit {
 
   constructor( private api: ApiService) { }
 
+  public allMasters  = []
+
   ngOnInit() {
-   this.api.getMasters()
+   this.api.getMasters().subscribe( x => this.allMasters = x)
   }
 
 
-  cities = this.api.getCities()
-  allMasters = this.api.getMasters()
+  cities = this.api.getCities() 
   mastersFilteredByCity = []
   filteredMasters =[] 
 

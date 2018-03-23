@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs/Observable'
+
 
 @Component({
   selector: 'admin',
@@ -13,18 +15,9 @@ export class AdminComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.getMasters()
-  }
-  getMasters(){
-    this.api.getMasters().subscribe(function(data){
-      this.masters = data
-    }
-    );
-    console.log(this.masters)
+    this.api.getMasters().subscribe(x => this.masters = x) 
   }
 
-
-//masters = this.api.getMasters()
 cities = this.api.getCities()
 
 newCity: string

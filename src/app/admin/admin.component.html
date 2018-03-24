@@ -1,7 +1,7 @@
  <h1>Clients</h1>
 <mat-list> 
-  <mat-list-item *ngFor="let city of cities">
-    <h4 mat-line>{{city}}</h4>        
+  <mat-list-item *ngFor="let city of api.cities">
+    <h4 mat-line>{{city.cityName}}</h4>        
   </mat-list-item>
 </mat-list>  
 <mat-divider></mat-divider>    
@@ -34,8 +34,8 @@
 
 <h1>Cities</h1>
 <mat-list>
-  <mat-list-item *ngFor="let city of cities">
-    <h4 mat-line>{{city}}</h4>        
+  <mat-list-item *ngFor="let city of api.cities">
+    <h4 mat-line>{{city.cityName}}</h4>        
   </mat-list-item>
 </mat-list>
 <h3>Add new city</h3>

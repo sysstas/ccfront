@@ -10,15 +10,14 @@ import { Observable } from 'rxjs/Observable'
 })
 export class AdminComponent implements OnInit {
 
-  public masters
+  public masters  
 
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getMasters().subscribe(x => this.masters = x) 
+    this.api.getMasters().subscribe(x => this.masters = x)    
+    this.api.getCities()
   }
-
-cities = this.api.getCities()
 
 newCity: string
 
@@ -37,13 +36,16 @@ newMaster = {
   rating: ''
 }
 
-addNewCity(){
-  console.log(this.newCity)
+addNewCity(){ 
+  // calling addCity funcnion on API 
   this.api.addCity(this.newCity)
+  // refreshing cities list on page
+  this.api.getCities()
 }
 
 addNewMaster(){
-  this.api.addMaster(this.newMaster)
+  //this.api.addMaster(this.newMaster)
+  console.log(this.api.cities[0])
 }
 
 }

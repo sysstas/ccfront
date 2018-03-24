@@ -76,13 +76,12 @@ export class ClientComponent implements OnInit {
   constructor( private api: ApiService) { }
 
   public allMasters  = []
-
+  
   ngOnInit() {
    this.api.getMasters().subscribe( x => this.allMasters = x)
+   this.api.getCities()
   }
-
-
-  cities = this.api.getCities() 
+  
   mastersFilteredByCity = []
   filteredMasters =[] 
 

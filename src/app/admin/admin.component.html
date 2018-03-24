@@ -8,7 +8,7 @@
 
 <h1>Masters</h1>
 <mat-list >  
-  <mat-list-item *ngFor="let master of masters">
+  <mat-list-item *ngFor="let master of api.masters">
     <h4 mat-line>Name: {{master.name }}</h4>
     <p mat-line>Rating: {{master.rating | json}} stars</p>
   </mat-list-item>
@@ -17,7 +17,7 @@
 <div class="example-container">
   <mat-form-field>
     <mat-select placeholder="City" [(ngModel)]="newMaster.city" name="city" required>
-      <mat-option *ngFor="let city of cities" [value]="city" >{{city}}</mat-option>
+      <mat-option *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>

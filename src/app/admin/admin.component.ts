@@ -15,7 +15,7 @@ export class AdminComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit() {
-    this.api.getMasters().subscribe(x => this.masters = x)    
+    this.api.getMasters()    
     this.api.getCities()
   }
 
@@ -44,8 +44,8 @@ addNewCity(){
 }
 
 addNewMaster(){
-  //this.api.addMaster(this.newMaster)
-  console.log(this.api.cities[0])
+  this.api.addMaster(this.newMaster)
+  this.api.getMasters()
 }
 
 }

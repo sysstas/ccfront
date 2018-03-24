@@ -13,13 +13,24 @@ export class ApiService {
 
   getCities(){
     this.http.get('http://localhost:3000/cities').subscribe( x => {
-      this.cities = x.json()    
-      console.log(x)
+      this.cities = x.json()  
     })   
   }
 
   getMasters(){
-    return this.http.get('http://localhost:3000/masters').map( x => x.json() )     
+    this.http.get('http://localhost:3000/masters').subscribe( x => {
+      this.masters = x.json() 
+    })     
+  }
+
+  arr = []
+  getFreeMasters(query){
+    
+    // let choosesCity = {city: city}
+     this.http.post('http://localhost:3000/freemasters', query).subscribe( res => {
+       this.arr = res.json() 
+    //   console.log("api " + this.arr)      
+    })    
   }
 
   addCity(cityName: string){    
@@ -28,15 +39,18 @@ export class ApiService {
     // refreshing cities array after adding new city
     this.getCities()
   }
-
-  // !!!temporary function, valid till moving all logic to node server an mongo
-  addMaster(newMaster){
-    let id = this.masters.length
-    // using this construction to clone "newMaster" obj to "newobj"
-    const newobj = { id: id, ...newMaster}    
-    this.masters.push(newobj) 
+  
+  addMaster(newMaster){    
+    this.http.post('http://localhost:3000/newmaster', newMaster).subscribe(res => {})
+    // refreshing masters array after adding new city
+    this.getMasters()
   }  
 
+  updateMasterSchedule(orderInfo){    
+    this.http.post('http://localhost:3000/updateschedule', orderInfo).subscribe(res => {})
+    // refreshing masters array after adding new city
+    this.getMasters()
+  }
 }
 
 

@@ -1,27 +1,32 @@
-# CC
+# Dev plan
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.1.
+# Frontend part
+1. `(Done)` Create empty project structure : 
+    components: Admin, Client, Navigation
+    service: Api
 
-## Development server
+2. `(Done)` Add all necessary dependencies: angular material, etc...
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+3. `(Done)` Setup routs and router
 
-## Code scaffolding
+4. Create login form for accessing admin page
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+5. Create logic and guard to accessing admin page
 
-## Build
+5. `(Done)` Create forms for choosing master on client page, and for adding new city and new master on admin page
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+6. `(Done)` Create lists of masters and cities on client and admin pages
 
-## Running unit tests
+7. `(Done)` Create logic of filtering masters array on client page
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+8. Add validation on form on client page
 
-## Running end-to-end tests
+9. Add validation on forms on admin page 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+10. Create logic of displaing masters schedule
 
-## Further help
+11. Move all necessary hardcoded data to node server
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+12. Make app responsive with flexbox
+
+13. Make app attractive with flexbox

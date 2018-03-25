@@ -10,6 +10,11 @@ import { Observable } from 'rxjs/Observable'
 })
 export class AdminComponent implements OnInit {
 
+  ScheduleForm = {    
+    date:'',
+    city:''
+  }
+
   public masters  
 
   constructor(private api: ApiService) { }
@@ -20,33 +25,46 @@ export class AdminComponent implements OnInit {
     this.api.getClients()
   }
 
-newCity: string
+  newCity: string
 
-masterRating = [
-  {mark: 1},
-  {mark: 2},
-  {mark: 3},
-  {mark: 4},
-  {mark: 5}
-]
+  masterRating = [
+    {mark: 1},
+    {mark: 2},
+    {mark: 3},
+    {mark: 4},
+    {mark: 5}
+  ]
 
 
-newMaster = {
-  city: '',
-  name : '',
-  rating: ''
-}
+  newMaster = {
+    city: '',
+    name : '',
+    rating: ''
+  }
 
-addNewCity(){ 
-  // calling addCity funcnion on API 
-  this.api.addCity(this.newCity)
-  // refreshing cities list on page
-  this.api.getCities()
-}
+  addNewCity(){ 
+    // calling addCity funcnion on API 
+    this.api.addCity(this.newCity)
+    // refreshing cities list on page
+    this.api.getCities()
+  }
 
-addNewMaster(){
-  this.api.addMaster(this.newMaster)
-  this.api.getMasters()
-}
+  addNewMaster(){
+    // calling addMaster funcnion on API 
+    this.api.addMaster(this.newMaster)
+    // refreshing masters list on page
+    this.api.getMasters()
+  }
+
+  schelulefilter(){
+    let city = this.ScheduleForm.city
+    let date = Date.parse( this.ScheduleForm.date)
+    let sheduleQuery = {      
+      city: city,
+      date: date
+    }
+    console.log(this.api.schedule)
+    this.api.getMastersShedule(sheduleQuery)
+  }
 
 }

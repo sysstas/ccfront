@@ -32,12 +32,16 @@ export class ApiService {
 
   arr = []
   getFreeMasters(query){
-    
-    // let choosesCity = {city: city}
      this.http.post('http://localhost:3000/freemasters', query).subscribe( res => {
-       this.arr = res.json() 
-    //   console.log("api " + this.arr)      
+       this.arr = res.json()     
     })    
+  }
+
+  schedule = []
+  getMastersShedule(query){
+    this.http.post('http://localhost:3000/schedule', query).subscribe( res => {
+      this.schedule = res.json()
+    })
   }
 
   addCity(cityName: string){    

@@ -8,6 +8,7 @@ export class ApiService {
   
   cities = []
   masters =[]
+  clients = []
 
   constructor( private http: Http ) { }
 
@@ -20,6 +21,12 @@ export class ApiService {
   getMasters(){
     this.http.get('http://localhost:3000/masters').subscribe( x => {
       this.masters = x.json() 
+    })     
+  }
+
+  getClients(){
+    this.http.get('http://localhost:3000/clients').subscribe( x => {
+      this.clients = x.json() 
     })     
   }
 
@@ -50,6 +57,11 @@ export class ApiService {
     this.http.post('http://localhost:3000/updateschedule', orderInfo).subscribe(res => {})
     // refreshing masters array after adding new city
     this.getMasters()
+  }
+
+  sendClientData(query){
+    console.log(query)
+    this.http.post('http://localhost:3000/sendclient', query).subscribe(res =>{{}})
   }
 }
 

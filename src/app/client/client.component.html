@@ -53,17 +53,6 @@
 </div>
 <mat-divider></mat-divider>
 
-
-<!-- <h1>Please choose preferred master</h1>
-<mat-list *ngFor="let master of filteredMasters">  
-  <mat-list-item>
-    <h4 mat-line>Name: {{master.name }} from {{master.city}}</h4>
-    <p mat-line>Rating: {{master.rating | json}} stars</p> 
-    <button  mat-line (click)="makeOrder(master._id)" mat-raised-button color="primary" type="submit" >Order this master</button>   
-  </mat-list-item>
-</mat-list>
-<mat-divider></mat-divider> -->
-
 <h1>Please choose preferred master</h1>
 <mat-list *ngFor="let master of api.arr">  
   <mat-list-item>
@@ -74,4 +63,3 @@
 </mat-list>
 <mat-divider></mat-divider>
 
-<!-- <choosemaster *ngIf="isFormSubmitted"></choosemaster> -->

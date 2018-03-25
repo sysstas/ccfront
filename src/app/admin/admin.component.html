@@ -1,7 +1,8 @@
  <h1>Clients</h1>
 <mat-list> 
-  <mat-list-item *ngFor="let city of api.cities">
-    <h4 mat-line>{{city.cityName}}</h4>        
+  <mat-list-item *ngFor="let client of api.clients">
+    <h4 mat-line>Name: {{client.name}}</h4> 
+    <h3 mat-line>Email: {{client.email}}</h3>         
   </mat-list-item>
 </mat-list>  
 <mat-divider></mat-divider>    

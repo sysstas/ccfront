@@ -77,8 +77,14 @@ export class ClientComponent implements OnInit {
       time: this.submitedForm.busy
     }    
 
+    let clientQuery = {
+      name: this.submitedForm.name,
+      email: this.submitedForm.email
+    }
+
     this.api.getFreeMasters(query)
-    let mastersFromCity = this.api.arr   
+    this.api.sendClientData(clientQuery)
+    //let mastersFromCity = this.api.arr   
   }
 
     

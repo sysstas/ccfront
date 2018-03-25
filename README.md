@@ -23,10 +23,14 @@
 
 9. Add validation on forms on admin page 
 
-10. Create logic of displaing masters schedule
+10. `(Done)`Create logic of displaing masters schedule
 
-11. Move all necessary hardcoded data to node server
+11. `(Done)`Move all necessary hardcoded data to node server
 
 12. Make app responsive with flexbox
 
 13. Make app attractive with flexbox
+
+14. Create logic of deletion and edition of elements
+
+15. Add email auto send logic

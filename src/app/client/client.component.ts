@@ -57,7 +57,7 @@ export class ClientComponent implements OnInit {
   }
    
 
-  constructor( private api: ApiService) { }
+  constructor( public api: ApiService) { }
     
   ngOnInit() {
    this.api.getMasters()

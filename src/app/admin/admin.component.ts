@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   public masters  
 
-  constructor(private api: ApiService) { }
+  constructor(public api: ApiService) { }
 
   ngOnInit() {
     this.api.getMasters()    

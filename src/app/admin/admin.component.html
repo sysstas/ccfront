@@ -64,12 +64,13 @@
 </mat-list>
 
 <div class="example-container"> 
+ 
   <mat-form-field>
-    <mat-select placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
-      <mat-option *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
+    <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
+      <mat-option  *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
     </mat-select>
   </mat-form-field>
-
+ 
   <mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="ScheduleForm.date" name="date" required>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -79,6 +80,16 @@
   <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Submit</button>
 </div>
 
+
+
+ 
+
+
+
+
+
+
+ 
 
 
 

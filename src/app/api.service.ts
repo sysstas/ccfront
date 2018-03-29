@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ApiService {
@@ -10,7 +11,7 @@ export class ApiService {
   masters =[]
   clients = []
   addr = "https://gentle-ravine-23080.herokuapp.com"
-  constructor( private http: Http ) { }
+  constructor( private http: Http, public router: Router ) { }
 
   getCities(){
     this.http.get(this.addr+'/cities').subscribe( x => {
@@ -66,6 +67,17 @@ export class ApiService {
   sendClientData(query){
     console.log(query)
     this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{}})
+  }
+  
+  IsLoggedIn = false
+  Auth(login, password){
+    let patternLogin =  'admin@example.com'
+    let patternPassword = 'passwordsecret'
+    if ( login == patternLogin && password == patternPassword){
+      this.router.navigate(['/admin']) 
+      this.IsLoggedIn = true
+      return true
+    } else return false
   }
 }
 

@@ -1,11 +1,14 @@
 <div mat-dialog-content>
   <h1>Login</h1>
+  <h4> Hint:</h4>
+  <p>admin@example.com</p>
+  <p>passwordsecret</p>
   <mat-form-field>
-    <input  matInput placeholder="Name" [(ngModel)]="submitedForm.name" name="Name" required>
+    <input  matInput placeholder="Login" [(ngModel)]="submitedForm.login" name="login" required>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Email" type="email" [(ngModel)]="submitedForm.email" name="Email" required>
+    <input matInput placeholder="Password" type="password" [(ngModel)]="submitedForm.password" name="password" required>
   </mat-form-field>  
 
 </div>

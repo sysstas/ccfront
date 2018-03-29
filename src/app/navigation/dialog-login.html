@@ -1,0 +1,16 @@
+<div mat-dialog-content>
+  <h1>Login</h1>
+  <mat-form-field>
+    <input  matInput placeholder="Name" [(ngModel)]="submitedForm.name" name="Name" required>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Email" type="email" [(ngModel)]="submitedForm.email" name="Email" required>
+  </mat-form-field>  
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close] (click)="login()" cdkFocusInitial>Login</button>
+</div>

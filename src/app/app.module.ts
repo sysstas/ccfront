@@ -12,9 +12,11 @@ import {
   MatNativeDateModule,
   MatListModule,
   MatTooltipModule,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatExpansionModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import {FormControl, Validators} from '@angular/forms';
+
 
 
 
@@ -63,7 +65,8 @@ const routes: Routes = [
     MatNativeDateModule,
     MatListModule,
     MatTooltipModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   entryComponents: [NavigationComponent, DialogLogin],
   providers: [ApiService],

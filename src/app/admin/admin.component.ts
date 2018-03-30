@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable'
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
+  panelOpenState: boolean = false;
   ScheduleForm = {    
     date:'',
     city:''

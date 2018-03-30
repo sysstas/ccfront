@@ -11,6 +11,7 @@ export class ApiService {
   masters =[]
   clients = []
   addr = "https://gentle-ravine-23080.herokuapp.com"
+  //addr = "http://localhost:5000"
   constructor( private http: Http, public router: Router ) { }
 
   getCities(){
@@ -69,6 +70,24 @@ export class ApiService {
     this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{}})
   }
   
+  delete(idValue, dbValue){    
+    let query = {
+      id: idValue,
+      db: dbValue
+    }    
+    console.log(query)
+    this.http.post(this.addr+'/delete', query).subscribe(res => {})
+    if (dbValue === 'client') {
+      this.getClients()
+    } else if (dbValue === 'master') {
+      this.getMasters()
+      //console.log(idValue)
+    } else if (dbValue === 'city') {
+      this.getCities()
+      console.log(idValue)
+    }
+  }
+
   IsLoggedIn = false
   Auth(login, password){
     let patternLogin =  'admin@example.com'

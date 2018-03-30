@@ -1,85 +1,125 @@
- <h1>Clients</h1>
-<mat-list> 
-  <mat-list-item *ngFor="let client of api.clients">
-    <h4 mat-line>Name: {{client.name}}</h4> 
-    <h3 mat-line>Email: {{client.email}}</h3>
-    <button mat-button>Edit</button>
-    <button mat-button>Delete</button>          
-  </mat-list-item>
-</mat-list>  
-<mat-divider></mat-divider>    
-
-<h1>Masters</h1>
-<mat-list >  
-  <mat-list-item *ngFor="let master of api.masters">
-    <h4 mat-line>Name: {{master.name }}</h4>
-    <p mat-line>Rating: {{master.rating | json}} stars</p>
-    <button mat-button>Edit</button>
-    <button mat-button>Delete</button>    
-  </mat-list-item>
-</mat-list>
-<h1>Add new master</h1>
-<div class="example-container">
-  <mat-form-field>
-    <mat-select placeholder="City" [(ngModel)]="newMaster.city" name="city" required>
-      <mat-option *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Master name" [(ngModel)]="newMaster.name" name="newmaster">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-select placeholder="Rating" [(ngModel)]="newMaster.rating" name="rating" required>
-      <mat-option *ngFor="let rating of masterRating" [value]="rating.mark" >{{rating.mark}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button (click)="addNewMaster()" mat-raised-button color="primary" type="submit" >Add new master</button>
-</div>
-<mat-divider></mat-divider>
-
-<h1>Cities</h1>
-<mat-list>
-  <mat-list-item *ngFor="let city of api.cities">
-    <h4 mat-line>{{city.cityName}}</h4>        
-  </mat-list-item>
-</mat-list>
-<h3>Add new city</h3>
-<div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
-  </mat-form-field>
-  <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
-</div>
-<mat-divider></mat-divider>
-
-
-<h1>Schedule</h1>
-<mat-list>
-  <h2>{{ScheduleForm.city}}</h2>
-  <h3>{{ScheduleForm.date | date}}</h3>
-  <mat-list-item *ngFor="let master of api.schedule">
-    <h4 mat-line>{{master.name}}</h4> 
-    <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>   
-  </mat-list-item>
-</mat-list>
-
-<div class="example-container"> 
  
-  <mat-form-field>
-    <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
-      <mat-option  *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
-    </mat-select>
-  </mat-form-field>
- 
-  <mat-form-field>
-    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="ScheduleForm.date" name="date" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>  
 
-  <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Submit</button>
-</div>
 
+
+
+
+
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Clients
+      </mat-panel-title>
+      <mat-panel-description>
+        Database of clients
+      </mat-panel-description>
+    </mat-expansion-panel-header>     
+    <mat-list> 
+      <mat-list-item *ngFor="let client of api.clients">
+        <h4 mat-line>Name: {{client.name}}</h4> 
+        <h3 mat-line>Email: {{client.email}}</h3>
+        <button mat-button>Edit</button>
+        <button mat-button (click)="api.delete(client._id, 'client')">Delete</button>          
+      </mat-list-item>
+    </mat-list>  
+    <mat-divider></mat-divider> 
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Masters
+      </mat-panel-title>
+      <mat-panel-description>
+        Database of masters
+      </mat-panel-description>
+    </mat-expansion-panel-header>     
+    <mat-list >  
+      <mat-list-item *ngFor="let master of api.masters">
+        <h4 mat-line>Name: {{master.name }}</h4>
+        <p mat-line>Rating: {{master.rating | json}} stars</p>
+        <button mat-button>Edit</button>
+        <button mat-button (click)="api.delete(master._id, 'master')">Delete</button>    
+      </mat-list-item>
+    </mat-list>
+    <h1>Add new master</h1>
+    <div class="example-container">
+      <mat-form-field>
+        <mat-select placeholder="City" [(ngModel)]="newMaster.city" name="city" required>
+          <mat-option *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Master name" [(ngModel)]="newMaster.name" name="newmaster">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Rating" [(ngModel)]="newMaster.rating" name="rating" required>
+          <mat-option *ngFor="let rating of masterRating" [value]="rating.mark" >{{rating.mark}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button (click)="addNewMaster()" mat-raised-button color="primary" type="submit" >Add new master</button>
+    </div>    
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Cities
+      </mat-panel-title>
+      <mat-panel-description>
+          Database of cities
+      </mat-panel-description>
+    </mat-expansion-panel-header>        
+    <mat-list>
+      <mat-list-item *ngFor="let city of api.cities">
+        <h4 mat-line>{{city.cityName}}</h4> 
+        <button mat-button (click)="api.delete(city._id, 'city')">Delete</button>           
+      </mat-list-item>
+    </mat-list>
+    <h3>Add new city</h3>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
+      </mat-form-field>
+      <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
+    </div>       
+  </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Schedule
+        </mat-panel-title>
+        <mat-panel-description>
+          Check masters schedule here
+        </mat-panel-description>
+      </mat-expansion-panel-header> 
+      <mat-list>
+        <h2>{{ScheduleForm.city}}</h2>
+        <h3>{{ScheduleForm.date | date}}</h3>
+        <mat-list-item *ngFor="let master of api.schedule">
+          <h4 mat-line>{{master.name}}</h4> 
+          <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>   
+        </mat-list-item>
+      </mat-list>
+      <div class="example-container">         
+        <mat-form-field>
+          <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
+            <mat-option  *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
+          </mat-select>
+        </mat-form-field>        
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="ScheduleForm.date" name="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Submit</button>
+      </div>
+    </mat-expansion-panel>
+
+</mat-accordion>
 
 
  

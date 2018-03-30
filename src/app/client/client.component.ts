@@ -94,7 +94,9 @@ export class ClientComponent implements OnInit {
     let oderInfo = {
       id: masterId,
       date: Date.parse(this.submitedForm.date.toString()),
-      time: this.submitedForm.busy
+      time: this.submitedForm.busy,
+      userName: this.submitedForm.name,
+      userEmail: this.submitedForm.email
     }
     this.api.updateMasterSchedule(oderInfo)
     // Clear form and page to initial state

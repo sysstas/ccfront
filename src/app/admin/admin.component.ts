@@ -62,29 +62,19 @@ export class AdminComponent implements OnInit {
 
 
   /// open dialog edit master
-  openDialogEditMaster(master): void {
-    //console.log(client)
-    let dialogRef = this.dialog.open(DialogEditMaster, {
-      width: '250px',
-      data: { name: master.name, id: master._id, rating: master.rating, city: master.city}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
-  }
-
-  // openDialog(client): void {
-  //   let dialogRef = this.dialog.open(DialogEdit, {
-  //     width: '250px'
+  // openDialogEditMaster(master): void {
+  //   //console.log(client)
+  //   let dialogRef = this.dialog.open(DialogEditMaster, {
+  //     width: '250px',
+  //     data: { name: master.name, id: master._id, rating: master.rating, city: master.city}
   //   });
-  //   data: { name: client.name }
 
   //   dialogRef.afterClosed().subscribe(result => {
   //     console.log('The dialog was closed');
+  //     this.animal = result;
   //   });
   // }
+
 
   newCity: string
 
@@ -110,12 +100,12 @@ export class AdminComponent implements OnInit {
     this.api.getCities()
   }
 
-  addNewMaster(){
-    // calling addMaster funcnion on API 
-    this.api.addMaster(this.newMaster)
-    // refreshing masters list on page
-    this.api.getMasters()
-  }
+  // addNewMaster(){
+  //   // calling addMaster funcnion on API 
+  //   this.api.addMaster(this.newMaster)
+  //   // refreshing masters list on page
+  //   this.api.getMasters()
+  // }
 
   schelulefilter(){
     let city = this.ScheduleForm.city
@@ -183,25 +173,25 @@ export class DialogEditCity {
 
 
 /// dialog edit master
-@Component({
-  selector: 'dialog-edit',
-  templateUrl: 'dialog-edit-master.html',
-})
-export class DialogEditMaster {
+// @Component({
+//   selector: 'dialog-edit',
+//   templateUrl: 'dialog-edit-master.html',
+// })
+// export class DialogEditMaster {
 
-  constructor(
-    public api: ApiService,
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+//   constructor(
+//     public api: ApiService,
+//     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+//     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
 
-  edit(data){
-    //console.log("edit is clicked")
-   // console.log(data)
-    this.api.editMaster(data)
+//   edit(data){
+//     //console.log("edit is clicked")
+//    // console.log(data)
+//     this.api.editMaster(data)
     
-  }
-}
+//   }
+// }

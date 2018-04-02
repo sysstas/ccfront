@@ -13,7 +13,8 @@ import {
   MatListModule,
   MatTooltipModule,
   MatDialogModule,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule,
+  MatIconModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import {FormControl, Validators} from '@angular/forms';
 
@@ -22,10 +23,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
-import { AdminComponent, DialogOverviewExampleDialog, DialogEditCity, DialogEditMaster } from './admin/admin.component';
+import { AdminComponent, 
+  DialogOverviewExampleDialog, 
+  DialogEditCity } from './admin/admin.component';
 import { NavigationComponent} from './navigation/navigation.component';
 import { DialogLogin } from './navigation/dialog-login';
-import { MastersComponent } from './admin/masters/masters.component';
+import { MastersComponent, DialogEditMaster } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
@@ -36,7 +39,7 @@ const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
   { path: 'admin', component: AdminComponent},  
-  { path: 'admin\masters', component: MastersComponent},
+  { path: 'admin/masters', component: MastersComponent},
   { path: '**', redirectTo: 'client'}
 ]
 
@@ -71,7 +74,8 @@ const routes: Routes = [
     MatListModule,
     MatTooltipModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatIconModule
   ],
   entryComponents: [NavigationComponent, DialogLogin, AdminComponent, DialogEdit, DialogOverviewExampleDialog, DialogEditCity, DialogEditMaster],
   providers: [ApiService],

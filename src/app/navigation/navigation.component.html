@@ -1,5 +1,7 @@
-<mat-toolbar id="background-color">
-  Clockwise Clockwork
-  <button mat-button routerLink="client">Home</button>
-  <button mat-button  (click)="openDialog()">Admin</button>
+<mat-toolbar id="background-color">  
+  <button mat-mini-fab routerLink="client">Clockwise Clockwork</button>
+  <button mat-button routerLink="admin/masters">mast</button>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-mini-fab  (click)="openDialog()"><mat-icon>lock</mat-icon></button>
+
 </mat-toolbar>

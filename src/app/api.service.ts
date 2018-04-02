@@ -10,8 +10,15 @@ export class ApiService {
   cities = []
   masters =[]
   clients = []
-  addr = "https://gentle-ravine-23080.herokuapp.com"
-  //addr = "http://localhost:5000"
+  masterRating = [
+    {mark: 1},
+    {mark: 2},
+    {mark: 3},
+    {mark: 4},
+    {mark: 5}
+  ]
+  addr = "https://apple-pie-41428.herokuapp.com"
+ // addr = "http://localhost:5000"
   constructor( private http: Http, public router: Router ) { }
 
   getCities(){
@@ -66,7 +73,7 @@ export class ApiService {
   }
 
   sendClientData(query){
-    console.log(query)
+    //console.log(query)
     this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{}})
   }
   
@@ -76,17 +83,53 @@ export class ApiService {
       db: dbValue
     }    
     console.log(query)
-    this.http.post(this.addr+'/delete', query).subscribe(res => {})
-    if (dbValue === 'client') {
-      this.getClients()
-    } else if (dbValue === 'master') {
-      this.getMasters()
-      //console.log(idValue)
-    } else if (dbValue === 'city') {
-      this.getCities()
-      console.log(idValue)
-    }
+    this.http.post(this.addr+'/delete', query).subscribe(res => {
+      if (res) {
+        if (dbValue === 'client') {
+          this.getClients()
+        } else if (dbValue === 'master') {
+          this.getMasters()
+          //console.log(idValue)
+        } else if (dbValue === 'city') {
+          this.getCities()
+          //console.log(idValue)
+        }
+      }
+    })
+    
   }
+
+  editClient(data){
+    //console.log(data)
+    this.http.post(this.addr+'/editclient', data).subscribe(res => {
+      //console.log(res)
+      if (res){
+        this.getClients()
+      }
+    })
+  }
+
+  editCity(data){
+    //console.log(data)
+    this.http.post(this.addr+'/editcity', data).subscribe(res => {
+      //console.log(res)
+      if (res){
+        this.getCities()
+      }
+    })
+  }
+
+  editMaster(data){
+    //console.log(data)
+    this.http.post(this.addr+'/editmaster', data).subscribe(res => {
+      //console.log(res)
+      if (res){
+        this.getMasters()
+      }
+    })
+  }
+
+
 
   IsLoggedIn = false
   Auth(login, password){

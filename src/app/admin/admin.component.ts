@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs/Observable'
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+//import { DialogEdit } from './dialog-edit';
 
 
 @Component({
@@ -17,13 +19,72 @@ export class AdminComponent implements OnInit {
 
   public masters  
 
-  constructor(public api: ApiService) { }
+  constructor(
+    public api: ApiService, 
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.api.getMasters()    
     this.api.getCities()
     this.api.getClients()
   }
+  animal: string;
+  name: string;
+
+  /// open dialog edit client
+  openDialog(client): void {
+    //console.log(client)
+    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: { name: client.name, id: client._id, email: client.email }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+  /// open dialog edit city
+  openDialogEditCity(city): void {
+    //console.log(client)
+    let dialogRef = this.dialog.open(DialogEditCity, {
+      width: '250px',
+      data: { cityName: city.cityName, id: city._id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+
+  /// open dialog edit master
+  openDialogEditMaster(master): void {
+    //console.log(client)
+    let dialogRef = this.dialog.open(DialogEditMaster, {
+      width: '250px',
+      data: { name: master.name, id: master._id, rating: master.rating, city: master.city}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+  // openDialog(client): void {
+  //   let dialogRef = this.dialog.open(DialogEdit, {
+  //     width: '250px'
+  //   });
+  //   data: { name: client.name }
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log('The dialog was closed');
+  //   });
+  // }
 
   newCity: string
 
@@ -67,4 +128,80 @@ export class AdminComponent implements OnInit {
     this.api.getMastersShedule(sheduleQuery)
   }
 
+}
+
+
+/// dialog edit client
+@Component({
+  selector: 'dialog-edit',
+  templateUrl: 'dialog-edit.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  edit(){
+    //console.log("edit is clicked")
+   // console.log(data)
+    this.api.editClient(this.data)
+    
+  }
+}
+
+
+
+/// dialog edit city
+@Component({
+  selector: 'dialog-edit',
+  templateUrl: 'dialog-edit-city.html',
+})
+export class DialogEditCity {
+
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  edit(data){
+    //console.log("edit is clicked")
+   // console.log(data)
+    this.api.editCity(data)
+    
+  }
+}
+
+
+/// dialog edit master
+@Component({
+  selector: 'dialog-edit',
+  templateUrl: 'dialog-edit-master.html',
+})
+export class DialogEditMaster {
+
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  edit(data){
+    //console.log("edit is clicked")
+   // console.log(data)
+    this.api.editMaster(data)
+    
+  }
 }

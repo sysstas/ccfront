@@ -22,13 +22,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
-import { AdminComponent } from './admin/admin.component';
+import { AdminComponent, DialogOverviewExampleDialog, DialogEditCity, DialogEditMaster } from './admin/admin.component';
 import { NavigationComponent} from './navigation/navigation.component';
 import { DialogLogin } from './navigation/dialog-login';
 import { MastersComponent } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
+import { DialogEdit } from './admin/dialog-edit';
 
 
 const routes: Routes = [
@@ -47,7 +48,11 @@ const routes: Routes = [
     NavigationComponent,
     MastersComponent,
     ChoseMasterComponent,
-    DialogLogin
+    DialogLogin,
+    DialogEdit,
+    DialogOverviewExampleDialog,
+    DialogEditCity,
+    DialogEditMaster
   ],
   imports: [
     BrowserModule,
@@ -68,9 +73,9 @@ const routes: Routes = [
     MatDialogModule,
     MatExpansionModule
   ],
-  entryComponents: [NavigationComponent, DialogLogin],
+  entryComponents: [NavigationComponent, DialogLogin, AdminComponent, DialogEdit, DialogOverviewExampleDialog, DialogEditCity, DialogEditMaster],
   providers: [ApiService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 

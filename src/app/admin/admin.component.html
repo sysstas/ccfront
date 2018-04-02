@@ -20,7 +20,7 @@
       <mat-list-item *ngFor="let client of api.clients">
         <h4 mat-line>Name: {{client.name}}</h4> 
         <h3 mat-line>Email: {{client.email}}</h3>
-        <button mat-button>Edit</button>
+        <button mat-button (click)="openDialog(client)">Edit</button>
         <button mat-button (click)="api.delete(client._id, 'client')">Delete</button>          
       </mat-list-item>
     </mat-list>  
@@ -40,7 +40,8 @@
       <mat-list-item *ngFor="let master of api.masters">
         <h4 mat-line>Name: {{master.name }}</h4>
         <p mat-line>Rating: {{master.rating | json}} stars</p>
-        <button mat-button>Edit</button>
+        <p mat-line>City: {{master.city}} </p>
+        <button mat-button (click)="openDialogEditMaster(master)">Edit</button>
         <button mat-button (click)="api.delete(master._id, 'master')">Delete</button>    
       </mat-list-item>
     </mat-list>
@@ -75,6 +76,7 @@
     <mat-list>
       <mat-list-item *ngFor="let city of api.cities">
         <h4 mat-line>{{city.cityName}}</h4> 
+        <button mat-button (click)="openDialogEditCity(city)">Edit</button>
         <button mat-button (click)="api.delete(city._id, 'city')">Delete</button>           
       </mat-list-item>
     </mat-list>

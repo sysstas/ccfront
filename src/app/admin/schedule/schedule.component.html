@@ -1,0 +1,34 @@
+<mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            Schedule
+        </mat-panel-title>
+        <mat-panel-description>
+          Check masters schedule here
+        </mat-panel-description>
+      </mat-expansion-panel-header> 
+      <mat-list>
+        <h2>{{ScheduleForm.city}}</h2>
+        <h3>{{ScheduleForm.date | date}}</h3>
+        <mat-list-item *ngFor="let master of api.schedule">
+          <h4 mat-line>{{master.name}}</h4> 
+          <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>   
+        </mat-list-item>
+      </mat-list>
+      <div class="example-container">         
+        <mat-form-field>
+          <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
+            <mat-option  *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
+          </mat-select>
+        </mat-form-field>        
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="ScheduleForm.date" name="date" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Submit</button>
+      </div>
+    </mat-expansion-panel>
+  
+</mat-accordion>

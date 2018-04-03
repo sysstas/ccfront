@@ -1,0 +1,22 @@
+<mat-accordion>
+    <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          Clients
+      </mat-panel-title>
+      <mat-panel-description>
+        Database of clients
+      </mat-panel-description>
+    </mat-expansion-panel-header>     
+    <mat-list> 
+      <mat-list-item *ngFor="let client of api.clients">
+        <h4 mat-line>Name: {{client.name}}</h4> 
+        <h3 mat-line>Email: {{client.email}}</h3>
+        <button mat-button (click)="openDialog(client)">Edit</button>
+        <button mat-button (click)="api.delete(client._id, 'client')">Delete</button>          
+      </mat-list-item>
+    </mat-list>  
+    <mat-divider></mat-divider> 
+  </mat-expansion-panel>
+</mat-accordion>
+

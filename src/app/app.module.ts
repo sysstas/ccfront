@@ -23,9 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ClientComponent } from './client/client.component';
-import { AdminComponent, 
-  DialogOverviewExampleDialog, 
-  DialogEditCity } from './admin/admin.component';
+import { AdminComponent} from './admin/admin.component';
 import { NavigationComponent} from './navigation/navigation.component';
 import { DialogLogin } from './navigation/dialog-login';
 import { MastersComponent, DialogEditMaster } from './admin/masters/masters.component';
@@ -33,13 +31,16 @@ import { ChoseMasterComponent } from './client/choosemaster/choosemaster.compone
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
 import { DialogEdit } from './admin/dialog-edit';
+import { CitiesComponent, DialogEditCity } from './admin/cities/cities.component';
+import { ClientsComponent, DialogOverviewExampleDialog  } from './admin/clients/clients.component';
+import { ScheduleComponent } from './admin/schedule/schedule.component';
 
 
 const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
   { path: 'admin', component: AdminComponent},  
-  { path: 'admin/masters', component: MastersComponent},
+  { path: 'admin/masters', component: ClientsComponent},
   { path: '**', redirectTo: 'client'}
 ]
 
@@ -55,7 +56,10 @@ const routes: Routes = [
     DialogEdit,
     DialogOverviewExampleDialog,
     DialogEditCity,
-    DialogEditMaster
+    DialogEditMaster,
+    CitiesComponent,
+    ClientsComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +81,13 @@ const routes: Routes = [
     MatExpansionModule,
     MatIconModule
   ],
-  entryComponents: [NavigationComponent, DialogLogin, AdminComponent, DialogEdit, DialogOverviewExampleDialog, DialogEditCity, DialogEditMaster],
+  entryComponents: [NavigationComponent, 
+    DialogLogin, 
+    AdminComponent, 
+    DialogEdit, 
+    DialogOverviewExampleDialog, 
+    DialogEditCity, 
+    DialogEditMaster],
   providers: [ApiService],
   bootstrap: [AppComponent]
 })

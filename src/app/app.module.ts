@@ -39,8 +39,7 @@ import { ScheduleComponent } from './admin/schedule/schedule.component';
 const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
-  { path: 'admin', component: AdminComponent},  
-  { path: 'admin/masters', component: ClientsComponent},
+  { path: 'admin', component: AdminComponent},    
   { path: '**', redirectTo: 'client'}
 ]
 

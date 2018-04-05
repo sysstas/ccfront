@@ -2,8 +2,9 @@
 <mat-list>
   <mat-list-item *ngFor="let city of api.cities">
     <h4 mat-line>{{city.cityName}}</h4> 
-    <button mat-button (click)="openDialogEditCity(city)">Edit</button>
-    <button mat-button (click)="api.delete(city._id, 'city')">Delete</button>           
+    <button mat-button (click)="openDialogEditCity(city)"><mat-icon>edit</mat-icon></button>
+    <button mat-button (click)="api.delete(city._id, 'city')"><mat-icon>delete</mat-icon></button>           
+    <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
 <h3>Add new city</h3>

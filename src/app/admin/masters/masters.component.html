@@ -3,8 +3,9 @@
     <h4 mat-line>Name: {{master.name }}</h4>
     <p mat-line>Rating: {{master.rating | json}} stars</p>
     <p mat-line>City: {{master.city}} </p>
-    <button mat-button (click)="openDialogEditMaster(master)">Edit</button>
-    <button mat-button (click)="api.delete(master._id, 'master')">Delete</button>    
+    <button mat-button (click)="openDialogEditMaster(master)"><mat-icon>edit</mat-icon></button>
+    <button mat-button (click)="api.delete(master._id, 'master')"><mat-icon>delete</mat-icon></button>    
+    <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
 <h1>Add new master</h1>

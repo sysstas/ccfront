@@ -1,9 +1,10 @@
 <mat-list>
-  <h2>{{ScheduleForm.city}}</h2>
-  <h3>{{ScheduleForm.date | date}}</h3>
+  <h2>City: {{ScheduleForm.city}}</h2>
+  <h3>Date: {{ScheduleForm.date | date}}</h3>
   <mat-list-item *ngFor="let master of api.schedule">
     <h4 mat-line>{{master.name}}</h4> 
-    <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>   
+    <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>
+    <mat-divider></mat-divider>   
   </mat-list-item>
 </mat-list>
 <div class="example-container">         

@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class ApiService {
@@ -19,7 +20,9 @@ export class ApiService {
   ]
   addr = "https://apple-pie-41428.herokuapp.com"
  // addr = "http://localhost:5000"
-  constructor( private http: Http, public router: Router ) { }
+  constructor( private http: Http, 
+    public router: Router,  
+    public snackBar: MatSnackBar) { }
 
   getCities(){
     this.http.get(this.addr+'/cities').subscribe( x => {
@@ -55,15 +58,25 @@ export class ApiService {
 
   addCity(cityName: string){    
     let city = {cityName: cityName}
-    this.http.post(this.addr+'/newcity', city).subscribe(res => {})
+    this.http.post(this.addr+'/newcity', city).subscribe(res => {
+      if (res){
+        this.getCities()
+        this.openSnackBarCity()
+      }
+    })
     // refreshing cities array after adding new city
-    this.getCities()
+    
   }
   
   addMaster(newMaster){    
-    this.http.post(this.addr+'/newmaster', newMaster).subscribe(res => {})
+    this.http.post(this.addr+'/newmaster', newMaster).subscribe(res => {
+      if (res){
+        this.getMasters()
+        this.openSnackBarMaster()
+      }
+    })
     // refreshing masters array after adding new city
-    this.getMasters()
+    
   }  
 
   updateMasterSchedule(orderInfo){    
@@ -105,6 +118,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getClients()
+        this.openSnackBarClient()
       }
     })
   }
@@ -115,6 +129,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getCities()
+        this.openSnackBarCity()
       }
     })
   }
@@ -125,6 +140,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getMasters()
+        this.openSnackBarMaster()
       }
     })
   }
@@ -141,6 +157,23 @@ export class ApiService {
       return true
     } else return false
   }
+
+  openSnackBarCity() {
+    this.snackBar.open('City succesfully saved', 'Close', {
+      duration: 2000,
+    });
+  }
+  openSnackBarClient() {
+    this.snackBar.open('Client succesfully saved', 'Close', {
+      duration: 2000,
+    });
+  }
+  openSnackBarMaster() {
+    this.snackBar.open('Master succesfully saved', 'Close', {
+      duration: 2000,
+    });
+  }
+  
 }
 
 

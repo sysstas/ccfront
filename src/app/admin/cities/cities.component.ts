@@ -24,8 +24,7 @@ export class CitiesComponent implements OnInit {
   name: string;
   newCity: string
   /// open dialog edit city
-  openDialogEditCity(city): void {
-    //console.log(client)
+  openDialogEditCity(city): void {    
     let dialogRef = this.dialog.open(DialogEditCity, {
       width: '250px',
       data: { cityName: city.cityName, id: city._id}
@@ -43,8 +42,8 @@ export class CitiesComponent implements OnInit {
     // refreshing cities list on page
     this.api.getCities()
   }
-
-
+  
+  
 }
 
 
@@ -65,11 +64,9 @@ export class DialogEditCity {
   }
 
   edit(data){
-    //console.log("edit is clicked")
-   // console.log(data)
-    this.api.editCity(data)
-    
+    this.api.editCity(data) 
   }
+  
 }
 
 

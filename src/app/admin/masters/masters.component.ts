@@ -25,6 +25,18 @@ export class MastersComponent implements OnInit {
   animal: string;
   name: string;
 
+  /// open dialog delete master function
+  openDialogDeleteMaster(master): void {    
+    let dialogRef = this.dialog.open(DialogDeleteMaster, {
+      width: '250px',
+      data: { masterName: master.name, id: master._id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  } 
+
   /// open dialog edit master
   openDialogEditMaster(master): void {
     //console.log(client)
@@ -63,6 +75,25 @@ export class MastersComponent implements OnInit {
     // refreshing masters list on page
     this.api.getMasters()
   }
+}
+
+/// dialog delete master component
+@Component({
+  templateUrl: 'dialog-delete-master.html',
+})
+export class DialogDeleteMaster {
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogDeleteMaster>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  delete(data){
+    let id = data.id
+    console.log(id)
+    this.api.delete(id, 'master')
+  }  
 }
 
 /// dialog edit master

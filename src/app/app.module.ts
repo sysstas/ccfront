@@ -27,12 +27,12 @@ import { ClientComponent } from './client/client.component';
 import { AdminComponent} from './admin/admin.component';
 import { NavigationComponent} from './navigation/navigation.component';
 import { DialogLogin } from './navigation/dialog-login';
-import { MastersComponent, DialogEditMaster } from './admin/masters/masters.component';
+import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
-import { ClientsComponent, DialogEditClient  } from './admin/clients/clients.component';
+import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 
 
@@ -56,6 +56,8 @@ const routes: Routes = [
     DialogEditCity,
     DialogEditMaster,
     DialogDeleteCity,
+    DialogDeleteClient,
+    DialogDeleteMaster,
     CitiesComponent,
     ClientsComponent,
     ScheduleComponent
@@ -87,7 +89,9 @@ const routes: Routes = [
     DialogEditClient, 
     DialogEditCity, 
     DialogEditMaster,
-    DialogDeleteCity],
+    DialogDeleteCity,
+    DialogDeleteClient,
+    DialogDeleteMaster],
   providers: [ApiService],
   bootstrap: [AppComponent]
 })

@@ -22,22 +22,53 @@ export class ClientsComponent implements OnInit {
   }
   animal: string;
   name: string;
- /// open dialog edit client
- openDialog(client): void {
-  //console.log(client)
-  let dialogRef = this.dialog.open(DialogEditClient, {
-    width: '250px',
-    data: { name: client.name, id: client._id, email: client.email }
-  });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    this.animal = result;
-  });
+  /// open dialog delete client function
+  openDialogDeleteClient(client): void {    
+    let dialogRef = this.dialog.open(DialogDeleteClient, {
+      width: '250px',
+      data: { clientName: client.name, id: client._id}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  } 
+
+  /// open dialog edit client function
+  openDialog(client): void {
+    //console.log(client)
+    let dialogRef = this.dialog.open(DialogEditClient, {
+      width: '250px',
+      data: { name: client.name, id: client._id, email: client.email }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
 }
 
+/// dialog delete clinet component
+@Component({
+  templateUrl: 'dialog-delete-client.html',
+})
+export class DialogDeleteClient {
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogDeleteClient>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  delete(data){
+    let id = data.id
+    console.log(id)
+    this.api.delete(id, 'client')
+  }  
 }
-
 
 /// dialog edit client
 @Component({

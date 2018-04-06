@@ -31,9 +31,8 @@ import { MastersComponent, DialogEditMaster } from './admin/masters/masters.comp
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
-import { DialogEdit } from './admin/dialog-edit';
-import { CitiesComponent, DialogEditCity } from './admin/cities/cities.component';
-import { ClientsComponent, DialogOverviewExampleDialog  } from './admin/clients/clients.component';
+import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
+import { ClientsComponent, DialogEditClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 
 
@@ -53,10 +52,10 @@ const routes: Routes = [
     MastersComponent,
     ChoseMasterComponent,
     DialogLogin,
-    DialogEdit,
-    DialogOverviewExampleDialog,
+    DialogEditClient,
     DialogEditCity,
     DialogEditMaster,
+    DialogDeleteCity,
     CitiesComponent,
     ClientsComponent,
     ScheduleComponent
@@ -84,11 +83,11 @@ const routes: Routes = [
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 
-    AdminComponent, 
-    DialogEdit, 
-    DialogOverviewExampleDialog, 
+    AdminComponent,
+    DialogEditClient, 
     DialogEditCity, 
-    DialogEditMaster],
+    DialogEditMaster,
+    DialogDeleteCity],
   providers: [ApiService],
   bootstrap: [AppComponent]
 })

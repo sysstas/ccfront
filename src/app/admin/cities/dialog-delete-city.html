@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>WARNING</h1>
+<div mat-dialog-content>  
+  <!-- <mat-form-field>
+    <input matInput placeholder="city" [(ngModel)]="data.cityName"  name="city" required>
+  </mat-form-field> -->
+  <p>Are You sure to delete city</p>
+  <h2>{{data.cityName}} ?</h2>  
+  
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="warn" [mat-dialog-close] (click)="delete(data)" >Delete</button>
+</div>

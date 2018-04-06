@@ -25,7 +25,7 @@ export class ClientsComponent implements OnInit {
  /// open dialog edit client
  openDialog(client): void {
   //console.log(client)
-  let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  let dialogRef = this.dialog.open(DialogEditClient, {
     width: '250px',
     data: { name: client.name, id: client._id, email: client.email }
   });
@@ -42,13 +42,13 @@ export class ClientsComponent implements OnInit {
 /// dialog edit client
 @Component({
   selector: 'dialog-edit',
-  templateUrl: 'dialog-edit.html',
+  templateUrl: 'dialog-edit-client.html',
 })
-export class DialogOverviewExampleDialog {
+export class DialogEditClient {
 
   constructor(
     public api: ApiService,
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogEditClient>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {

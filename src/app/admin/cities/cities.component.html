@@ -3,7 +3,8 @@
   <mat-list-item *ngFor="let city of api.cities">
     <h4 mat-line>{{city.cityName}}</h4> 
     <button mat-button (click)="openDialogEditCity(city)"><mat-icon>edit</mat-icon></button>
-    <button mat-button (click)="api.delete(city._id, 'city')"><mat-icon>delete</mat-icon></button>           
+    <button mat-button (click)="openDialogDeleteCity(city)"><mat-icon>delete</mat-icon></button>           
+
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
@@ -15,12 +16,4 @@
   <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
 </div>    
 
-<mat-form-field>
-  <input matInput value="Disco party!" placeholder="Message" #message>
-</mat-form-field>
 
-<mat-form-field>
-  <input matInput value="Dance" placeholder="Action" #action>
-</mat-form-field>
-
-<button mat-button (click)="openSnackBar('message.value')">Show snack-bar</button>

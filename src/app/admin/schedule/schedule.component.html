@@ -1,12 +1,4 @@
-<mat-list>
-  <h2>City: {{ScheduleForm.city}}</h2>
-  <h3>Date: {{ScheduleForm.date | date}}</h3>
-  <mat-list-item *ngFor="let master of api.schedule">
-    <h4 mat-line>{{master.name}}</h4> 
-    <h4 mat-line>Busy at {{master.busy[0].time + ":00, "}}</h4>
-    <mat-divider></mat-divider>   
-  </mat-list-item>
-</mat-list>
+
 <div class="example-container">         
   <mat-form-field>
     <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
@@ -20,4 +12,106 @@
   </mat-form-field>
   <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Submit</button>
 </div>
+<h2>City: {{ScheduleForm.city}}</h2>
+<h3>Date: {{ScheduleForm.date | date}}</h3>
+
+<div class="example-container mat-elevation-z8">
+    <mat-table #table [dataSource]="api.schedule">
+  
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="busy">
+        <mat-header-cell *matHeaderCellDef> Busy </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[0]}} </mat-cell>
+      </ng-container>
+
+      <!-- 8 Column -->
+      <ng-container matColumnDef="8">
+        <mat-header-cell *matHeaderCellDef> 8:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[0]}} </mat-cell>
+      </ng-container>      
+      
+      <!-- 9 Column -->
+      <ng-container matColumnDef="9">
+        <mat-header-cell *matHeaderCellDef> 9:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[1]}} </mat-cell>
+      </ng-container>     
+      
+      <!-- 10 Column -->
+      <ng-container matColumnDef="10">
+        <mat-header-cell *matHeaderCellDef> 10:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[2]}} </mat-cell>
+      </ng-container>     
+      
+      <!-- 11 Column -->
+      <ng-container matColumnDef="11">
+        <mat-header-cell *matHeaderCellDef> 11:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[3]}} </mat-cell>
+      </ng-container>    
+      
+      <!-- 12 Column -->
+      <ng-container matColumnDef="12">
+        <mat-header-cell *matHeaderCellDef> 12:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[4]}} </mat-cell>
+      </ng-container>  
+      
+      <!-- 13 Column -->
+      <ng-container matColumnDef="13">
+        <mat-header-cell *matHeaderCellDef> 13:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[5]}} </mat-cell>
+      </ng-container>     
+      
+      <!-- 14 Column -->
+      <ng-container matColumnDef="14">
+        <mat-header-cell *matHeaderCellDef> 14:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[6]}} </mat-cell>
+      </ng-container>    
+      
+      <!-- 15 Column -->
+      <ng-container matColumnDef="15">
+        <mat-header-cell *matHeaderCellDef> 15:00 </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.hours[7]}} </mat-cell>
+      </ng-container>
+
+      <!-- 16 Column -->
+      <ng-container matColumnDef="16">
+          <mat-header-cell *matHeaderCellDef> 16:00 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.hours[8]}} </mat-cell>
+        </ng-container>  
+
+      <!-- 17 Column -->
+      <ng-container matColumnDef="17">
+          <mat-header-cell *matHeaderCellDef> 17:00 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.hours[9]}} </mat-cell>
+        </ng-container>  
+
+      <!-- 18 Column -->
+      <ng-container matColumnDef="18">
+          <mat-header-cell *matHeaderCellDef> 18:00 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.hours[10]}} </mat-cell>
+        </ng-container>   
+
+      <!-- 19 Column -->
+      <ng-container matColumnDef="19">
+          <mat-header-cell *matHeaderCellDef> 19:00 </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.hours[11]}} </mat-cell>
+      </ng-container>        
+        
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  
+
+
+
     

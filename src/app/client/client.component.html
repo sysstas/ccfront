@@ -10,7 +10,6 @@
         <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
       </mat-form-field>
       
-      <!-- <div *ngIf="name.invalid && name.touched">Name is required, and must be at least 3 characters</div> -->
   
       <mat-form-field>
         <input matInput placeholder="Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.email" name="Email" required>

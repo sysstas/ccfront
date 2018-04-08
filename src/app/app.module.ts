@@ -15,7 +15,8 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatIconModule,
-  MatSnackBarModule} from '@angular/material';
+  MatSnackBarModule,
+  MatTableModule} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import {FormControl, Validators} from '@angular/forms';
 
@@ -81,7 +82,8 @@ const routes: Routes = [
     MatDialogModule,
     MatExpansionModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 

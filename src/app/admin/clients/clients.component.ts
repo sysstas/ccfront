@@ -10,6 +10,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class ClientsComponent implements OnInit {
 
+
+  
   constructor(
     public api: ApiService, 
     public dialog: MatDialog

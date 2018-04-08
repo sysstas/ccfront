@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { ApiService } from '../api.service';
 import { ClientSubmitedForm } from '../models/clientsubmitedform'
@@ -49,19 +50,8 @@ export class ClientComponent implements OnInit {
   //// LOGIC PART
   isFormSubmitted = false
 
-  // submitedForm = {
-  //   startHour:'',
-  //   workTime: '',
-  //   date:'',
-  //   city:'',
-  //   email:'',
-  //   name:'',
-  //   busy:[]
-  // }
-
   submitedForm = new ClientSubmitedForm('','', '','','','',[])
   
-
   workHours = [
     {hour: 8},
     {hour: 9},

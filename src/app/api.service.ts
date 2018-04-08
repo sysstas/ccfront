@@ -18,8 +18,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-  addr = "https://apple-pie-41428.herokuapp.com"
- // addr = "http://localhost:5000"
+ addr = "https://apple-pie-41428.herokuapp.com"
+  //addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
@@ -49,10 +49,22 @@ export class ApiService {
     })    
   }
 
+  
   schedule = []
   getMastersShedule(query){
     this.http.post(this.addr+'/schedule', query).subscribe( res => {
       this.schedule = res.json()
+      /// making appropriate array of hours when master is busy
+      this.schedule.forEach((master, index, array) => {
+        master.hours = []
+        let arr = master.busy[0].time
+        let length = arr.length
+        for (let index = 0; index < length; index++) {
+          const element = arr[index];         
+          let i = element - 8
+          master.hours[i] = "Busy"         
+        }
+      })
     })
   }
 
@@ -61,7 +73,7 @@ export class ApiService {
     this.http.post(this.addr+'/newcity', city).subscribe(res => {
       if (res){
         this.getCities()
-        this.openSnackBarCity()
+        this.openSnackBarEditCity()
       }
     })
     // refreshing cities array after adding new city
@@ -72,7 +84,7 @@ export class ApiService {
     this.http.post(this.addr+'/newmaster', newMaster).subscribe(res => {
       if (res){
         this.getMasters()
-        this.openSnackBarMaster()
+        this.openSnackBarEditMaster()
       }
     })
     // refreshing masters array after adding new city
@@ -80,14 +92,23 @@ export class ApiService {
   }  
 
   updateMasterSchedule(orderInfo){    
-    this.http.post(this.addr+'/updateschedule', orderInfo).subscribe(res => {})
-    // refreshing masters array after adding new city
-    this.getMasters()
+    this.http.post(this.addr+'/updateschedule', orderInfo).subscribe(res => {
+      if (res){
+        console.log('master schedule updated')
+        this.openSnackBarSuccessOrder()
+        // refreshing masters array after adding new city
+        this.getMasters()        
+      }
+    })    
   }
 
   sendClientData(query){
     //console.log(query)
-    this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{}})
+    this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{
+      if (res){
+        console.log('client added to database')        
+      }
+    }})
   }
   
   delete(idValue, dbValue){    
@@ -95,17 +116,22 @@ export class ApiService {
       id: idValue,
       db: dbValue
     }    
-    console.log(query)
     this.http.post(this.addr+'/delete', query).subscribe(res => {
       if (res) {
         if (dbValue === 'client') {
           this.getClients()
+          this.openSnackBarDeleteClient()
+          console.log('client deleted')
         } else if (dbValue === 'master') {
           this.getMasters()
-          //console.log(idValue)
+          this.openSnackBarDeleteMaster()         
+          console.log('master deleted')
+
         } else if (dbValue === 'city') {
           this.getCities()
-          //console.log(idValue)
+          this.openSnackBarDeleteCity()  
+          console.log('city deleted')
+       
         }
       }
     })
@@ -118,7 +144,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getClients()
-        this.openSnackBarClient()
+        this.openSnackBarEditClient()
       }
     })
   }
@@ -129,7 +155,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getCities()
-        this.openSnackBarCity()
+        this.openSnackBarEditCity()
       }
     })
   }
@@ -140,7 +166,7 @@ export class ApiService {
       //console.log(res)
       if (res){
         this.getMasters()
-        this.openSnackBarMaster()
+        this.openSnackBarEditMaster()
       }
     })
   }
@@ -158,22 +184,41 @@ export class ApiService {
     } else return false
   }
 
-  openSnackBarCity() {
+  openSnackBarEditCity() {
     this.snackBar.open('City succesfully saved', 'Close', {
       duration: 2000,
     });
   }
-  openSnackBarClient() {
+  openSnackBarEditClient() {
     this.snackBar.open('Client succesfully saved', 'Close', {
       duration: 2000,
     });
   }
-  openSnackBarMaster() {
+  openSnackBarEditMaster() {
     this.snackBar.open('Master succesfully saved', 'Close', {
       duration: 2000,
     });
   }
-  
+  openSnackBarDeleteCity() {
+    this.snackBar.open('City succesfully deleted', 'Close', {
+      duration: 2000,
+    });
+  }
+  openSnackBarDeleteClient() {
+    this.snackBar.open('Client succesfully deleted', 'Close', {
+      duration: 2000,
+    });
+  }
+  openSnackBarDeleteMaster() {
+    this.snackBar.open('Master succesfully deleted', 'Close', {
+      duration: 2000,
+    });
+  }
+  openSnackBarSuccessOrder() {
+    this.snackBar.open('You successfuly order a master', 'Close', {
+      duration: 2000,
+    });
+  }
 }
 
 

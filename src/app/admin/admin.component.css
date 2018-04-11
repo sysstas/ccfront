@@ -1,0 +1,6 @@
+.background-color > *{
+    background-color: #cdd;
+}
+.width-style{
+    min-width: 800px;
+}

@@ -1,0 +1,6 @@
+.table-style > *{
+    background-color: rgb(241, 234, 176);
+}
+.width-style >*{
+    min-width: 300px;
+}

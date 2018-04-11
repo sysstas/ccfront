@@ -1,8 +1,32 @@
-.example-container {
-    display: flex;
-    flex-direction: column;
-  }
+.horizontal-allign-center{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #cdd;
   
-  .example-container > * {
-    width: 240px;
-  }
+}
+.column{
+  flex-direction: column;
+  background-color: rgba(153, 180, 180, 0.575);
+}
+.width-300px {
+  flex-direction: column;
+  width: 300px;  
+}
+.width-300px-allign-start{
+  flex-direction: column;
+  width: 300px;  
+  justify-content: flex-start;
+}
+.width-800px {
+  flex-direction: column;
+  width: 800px;  
+  text-align: center;
+}
+.form-container{ 
+  flex-direction: column;
+  padding: 5px;
+}
+.form-container> * {
+  width: 100%;
+}

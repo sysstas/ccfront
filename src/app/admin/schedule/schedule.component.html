@@ -15,22 +15,16 @@
 <h2>City: {{ScheduleForm.city}}</h2>
 <h3>Date: {{ScheduleForm.date | date}}</h3>
 
-<div class="example-container mat-elevation-z8">
-    <mat-table #table [dataSource]="api.schedule">
+<div class="table-style mat-elevation-z8">
+    <mat-table #table [dataSource]="api.schedule" >
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
   
       <!-- Name Column -->
-      <ng-container matColumnDef="name">
+      <ng-container matColumnDef="name" class="width-style">
         <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Weight Column -->
-      <ng-container matColumnDef="busy">
-        <mat-header-cell *matHeaderCellDef> Busy </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.hours[0]}} </mat-cell>
       </ng-container>
 
       <!-- 8 Column -->

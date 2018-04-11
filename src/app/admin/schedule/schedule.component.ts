@@ -26,7 +26,7 @@ export class ScheduleComponent implements OnInit {
     this.api.getClients()
   }
 
-  displayedColumns = ['name', 'busy', '8', '9', '10', '11','12','13','14','15','16','17','18','19'];
+  displayedColumns = ['name', '8', '9', '10', '11','12','13','14','15','16','17','18','19'];
 
   schelulefilter(){
     let city = this.ScheduleForm.city

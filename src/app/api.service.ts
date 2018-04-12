@@ -19,7 +19,7 @@ export class ApiService {
     {mark: 5}
   ]
  addr = "https://apple-pie-41428.herokuapp.com"
-  //addr = "http://localhost:5000"
+  // addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
@@ -175,13 +175,14 @@ export class ApiService {
 
   IsLoggedIn = false
   Auth(login, password){
-    let patternLogin =  'admin@example.com'
-    let patternPassword = 'passwordsecret'
-    if ( login == patternLogin && password == patternPassword){
-      this.router.navigate(['/admin']) 
-      this.IsLoggedIn = true
-      return true
-    } else return false
+    let querry = {login: login, password: password}
+    //console.log(login)
+    this.http.post(this.addr+'/login', querry).subscribe(res => {
+      if (res){
+        this.router.navigate(['/admin']) 
+        this.IsLoggedIn = true
+      }
+    })    
   }
 
   openSnackBarEditCity() {

@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material'
 import { LoginSubmitedForm } from '../models/loginsubmitedform'
 import { Router } from '@angular/router'
 import { DialogLogin } from './dialog-login';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'navigation',
@@ -11,7 +12,9 @@ import { DialogLogin } from './dialog-login';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, 
+              public api: ApiService,
+              public router: Router) { }
 
   ngOnInit() {
   }
@@ -24,6 +27,11 @@ export class NavigationComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  logout(): void {
+    this.api.IsLoggedIn = false
+    this.router.navigate(['/client'])
   }
 }
 

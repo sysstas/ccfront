@@ -1,6 +1,6 @@
 <mat-toolbar id="background-color">  
   <button mat-mini-fab routerLink="client">Clockwise Clockwork</button>
   <span style="flex: 1 1 auto"></span>  
-  <button mat-mini-fab  (click)="openDialog()"><mat-icon>lock</mat-icon></button>
-
+  <button mat-mini-fab *ngIf="!api.IsLoggedIn" (click)="openDialog()">Admin</button>
+  <button mat-mini-fab *ngIf="api.IsLoggedIn" (click)="logout()">Logout</button>
 </mat-toolbar>

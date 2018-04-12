@@ -46,7 +46,9 @@ export class ClientComponent implements OnInit {
   getSizeErrorMessage() {
     return this.size.hasError('required') ? 'You must choose size' : '';
   } 
-
+  /// Data Picker validation 
+  minDate = new Date()
+  
   //// LOGIC PART
   isFormSubmitted = false
 

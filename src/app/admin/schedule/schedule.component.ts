@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
+import { Router } from '@angular/router'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
@@ -17,13 +18,14 @@ export class ScheduleComponent implements OnInit {
 
   constructor(
     public api: ApiService, 
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) { }
 
   ngOnInit() {
-    this.api.getMasters()    
-    this.api.getCities()
-    this.api.getClients()
+    // this.api.getMasters()    
+    // this.api.getCities()
+    // this.api.getClients()
   }
 
   displayedColumns = ['name', '8', '9', '10', '11','12','13','14','15','16','17','18','19'];

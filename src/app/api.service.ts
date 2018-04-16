@@ -126,16 +126,13 @@ export class ApiService {
           this.getMasters()
           this.openSnackBarDeleteMaster()         
           console.log('master deleted')
-
         } else if (dbValue === 'city') {
           this.getCities()
           this.openSnackBarDeleteCity()  
-          console.log('city deleted')
-       
+          console.log('city deleted')       
         }
       }
-    })
-    
+    })    
   }
 
   editClient(data){

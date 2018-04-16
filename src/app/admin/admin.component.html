@@ -1,67 +1,7 @@
-<mat-accordion class="background-color">
-  <mat-expansion-panel >
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          Clients
-      </mat-panel-title>
-      <mat-panel-description>
-        Database of clients
-      </mat-panel-description>
-    </mat-expansion-panel-header>     
-    <clients></clients>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          Masters
-      </mat-panel-title>
-      <mat-panel-description>
-        Database of masters
-      </mat-panel-description>
-    </mat-expansion-panel-header>     
-    <masters></masters>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          Cities
-      </mat-panel-title>
-      <mat-panel-description>
-          Database of cities
-      </mat-panel-description>
-    </mat-expansion-panel-header>        
-    <cities></cities>
-  </mat-expansion-panel>
-
-    <mat-expansion-panel class="width-style">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-            Schedule
-        </mat-panel-title>
-        <mat-panel-description>
-          Check masters schedule here
-        </mat-panel-description>
-      </mat-expansion-panel-header> 
-      <schedule></schedule>    
-    </mat-expansion-panel> 
-</mat-accordion>
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
- 
-
-
+<mat-toolbar>  
+  <button mat-button routerLink="./schedule">Schedule</button>
+  <button mat-button routerLink="./cities">Cities</button>
+  <button mat-button routerLink="./masters">Masters</button>
+  <button mat-button routerLink="./clients">Clients</button>
+</mat-toolbar>
+<router-outlet></router-outlet>

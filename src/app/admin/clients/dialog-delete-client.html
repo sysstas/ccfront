@@ -5,5 +5,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
-  <button mat-raised-button color="warn" [mat-dialog-close] (click)="delete(data)" >Delete</button>
+  <button mat-raised-button color="warn" [mat-dialog-close] (click)="api.deleteClient(data)" >Delete</button>
 </div>

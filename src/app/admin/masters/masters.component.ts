@@ -89,11 +89,6 @@ export class DialogDeleteMaster {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  delete(data){
-    let id = data.id
-    console.log(id)
-    this.api.delete(id, 'master')
-  }  
 }
 
 /// dialog edit master

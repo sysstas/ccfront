@@ -124,14 +124,15 @@ export class ClientComponent implements OnInit {
       time: this.submitedForm.busy
     }    
 
-    let clientQuery = {
+    let clientData = {
       name: this.submitedForm.name,
       email: this.submitedForm.email
     }
 
     this.api.getFreeMasters(query)
-    this.api.sendClientData(clientQuery)
-    //let mastersFromCity = this.api.arr   
+    // Add new client to database
+    this.api.addClient(clientData)
+   
   }
 
     

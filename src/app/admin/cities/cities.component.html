@@ -10,10 +10,13 @@
 </mat-list>
 <h3>Add new city</h3>
 <div class="example-container">
-  <mat-form-field>
-    <input matInput placeholder="Add new city" [(ngModel)]="newCity" name="newCity">
-  </mat-form-field>
-  <button (click)="addNewCity()" mat-raised-button color="primary" type="submit" >Add new city</button>
-</div>    
+  <form #form="ngForm" novalidate name="form">
+    <mat-form-field>
+      <input matInput placeholder="Add new city" [formControl]="city" [(ngModel)]="newCity" name="newCity" required>
+      <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <button [disabled]="city.invalid" (click)="addNewCity()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new city</button>
+  </form>
+  </div>    
 
 

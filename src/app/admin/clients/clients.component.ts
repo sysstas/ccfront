@@ -65,11 +65,6 @@ export class DialogDeleteClient {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  delete(data){
-    let id = data.id
-    console.log(id)
-    this.api.delete(id, 'client')
-  }  
 }
 
 /// dialog edit client

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'cities',
@@ -10,6 +11,13 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class CitiesComponent implements OnInit {
 
+  /// FORM VALIDATION PART
+  city = new FormControl('', [Validators.required, Validators.minLength(2)])
+  getCityErrorMessage() {
+    return this.city.hasError('required') ? 'You must enter city name' :
+        this.city.hasError('minlength') ? 'Min length is 2 char' :
+            '';
+  }  
   constructor(
     public api: ApiService, 
     public dialog: MatDialog
@@ -20,9 +28,15 @@ export class CitiesComponent implements OnInit {
     this.api.getCities()
     this.api.getClients()
   }
-  name: string;
+ 
   newCity: string
   
+  // Clean after submit
+  clean(): void{
+    console.log()
+    this.newCity = '';
+  }
+
   /// open dialog edit city function
   openDialogEditCity(city): void {    
     let dialogRef = this.dialog.open(DialogEditCity, {
@@ -68,11 +82,11 @@ export class DialogDeleteCity {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  delete(data){
-    let id = data.id
-    console.log(id)
-    this.api.delete(id, 'city')
-  }  
+  // delete(data){
+  //   let id = data.id
+  //   console.log(id)
+  //   this.api.delete(id, 'city')
+  // }  
 }
 
 /// dialog edit city component

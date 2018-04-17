@@ -24,31 +24,129 @@ export class ApiService {
     public router: Router,  
     public snackBar: MatSnackBar) { }
 
+
+  //// City CRUD /////////////////////////////
   getCities(){
-    this.http.get(this.addr+'/cities').subscribe( x => {
-      this.cities = x.json()  
+    this.http.get(this.addr+'/cities').subscribe( res => {
+      this.cities = res.json()  
     })   
   }
 
+  addCity(cityName: string){    
+    let city = {cityName: cityName}
+    this.http.post(this.addr+'/cities', city).subscribe(res => {
+      if (res){
+        this.getCities()
+        this.openSnackBarEditCity()
+        console.log(res)
+      }
+    })
+  }
+
+  editCity(data){
+    console.log(data)
+    this.http.put(this.addr+'/cities/' + data.id, data).subscribe(res => {      
+      if (res){
+        this.getCities()
+        this.openSnackBarEditCity()
+        console.log(res)
+      }
+    })
+  }
+
+  deleteCity(data){
+    this.http.delete(this.addr+'/cities/' + data.id).subscribe(res =>{
+      if (res){
+        this.getCities()
+        this.openSnackBarDeleteCity()  
+        console.log(res) 
+      }
+    })
+  }
+  ////////////////////////////////////////////////////
+
+  /////// CRUD Masters ///////////////////////////////
   getMasters(){
-    this.http.get(this.addr+'/masters').subscribe( x => {
-      this.masters = x.json() 
+    this.http.get(this.addr+'/masters').subscribe( res => {
+      this.masters = res.json() 
     })     
   }
 
+  addMaster(newMaster){    
+    this.http.post(this.addr+'/masters', newMaster).subscribe( res => {
+      if (res){
+        this.getMasters()
+        this.openSnackBarEditMaster()
+        console.log(res)
+      }
+    })
+  } 
+
+  editMaster(data){
+    this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
+      if (res){
+        this.getMasters()
+        this.openSnackBarEditMaster()
+        console.log(res)
+      }
+    })
+  }
+
+  deleteMaster(data){
+    this.http.delete(this.addr+'/masters/' + data.id).subscribe(res =>{
+      if (res){
+        this.getMasters()
+        this.openSnackBarDeleteMaster()  
+        console.log(res) 
+      }
+    })
+  }
+  //////////////////////////////////////
+
+  /////// CRUD Clients ///////////////////////////////
   getClients(){
-    this.http.get(this.addr+'/clients').subscribe( x => {
-      this.clients = x.json() 
+    this.http.get(this.addr+'/clients').subscribe( res => {
+      this.clients = res.json() 
     })     
   }
 
+  addClient(query){
+    //console.log(query)
+    this.http.post(this.addr+'/clients', query).subscribe(res =>{{
+      if (res){
+        console.log(res)        
+      }
+    }})
+  }
+
+  editClient(data){
+    this.http.put(this.addr+'/clients/' + data.id, data).subscribe(res => {
+      if (res){
+        this.getClients()
+        this.openSnackBarEditClient()
+        console.log(res)
+      }
+    })
+  }
+
+  deleteClient(data){
+    this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{
+      if (res){
+        this.getClients()
+        this.openSnackBarDeleteClient()  
+        console.log(res) 
+      }
+    })
+  }
+  //////////////////////////////////////
+
+  ////// App logic ///////////////////
   arr = []
   getFreeMasters(query){
      this.http.post(this.addr+'/freemasters', query).subscribe( res => {
        this.arr = res.json()     
     })    
   }
-
   
   schedule = []
   getMastersShedule(query){
@@ -68,29 +166,6 @@ export class ApiService {
     })
   }
 
-  addCity(cityName: string){    
-    let city = {cityName: cityName}
-    this.http.post(this.addr+'/newcity', city).subscribe(res => {
-      if (res){
-        this.getCities()
-        this.openSnackBarEditCity()
-      }
-    })
-    // refreshing cities array after adding new city
-    
-  }
-  
-  addMaster(newMaster){    
-    this.http.post(this.addr+'/newmaster', newMaster).subscribe(res => {
-      if (res){
-        this.getMasters()
-        this.openSnackBarEditMaster()
-      }
-    })
-    // refreshing masters array after adding new city
-    
-  }  
-
   updateMasterSchedule(orderInfo){    
     this.http.post(this.addr+'/updateschedule', orderInfo).subscribe(res => {
       if (res){
@@ -102,78 +177,9 @@ export class ApiService {
     })    
   }
 
-  sendClientData(query){
-    //console.log(query)
-    this.http.post(this.addr+'/sendclient', query).subscribe(res =>{{
-      if (res){
-        console.log('client added to database')        
-      }
-    }})
-  }
-  
-  delete(idValue, dbValue){    
-    let query = {
-      id: idValue,
-      db: dbValue
-    }    
-    this.http.post(this.addr+'/delete', query).subscribe(res => {
-      if (res) {
-        if (dbValue === 'client') {
-          this.getClients()
-          this.openSnackBarDeleteClient()
-          console.log('client deleted')
-        } else if (dbValue === 'master') {
-          this.getMasters()
-          this.openSnackBarDeleteMaster()         
-          console.log('master deleted')
-        } else if (dbValue === 'city') {
-          this.getCities()
-          this.openSnackBarDeleteCity()  
-          console.log('city deleted')       
-        }
-      }
-    })    
-  }
-
-  editClient(data){
-    //console.log(data)
-    this.http.post(this.addr+'/editclient', data).subscribe(res => {
-      //console.log(res)
-      if (res){
-        this.getClients()
-        this.openSnackBarEditClient()
-      }
-    })
-  }
-
-  editCity(data){
-    //console.log(data)
-    this.http.post(this.addr+'/editcity', data).subscribe(res => {
-      //console.log(res)
-      if (res){
-        this.getCities()
-        this.openSnackBarEditCity()
-      }
-    })
-  }
-
-  editMaster(data){
-    //console.log(data)
-    this.http.post(this.addr+'/editmaster', data).subscribe(res => {
-      //console.log(res)
-      if (res){
-        this.getMasters()
-        this.openSnackBarEditMaster()
-      }
-    })
-  }
-
-
-
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
-    //console.log(login)
     this.http.post(this.addr+'/login', querry).subscribe(res => {
       if (res){
         this.router.navigate(['/admin']) 
@@ -187,31 +193,37 @@ export class ApiService {
       duration: 2000,
     });
   }
+
   openSnackBarEditClient() {
     this.snackBar.open('Client succesfully saved', 'Close', {
       duration: 2000,
     });
   }
+
   openSnackBarEditMaster() {
     this.snackBar.open('Master succesfully saved', 'Close', {
       duration: 2000,
     });
   }
+
   openSnackBarDeleteCity() {
     this.snackBar.open('City succesfully deleted', 'Close', {
       duration: 2000,
     });
   }
+
   openSnackBarDeleteClient() {
     this.snackBar.open('Client succesfully deleted', 'Close', {
       duration: 2000,
     });
   }
+
   openSnackBarDeleteMaster() {
     this.snackBar.open('Master succesfully deleted', 'Close', {
       duration: 2000,
     });
   }
+
   openSnackBarSuccessOrder() {
     this.snackBar.open('You successfuly order a master', 'Close', {
       duration: 2000,

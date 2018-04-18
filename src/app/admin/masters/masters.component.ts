@@ -13,7 +13,26 @@ export class MastersComponent implements OnInit {
   panelOpenState: boolean = false;
   public masters  
 
+  /// CREATE FORM VALIDATION PART
+  newMasterName = new FormControl('', [Validators.required])
+  newMasterRatingEdit = new FormControl('', [Validators.required])
+  newMasterCity = new FormControl('', [Validators.required])
 
+  getMasterNameErrorMessage() {
+    return this.newMasterName.hasError('required') ? 'Name is required' :
+              '';
+  }
+
+  getMasterRatingMessage() {
+    return this.newMasterRatingEdit.hasError('required') ? 'Rating is required' :
+              '';
+  }
+
+  getMasterCityMessage() {
+  return this.newMasterCity.hasError('required') ? 'City is required' :
+            '';
+  }
+  //////////////////////////////////////
 
   constructor(
     public api: ApiService, 

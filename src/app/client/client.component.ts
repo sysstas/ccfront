@@ -48,6 +48,7 @@ export class ClientComponent implements OnInit {
   } 
   /// Data Picker validation 
   minDate = new Date()
+  //////////////////////////////////////////////
   
   //// LOGIC PART
   isFormSubmitted = false

@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'clients',
@@ -73,6 +74,22 @@ export class DialogDeleteClient {
   templateUrl: 'dialog-edit-client.html',
 })
 export class DialogEditClient {
+
+  /// EDIT FORM VALIDATION PART
+  clientName = new FormControl('', [Validators.required])
+  clientEmail = new FormControl('', [Validators.required, Validators.email])
+
+  getClientNameErrorMessage() {
+    return this.clientName.hasError('required') ? 'You must enter client name' :
+              '';
+  }
+
+  getClientEmailErrorMessage() {
+    return this.clientEmail.hasError('required') ? 'You must enter email' :
+    this.clientEmail.hasError('email') ? 'Not a valid email' :
+    '';
+  }
+  //////////////////////////////////////
 
   constructor(
     public api: ApiService,

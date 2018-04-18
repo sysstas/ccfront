@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'masters',
@@ -11,6 +12,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 export class MastersComponent implements OnInit {
   panelOpenState: boolean = false;
   public masters  
+
+
 
   constructor(
     public api: ApiService, 
@@ -97,6 +100,27 @@ export class DialogDeleteMaster {
   templateUrl: 'dialog-edit-master.html',
 })
 export class DialogEditMaster {
+
+  /// EDIT FORM VALIDATION PART
+  masterName = new FormControl('', [Validators.required])
+  masterRatingEdit = new FormControl('', [Validators.required])
+  masterCity = new FormControl('', [Validators.required])
+
+  getMasterNameErrorMessage() {
+    return this.masterName.hasError('required') ? 'Name is required' :
+              '';
+  }
+
+  getMasterRatingMessage() {
+    return this.masterRatingEdit.hasError('required') ? 'Rating is required' :
+              '';
+  }
+
+  getMasterCityMessage() {
+  return this.masterCity.hasError('required') ? 'City is required' :
+            '';
+  }
+  //////////////////////////////////////
 
   constructor(
     public api: ApiService,

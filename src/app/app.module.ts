@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router' 
+import { Routes, RouterModule, RouterLinkActive } from '@angular/router' 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatToolbarModule, 
@@ -35,6 +35,7 @@ import { HttpModule } from '@angular/http';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
 import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
+import { OrdersComponent } from './admin/orders/orders.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,8 @@ const routes: Routes = [
       {path: 'schedule', component: ScheduleComponent},
       {path: 'clients', component: ClientsComponent},
       {path: 'masters', component: MastersComponent},
-      {path: 'cities', component: CitiesComponent}
+      {path: 'cities', component: CitiesComponent},
+      {path: 'orders', component: OrdersComponent}
     ]
   },    
   { path: '**', redirectTo: 'client'}
@@ -70,7 +72,9 @@ const routes: Routes = [
     DialogDeleteMaster,
     CitiesComponent,
     ClientsComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    OrdersComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -92,7 +96,7 @@ const routes: Routes = [
     MatExpansionModule,
     MatIconModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule   
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 

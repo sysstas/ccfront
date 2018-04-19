@@ -24,9 +24,9 @@ export class CitiesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.api.getMasters()     
+   // this.api.getMasters()     
     this.api.getCities()
-    this.api.getClients()
+   // this.api.getClients()
   }
  
   newCity: string

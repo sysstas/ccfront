@@ -42,7 +42,7 @@ export class MastersComponent implements OnInit {
   ngOnInit() {
     this.api.getMasters()     
     this.api.getCities()
-    this.api.getClients()
+    //this.api.getClients()
   }
   animal: string;
   name: string;

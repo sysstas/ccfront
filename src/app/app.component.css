@@ -1,0 +1,11 @@
+footer {
+    
+    background-color: darkgray;
+    height: 80px;
+    align-items: flex-end;
+}
+
+
+navigation, footer {
+    flex-shrink: 0;
+}

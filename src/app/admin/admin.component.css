@@ -4,3 +4,11 @@
 .width-style{
     min-width: 800px;
 }
+.active-link{
+    color: rgb(13, 114, 109);
+    font-weight: bold;   
+}
+.main {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }

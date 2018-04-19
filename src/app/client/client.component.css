@@ -30,3 +30,7 @@
 .form-container> * {
   width: 100%;
 }
+.main {
+  flex-grow: 1;
+  flex-shrink: 0;
+}

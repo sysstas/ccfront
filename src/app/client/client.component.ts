@@ -47,7 +47,10 @@ export class ClientComponent implements OnInit {
     return this.size.hasError('required') ? 'You must choose size' : '';
   } 
   /// Data Picker validation 
-  minDate = new Date()
+  today = new Date()
+  minDate = new Date(this.today.setDate(this.today.getDate()+1))
+  
+
   //////////////////////////////////////////////
   
   //// LOGIC PART

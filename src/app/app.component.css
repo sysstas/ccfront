@@ -1,11 +1,14 @@
-footer {
-    
-    background-color: darkgray;
-    height: 80px;
-    align-items: flex-end;
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
-
-
-navigation, footer {
-    flex-shrink: 0;
+.content {
+    flex-grow: 1;    
+}
+.footer {
+    flex-grow: 0;
+    height: 80px;
+    background: rgb(71, 76, 77);  
+    text-align: center;
 }

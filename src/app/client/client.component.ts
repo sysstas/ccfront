@@ -138,7 +138,10 @@ export class ClientComponent implements OnInit {
     this.api.addClient(clientData)
    
   }
-
+  
+  backToStep1(){
+    this.isFormSubmitted = false;
+  }
     
   // forms array of busi hours for submitted form data
   workiHoursAnalizer(start:any, duration:any){

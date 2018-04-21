@@ -5,7 +5,7 @@
       <p mat-line>City: {{master.city}} </p>
       <button mat-button (click)="openDialogEditMaster(master)"><mat-icon>edit</mat-icon></button>
       <!-- <button mat-button (click)="api.delete(master._id, 'master')"><mat-icon>delete</mat-icon></button>     -->
-      <button mat-button (click)="openDialogDeleteMaster(master)"><mat-icon>delete</mat-icon></button> 
+      <button mat-button (click)="openDialogDeleteMaster(master)"><mat-icon class="red">delete</mat-icon></button> 
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>  
@@ -18,7 +18,7 @@
       <mat-error *ngIf="newMasterCity.invalid">{{getMasterCityMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Master name" [formControl]="newMasterName" [(ngModel)]="newMaster.name" name="newmaster">
+      <input matInput placeholder="Master name" [formControl]="newMasterName" [(ngModel)]="newMaster.name" name="newmaster" required>
       <mat-error *ngIf="newMasterName.invalid">{{getMasterNameErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>

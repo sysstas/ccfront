@@ -12,3 +12,7 @@
     background: rgb(71, 76, 77);  
     text-align: center;
 }
+a {
+    text-decoration-color: black;
+    color: black;
+}

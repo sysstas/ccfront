@@ -167,7 +167,7 @@ export class ApiService {
   }
 
   updateMasterSchedule(orderInfo){    
-    this.http.post(this.addr+'/updateschedule', orderInfo).subscribe(res => {
+    this.http.post(this.addr+'/make-order', orderInfo).subscribe(res => {
       if (res){
         console.log('master schedule updated')
         this.openSnackBarSuccessOrder()

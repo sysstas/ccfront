@@ -86,10 +86,12 @@ export class ClientComponent implements OnInit {
     }
   ]
 
-  makeOrder(masterId) {
+  makeOrder(master) {
     let oderInfo = {
-      id: masterId,
+      id: master._id,
+      masterName: master.name,
       date: Date.parse(this.submitedForm.date.toString()),
+      dateMsg: this.submitedForm.date,
       time: this.submitedForm.busy,
       userName: this.submitedForm.name,
       userEmail: this.submitedForm.email

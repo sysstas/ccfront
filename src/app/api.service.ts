@@ -37,7 +37,7 @@ export class ApiService {
     this.http.post(this.addr+'/cities', city).subscribe(res => {
       if (res){
         this.getCities()
-        this.openSnackBarEditCity()
+        this.openSnackBar('City succesfully saved')
         console.log(res)
       }
     })
@@ -48,7 +48,7 @@ export class ApiService {
     this.http.put(this.addr+'/cities/' + data.id, data).subscribe(res => {      
       if (res){
         this.getCities()
-        this.openSnackBarEditCity()
+        this.openSnackBar('City succesfully saved')
         console.log(res)
       }
     })
@@ -58,7 +58,7 @@ export class ApiService {
     this.http.delete(this.addr+'/cities/' + data.id).subscribe(res =>{
       if (res){
         this.getCities()
-        this.openSnackBarDeleteCity()  
+        this.openSnackBar('City succesfully deleted')  
         console.log(res) 
       }
     })
@@ -76,7 +76,7 @@ export class ApiService {
     this.http.post(this.addr+'/masters', newMaster).subscribe( res => {
       if (res){
         this.getMasters()
-        this.openSnackBarEditMaster()
+        this.openSnackBar('Master succesfully saved')
         console.log(res)
       }
     })
@@ -86,7 +86,7 @@ export class ApiService {
     this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
       if (res){
         this.getMasters()
-        this.openSnackBarEditMaster()
+        this.openSnackBar('Master succesfully saved')
         console.log(res)
       }
     })
@@ -96,7 +96,7 @@ export class ApiService {
     this.http.delete(this.addr+'/masters/' + data.id).subscribe(res =>{
       if (res){
         this.getMasters()
-        this.openSnackBarDeleteMaster()  
+        this.openSnackBar('Master succesfully deleted')  
         console.log(res) 
       }
     })
@@ -123,7 +123,7 @@ export class ApiService {
     this.http.put(this.addr+'/clients/' + data.id, data).subscribe(res => {
       if (res){
         this.getClients()
-        this.openSnackBarEditClient()
+        this.openSnackBar('Client succesfully saved')
         console.log(res)
       }
     })
@@ -133,7 +133,7 @@ export class ApiService {
     this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{
       if (res){
         this.getClients()
-        this.openSnackBarDeleteClient()  
+        this.openSnackBar('Client succesfully deleted')  
         console.log(res) 
       }
     })
@@ -170,7 +170,7 @@ export class ApiService {
     this.http.post(this.addr+'/make-order', orderInfo).subscribe(res => {
       if (res){
         console.log('master schedule updated')
-        this.openSnackBarSuccessOrder()
+        this.openSnackBar('You successfuly order a master')
         // refreshing masters array after adding new city
         this.getMasters()        
       }
@@ -188,47 +188,12 @@ export class ApiService {
     })    
   }
 
-  openSnackBarEditCity() {
-    this.snackBar.open('City succesfully saved', 'Close', {
+  openSnackBar(message) {
+    this.snackBar.open( message, 'Close', {
       duration: 2000,
     });
   }
 
-  openSnackBarEditClient() {
-    this.snackBar.open('Client succesfully saved', 'Close', {
-      duration: 2000,
-    });
-  }
-
-  openSnackBarEditMaster() {
-    this.snackBar.open('Master succesfully saved', 'Close', {
-      duration: 2000,
-    });
-  }
-
-  openSnackBarDeleteCity() {
-    this.snackBar.open('City succesfully deleted', 'Close', {
-      duration: 2000,
-    });
-  }
-
-  openSnackBarDeleteClient() {
-    this.snackBar.open('Client succesfully deleted', 'Close', {
-      duration: 2000,
-    });
-  }
-
-  openSnackBarDeleteMaster() {
-    this.snackBar.open('Master succesfully deleted', 'Close', {
-      duration: 2000,
-    });
-  }
-
-  openSnackBarSuccessOrder() {
-    this.snackBar.open('You successfuly order a master', 'Close', {
-      duration: 2000,
-    });
-  }
 }
 
 

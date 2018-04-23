@@ -26,11 +26,8 @@
   background-color: rgba(247, 255, 255, 0.952);
 }
 
-.width-300px {
-  flex-direction: column;
-  width: 300px;  
-}
-.width-300px-allign-start{
+
+.masters-container{
   flex-direction: column;
   width: 300px;  
   justify-content: flex-start;
@@ -39,8 +36,4 @@
 
 .form-container> * {
   width: 100%;
-}
-.main {
-  flex-grow: 1;
-  flex-shrink: 0;
 }

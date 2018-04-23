@@ -57,8 +57,8 @@
             <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
           </mat-form-field>  
           <button [disabled]="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" (click)="find(); $event.preventDefault()" mat-raised-button color="primary" >
-            <span *ngIf="!(size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid)">Find master</span>
-            <span *ngIf="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" matTooltip="Fill all fields to activate">Find master</span>
+            <span *ngIf="!(size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid)">To Step 2</span>
+            <span *ngIf="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" matTooltip="Fill all fields to activate">To Step 2</span>
           </button>       
         </form>
       </div>
@@ -86,7 +86,7 @@
         <div *ngIf="api.arr?.length">
           <h1>Step 2</h1>
           <h3>Choose master</h3>
-          <mat-list *ngFor="let master of api.arr" class="width-300px-allign-start">  
+          <mat-list *ngFor="let master of api.arr" class="masters-container">  
             <mat-list-item>
               <h4 mat-line>Name: {{master.name }} </h4>
               <h3 mat-line>from {{master.city}}</h3>
@@ -102,11 +102,8 @@
   
       </div>
       
-    </div>
-   
-  
-    
-  </div>
+    </div> 
+</div>
    
   
    

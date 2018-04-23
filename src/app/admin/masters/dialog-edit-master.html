@@ -21,6 +21,6 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onCloseButtonClick()">Cancel</button>
   <button mat-button [mat-dialog-close] [disabled]="masterName.invalid || masterRatingEdit.invalid || masterCity.invalid" (click)="edit(data)" cdkFocusInitial>Save</button>
 </div>

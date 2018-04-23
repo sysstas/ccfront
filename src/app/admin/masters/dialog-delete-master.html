@@ -4,6 +4,6 @@
   <h2>{{data.masterName}} ?</h2>     
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-button (click)="onCloseButtonClick()" cdkFocusInitial>Cancel</button>
   <button mat-raised-button color="warn" [mat-dialog-close] (click)="api.deleteMaster(data)" >Delete</button>
 </div>

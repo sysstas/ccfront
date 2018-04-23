@@ -108,7 +108,7 @@ export class DialogDeleteMaster {
     public api: ApiService,
     public dialogRef: MatDialogRef<DialogDeleteMaster>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
-  onNoClick(): void {
+    onCloseButtonClick(): void {
     this.dialogRef.close();
   }
 }
@@ -146,7 +146,7 @@ export class DialogEditMaster {
     public dialogRef: MatDialogRef<DialogEditMaster>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  onNoClick(): void {
+    onCloseButtonClick(): void {
     this.dialogRef.close();
   }
 

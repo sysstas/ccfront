@@ -187,6 +187,9 @@ export class ApiService {
       }
     })    
   }
+  isLoggedIn(){
+    return this.IsLoggedIn;
+  }
 
   openSnackBar(message) {
     this.snackBar.open( message, 'Close', {

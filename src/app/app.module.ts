@@ -36,6 +36,7 @@ import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/citie
 import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 import { OrdersComponent } from './admin/orders/orders.component';
+import { AuthGuardService } from './auth-guard.service';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'client', component: ClientComponent},
   { path: 'admin', 
     component: AdminComponent,
+    canActivate: [AuthGuardService],
     children: [
       {path: '', redirectTo: 'schedule', pathMatch: 'full'},
       {path: 'schedule', component: ScheduleComponent},
@@ -107,7 +109,7 @@ const routes: Routes = [
     DialogDeleteCity,
     DialogDeleteClient,
     DialogDeleteMaster],
-  providers: [ApiService],
+  providers: [ApiService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

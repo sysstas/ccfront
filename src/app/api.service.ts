@@ -18,8 +18,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
- addr = "https://apple-pie-41428.herokuapp.com"
-  // addr = "http://localhost:5000"
+//  addr = "https://apple-pie-41428.herokuapp.com"
+  addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }

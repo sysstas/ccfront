@@ -63,7 +63,7 @@ export class DialogDeleteClient {
     public api: ApiService,
     public dialogRef: MatDialogRef<DialogDeleteClient>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
-  onNoClick(): void {
+    onCloseButtonClick(): void {
     this.dialogRef.close();
   }
 }
@@ -96,7 +96,7 @@ export class DialogEditClient {
     public dialogRef: MatDialogRef<DialogEditClient>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  onNoClick(): void {
+    onCloseButtonClick(): void {
     this.dialogRef.close();
   }
 

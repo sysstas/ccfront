@@ -79,7 +79,7 @@ export class DialogDeleteCity {
     public api: ApiService,
     public dialogRef: MatDialogRef<DialogDeleteCity>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
-  onNoClick(): void {
+    onCloseButtonClick(): void {
     this.dialogRef.close();
   }
   // delete(data){
@@ -99,7 +99,7 @@ export class DialogEditCity {
     public api: ApiService,
     public dialogRef: MatDialogRef<DialogEditCity>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
-  onNoClick(): void {
+  onCloseButtonClick(): void {
     this.dialogRef.close();
   }
   edit(data){

@@ -11,8 +11,9 @@
     height: 80px;
     background: rgb(71, 76, 77);  
     text-align: center;
+    color: rgb(253, 235, 74); 
 }
 a {
-    text-decoration-color: black;
-    color: black;
+    text-decoration-color: rgb(253, 235, 74);
+    color: rgb(253, 235, 74); 
 }

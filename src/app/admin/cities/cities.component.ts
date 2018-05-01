@@ -35,6 +35,7 @@ export class CitiesComponent implements OnInit {
   clean(): void{
     console.log()
     this.newCity = '';
+    this.city.reset();
   }
 
   /// open dialog edit city function

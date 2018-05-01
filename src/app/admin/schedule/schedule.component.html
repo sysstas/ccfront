@@ -1,4 +1,4 @@
-<div class="example-container">         
+<div class="container">         
   <mat-form-field>
     <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
       <mat-option  *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
@@ -10,7 +10,6 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Find</button>
-</div>
 <h2>City: {{ScheduleForm.city}}</h2>
 <h3>Date: {{ScheduleForm.date | date}}</h3>
 
@@ -103,6 +102,9 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
   </div>
+
+</div>
+
   
 
 

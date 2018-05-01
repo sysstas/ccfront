@@ -37,3 +37,8 @@
 .form-container> * {
   width: 100%;
 }
+
+.master-font{
+  color: darkcyan;
+  font-weight: bold;
+}

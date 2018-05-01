@@ -16,7 +16,10 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatSnackBarModule,
-  MatTableModule} from '@angular/material';
+  MatTableModule,
+  MatPaginatorModule,
+  MatTableDataSource} from '@angular/material';
+import {MatSortModule} from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import {FormControl, Validators} from '@angular/forms';
 
@@ -75,7 +78,7 @@ const routes: Routes = [
     CitiesComponent,
     ClientsComponent,
     ScheduleComponent,
-    OrdersComponent,
+    OrdersComponent
     
   ],
   imports: [
@@ -98,7 +101,9 @@ const routes: Routes = [
     MatExpansionModule,
     MatIconModule,
     MatSnackBarModule,
-    MatTableModule   
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 

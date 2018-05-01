@@ -94,7 +94,8 @@ export class ClientComponent implements OnInit {
       dateMsg: this.submitedForm.date,
       time: this.submitedForm.busy,
       userName: this.submitedForm.name,
-      userEmail: this.submitedForm.email
+      userEmail: this.submitedForm.email,
+      city: this.submitedForm.city
     }
     this.api.updateMasterSchedule(oderInfo)
     // Clear form and page to initial state

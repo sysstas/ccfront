@@ -11,6 +11,7 @@ export class ApiService {
   cities = []
   masters =[]
   clients = []
+  orders = []
   masterRating = [
     {mark: 1},
     {mark: 2},
@@ -114,6 +115,8 @@ export class ApiService {
     //console.log(query)
     this.http.post(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
+        this.getClients()
+        this.openSnackBar('Client succesfully saved')
         console.log(res)        
       }
     }})
@@ -139,6 +142,32 @@ export class ApiService {
     })
   }
   //////////////////////////////////////
+
+  /////// CRUD Orders //////////////////////
+  getOrders(){
+    this.http.get(this.addr+'/order/').subscribe(res =>{
+      if (res){
+        this.orders = res.json()
+        console.log(this.orders)
+      }
+    })
+  }
+
+  createOrder(){
+
+  }
+
+  deleteOrder(id){
+    this.http.delete(this.addr+'/order/' + id).subscribe(res =>{
+      if (res){
+        this.getOrders()
+        //this.openSnackBar('Order succesfully deleted')  
+        console.log(res) 
+        return true
+      }
+    })
+  }
+  /////////////////////////////////////
 
   ////// App logic ///////////////////
   arr = []
@@ -167,7 +196,7 @@ export class ApiService {
   }
 
   updateMasterSchedule(orderInfo){    
-    this.http.post(this.addr+'/make-order', orderInfo).subscribe(res => {
+    this.http.post(this.addr+'/order', orderInfo).subscribe(res => {
       if (res){
         console.log('master schedule updated')
         this.openSnackBar('You successfuly order a master')

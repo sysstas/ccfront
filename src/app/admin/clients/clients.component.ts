@@ -10,8 +10,21 @@ import {FormControl, Validators} from '@angular/forms';
   styleUrls: ['./clients.component.css']
 })
 export class ClientsComponent implements OnInit {
+  /// CREATE FORM VALIDATION PART
+  clientName = new FormControl('', [Validators.required])
+  clientEmail = new FormControl('', [Validators.required, Validators.email])
 
+  getClientNameErrorMessage() {
+    return this.clientName.hasError('required') ? 'You must enter client name' :
+              '';
+  }
 
+  getClientEmailErrorMessage() {
+    return this.clientEmail.hasError('required') ? 'You must enter email' :
+    this.clientEmail.hasError('email') ? 'Not a valid email' :
+    '';
+  }
+  //////////////////////////////////////
   
   constructor(
     public api: ApiService, 
@@ -23,8 +36,22 @@ export class ClientsComponent implements OnInit {
    // this.api.getCities()
     this.api.getClients()
   }
-  animal: string;
+  //animal: string;
   name: string;
+  
+  newClient = {
+    name: '',
+    email: ''
+  }
+  // Clean after submit
+  clean(): void{
+    console.log()
+    this.newClient = {
+      name: '',
+      email: ''
+    };
+  }
+
 
   /// open dialog delete client function
   openDialogDeleteClient(client): void {    
@@ -48,9 +75,17 @@ export class ClientsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      //this.animal = result;
     });
   }
+  
+  addNewClient(){ 
+    // calling addCity funcnion on API 
+    this.api.addClient(this.newClient)
+    // refreshing cities list on page
+    this.api.getClients()
+  }  
+
 
 }
 

@@ -25,6 +25,7 @@ export class ScheduleComponent implements OnInit {
   ngOnInit() {
     // this.api.getMasters()    
      this.api.getCities()
+     this.api.getOrders()
     // this.api.getClients()
   }
 

@@ -50,6 +50,8 @@ export class ClientsComponent implements OnInit {
       name: '',
       email: ''
     };
+    this.clientName.reset();
+    this.clientEmail.reset();
   }
 
 

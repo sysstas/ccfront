@@ -33,7 +33,7 @@ export class CitiesComponent implements OnInit {
   
   // Clean after submit
   clean(): void{
-    console.log()
+    //
     this.newCity = '';
     this.city.reset();
   }

@@ -47,6 +47,19 @@ export class MastersComponent implements OnInit {
   animal: string;
   name: string;
 
+  // Clean after submit
+  clean(): void{
+    //
+    this.newMaster = {
+      city: '',
+      name : '',
+      rating: ''
+    }
+    this.newMasterName.reset();
+    this.newMasterRatingEdit.reset();
+    this.newMasterCity.reset();
+  } 
+
   /// open dialog delete master function
   openDialogDeleteMaster(master): void {    
     let dialogRef = this.dialog.open(DialogDeleteMaster, {

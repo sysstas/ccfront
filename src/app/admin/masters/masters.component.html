@@ -27,7 +27,7 @@
       </mat-select>
       <mat-error *ngIf="newMasterRatingEdit.invalid">{{getMasterRatingMessage()}}</mat-error>
     </mat-form-field>
-    <button (click)="addNewMaster()" [disabled]="newMasterName.invalid || newMasterCity.invalid || newMasterRatingEdit.invalid" mat-raised-button color="primary" type="submit" >Add new master</button>  
+    <button (click)="addNewMaster()" (click)="clean()" [disabled]="newMasterName.invalid || newMasterCity.invalid || newMasterRatingEdit.invalid" mat-raised-button color="primary" type="submit" >Add new master</button>  
   </form>  
         
       

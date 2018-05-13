@@ -1,36 +1,30 @@
-# Dev plan
+# Clockwise Clockwork
+This is demo project as part of intern program in Clockwise.software
+
+Goal: Create app where users can order masters for repear grandfather clock.
+App should have user and admin parts. In admin part admin can control cities, masters, clients, orders collections. Need to have validation in forms, clean and simple design, clear and pretty UI, email notification.
+
+live demo: `http://ec2-34-244-145-145.eu-west-1.compute.amazonaws.com`
 
 # Frontend part
-1. `(Done)` Create empty project structure : 
-    components: Admin, Client, Navigation
-    service: Api
 
-2. `(Done)` Add all necessary dependencies: angular material, etc...
+# Prerequirements:
+To run this code you already neen to have: git, node.js, nodemon, mongo, Angular CLI.
 
-3. `(Done)` Setup routs and router
+# How to install
+1. Clone this frontend part using terminal: `git clone https://github.com/sysstas/ccfront.git` 
+2. Locate newly created folder: `cd ccfront`
+3. Ensure that server location is `addr = "http://localhost:5000"` in file `ccfront\src\app\api.service.ts` (line 23)
+4. Start Angular CLI server: `ng s`
 
-4. Create login form for accessing admin page
+5. Clone backend part `https://github.com/sysstas/ccback.git`
+6. Locate newly created folder: `cd ccback`
+7. Create and run local mongo server or use mlab.com
+8. Ensure that mongo server location is your server location on line 31 in `ccback\index.js`
+9. your mongo database should have `admins` collection with at least 1 record with fields `login` and `password`
+10. Start nodemon server: `nodemon index.js`
 
-5. Create logic and guard to accessing admin page
+11. Open in browser `http://localhost:4200/`
 
-5. `(Done)` Create forms for choosing master on client page, and for adding new city and new master on admin page
+Enjoy!!!!
 
-6. `(Done)` Create lists of masters and cities on client and admin pages
-
-7. `(Done)` Create logic of filtering masters array on client page
-
-8. Add validation on form on client page
-
-9. Add validation on forms on admin page 
-
-10. `(Done)`Create logic of displaing masters schedule
-
-11. `(Done)`Move all necessary hardcoded data to node server
-
-12. Make app responsive with flexbox
-
-13. Make app attractive with flexbox
-
-14. Create logic of deletion and edition of elements
-
-15. Add email auto send logic

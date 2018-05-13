@@ -1,0 +1,70 @@
+.mat-column-ID{
+    flex: 0 0 200px;
+} 
+.mat-column-ClientName{
+    flex: 0 0 200px;
+}
+.mat-column-City{
+    flex: 0 0 100px;
+}
+.mat-column-Time{
+    flex: 0 0 80px;
+} 
+.mat-column-Duration{
+    flex: 0 0 80px;
+} 
+.mat-column-Date{
+    flex: 0 0 100px;
+}
+.mat-column-Action{
+    flex: 0 0 60px;
+}
+.red{    
+    color: crimson;
+}
+
+.row-justify-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+  }
+  .column {
+    flex-direction: column;
+    border-style: solid;
+    border-color: rgba(153, 180, 180, 0.575);
+    background-color: ghostwhite
+  }
+  .content-item {
+    flex-direction: column;
+    width: 800px;  
+    text-align: center;
+    color: darkcyan;
+    margin-top: 20px;
+  }
+  .form-container{ 
+    flex-direction: column;
+    width: 300px;  
+    padding: 5px;
+    margin: 20px;
+    border-style: solid;
+    border-color: rgba(153, 180, 180, 0.575);
+    background-color: rgba(247, 255, 255, 0.952);
+  }
+  
+  
+  .masters-container{
+    flex-direction: column;
+    width: 300px;  
+    justify-content: flex-start;
+  }
+  
+  
+  .form-container> * {
+    width: 100%;
+  }
+  
+  .master-font{
+    color: darkcyan;
+    font-weight: bold;
+  }
+  

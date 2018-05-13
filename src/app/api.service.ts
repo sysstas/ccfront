@@ -145,7 +145,7 @@ export class ApiService {
 
   /////// CRUD Orders //////////////////////
   getOrders(){
-    this.http.get(this.addr+'/order/').subscribe(res =>{
+    this.http.get(this.addr+'/order').subscribe(res =>{
       if (res){
         this.orders = res.json()
         console.log(this.orders)
@@ -201,7 +201,8 @@ export class ApiService {
         console.log('master schedule updated')
         this.openSnackBar('You successfuly order a master')
         // refreshing masters array after adding new city
-        this.getMasters()        
+        this.getMasters()      
+        this.getOrders()  
       }
     })    
   }

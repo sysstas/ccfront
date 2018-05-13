@@ -19,8 +19,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
- addr = "https://apple-pie-41428.herokuapp.com"
-  // addr = "http://localhost:5000"
+//  addr = "https://apple-pie-41428.herokuapp.com"
+  addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
@@ -145,7 +145,7 @@ export class ApiService {
 
   /////// CRUD Orders //////////////////////
   getOrders(){
-    this.http.get(this.addr+'/order').subscribe(res =>{
+    return this.http.get(this.addr+'/order').subscribe(res =>{
       if (res){
         this.orders = res.json()
         console.log(this.orders)
@@ -153,20 +153,25 @@ export class ApiService {
     })
   }
 
-  createOrder(){
-
+  getOrdersAfterChange(): Observable<any>{
+    return this.http.get(this.addr+'/order')   
   }
 
-  deleteOrder(id){
-    this.http.delete(this.addr+'/order/' + id).subscribe(res =>{
-      if (res){
-        this.getOrders()
-        //this.openSnackBar('Order succesfully deleted')  
-        console.log(res) 
-        return true
-      }
-    })
+  deleteOrder(id): Observable<any>{
+    return this.http.delete(this.addr+'/order/' + id)
+    // .subscribe(res =>{
+    //   if (res){
+    //     this.getOrders()
+    //     //this.openSnackBar('Order succesfully deleted')  
+    //     console.log(res)        
+    //   }
+    // })
   }
+
+  createOrder(orderInfo): Observable<any>{    
+    return this.http.post(this.addr+'/order', orderInfo)    
+  }
+  
   /////////////////////////////////////
 
   ////// App logic ///////////////////
@@ -206,6 +211,7 @@ export class ApiService {
       }
     })    
   }
+
 
   IsLoggedIn = false
   Auth(login, password){

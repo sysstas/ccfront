@@ -26,7 +26,18 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource(this.api.orders);
   
   deleteOrder(id){
-    this.api.deleteOrder(id)    
+    this.api.deleteOrder(id).subscribe(res =>{
+      if (res){
+        this.api.getOrdersAfterChange().subscribe(res =>{
+            if (res){
+              this.api.orders = res.json()         
+              this.dataSource = new MatTableDataSource(this.api.orders); 
+            }
+          })        
+        //this.openSnackBar('Order succesfully deleted')  
+      
+      }
+    })   
   }
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -120,7 +131,20 @@ export class OrdersComponent implements OnInit, AfterViewInit {
       userEmail: this.submitedForm.email,
       city: this.submitedForm.city
     }
-    this.api.updateMasterSchedule(oderInfo)
+    this.api.createOrder(oderInfo)
+    .subscribe(res => {
+      if (res){
+        console.log('master schedule updated')        
+         this.api.getOrdersAfterChange().subscribe(res =>{
+          if (res){
+            this.api.orders = res.json()         
+            this.dataSource = new MatTableDataSource(this.api.orders); 
+          } 
+        })
+      }
+    })
+    
+    
     // Clear form and page to initial state
     this.isFormSubmitted = false
     this.submitedForm = new ClientSubmitedForm('','', '','','','',[])

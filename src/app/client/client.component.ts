@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatProgressSpinnerModule} from '@angular/material';
 
 import { ApiService } from '../api.service';
 import { ClientSubmitedForm } from '../models/clientsubmitedform'
@@ -114,6 +114,7 @@ export class ClientComponent implements OnInit {
   constructor( public api: ApiService) { }
     
   ngOnInit() {
+   this.api.loadingSetTrue()
    this.api.getMasters()
    this.api.getCities()
   }

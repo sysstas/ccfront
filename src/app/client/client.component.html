@@ -10,6 +10,7 @@
         <h2>To make order just follow two simple steps</h2>
         
       </div>
+
       <div class="content-item" *ngIf="!isFormSubmitted">
         <form #form="ngForm" novalidate name="form" class="form-container">
           <h3>Step 1</h3>
@@ -82,7 +83,9 @@
   
         
         <mat-divider></mat-divider>
-  
+        <div *ngIf="api.loading">
+          <mat-spinner></mat-spinner>
+        </div>
         <div *ngIf="api.arr?.length" class="form-container">
           <h1>Step 2</h1>
           <h3>Choose master</h3>

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable'
 import { ApiService } from '../../api.service';
-import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule } from '@angular/material';
 import { ClientSubmitedForm } from '../../models/clientsubmitedform'
 
 @Component({
@@ -16,6 +16,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     public api: ApiService) {}
 
   ngOnInit() {
+    this.api.loadingSetTrue()
     this.api.getOrders()
     this.api.getMasters()
     this.api.getCities()

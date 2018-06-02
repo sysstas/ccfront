@@ -18,7 +18,8 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
-  MatTableDataSource} from '@angular/material';
+  MatTableDataSource,
+  MatProgressSpinnerModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import {FormControl, Validators} from '@angular/forms';
@@ -103,7 +104,8 @@ const routes: Routes = [
     MatSnackBarModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 

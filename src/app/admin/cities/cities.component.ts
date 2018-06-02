@@ -39,10 +39,11 @@ export class CitiesComponent implements OnInit {
   }
 
   /// open dialog edit city function
-  openDialogEditCity(city): void {    
+  openDialogEditCity(city): void {  
+    console.log(city)  
     let dialogRef = this.dialog.open(DialogEditCity, {
       width: '250px',
-      data: { cityName: city.cityName, id: city._id}
+      data: { cityName: city.cityName, ID: city.ID}      
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -54,7 +55,7 @@ export class CitiesComponent implements OnInit {
   openDialogDeleteCity(city): void {    
     let dialogRef = this.dialog.open(DialogDeleteCity, {
       width: '250px',
-      data: { cityName: city.cityName, id: city._id}
+      data: { cityName: city.cityName, ID: city.ID}
     });
 
     dialogRef.afterClosed().subscribe(result => {

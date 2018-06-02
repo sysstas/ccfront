@@ -8,6 +8,15 @@ import { MatSnackBar } from '@angular/material';
 @Injectable()
 export class ApiService {
   
+  loadingStatus = true;
+
+  loadingSetTrue(){
+    this.loadingStatus = true;
+  }
+  loadingSetFalse(){
+    this.loadingStatus = false;
+  }
+
   cities = []
   masters =[]
   clients = []
@@ -29,7 +38,8 @@ export class ApiService {
   //// City CRUD /////////////////////////////
   getCities(){
     this.http.get(this.addr+'/cities').subscribe( res => {
-      this.cities = res.json()  
+      this.cities = res.json() 
+      console.log(res) 
     })   
   }
 
@@ -44,9 +54,8 @@ export class ApiService {
     })
   }
 
-  editCity(data){
-    console.log(data)
-    this.http.put(this.addr+'/cities/' + data.id, data).subscribe(res => {      
+  editCity(data){   
+    this.http.put(this.addr+'/cities/' + data.ID, data).subscribe(res => {      
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully saved')
@@ -56,7 +65,8 @@ export class ApiService {
   }
 
   deleteCity(data){
-    this.http.delete(this.addr+'/cities/' + data.id).subscribe(res =>{
+    console.log(data)
+    this.http.delete(this.addr+'/cities/' + data.ID).subscribe(res =>{
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully deleted')  
@@ -178,6 +188,7 @@ export class ApiService {
   arr = []
   getFreeMasters(query){
      this.http.post(this.addr+'/freemasters', query).subscribe( res => {
+       this.loadingSetTrue()
        this.arr = res.json()     
     })    
   }

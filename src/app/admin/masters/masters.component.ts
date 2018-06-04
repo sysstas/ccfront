@@ -51,9 +51,9 @@ export class MastersComponent implements OnInit {
   clean(): void{
     //
     this.newMaster = {
-      city: '',
-      name : '',
-      rating: ''
+      CityID: '',
+      masterName : '',
+      masterRating: ''
     }
     this.newMasterName.reset();
     this.newMasterRatingEdit.reset();
@@ -61,10 +61,10 @@ export class MastersComponent implements OnInit {
   } 
 
   /// open dialog delete master function
-  openDialogDeleteMaster(master): void {    
+  openDialogDeleteMaster(master): void { 
     let dialogRef = this.dialog.open(DialogDeleteMaster, {
       width: '250px',
-      data: { masterName: master.name, id: master._id}
+      data: { masterName: master.masterName, id: master.MasterID}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -73,11 +73,10 @@ export class MastersComponent implements OnInit {
   } 
 
   /// open dialog edit master
-  openDialogEditMaster(master): void {
-    //console.log(client)
+  openDialogEditMaster(master): void { 
     let dialogRef = this.dialog.open(DialogEditMaster, {
       width: '250px',
-      data: { name: master.name, id: master._id, rating: master.rating, city: master.city}
+      data: { masterName: master.masterName, id: master.MasterID, masterRating: master.masterRating, CityID: master.CityID, cityName: master.cityName}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -99,9 +98,9 @@ export class MastersComponent implements OnInit {
 
 
   newMaster = {
-    city: '',
-    name : '',
-    rating: ''
+    CityID: '',
+    masterName : '',
+    masterRating: ''
   }
 
   addNewMaster(){
@@ -165,7 +164,7 @@ export class DialogEditMaster {
 
   edit(data){
     //console.log("edit is clicked")
-   // console.log(data)
+    console.log("edit is clicked",data)
     this.api.editMaster(data)
     
   }

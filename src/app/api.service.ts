@@ -39,7 +39,7 @@ export class ApiService {
   getCities(){
     this.http.get(this.addr+'/cities').subscribe( res => {
       this.cities = res.json() 
-      console.log(res) 
+      //console.log(res) 
     })   
   }
 
@@ -80,6 +80,7 @@ export class ApiService {
   getMasters(){
     this.http.get(this.addr+'/masters').subscribe( res => {
       this.masters = res.json() 
+      console.log(res) 
     })     
   }
 
@@ -94,6 +95,7 @@ export class ApiService {
   } 
 
   editMaster(data){
+    console.log(data.id)
     this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
       if (res){
         this.getMasters()

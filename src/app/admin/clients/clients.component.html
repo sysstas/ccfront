@@ -1,7 +1,7 @@
 <mat-list> 
   <mat-list-item *ngFor="let client of api.clients">
-    <h4 mat-line>Name: {{client.name}}</h4> 
-    <h3 mat-line>Email: {{client.email}}</h3>    
+    <h4 mat-line>Name: {{client.clientName}}</h4> 
+    <h3 mat-line>Email: {{client.clientEmail}}</h3>    
     <button mat-button (click)="openDialog(client)"><mat-icon>edit</mat-icon></button>
     <!-- <button mat-button (click)="api.delete(client._id, 'client')"><mat-icon>delete</mat-icon></button>           -->
     <button mat-button (click)="openDialogDeleteClient(client)"><mat-icon class="red">delete</mat-icon></button>           
@@ -12,11 +12,11 @@
 <form #form="ngForm" novalidate name="form">
   <h3>Add new client</h3>
   <mat-form-field>
-    <input matInput placeholder="name" [formControl]="clientName"  [(ngModel)]="newClient.name"  name="name" required>
+    <input matInput placeholder="name" [formControl]="clientName"  [(ngModel)]="newClient.clientName"  name="name" required>
     <mat-error *ngIf="clientName.invalid">{{getClientNameErrorMessage()}}</mat-error>
   </mat-form-field>
   <mat-form-field>
-    <input matInput placeholder="email" [formControl]="clientEmail" [(ngModel)]="newClient.email"  name="email" required>
+    <input matInput placeholder="email" [formControl]="clientEmail" [(ngModel)]="newClient.clientEmail"  name="email" required>
     <mat-error *ngIf="clientEmail.invalid">{{getClientEmailErrorMessage()}}</mat-error>
   </mat-form-field>
   <button [disabled]="clientName.invalid || clientEmail.invalid" (click)="addNewClient()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new client</button>

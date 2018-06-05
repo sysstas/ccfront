@@ -40,15 +40,15 @@ export class ClientsComponent implements OnInit {
   name: string;
   
   newClient = {
-    name: '',
-    email: ''
+    clientName: '',
+    clientEmail: ''
   }
   // Clean after submit
   clean(): void{
     console.log()
     this.newClient = {
-      name: '',
-      email: ''
+      clientName: '',
+      clientEmail: ''
     };
     this.clientName.reset();
     this.clientEmail.reset();
@@ -59,7 +59,7 @@ export class ClientsComponent implements OnInit {
   openDialogDeleteClient(client): void {    
     let dialogRef = this.dialog.open(DialogDeleteClient, {
       width: '250px',
-      data: { clientName: client.name, id: client._id}
+      data: { clientName: client.clientName, id: client.ID}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -69,10 +69,10 @@ export class ClientsComponent implements OnInit {
 
   /// open dialog edit client function
   openDialog(client): void {
-    //console.log(client)
+    console.log(client)
     let dialogRef = this.dialog.open(DialogEditClient, {
       width: '250px',
-      data: { name: client.name, id: client._id, email: client.email }
+      data: { clientName: client.clientName, id: client.ID, clientEmail: client.clientEmail }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -83,6 +83,7 @@ export class ClientsComponent implements OnInit {
   
   addNewClient(){ 
     // calling addCity funcnion on API 
+    console.log('send client data: ', this.newClient)
     this.api.addClient(this.newClient)
     // refreshing cities list on page
     this.api.getClients()

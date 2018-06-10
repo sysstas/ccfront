@@ -5,11 +5,11 @@
     <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="ID">
             <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element._id}}</mat-cell>
+            <mat-cell *matCellDef="let element">{{element.ID}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="City">
             <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+            <mat-cell *matCellDef="let element">{{element.cityName}}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="ClientEmail">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Client Email</mat-header-cell>
@@ -38,7 +38,8 @@
         <ng-container matColumnDef="Action">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <button mat-button (click)="deleteOrder(element._id)"><mat-icon class="red">delete</mat-icon></button>
+                    <button mat-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
+                    <button mat-button (click)="deleteOrder(element.ID)"><mat-icon class="red">delete</mat-icon></button>
                 </mat-cell>
             </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -52,7 +53,48 @@
     </mat-paginator>
 </div>
 
-<div class="content-item" *ngIf="!isFormSubmitted">
+
+
+
+<h1 >Create</h1>
+<div class="content-item" >  
+  <form class="form-container"> 
+
+    <mat-form-field>
+        <mat-select placeholder="city"  [(ngModel)]="newOrder.cityID" name="2" required>
+          <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
+        </mat-select>     
+    </mat-form-field>     
+
+    <mat-form-field>
+        <mat-select placeholder="master"  [(ngModel)]="newOrder.masterID" name="3" required>
+          <mat-option *ngFor="let master of api.masters" [value]="master.ID" >{{master.masterName}}</mat-option>
+        </mat-select>       
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="client email"  [(ngModel)]="newOrder.clientID" name="4" required>
+          <mat-option *ngFor="let client of api.clients" [value]="client.ID" >{{client.clientEmail}}</mat-option>
+        </mat-select>       
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="date" [(ngModel)]="newOrder.date" name="5" required>     
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="time" [(ngModel)]="newOrder.time" name="6" required>     
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="duration" [(ngModel)]="newOrder.duration" name="7" required>     
+    </mat-form-field>
+
+    <button mat-button (click)="createNewOrder()">Save</button>
+  </form> 
+</div>
+
+<!-- <div class="content-item" *ngIf="!isFormSubmitted">
     <form #form="ngForm" novalidate name="form" class="form-container">
       <h3>Step 1</h3>
       <p>Fill the form</p>
@@ -103,8 +145,8 @@
         <span *ngIf="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" matTooltip="Fill all fields to activate">To Step 2</span>
       </button>       
     </form>
-</div>
-<div class="content-item" *ngIf="isFormSubmitted">
+</div> -->
+<!-- <div class="content-item" *ngIf="isFormSubmitted">
 <div class="wrapper1">
     <mat-form-field>
     <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
@@ -142,4 +184,4 @@
     <h1>Sorry, all masters are busy at this time. Choose another time or date</h1>
 </div>
 
-</div>
+</div> -->

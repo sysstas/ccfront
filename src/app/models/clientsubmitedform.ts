@@ -1,11 +1,11 @@
 export class ClientSubmitedForm {
     constructor(
-        public startHour: string,
-        public workTime: string,
+        public time: string,
+        public duration: string,
         public date: string,
-        public city: string,
-        public email: string,
-        public name: string,
-        public busy: any        
+        public cityID: string,
+        public cityName: string,
+        public clientEmail: string,
+        public clientName: string               
     ){}
 }

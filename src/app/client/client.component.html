@@ -18,21 +18,21 @@
           <mat-form-field>
             <input  matInput placeholder="Your Name" 
                     [formControl]="name"
-                    [ngModel]="submitedForm.name" 
-                    (ngModelChange)="submitedForm.name=$event" 
+                    [ngModel]="submitedForm.clientName" 
+                    (ngModelChange)="submitedForm.clientName=$event" 
                     pattern="...+"
                     name="Name" required>
             <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
           </mat-form-field>
   
           <mat-form-field>
-            <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.email" name="Email" required>
+            <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.clientEmail" name="Email" required>
             <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
           </mat-form-field>  
   
           <mat-form-field>
-            <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.city" name="city" required>
-              <mat-option *ngFor="let city of api.cities" [value]="city.cityName" >{{city.cityName}}</mat-option>
+            <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.cityID" name="city" required>
+              <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
           </mat-form-field>
@@ -45,14 +45,14 @@
           </mat-form-field>
   
           <mat-form-field>
-            <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submitedForm.startHour" name="workhour" required>
+            <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submitedForm.time" name="workhour" required>
               <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
             </mat-select>
             <mat-error *ngIf="time.invalid">{{getTimeErrorMessage()}}</mat-error>
           </mat-form-field>
   
           <mat-form-field>
-            <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submitedForm.workTime" name="clocksize" required>
+            <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submitedForm.duration" name="clocksize" required>
               <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
             </mat-select>
             <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
@@ -72,7 +72,7 @@
           </mat-form-field>
   
           <mat-form-field>
-            <mat-select placeholder="Change time" [(ngModel)]="submitedForm.startHour" name="workhour1" required>
+            <mat-select placeholder="Change time" [(ngModel)]="submitedForm.time" name="workhour1" required>
               <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
             </mat-select>
           </mat-form-field>
@@ -91,9 +91,9 @@
           <h3>Choose master</h3>
           <mat-list *ngFor="let master of api.arr" class="masters-container">  
             <mat-list-item>
-              <h4 mat-line>Name:<span class="master-font">{{master.name }}</span> </h4>
+              <h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>
               <!-- <h3 mat-line>from {{master.city}}</h3> -->
-              <p mat-line>Rating:<span class="master-font"> {{master.rating | json}}</span> </p> 
+              <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p> 
               <button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>   
             </mat-list-item>
           </mat-list>

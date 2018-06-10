@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable'
 import { ApiService } from '../../api.service';
-import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ClientSubmitedForm } from '../../models/clientsubmitedform'
 
 @Component({
@@ -13,19 +13,37 @@ import { ClientSubmitedForm } from '../../models/clientsubmitedform'
 export class OrdersComponent implements OnInit, AfterViewInit {
 
   constructor(
-    public api: ApiService) {}
+    public api: ApiService,  
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.api.loadingSetTrue()
     this.api.getOrders()
     this.api.getMasters()
     this.api.getCities()
+    this.api.getClients()
     //console.log(this.dataSource)
   }
 
   displayedColumns = ['ID', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Action'];
   dataSource = new MatTableDataSource(this.api.orders);
   
+  newOrder = {
+    ID: '',
+    cityID: '',
+    masterID: '',
+    clientID: '',
+    date: '',
+    time: '',
+    duration: ''
+  }
+
+  createNewOrder(){
+    this.api.createOrder(this.newOrder);
+    this.api.getOrders();
+  }
+
   deleteOrder(id){
     this.api.deleteOrder(id).subscribe(res =>{
       if (res){
@@ -41,6 +59,28 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     })   
   }
   
+  /// open dialog edit master
+  openDialogEditOrder(order): void { 
+    console.log(order)
+    let dialogRef = this.dialog.open(DialogEditOrder, {
+      width: '250px',
+      data: { 
+        ID: order.ID,
+        cityID: order.cityID, 
+        masterID: order.masterID,
+        clientID: order.clientID,
+        date:order.date,
+        time: order.time,
+        duration: order.duration
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     // this.animal = result;
+    });
+  }
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {  
@@ -91,7 +131,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   //// LOGIC PART //////////////////////////////
   isFormSubmitted = false
 
-  submitedForm = new ClientSubmitedForm('','','','','','',[])
+  submitedForm = new ClientSubmitedForm('','','','','','','')
 
   workHours = [
     {hour: 8},
@@ -121,77 +161,126 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     }
   ]
 
-  makeOrder(master) {
-    let oderInfo = {
-      id: master._id,
-      masterName: master.name,
-      date: Date.parse(this.submitedForm.date.toString()),
-      dateMsg: this.submitedForm.date,
-      time: this.submitedForm.busy,
-      userName: this.submitedForm.name,
-      userEmail: this.submitedForm.email,
-      city: this.submitedForm.city
-    }
-    this.api.createOrder(oderInfo)
-    .subscribe(res => {
-      if (res){
-        console.log('master schedule updated')        
-         this.api.getOrdersAfterChange().subscribe(res =>{
-          if (res){
-            this.api.orders = res.json()         
-            this.dataSource = new MatTableDataSource(this.api.orders); 
-          } 
-        })
-      }
-    })
-    
-    
-    // Clear form and page to initial state
-    this.isFormSubmitted = false
-    this.submitedForm = new ClientSubmitedForm('','', '','','','',[])
-    this.api.arr = []
-    this.email = new FormControl('', [Validators.required, Validators.email])
-    this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
-    this.city = new FormControl('', [Validators.required])
-    this.date = new FormControl('', [Validators.required])
-    this.time = new FormControl('', [Validators.required])
-    this.size = new FormControl('', [Validators.required])    
-  }
 
-  find() {     
-    // this for changing layout when client 
-    this.isFormSubmitted = true;
-    this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)    
-    // forming query object
-    let query = {
-      city: this.submitedForm.city,
-      date: Date.parse(this.submitedForm.date.toString()),
-      time: this.submitedForm.busy
-    }
-    let clientData = {
-      name: this.submitedForm.name,
-      email: this.submitedForm.email
-    }
-    this.api.getFreeMasters(query)
-    // Add new client to database
-    this.api.addClient(clientData)
-  }
+  // makeOrder(master) {
+  //    this.api.createOrder()
+    
+  // }
+  // makeOrder(master) {
+  //   let oderInfo = {
+  //     id: master._id,
+  //     masterName: master.name,
+  //     date: Date.parse(this.submitedForm.date.toString()),
+  //     dateMsg: this.submitedForm.date,
+  //     time: this.submitedForm.busy,
+  //     userName: this.submitedForm.name,
+  //     userEmail: this.submitedForm.email,
+  //     city: this.submitedForm.city
+  //   }
+  //   this.api.createOrder(oderInfo)
+  //   .subscribe(res => {
+  //     if (res){
+  //       console.log('master schedule updated')        
+  //        this.api.getOrdersAfterChange().subscribe(res =>{
+  //         if (res){
+  //           this.api.orders = res.json()         
+  //           this.dataSource = new MatTableDataSource(this.api.orders); 
+  //         } 
+  //       })
+  //     }
+  //   })
+    
+    
+  //   // Clear form and page to initial state
+  //   this.isFormSubmitted = false
+  //   this.submitedForm = new ClientSubmitedForm('','', '','','','',[])
+  //   this.api.arr = []
+  //   this.email = new FormControl('', [Validators.required, Validators.email])
+  //   this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
+  //   this.city = new FormControl('', [Validators.required])
+  //   this.date = new FormControl('', [Validators.required])
+  //   this.time = new FormControl('', [Validators.required])
+  //   this.size = new FormControl('', [Validators.required])    
+  // }
+
+  // find() {     
+  //   // this for changing layout when client 
+  //   this.isFormSubmitted = true;
+  //   this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)    
+  //   // forming query object
+  //   let query = {
+  //     city: this.submitedForm.city,
+  //     date: Date.parse(this.submitedForm.date.toString()),
+  //     time: this.submitedForm.busy
+  //   }
+  //   let clientData = {
+  //     name: this.submitedForm.name,
+  //     email: this.submitedForm.email
+  //   }
+  //   this.api.getFreeMasters(query)
+  //   // Add new client to database
+  //   this.api.addClient(clientData)
+  // }
 
   backToStep1(){
     this.isFormSubmitted = false;
   }
   
   // forms array of busi hours for submitted form data
-  workiHoursAnalizer(start:any, duration:any){
-    let time = []
-    time.push(start)
-    if (duration === 3) {
-      time.push(start+1)
-      time.push(start+2) 
-    } else if (duration === 2){
-      time.push(start+1)      
-    } 
-    this.submitedForm.busy = time    
-  }
+  // workiHoursAnalizer(start:any, duration:any){
+  //   let time = []
+  //   time.push(start)
+  //   if (duration === 3) {
+  //     time.push(start+1)
+  //     time.push(start+2) 
+  //   } else if (duration === 2){
+  //     time.push(start+1)      
+  //   } 
+  //   this.submitedForm.busy = time    
+  // }
 }
 
+/// dialog edit master
+@Component({
+  selector: 'dialog-edit',
+  templateUrl: 'dialog-edit-order.html',
+})
+export class DialogEditOrder {
+
+  /// EDIT FORM VALIDATION PART
+  masterName = new FormControl('', [Validators.required])
+  masterRatingEdit = new FormControl('', [Validators.required])
+  masterCity = new FormControl('', [Validators.required])
+
+  getMasterNameErrorMessage() {
+    return this.masterName.hasError('required') ? 'Name is required' :
+              '';
+  }
+
+  getMasterRatingMessage() {
+    return this.masterRatingEdit.hasError('required') ? 'Rating is required' :
+              '';
+  }
+
+  getMasterCityMessage() {
+  return this.masterCity.hasError('required') ? 'City is required' :
+            '';
+  }
+  //////////////////////////////////////
+
+  constructor(
+    public api: ApiService,
+    public dialogRef: MatDialogRef<DialogEditOrder>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+    onCloseButtonClick(): void {
+    this.dialogRef.close();
+  }
+
+  edit(data){
+    //console.log("edit is clicked")
+    console.log("edit is clicked",data)
+    this.api.editOrder(data)
+    
+  }
+}

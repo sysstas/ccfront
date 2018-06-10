@@ -56,7 +56,7 @@ export class ClientComponent implements OnInit {
   //// LOGIC PART
   isFormSubmitted = false
 
-  submitedForm = new ClientSubmitedForm('','', '','','','',[])
+  submitedForm = new ClientSubmitedForm('','', '','','','','')
   
   workHours = [
     {hour: 8},
@@ -88,19 +88,23 @@ export class ClientComponent implements OnInit {
 
   makeOrder(master) {
     let oderInfo = {
-      id: master._id,
-      masterName: master.name,
+      masterID: master.ID,
+      masterName: master.masterName,
       date: Date.parse(this.submitedForm.date.toString()),
       dateMsg: this.submitedForm.date,
-      time: this.submitedForm.busy,
-      userName: this.submitedForm.name,
-      userEmail: this.submitedForm.email,
-      city: this.submitedForm.city
+      time: this.submitedForm.time,
+      duration: this.submitedForm.duration,
+      userName: this.submitedForm.clientName,
+      userEmail: this.submitedForm.clientEmail,
+      cityID: this.submitedForm.cityID,
+      clientID: this.api.currentClient
     }
-    this.api.updateMasterSchedule(oderInfo)
+    console.log('oderInfo',oderInfo)
+    this.api.createOrder(oderInfo)
+    // this.api.updateMasterSchedule(oderInfo)
     // Clear form and page to initial state
     this.isFormSubmitted = false
-    this.submitedForm = new ClientSubmitedForm('','', '','','','',[])
+    this.submitedForm = new ClientSubmitedForm('','', '','','','','')
     this.api.arr = []
     this.email = new FormControl('', [Validators.required, Validators.email])
     this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -123,21 +127,22 @@ export class ClientComponent implements OnInit {
     // this for changing layout when client 
     this.isFormSubmitted = true;
 
-    this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
+    // this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
      
-    // forming query object
-    let query = {
-      city: this.submitedForm.city,
+    // forming query object for free masters search on backend
+    let freeMasetersQuery = {
+      cityID: this.submitedForm.cityID,
       date: Date.parse(this.submitedForm.date.toString()),
-      time: this.submitedForm.busy
+      time: this.submitedForm.time,
+      duration: this.submitedForm.duration
     }    
-
+    console.log('query: ',freeMasetersQuery )
     let clientData = {
-      name: this.submitedForm.name,
-      email: this.submitedForm.email
+      clientName: this.submitedForm.clientName,
+      clientEmail: this.submitedForm.clientEmail
     }
-
-    this.api.getFreeMasters(query)
+    console.log('clientData: ',clientData )
+    this.api.getFreeMasters(freeMasetersQuery)
     // Add new client to database
     this.api.addClient(clientData)
    
@@ -148,17 +153,17 @@ export class ClientComponent implements OnInit {
   }
     
   // forms array of busi hours for submitted form data
-  workiHoursAnalizer(start:any, duration:any){
-    let time = []
-    time.push(start)
-    if (duration === 3) {
-      time.push(start+1)
-      time.push(start+2) 
-    } else if (duration === 2){
-      time.push(start+1)      
-    } 
-    this.submitedForm.busy = time    
-  }
+  // workiHoursAnalizer(start:any, duration:any){
+  //   let time = []
+  //   time.push(start)
+  //   if (duration === 3) {
+  //     time.push(start+1)
+  //     time.push(start+2) 
+  //   } else if (duration === 2){
+  //     time.push(start+1)      
+  //   } 
+  //   this.submitedForm.busy = time    
+  // }
 }
 
 

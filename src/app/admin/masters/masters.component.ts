@@ -64,7 +64,7 @@ export class MastersComponent implements OnInit {
   openDialogDeleteMaster(master): void { 
     let dialogRef = this.dialog.open(DialogDeleteMaster, {
       width: '250px',
-      data: { masterName: master.masterName, id: master.MasterID}
+      data: { masterName: master.masterName, id: master.ID}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -76,7 +76,7 @@ export class MastersComponent implements OnInit {
   openDialogEditMaster(master): void { 
     let dialogRef = this.dialog.open(DialogEditMaster, {
       width: '250px',
-      data: { masterName: master.masterName, id: master.MasterID, masterRating: master.masterRating, CityID: master.CityID, cityName: master.cityName}
+      data: { masterName: master.masterName, ID: master.ID, masterRating: master.masterRating, CityID: master.CityID, cityName: master.cityName}
     });
 
     dialogRef.afterClosed().subscribe(result => {

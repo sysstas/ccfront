@@ -39,7 +39,7 @@ export class ApiService {
   getCities(){
     this.http.get(this.addr+'/cities').subscribe( res => {
       this.cities = res.json() 
-      //console.log(res) 
+      // console.log(res) 
     })   
   }
 
@@ -49,7 +49,7 @@ export class ApiService {
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully saved')
-        console.log(res)
+        // console.log(res)
       }
     })
   }
@@ -59,18 +59,18 @@ export class ApiService {
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully saved')
-        console.log(res)
+        // console.log(res)
       }
     })
   }
 
   deleteCity(data){
-    console.log(data)
+    // console.log(data)
     this.http.delete(this.addr+'/cities/' + data.ID).subscribe(res =>{
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully deleted')  
-        console.log(res) 
+        // console.log(res) 
       }
     })
   }
@@ -80,7 +80,7 @@ export class ApiService {
   getMasters(){
     this.http.get(this.addr+'/masters').subscribe( res => {
       this.masters = res.json() 
-      console.log(res) 
+      console.log('get masters:', res) 
     })     
   }
 
@@ -89,18 +89,18 @@ export class ApiService {
       if (res){
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
-        console.log(res)
+        // console.log(res)
       }
     })
   } 
 
   editMaster(data){
-    console.log(data.id)
-    this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
+    // console.log(data.id)
+    this.http.put(this.addr+'/masters/' + data.ID, data).subscribe( res => {
       if (res){
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
-        console.log(res)
+        // console.log(res)
       }
     })
   }
@@ -110,7 +110,7 @@ export class ApiService {
       if (res){
         this.getMasters()
         this.openSnackBar('Master succesfully deleted')  
-        console.log(res) 
+        // console.log(res) 
       }
     })
   }
@@ -122,24 +122,34 @@ export class ApiService {
       this.clients = res.json() 
     })     
   }
-
+  currentClient ={}
   addClient(query){
     //console.log(query)
     this.http.post(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
+        this.getCurrentClient(query)
         this.getClients()
         this.openSnackBar('Client succesfully saved')
-        console.log(res)        
+        //console.log(res)        
       }
     }})
   }
+  getCurrentClient(query){   
+    this.http.post(this.addr+'/getcurrentclient', query).subscribe(res =>{{
+      if (res){
+        this.currentClient = res.json()[0].ID
+        console.log('Client ID:',res)        
+      }
+    }})
+  }
+
 
   editClient(data){
     this.http.put(this.addr+'/clients/' + data.id, data).subscribe(res => {
       if (res){
         this.getClients()
         this.openSnackBar('Client succesfully saved')
-        console.log(res)
+        // console.log(res)
       }
     })
   }
@@ -149,7 +159,7 @@ export class ApiService {
       if (res){
         this.getClients()
         this.openSnackBar('Client succesfully deleted')  
-        console.log(res) 
+        // console.log(res) 
       }
     })
   }
@@ -160,7 +170,7 @@ export class ApiService {
     return this.http.get(this.addr+'/order').subscribe(res =>{
       if (res){
         this.orders = res.json()
-        console.log(this.orders)
+        console.log('get orders: ', this.orders)
       }
     })
   }
@@ -180,10 +190,46 @@ export class ApiService {
     // })
   }
 
-  createOrder(orderInfo): Observable<any>{    
-    return this.http.post(this.addr+'/order', orderInfo)    
+  // createOrder(orderInfo): Observable<any>{    
+  //   return this.http.post(this.addr+'/order', orderInfo)    
+  // }
+  createOrder(newOrder){    
+    // let orderInfo = {
+    //   cityID:4, 
+    //   masterID:3,
+    //   clientID:4,
+    //   date:1526331600000,
+    //   time:11,
+    //   duration:2
+    // }
+    console.log("send order", newOrder)
+    this.http.post(this.addr+'/order', newOrder).subscribe(res =>{{
+      if (res){
+        // this.getClients()
+        // this.openSnackBar('Client succesfully saved')
+        console.log(res)        
+      }
+    }})    
   }
   
+  editOrder(data){    
+    let orderInfo = {
+      cityID: data.cityID, 
+      masterID: data.masterID,
+      clientID: data.clientID,
+      date:data.date,
+      time: data.time,
+      duration: data.duration
+    }
+    // console.log("send order")
+    this.http.post(this.addr+'/order/' + data.id, orderInfo).subscribe(res =>{{
+      if (res){
+        // this.getClients()
+        // this.openSnackBar('Client succesfully saved')
+        console.log(res)        
+      }
+    }})    
+  }
   /////////////////////////////////////
 
   ////// App logic ///////////////////

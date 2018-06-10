@@ -39,7 +39,7 @@ import { HttpModule } from '@angular/http';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
 import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
-import { OrdersComponent } from './admin/orders/orders.component';
+import { OrdersComponent, DialogEditOrder } from './admin/orders/orders.component';
 import { AuthGuardService } from './auth-guard.service';
 
 
@@ -73,6 +73,7 @@ const routes: Routes = [
     DialogEditClient,
     DialogEditCity,
     DialogEditMaster,
+    DialogEditOrder,
     DialogDeleteCity,
     DialogDeleteClient,
     DialogDeleteMaster,
@@ -113,6 +114,7 @@ const routes: Routes = [
     DialogEditClient, 
     DialogEditCity, 
     DialogEditMaster,
+    DialogEditOrder,
     DialogDeleteCity,
     DialogDeleteClient,
     DialogDeleteMaster],

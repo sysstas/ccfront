@@ -1,7 +1,7 @@
 <div class="example-container mat-elevation-z8">
-    <div *ngIf="api.loading">
+    <!-- <div *ngIf="api.loading">
       <mat-spinner></mat-spinner>
-    </div>
+    </div> -->
     <mat-table #table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="ID">
             <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>

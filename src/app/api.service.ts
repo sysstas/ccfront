@@ -28,8 +28,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-//  addr = "https://apple-pie-41428.herokuapp.com"
-  addr = "http://localhost:5000"
+ addr = "https://apple-pie-41428.herokuapp.com"
+  // addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
@@ -243,19 +243,37 @@ export class ApiService {
   
   schedule = []
   getMastersShedule(query){
+    // console.log('schedule query: ', query)
     this.http.post(this.addr+'/schedule', query).subscribe( res => {
-      this.schedule = res.json()
-      /// making appropriate array of hours when master is busy
-      this.schedule.forEach((master, index, array) => {
-        master.hours = []
-        let arr = master.busy[0].time
-        let length = arr.length
-        for (let index = 0; index < length; index++) {
-          const element = arr[index];         
-          let i = element - 8
-          master.hours[i] = "Busy"         
+      //this.schedule = res.json()
+      // console.log("received schedule data: ",res.json())
+      // this.schedule = [{name:"Alice",hours:['qwe','qwe']}]
+      let temp = res.json()
+      temp.forEach(element => {      
+        element.hours=[]
+        for (let i = 0; i < element.duration; i++) {
+          element.hours[element.time - 8 + i]=element.ID 
         }
+        // console.log(element)
       })
+      this.schedule = temp
+      temp.forEach(element => {
+        
+      })
+      // console.log(temp)
+      //{ID: 15, masterName: "Nastya", time: 8, duration: 3}
+      console.log("received schedule temp: ",temp)
+      // /// making appropriate array of hours when master is busy
+      // this.schedule.forEach((master, index, array) => {
+      //   master.hours = []
+      //   let arr = master.busy[0].time
+      //   let length = arr.length
+      //   for (let index = 0; index < length; index++) {
+      //     const element = arr[index];         
+      //     let i = element - 8
+      //     master.hours[i] = "Busy"         
+      //   }
+      // })
     })
   }
 

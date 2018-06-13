@@ -35,10 +35,10 @@ export class ScheduleComponent implements OnInit {
     let city = this.ScheduleForm.city
     let date = Date.parse( this.ScheduleForm.date)
     let sheduleQuery = {      
-      city: city,
+      cityID: city,
       date: date
     }
-    console.log(this.api.schedule)
+    console.log('schedule',this.api.schedule)
     this.api.getMastersShedule(sheduleQuery)
   }
 

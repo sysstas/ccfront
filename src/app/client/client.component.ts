@@ -134,7 +134,8 @@ export class ClientComponent implements OnInit {
       cityID: this.submitedForm.cityID,
       date: Date.parse(this.submitedForm.date.toString()),
       time: this.submitedForm.time,
-      duration: this.submitedForm.duration
+      duration: this.submitedForm.duration,
+      clientEmail: this.submitedForm.clientEmail
     }    
     console.log('query: ',freeMasetersQuery )
     let clientData = {

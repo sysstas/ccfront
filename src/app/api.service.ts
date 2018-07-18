@@ -28,8 +28,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
- addr = "https://apple-pie-41428.herokuapp.com"
-  // addr = "http://localhost:5000"
+//  addr = "https://apple-pie-41428.herokuapp.com"
+  addr = "http://localhost:5000"
   constructor( private http: Http, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
@@ -130,7 +130,7 @@ export class ApiService {
         this.getCurrentClient(query)
         this.getClients()
         this.openSnackBar('Client succesfully saved')
-        //console.log(res)        
+        console.log(res)        
       }
     }})
   }
@@ -167,7 +167,7 @@ export class ApiService {
 
   /////// CRUD Orders //////////////////////
   getOrders(){
-    return this.http.get(this.addr+'/order').subscribe(res =>{
+    return this.http.get(this.addr+'/orders').subscribe(res =>{
       if (res){
         this.orders = res.json()
         console.log('get orders: ', this.orders)
@@ -293,8 +293,11 @@ export class ApiService {
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
-    this.http.post(this.addr+'/login', querry).subscribe(res => {
+    this.http.post(this.addr+'/login', querry)    
+    .subscribe(res => {
       if (res){
+        console.log(res)
+        localStorage.setItem('token', res.json().token)
         this.router.navigate(['/admin']) 
         this.IsLoggedIn = true
       }

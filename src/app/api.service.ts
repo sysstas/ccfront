@@ -127,21 +127,22 @@ export class ApiService {
     //console.log(query)
     this.http.post(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
-        this.getCurrentClient(query)
+        this.currentClient = res.json()
         this.getClients()
         this.openSnackBar('Client succesfully saved')
-        console.log(res)        
+        // console.log("res: ",res)     
+        // console.log("this.currentClient: ", this.currentClient)   
       }
     }})
   }
-  getCurrentClient(query){   
-    this.http.post(this.addr+'/getcurrentclient', query).subscribe(res =>{{
-      if (res){
-        this.currentClient = res.json()[0].ID
-        console.log('Client ID:',res)        
-      }
-    }})
-  }
+  // getCurrentClient(query){   
+  //   this.http.post(this.addr+'/getcurrentclient', query).subscribe(res =>{{
+  //     if (res){
+  //       this.currentClient = res.json()[0].ID
+  //       console.log('Client ID:',res)        
+  //     }
+  //   }})
+  // }
 
 
   editClient(data){
@@ -176,11 +177,11 @@ export class ApiService {
   }
 
   getOrdersAfterChange(): Observable<any>{
-    return this.http.get(this.addr+'/order')   
+    return this.http.get(this.addr+'/orders')   
   }
 
   deleteOrder(id): Observable<any>{
-    return this.http.delete(this.addr+'/order/' + id)
+    return this.http.delete(this.addr+'/orders/' + id)
     // .subscribe(res =>{
     //   if (res){
     //     this.getOrders()
@@ -203,7 +204,7 @@ export class ApiService {
     //   duration:2
     // }
     console.log("send order", newOrder)
-    this.http.post(this.addr+'/order', newOrder).subscribe(res =>{{
+    this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
       if (res){
         // this.getClients()
         // this.openSnackBar('Client succesfully saved')

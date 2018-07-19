@@ -97,12 +97,13 @@ export class ClientComponent implements OnInit {
       userName: this.submitedForm.clientName,
       userEmail: this.submitedForm.clientEmail,
       cityID: this.submitedForm.cityID,
-      clientID: this.api.currentClient
+      client: this.api.currentClient
     }
     console.log('oderInfo',oderInfo)
     this.api.createOrder(oderInfo)
     // this.api.updateMasterSchedule(oderInfo)
     // Clear form and page to initial state
+    
     this.isFormSubmitted = false
     this.submitedForm = new ClientSubmitedForm('','', '','','','','')
     this.api.arr = []
@@ -124,29 +125,31 @@ export class ClientComponent implements OnInit {
   }
 
   find() {     
-    // this for changing layout when client 
-    this.isFormSubmitted = true;
+    let clientData = {
+      clientName: this.submitedForm.clientName,
+      clientEmail: this.submitedForm.clientEmail
+    }
+    console.log('clientData: ',clientData )
+    
+    // Add new client to database
+    this.api.addClient(clientData)
 
-    // this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)
      
     // forming query object for free masters search on backend
     let freeMasetersQuery = {
       cityID: this.submitedForm.cityID,
       date: Date.parse(this.submitedForm.date.toString()),
       time: this.submitedForm.time,
-      duration: this.submitedForm.duration,
-      clientEmail: this.submitedForm.clientEmail
+      duration: this.submitedForm.duration
     }    
     console.log('query: ',freeMasetersQuery )
-    let clientData = {
-      clientName: this.submitedForm.clientName,
-      clientEmail: this.submitedForm.clientEmail
-    }
-    console.log('clientData: ',clientData )
+
+
     this.api.getFreeMasters(freeMasetersQuery)
-    // Add new client to database
-    this.api.addClient(clientData)
-   
+
+    
+    // this for changing layout when client 
+    this.isFormSubmitted = true;
   }
   
   backToStep1(){

@@ -2,7 +2,7 @@
     <mat-list-item *ngFor="let master of api.masters">
       <h4 mat-line>Name: {{master.masterName }}</h4>
       <p mat-line>Rating: {{master.masterRating | json}} stars</p>
-      <p mat-line>City: {{master.cityName}} </p>
+      <p mat-line>City: {{master.city.cityName}} </p>
       <button mat-button (click)="openDialogEditMaster(master)"><mat-icon>edit</mat-icon></button>
       <!-- <button mat-button (click)="api.delete(master._id, 'master')"><mat-icon>delete</mat-icon></button>     -->
       <button mat-button (click)="openDialogDeleteMaster(master)"><mat-icon class="red">delete</mat-icon></button> 
@@ -12,8 +12,8 @@
   <form>
     <h1>Add new master</h1>
     <mat-form-field>
-      <mat-select placeholder="City" [formControl]="newMasterCity" [(ngModel)]="newMaster.CityID" name="city" required>
-        <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
+      <mat-select placeholder="City" [formControl]="newMasterCity" [(ngModel)]="newMaster.cityID" name="city" required>
+        <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
       </mat-select>
       <mat-error *ngIf="newMasterCity.invalid">{{getMasterCityMessage()}}</mat-error>
     </mat-form-field>

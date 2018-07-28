@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
@@ -30,56 +30,56 @@ export class ApiService {
   ]
 //  addr = "https://apple-pie-41428.herokuapp.com"
   addr = "http://localhost:5000"
-  constructor( private http: Http, 
+  TOKEN_KEY = 'token'
+
+  constructor( private http: HttpClient, 
     public router: Router,  
     public snackBar: MatSnackBar) { }
 
+  get token() {
+    return localStorage.getItem(this.TOKEN_KEY)
+  }
 
   //// City CRUD /////////////////////////////
   getCities(){
-    this.http.get(this.addr+'/cities').subscribe( res => {
-      this.cities = res.json() 
-      // console.log(res) 
+    this.http.get<any>(this.addr+'/cities').subscribe( res => {
+      this.cities = res 
     })   
   }
 
   addCity(cityName: string){    
-    let city = {cityName: cityName}
+    let city = {
+      cityName: cityName
+    } 
     this.http.post(this.addr+'/cities', city).subscribe(res => {
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully saved')
-        // console.log(res)
       }
     })
   }
 
-  editCity(data){   
+  editCity(data){
     this.http.put(this.addr+'/cities/' + data.ID, data).subscribe(res => {      
       if (res){
         this.getCities()
         this.openSnackBar('City succesfully saved')
-        // console.log(res)
       }
     })
   }
 
   deleteCity(data){
-    // console.log(data)
     this.http.delete(this.addr+'/cities/' + data.ID).subscribe(res =>{
-      if (res){
-        this.getCities()
-        this.openSnackBar('City succesfully deleted')  
-        // console.log(res) 
-      }
+      this.getCities()
+      this.openSnackBar('City succesfully deleted')
     })
   }
   ////////////////////////////////////////////////////
 
   /////// CRUD Masters ///////////////////////////////
   getMasters(){
-    this.http.get(this.addr+'/masters').subscribe( res => {
-      this.masters = res.json() 
+    this.http.get<any>(this.addr+'/masters').subscribe( res => {
+      this.masters = res
       console.log('get masters:', res) 
     })     
   }
@@ -89,88 +89,67 @@ export class ApiService {
       if (res){
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
-        // console.log(res)
       }
     })
   } 
 
   editMaster(data){
-    // console.log(data.id)
-    this.http.put(this.addr+'/masters/' + data.ID, data).subscribe( res => {
+    this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
       if (res){
+        console.log(data)
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
-        // console.log(res)
       }
     })
   }
 
   deleteMaster(data){
-    this.http.delete(this.addr+'/masters/' + data.id).subscribe(res =>{
-      if (res){
-        this.getMasters()
-        this.openSnackBar('Master succesfully deleted')  
-        // console.log(res) 
-      }
+    this.http.delete(this.addr+'/masters/' + data.id).subscribe(res =>{     
+      this.getMasters()
+      this.openSnackBar('Master succesfully deleted')       
     })
   }
   //////////////////////////////////////
 
   /////// CRUD Clients ///////////////////////////////
   getClients(){
-    this.http.get(this.addr+'/clients').subscribe( res => {
-      this.clients = res.json() 
+    this.http.get<any>(this.addr+'/clients').subscribe( res => {
+      this.clients = res
     })     
   }
   currentClient ={}
   addClient(query){
-    //console.log(query)
-    this.http.post(this.addr+'/clients', query).subscribe(res =>{{
+    this.http.post<any>(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
-        this.currentClient = res.json()
+        this.currentClient = res
         this.getClients()
         this.openSnackBar('Client succesfully saved')
-        // console.log("res: ",res)     
-        // console.log("this.currentClient: ", this.currentClient)   
       }
     }})
   }
-  // getCurrentClient(query){   
-  //   this.http.post(this.addr+'/getcurrentclient', query).subscribe(res =>{{
-  //     if (res){
-  //       this.currentClient = res.json()[0].ID
-  //       console.log('Client ID:',res)        
-  //     }
-  //   }})
-  // }
-
 
   editClient(data){
     this.http.put(this.addr+'/clients/' + data.id, data).subscribe(res => {
       if (res){
         this.getClients()
-        this.openSnackBar('Client succesfully saved')
-        // console.log(res)
+        this.openSnackBar('Client succesfully saved')        // console.log(res)
       }
     })
   }
 
   deleteClient(data){
-    this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{
-      if (res){
-        this.getClients()
-        this.openSnackBar('Client succesfully deleted')  
-        // console.log(res) 
-      }
+    this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{      
+      this.getClients()
+      this.openSnackBar('Client succesfully deleted')      
     })
   }
   //////////////////////////////////////
 
   /////// CRUD Orders //////////////////////
   getOrders(){
-    return this.http.get(this.addr+'/orders').subscribe(res =>{
+    return this.http.get<any>(this.addr+'/orders').subscribe(res =>{
       if (res){
-        this.orders = res.json()
+        this.orders = res
         console.log('get orders: ', this.orders)
       }
     })
@@ -236,20 +215,20 @@ export class ApiService {
   ////// App logic ///////////////////
   arr = []
   getFreeMasters(query){
-     this.http.post(this.addr+'/freemasters', query).subscribe( res => {
+     this.http.post<any>(this.addr+'/freemasters', query).subscribe( res => {
        this.loadingSetTrue()
-       this.arr = res.json()     
+       this.arr = res    
     })    
   }
   
   schedule = []
   getMastersShedule(query){
     // console.log('schedule query: ', query)
-    this.http.post(this.addr+'/schedule', query).subscribe( res => {
+    this.http.post<any>(this.addr+'/schedule', query).subscribe( res => {
       //this.schedule = res.json()
       // console.log("received schedule data: ",res.json())
       // this.schedule = [{name:"Alice",hours:['qwe','qwe']}]
-      let temp = res.json()
+      let temp = res
       temp.forEach(element => {      
         element.hours=[]
         for (let i = 0; i < element.duration; i++) {
@@ -294,11 +273,11 @@ export class ApiService {
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
-    this.http.post(this.addr+'/login', querry)    
+    this.http.post<any>(this.addr+'/login', querry)    
     .subscribe(res => {
       if (res){
         console.log(res)
-        localStorage.setItem('token', res.json().token)
+        localStorage.setItem('token', res.token)
         this.router.navigate(['/admin']) 
         this.IsLoggedIn = true
       }

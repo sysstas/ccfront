@@ -35,12 +35,13 @@ import { DialogLogin } from './navigation/dialog-login';
 import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
-import { HttpModule } from '@angular/http';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
 import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 import { OrdersComponent, DialogEditOrder } from './admin/orders/orders.component';
 import { AuthGuardService } from './auth-guard.service';
+import { AuthInterceptorService } from './authInterceptor.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 
 const routes: Routes = [
@@ -85,7 +86,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     FormsModule,
@@ -118,7 +119,11 @@ const routes: Routes = [
     DialogDeleteCity,
     DialogDeleteClient,
     DialogDeleteMaster],
-  providers: [ApiService, AuthGuardService],
+  providers: [ApiService, AuthGuardService, { 
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

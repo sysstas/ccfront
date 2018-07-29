@@ -3,24 +3,24 @@
   <form>
  
     <mat-form-field>
-      <mat-select placeholder="ID"  [(ngModel)]="data.ID" name="ID" disabled >
-        <mat-option *ngFor="let order of api.orders" [value]="order.ID" >{{order.ID}}</mat-option>
+      <mat-select placeholder="ID"  [(ngModel)]="data.id" name="ID" disabled >
+        <mat-option *ngFor="let order of api.orders" [value]="order.id" >{{order.id}}</mat-option>
       </mat-select>
       <!-- <mat-error *ngIf="masterRatingEdit.invalid">{{getMasterRatingMessage()}}</mat-error> -->
     </mat-form-field>
     <mat-form-field>
         <mat-select placeholder="city"  [(ngModel)]="data.cityID" name="cityID" required>
-          <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
+          <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
         </mat-select>     
     </mat-form-field>     
     <mat-form-field>
         <mat-select placeholder="master"  [(ngModel)]="data.masterID" name="masterID" required>
-          <mat-option *ngFor="let master of api.masters" [value]="master.ID" >{{master.masterName}}</mat-option>
+          <mat-option *ngFor="let master of api.masters" [value]="master.id" >{{master.masterName}}</mat-option>
         </mat-select>       
     </mat-form-field>
     <mat-form-field>
         <mat-select placeholder="client email"  [(ngModel)]="data.clientID" name="clientID" required>
-          <mat-option *ngFor="let client of api.clients" [value]="client.ID" >{{client.clientEmail}}</mat-option>
+          <mat-option *ngFor="let client of api.clients" [value]="client.id" >{{client.clientEmail}}</mat-option>
         </mat-select>       
     </mat-form-field>
     <mat-form-field>

@@ -46,35 +46,40 @@ export class OrdersComponent implements OnInit, AfterViewInit {
 
   deleteOrder(id){
     this.api.deleteOrder(id).subscribe(res =>{
-      if (res){
-        this.api.getOrdersAfterChange().subscribe(res =>{
-            if (res){
-              this.api.orders = res.json()         
-              this.dataSource = new MatTableDataSource(this.api.orders); 
-            }
-          })        
-        //this.openSnackBar('Order succesfully deleted')  
-      
-      }
+      console.log('orders.component deleteOrder', res)
+      this.api.getOrdersAfterChange().subscribe(res =>{                    
+          this.api.orders = res         
+          this.dataSource = new MatTableDataSource(this.api.orders);             
+        })        
+      //this.openSnackBar('Order succesfully deleted') 
     })   
   }
   
   /// open dialog edit master
   openDialogEditOrder(order): void { 
-    console.log(order)
+    console.log("order edit open ", order)
     let dialogRef = this.dialog.open(DialogEditOrder, {
       width: '250px',
       data: { 
-        ID: order.ID,
+        id: order.id,
         cityID: order.cityID, 
         masterID: order.masterID,
-        clientID: order.clientID,
+        clientID: order.client.id,
         date:order.date,
         time: order.time,
         duration: order.duration
       }
     });
-
+    let       data = { 
+      id: order.id,
+      cityID: order.cityID, 
+      masterID: order.masterID,
+      clientID: order.client.id,
+      date:order.date,
+      time: order.time,
+      duration: order.duration
+    }
+    console.log("order edit open data", data)
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
      // this.animal = result;

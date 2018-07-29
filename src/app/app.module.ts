@@ -37,6 +37,7 @@ import { ChoseMasterComponent } from './client/choosemaster/choosemaster.compone
 import { ApiService } from './api.service';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
 import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
+import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 import { OrdersComponent, DialogEditOrder } from './admin/orders/orders.component';
 import { AuthGuardService } from './auth-guard.service';
@@ -59,6 +60,7 @@ const routes: Routes = [
       {path: 'orders', component: OrdersComponent}
     ]
   },    
+  { path: 'neworder', component: NewOrderComponent},
   { path: '**', redirectTo: 'client'}
 ]
 
@@ -66,6 +68,7 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     ClientComponent,
+    NewOrderComponent,
     AdminComponent,
     NavigationComponent,
     MastersComponent,

@@ -39,7 +39,7 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <button mat-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
-                    <button mat-button (click)="deleteOrder(element.ID)"><mat-icon class="red">delete</mat-icon></button>
+                    <button mat-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
                 </mat-cell>
             </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

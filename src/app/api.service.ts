@@ -16,7 +16,7 @@ export class ApiService {
   loadingSetFalse(){
     this.loadingStatus = false;
   }
-
+  
   cities = []
   masters =[]
   clients = []
@@ -28,8 +28,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-//  addr = "https://apple-pie-41428.herokuapp.com"
-  addr = "http://localhost:5000"
+ addr = "https://apple-pie-41428.herokuapp.com"
+  // addr = "http://localhost:5000"
   TOKEN_KEY = 'token'
 
   constructor( private http: HttpClient, 
@@ -96,7 +96,7 @@ export class ApiService {
   editMaster(data){
     this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
       if (res){
-        console.log(data)
+        // console.log(data)
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
       }
@@ -161,33 +161,18 @@ export class ApiService {
 
   deleteOrder(id): Observable<any>{
     return this.http.delete(this.addr+'/orders/' + id)
-    // .subscribe(res =>{
-    //   if (res){
-    //     this.getOrders()
-    //     //this.openSnackBar('Order succesfully deleted')  
-    //     console.log(res)        
-    //   }
-    // })
   }
 
-  // createOrder(orderInfo): Observable<any>{    
-  //   return this.http.post(this.addr+'/order', orderInfo)    
-  // }
-  createOrder(newOrder){    
-    // let orderInfo = {
-    //   cityID:4, 
-    //   masterID:3,
-    //   clientID:4,
-    //   date:1526331600000,
-    //   time:11,
-    //   duration:2
-    // }
-    console.log("send order", newOrder)
+
+  newOrderInformation = {}
+  createOrder(newOrder){   
+    // console.log("send order", newOrder)
     this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
       if (res){
-        // this.getClients()
-        // this.openSnackBar('Client succesfully saved')
-        console.log(res)        
+        console.log('order created ', res)
+        console.log('order created full ', newOrder)
+        this.newOrderInformation = newOrder
+        this.router.navigate(['/neworder']) 
       }
     }})    
   }
@@ -201,13 +186,10 @@ export class ApiService {
       time: data.time,
       duration: data.duration
     }
-    // console.log("send order")
-    this.http.post(this.addr+'/order/' + data.id, orderInfo).subscribe(res =>{{
-      if (res){
-        // this.getClients()
-        // this.openSnackBar('Client succesfully saved')
-        console.log(res)        
-      }
+    console.log("send order ", data)
+    this.http.put(this.addr+'/orders/' + data.id, orderInfo).subscribe(res =>{{
+        console.log(res) 
+        this.getOrders()     
     }})    
   }
   /////////////////////////////////////

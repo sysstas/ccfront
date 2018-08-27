@@ -93,7 +93,7 @@
       <mat-list *ngFor="let master of api.arr" class="masters-container">  
         <mat-list-item>
           <h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>
-          <!-- <h3 mat-line>from {{master.city}}</h3> -->
+
           <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p> 
           <button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>   
         </mat-list-item>

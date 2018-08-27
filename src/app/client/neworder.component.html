@@ -1,8 +1,10 @@
-<h1>Congratulation! You order master!</h1>
-<h2>Order information:</h2>
-
-<p>Order date: {{orderInformation.date | date}}</p>
-<p>When to begin: {{orderInformation.time}}</p>
-<p>Master name: {{orderInformation.masterName}}</p>
-<p>Work Duration: {{orderInformation.duration}}</p>
-<h2>Thank You for order!</h2>
+<div class="col-xl-12 center">
+    <h1>Congratulation! You order master!</h1>
+    <h2>Order information:</h2>
+    <p>Order date: {{orderInformation.date | date}}</p>
+    <p>When to begin: {{orderInformation.time}}</p>
+    <p>Master name: {{orderInformation.masterName}}</p>
+    <p>Work Duration: {{orderInformation.duration}}</p>
+    <h2>Thank You for order!</h2>
+    <button mat-raised-button (click)="returnToStartPage()">OK</button>
+</div>

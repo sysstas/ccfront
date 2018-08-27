@@ -3,12 +3,7 @@
   flex-direction: row;
   justify-content: center;  
 }
-/* .column {
-  flex-direction: column;
-  border-style: solid;
-  border-color: rgba(153, 180, 180, 0.575);
-  background-color: ghostwhite
-} */
+
 .content-item {  
   text-align: center;
   color: darkcyan;
@@ -22,14 +17,6 @@
   border-color: rgba(153, 180, 180, 0.575);
   background-color: rgba(247, 255, 255, 0.952);
 }
-
-/* 
-.masters-container{
-  flex-direction: column;
-  width: 300px;  
-  justify-content: flex-start;
-} */
-
 
 .form-container> * {
   width: 100%;

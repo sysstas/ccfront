@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,10 +11,13 @@ import { ApiService } from '../api.service';
 
 
 export class NewOrderComponent {
-    constructor( public api: ApiService) { }
+    constructor( public api: ApiService, public router: Router,) { }
     
 orderInformation = this.api.newOrderInformation
 
+returnToStartPage() {
+  this.router.navigate(['/client'])
+}
 }
 
 

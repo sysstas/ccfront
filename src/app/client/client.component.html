@@ -1,112 +1,113 @@
 
-<div class="row-justify-center">
-    <div class="column">
-      <div class="content-item" *ngIf="!isFormSubmitted">
-        <h1>Welcome to Clockwise Clockwork</h1>
-        <h2>Do You Need Someone to Repair Your Grandfather Clock?</h2>
-        <h2>This place is exactly what you need!</h2>
-        <h2>Our masters can DO IT</h2>
-        <h1>FAST, PROFESSIONAL, EXPENSIVE </h1>
-        <h2>To make order just follow two simple steps</h2>
-        
-      </div>
 
-      <div class="content-item" *ngIf="!isFormSubmitted">
-        <form #form="ngForm" novalidate name="form" class="form-container">
-          <h3>Step 1</h3>
-          <p>Fill the form</p>
-          <mat-form-field>
-            <input  matInput placeholder="Your Name" 
-                    [formControl]="name"
-                    [ngModel]="submitedForm.clientName" 
-                    (ngModelChange)="submitedForm.clientName=$event" 
-                    pattern="...+"
-                    name="Name" required>
-            <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
-          </mat-form-field>
-  
-          <mat-form-field>
-            <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.clientEmail" name="Email" required>
-            <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
-          </mat-form-field>  
-  
-          <mat-form-field>
-            <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.cityID" name="city" required>
-              <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
-          </mat-form-field>
-          
-          <mat-form-field>
-            <input matInput [formControl]="date" [min]="minDate" [matDatepicker]="picker" placeholder="Choose date when master to come" [(ngModel)]="submitedForm.date" name="date" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="date.invalid">{{getDateErrorMessage()}}</mat-error>
-          </mat-form-field>
-  
-          <mat-form-field>
-            <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submitedForm.time" name="workhour" required>
-              <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="time.invalid">{{getTimeErrorMessage()}}</mat-error>
-          </mat-form-field>
-  
-          <mat-form-field>
-            <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submitedForm.duration" name="clocksize" required>
-              <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
-          </mat-form-field>  
-          <button [disabled]="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" (click)="find(); $event.preventDefault()" mat-raised-button color="primary" >
-            <span *ngIf="!(size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid)">To Step 2</span>
-            <span *ngIf="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" matTooltip="Fill all fields to activate">To Step 2</span>
-          </button>       
-        </form>
-      </div>
-      <div class="content-item" *ngIf="isFormSubmitted">
-        <div class="wrapper1">
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-  
-          <mat-form-field>
-            <mat-select placeholder="Change time" [(ngModel)]="submitedForm.time" name="workhour1" required>
-              <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-  
-          <button (click)="find()" mat-raised-button color="primary" type="submit" >Find Free Masters</button>
-          <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button>  
-        </div>
-  
-        
-        <mat-divider></mat-divider>
-        <div *ngIf="api.loading">
-          <mat-spinner></mat-spinner>
-        </div>
-        <div *ngIf="api.arr?.length" class="form-container">
-          <h1>Step 2</h1>
-          <h3>Choose master</h3>
-          <mat-list *ngFor="let master of api.arr" class="masters-container">  
-            <mat-list-item>
-              <h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>
-              <!-- <h3 mat-line>from {{master.city}}</h3> -->
-              <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p> 
-              <button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>   
-            </mat-list-item>
-          </mat-list>
-          <mat-divider></mat-divider>
-        </div>
-        <div *ngIf="!api.arr?.length" >
-          <h1>Sorry, all masters are busy at this time. Choose another time or date</h1>
-        </div>
-  
-      </div>
+
+
+  <div class="content-item col-xl-12" *ngIf="!isFormSubmitted">
+    <h1>Welcome to Clockwise Clockwork</h1>
+    <h2>Do You Need Someone to Repair Your Grandfather Clock?</h2>
+    <h2>This place is exactly what you need!</h2>
+    <h2>Our masters can DO IT</h2>
+    <h1>FAST, PROFESSIONAL, EXPENSIVE </h1>
+    <h2>To make order just follow two simple steps</h2>    
+  </div>
+
+  <div class="content-item col-xl-12 center" *ngIf="!isFormSubmitted">
+    <form #form="ngForm" novalidate name="form" class="form-container">
+      <h3>Step 1</h3>
+      <p>Fill the form</p>
+      <mat-form-field>
+        <input  matInput placeholder="Your Name" 
+                [formControl]="name"
+                [ngModel]="submitedForm.clientName" 
+                (ngModelChange)="submitedForm.clientName=$event" 
+                pattern="...+"
+                name="Name" required>
+        <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.clientEmail" name="Email" required>
+        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>  
+
+      <mat-form-field>
+        <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.cityID" name="city" required>
+          <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
+      </mat-form-field>
       
-    </div> 
-</div>
+      <mat-form-field>
+        <input matInput [formControl]="date" [min]="minDate" [matDatepicker]="picker" placeholder="Choose date when master to come" [(ngModel)]="submitedForm.date" name="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="date.invalid">{{getDateErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submitedForm.time" name="workhour" required>
+          <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="time.invalid">{{getTimeErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submitedForm.duration" name="clocksize" required>
+          <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
+      </mat-form-field>  
+      <button [disabled]="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" (click)="find(); $event.preventDefault()" mat-raised-button color="primary" >
+        <span *ngIf="!(size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid)">To Step 2</span>
+        <span *ngIf="size.invalid || time.invalid || date.invalid || city.invalid || email.invalid || name.invalid" matTooltip="Fill all fields to activate">To Step 2</span>
+      </button>       
+    </form>
+  </div>
+
+  <div class="content-item col-xl-12 center" *ngIf="isFormSubmitted">
+    <div class="wrapper1">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Change time" [(ngModel)]="submitedForm.time" name="workhour1" required>
+          <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button (click)="find()" mat-raised-button color="primary" type="submit" >Find Free Masters</button>
+      <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button>  
+    </div>
+
+    
+    <mat-divider></mat-divider>
+    <div *ngIf="api.loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="api.arr?.length" class="form-container">
+      <h1>Step 2</h1>
+      <h3>Choose master</h3>
+      <mat-list *ngFor="let master of api.arr" class="masters-container">  
+        <mat-list-item>
+          <h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>
+          <!-- <h3 mat-line>from {{master.city}}</h3> -->
+          <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p> 
+          <button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>   
+        </mat-list-item>
+      </mat-list>
+      <mat-divider></mat-divider>
+    </div>
+    <div *ngIf="!api.arr?.length" >
+      <h1>Sorry, all masters are busy at this time. Choose another time or date</h1>
+    </div>
+
+  </div>
+  
+ 
+
    
   
    

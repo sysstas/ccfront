@@ -1,37 +1,19 @@
-.flex-container {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-.content {
-    flex-grow: 1;    
-}
-.container{
-    padding-bottom: 120px;
-}
-.jumbotron {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 80px;
-    line-height:80px;
-    background: rgb(71, 76, 77);  
-    text-align: center;
-    color: rgb(253, 235, 74); 
-    margin-top: 4px;
-    padding-bottom: 10px;
-    
+li{
+    color: rgb(253, 235, 74);
 }
 
-a {
-    text-decoration-color: rgb(253, 235, 74);
-    color: rgb(253, 235, 74); 
+.container{
+    z-index: 1;
 }
-ul {
-    list-style: none;
+
+.navbar-fixed-bottom{
+   flex: 0 0 auto;
 }
-ul>li {
-    height: 20px;
-    
-}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+  }
+  .content {
+
+  }

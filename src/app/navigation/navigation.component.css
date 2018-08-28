@@ -11,3 +11,6 @@
     color: rgb(253, 235, 74);      
     font-size: 15px 
 }
+.navbar{
+    z-index: 2;
+}

@@ -1,98 +1,113 @@
-<div class="example-container mat-elevation-z8">
-    <!-- <div *ngIf="api.loading">
-      <mat-spinner></mat-spinner>
-    </div> -->
-    <mat-table #table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="ID">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="City">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.city.cityName}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="ClientEmail">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Client Email</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.client.clientEmail}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="ClientName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.client.clientName}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Date">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.date | date}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Time">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Start time</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.time}}:00</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Duration">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.duration}} hr</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Master">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Master</mat-header-cell>
-            <mat-cell *matCellDef="let element">{{element.master.masterName}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Action">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <button mat-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
-                    <button mat-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
-                </mat-cell>
-            </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+<div class="container">
+  
+  <div class="row">
+    
+    <div class="col-xl-12">
+      <h1>ORDERS</h1>
+      <div class="example-container mat-elevation-z8">
+          <!-- <div *ngIf="api.loading">
+            <mat-spinner></mat-spinner>
+          </div> -->
+          <mat-table #table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="ID">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="City">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.city.cityName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ClientEmail">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Client Email</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.client.clientEmail}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="ClientName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Client Name</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.client.clientName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.date | date}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Time">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start time</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.time}}:00</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Duration">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.duration}} hr</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Master">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Master</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.master.masterName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Action">
+                      <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
+                      <mat-cell *matCellDef="let element">
+                          <button mat-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
+                          <button mat-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
+                      </mat-cell>
+                  </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-    </mat-table>
-    <mat-paginator #paginator
-    [pageSize]="10"
-    [pageSizeOptions]="[2, 10, 20]"
-    [showFirstLastButtons]="true">
-    </mat-paginator>
+          </mat-table>
+          <mat-paginator #paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[2, 10, 20]"
+          [showFirstLastButtons]="true">
+          </mat-paginator>
+      </div>
+    </div>
+    
+    <div class="col-xl-12">
+      <h1 >Create</h1>
+      <div class="content-item" >  
+        <form class="form-container"> 
+
+          <mat-form-field>
+              <mat-select placeholder="city"  [(ngModel)]="newOrder.cityID" name="2" required>
+                <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
+              </mat-select>     
+          </mat-form-field>     
+
+          <mat-form-field>
+              <mat-select placeholder="master"  [(ngModel)]="newOrder.masterID" name="3" required>
+                <mat-option *ngFor="let master of api.masters" [value]="master.ID" >{{master.masterName}}</mat-option>
+              </mat-select>       
+          </mat-form-field>
+
+          <mat-form-field>
+              <mat-select placeholder="client email"  [(ngModel)]="newOrder.clientID" name="4" required>
+                <mat-option *ngFor="let client of api.clients" [value]="client.ID" >{{client.clientEmail}}</mat-option>
+              </mat-select>       
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput placeholder="date" [(ngModel)]="newOrder.date" name="5" required>     
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput placeholder="time" [(ngModel)]="newOrder.time" name="6" required>     
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput placeholder="duration" [(ngModel)]="newOrder.duration" name="7" required>     
+          </mat-form-field>
+
+          <button mat-button (click)="createNewOrder()">Save</button>
+        </form> 
+      </div>
+    </div>
+  
+  </div>
+
 </div>
 
 
 
 
-<h1 >Create</h1>
-<div class="content-item" >  
-  <form class="form-container"> 
 
-    <mat-form-field>
-        <mat-select placeholder="city"  [(ngModel)]="newOrder.cityID" name="2" required>
-          <mat-option *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
-        </mat-select>     
-    </mat-form-field>     
-
-    <mat-form-field>
-        <mat-select placeholder="master"  [(ngModel)]="newOrder.masterID" name="3" required>
-          <mat-option *ngFor="let master of api.masters" [value]="master.ID" >{{master.masterName}}</mat-option>
-        </mat-select>       
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-select placeholder="client email"  [(ngModel)]="newOrder.clientID" name="4" required>
-          <mat-option *ngFor="let client of api.clients" [value]="client.ID" >{{client.clientEmail}}</mat-option>
-        </mat-select>       
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="date" [(ngModel)]="newOrder.date" name="5" required>     
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="time" [(ngModel)]="newOrder.time" name="6" required>     
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="duration" [(ngModel)]="newOrder.duration" name="7" required>     
-    </mat-form-field>
-
-    <button mat-button (click)="createNewOrder()">Save</button>
-  </form> 
-</div>
 
 <!-- <div class="content-item" *ngIf="!isFormSubmitted">
     <form #form="ngForm" novalidate name="form" class="form-container">

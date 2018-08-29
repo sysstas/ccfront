@@ -1,34 +1,49 @@
-<mat-list >  
-    <mat-list-item *ngFor="let master of api.masters">
-      <h4 mat-line>Name: {{master.masterName }}</h4>
-      <p mat-line>Rating: {{master.masterRating | json}} stars</p>
-      <p mat-line>City: {{master.city.cityName}} </p>
-      <button mat-button (click)="openDialogEditMaster(master)"><mat-icon>edit</mat-icon></button>
-      <!-- <button mat-button (click)="api.delete(master._id, 'master')"><mat-icon>delete</mat-icon></button>     -->
-      <button mat-button (click)="openDialogDeleteMaster(master)"><mat-icon class="red">delete</mat-icon></button> 
-      <mat-divider></mat-divider>
-    </mat-list-item>
-  </mat-list>  
-  <form>
-    <h1>Add new master</h1>
-    <mat-form-field>
-      <mat-select placeholder="City" [formControl]="newMasterCity" [(ngModel)]="newMaster.cityID" name="city" required>
-        <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="newMasterCity.invalid">{{getMasterCityMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Master name" [formControl]="newMasterName" [(ngModel)]="newMaster.masterName" name="newmaster" required>
-      <mat-error *ngIf="newMasterName.invalid">{{getMasterNameErrorMessage()}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select placeholder="Rating" [formControl]="newMasterRatingEdit" [(ngModel)]="newMaster.masterRating" name="rating" required>
-        <mat-option *ngFor="let rating of masterRating" [value]="rating.mark" >{{rating.mark}}</mat-option>
-      </mat-select>
-      <mat-error *ngIf="newMasterRatingEdit.invalid">{{getMasterRatingMessage()}}</mat-error>
-    </mat-form-field>
-    <button (click)="addNewMaster()" (click)="clean()" [disabled]="newMasterName.invalid || newMasterCity.invalid || newMasterRatingEdit.invalid" mat-raised-button color="primary" type="submit" >Add new master</button>  
-  </form>  
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-xl-12">
+      <h1>MASTERS</h1>
+      <mat-list >  
+        <mat-list-item *ngFor="let master of api.masters">
+          <h4 mat-line>Name: {{master.masterName }}</h4>
+          <p mat-line>Rating: {{master.masterRating | json}} stars</p>
+          <p mat-line>City: {{master.city.cityName}} </p>
+          <button mat-button (click)="openDialogEditMaster(master)"><mat-icon>edit</mat-icon></button>
+          <!-- <button mat-button (click)="api.delete(master._id, 'master')"><mat-icon>delete</mat-icon></button>     -->
+          <button mat-button (click)="openDialogDeleteMaster(master)"><mat-icon class="red">delete</mat-icon></button> 
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list> 
+    </div>
+
+    <div class="col-xl-12">  
+      <form>
+        <h1>Add new master</h1>
+        <mat-form-field>
+          <mat-select placeholder="City" [formControl]="newMasterCity" [(ngModel)]="newMaster.cityID" name="city" required>
+            <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="newMasterCity.invalid">{{getMasterCityMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Master name" [formControl]="newMasterName" [(ngModel)]="newMaster.masterName" name="newmaster" required>
+          <mat-error *ngIf="newMasterName.invalid">{{getMasterNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Rating" [formControl]="newMasterRatingEdit" [(ngModel)]="newMaster.masterRating" name="rating" required>
+            <mat-option *ngFor="let rating of masterRating" [value]="rating.mark" >{{rating.mark}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="newMasterRatingEdit.invalid">{{getMasterRatingMessage()}}</mat-error>
+        </mat-form-field>
+        <button (click)="addNewMaster()" (click)="clean()" [disabled]="newMasterName.invalid || newMasterCity.invalid || newMasterRatingEdit.invalid" mat-raised-button color="primary" type="submit" >Add new master</button>  
+      </form>
+    </div>
+
+  </div>
+
+</div>
+
         
       
     

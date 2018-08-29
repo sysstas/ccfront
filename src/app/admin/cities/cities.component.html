@@ -1,18 +1,33 @@
-<mat-list>
-  <mat-list-item *ngFor="let city of api.cities">
-    <h4 mat-line>{{city.cityName}}</h4> 
-    <button mat-button (click)="openDialogEditCity(city)"><mat-icon>edit</mat-icon></button>
-    <button mat-button (click)="openDialogDeleteCity(city)"><mat-icon class="red">delete</mat-icon></button>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
-<form #form="ngForm" novalidate name="form">
-  <h3>Add new city</h3>
-  <mat-form-field>
-    <input matInput placeholder="Add new city" [formControl]="city" [(ngModel)]="newCity" name="newCity" required>
-    <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
-  </mat-form-field>
+<div class="container">
   
-  <button [disabled]="city.invalid" (click)="addNewCity()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new city</button>
+  <div class="row">
 
-</form>
+    <div class="col-xl-12">
+      <h1>CITIES</h1>
+      <mat-list>
+        <mat-list-item *ngFor="let city of api.cities">
+          <h4 mat-line>{{city.cityName}}</h4> 
+          <button mat-button (click)="openDialogEditCity(city)"><mat-icon>edit</mat-icon></button>
+          <button mat-button (click)="openDialogDeleteCity(city)"><mat-icon class="red">delete</mat-icon></button>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    
+    <div class="col-xl-12">
+      <form #form="ngForm" novalidate name="form">
+        <h3>Add new city</h3>
+        <mat-form-field>
+          <input matInput placeholder="Add new city" [formControl]="city" [(ngModel)]="newCity" name="newCity" required>
+          <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
+        </mat-form-field>        
+        <button [disabled]="city.invalid" (click)="addNewCity()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new city</button>
+      </form>
+    </div>  
+  
+  </div>
+
+</div>
+
+
+

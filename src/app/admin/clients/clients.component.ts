@@ -25,17 +25,17 @@ export class IsReg implements PipeTransform {
 })
 export class ClientsComponent implements OnInit {
   /// CREATE FORM VALIDATION PART
-  clientName = new FormControl('', [Validators.required])
-  clientEmail = new FormControl('', [Validators.required, Validators.email])
+  userName = new FormControl('', [Validators.required])
+  userEmail = new FormControl('', [Validators.required, Validators.email])
 
-  getClientNameErrorMessage() {
-    return this.clientName.hasError('required') ? 'You must enter client name' :
+  getUserNameErrorMessage() {
+    return this.userName.hasError('required') ? 'You must enter user name' :
               '';
   }
 
-  getClientEmailErrorMessage() {
-    return this.clientEmail.hasError('required') ? 'You must enter email' :
-    this.clientEmail.hasError('email') ? 'Not a valid email' :
+  getUserEmailErrorMessage() {
+    return this.userEmail.hasError('required') ? 'You must enter email' :
+    this.userEmail.hasError('email') ? 'Not a valid email' :
     '';
   }
   //////////////////////////////////////
@@ -53,27 +53,28 @@ export class ClientsComponent implements OnInit {
   //animal: string;
   name: string;
   
-  newClient = {
-    clientName: '',
-    clientEmail: ''
+  newUser = {
+    userName: '',
+    userEmail: ''
   }
   // Clean after submit
   clean(): void{
     console.log()
-    this.newClient = {
-      clientName: '',
-      clientEmail: ''
+    this.newUser = {
+      userName: '',
+      userEmail: ''
     };
-    this.clientName.reset();
-    this.clientEmail.reset();
+    this.userName.reset();
+    this.userEmail.reset();
   }
 
 
   /// open dialog delete client function
-  openDialogDeleteClient(client): void {    
+  openDialogDeleteUser(user): void { 
+    console.log('user', user)   
     let dialogRef = this.dialog.open(DialogDeleteClient, {
       width: '250px',
-      data: { clientName: client.clientName, id: client.ID}
+      data: { userName: user.userName, id: user.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -81,12 +82,12 @@ export class ClientsComponent implements OnInit {
     });
   } 
 
-  /// open dialog edit client function
-  openDialog(client): void {
-    console.log(client)
+  /// open dialog edit user function
+  openDialog(user): void {
+    console.log(user)
     let dialogRef = this.dialog.open(DialogEditClient, {
       width: '250px',
-      data: { clientName: client.clientName, id: client.ID, clientEmail: client.clientEmail }
+      data: { userName: user.userName, id: user.id, userEmail: user.userEmail }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -95,10 +96,10 @@ export class ClientsComponent implements OnInit {
     });
   }
   
-  addNewClient(){ 
+  addNewUser(){ 
     // calling addCity funcnion on API 
-    console.log('send client data: ', this.newClient)
-    this.api.addClient(this.newClient)
+    console.log('send client data: ', this.newUser)
+    this.api.addClient(this.newUser)
     // refreshing cities list on page
     this.api.getClients()
   }  
@@ -106,7 +107,7 @@ export class ClientsComponent implements OnInit {
 
 }
 
-/// dialog delete clinet component
+/// dialog delete user component
 @Component({
   templateUrl: 'dialog-delete-client.html',
 })
@@ -128,17 +129,17 @@ export class DialogDeleteClient {
 export class DialogEditClient {
 
   /// EDIT FORM VALIDATION PART
-  clientName = new FormControl('', [Validators.required])
-  clientEmail = new FormControl('', [Validators.required, Validators.email])
+  userName = new FormControl('', [Validators.required])
+  userEmail = new FormControl('', [Validators.required, Validators.email])
 
-  getClientNameErrorMessage() {
-    return this.clientName.hasError('required') ? 'You must enter client name' :
+  getUserNameErrorMessage() {
+    return this.userName.hasError('required') ? 'You must enter user name' :
               '';
   }
 
-  getClientEmailErrorMessage() {
-    return this.clientEmail.hasError('required') ? 'You must enter email' :
-    this.clientEmail.hasError('email') ? 'Not a valid email' :
+  getUserEmailErrorMessage() {
+    return this.userEmail.hasError('required') ? 'You must enter email' :
+    this.userEmail.hasError('email') ? 'Not a valid email' :
     '';
   }
   //////////////////////////////////////

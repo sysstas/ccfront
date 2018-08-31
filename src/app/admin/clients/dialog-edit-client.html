@@ -2,17 +2,17 @@
 <div mat-dialog-content>  
   <form>
     <mat-form-field>
-      <input matInput placeholder="name" [formControl]="clientName"  [(ngModel)]="data.clientName"  name="name" required>
-      <mat-error *ngIf="clientName.invalid">{{getClientNameErrorMessage()}}</mat-error>
+      <input matInput placeholder="name" [formControl]="userName"  [(ngModel)]="data.userName"  name="name" required>
+      <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="email" [formControl]="clientEmail"[(ngModel)]="data.clientEmail"  name="email" required>
-      <mat-error *ngIf="clientEmail.invalid">{{getClientEmailErrorMessage()}}</mat-error>
+      <input matInput placeholder="email" [formControl]="userEmail"[(ngModel)]="data.userEmail"  name="email" required>
+      <mat-error *ngIf="userEmail.invalid">{{getUserEmailErrorMessage()}}</mat-error>
     </mat-form-field>
   </form>
   
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCloseButtonClick()">Cancel</button>
-  <button mat-button [disabled]="clientName.invalid || clientEmail.invalid" [mat-dialog-close] (click)="edit()" cdkFocusInitial>Save</button>
+  <button mat-button [disabled]="userName.invalid || userEmail.invalid" [mat-dialog-close] (click)="edit()" cdkFocusInitial>Save</button>
 </div>

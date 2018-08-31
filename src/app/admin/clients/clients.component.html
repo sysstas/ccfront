@@ -5,14 +5,13 @@
     <div class="col-xl-12">
       <h1>USERS</h1>
       <mat-list> 
-        <mat-list-item *ngFor="let user of api.clients">
+        <mat-list-item *ngFor="let user of api.users">
           <h4 mat-line>Name: {{user.userName}}</h4> 
           <h3 mat-line>Email: {{user.userEmail}}</h3>
           <h3 mat-line>{{user.isAdmin | isAdmin}}</h3>
           <h3 mat-line>{{user.isRegistered | isReg}}</h3>    
           <button mat-button (click)="openDialog(user)"><mat-icon>edit</mat-icon></button>
-          <!-- <button mat-button (click)="api.delete(client._id, 'client')"><mat-icon>delete</mat-icon></button>           -->
-          <button mat-button (click)="openDialogDeleteClient(user)"><mat-icon class="red">delete</mat-icon></button>
+          <button mat-button (click)="openDialogDeleteUser(user)"><mat-icon class="red">delete</mat-icon></button>
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list> 
@@ -20,16 +19,16 @@
     
     <div class="col-xl-12">
       <form #form="ngForm" novalidate name="form">
-        <h3>Add new client</h3>
+        <h3>Add new user</h3>
         <mat-form-field>
-          <input matInput placeholder="name" [formControl]="clientName"  [(ngModel)]="newClient.clientName"  name="name" required>
-          <mat-error *ngIf="clientName.invalid">{{getClientNameErrorMessage()}}</mat-error>
+          <input matInput placeholder="name" [formControl]="userName"  [(ngModel)]="newUser.userName"  name="name" required>
+          <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="email" [formControl]="clientEmail" [(ngModel)]="newClient.clientEmail"  name="email" required>
-          <mat-error *ngIf="clientEmail.invalid">{{getClientEmailErrorMessage()}}</mat-error>
+          <input matInput placeholder="email" [formControl]="userEmail" [(ngModel)]="newUser.userEmail"  name="email" required>
+          <mat-error *ngIf="userEmail.invalid">{{getUserEmailErrorMessage()}}</mat-error>
         </mat-form-field>
-        <button [disabled]="clientName.invalid || clientEmail.invalid" (click)="addNewClient()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new client</button>
+        <button [disabled]="userName.invalid || userEmail.invalid" (click)="addNewUser()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new user</button>
       </form>
     </div>
   

@@ -22,7 +22,7 @@ export class ApiService {
   
   cities = []
   masters =[]
-  clients = []
+  users = []
   orders = []
   masterRating = [
     {mark: 1},
@@ -117,9 +117,10 @@ export class ApiService {
   /////// CRUD Users ///////////////////////////////
   getClients(){
     this.http.get<any>(this.addr+'/clients').subscribe( res => {
-      this.clients = res
+      this.users = res
     })     
   }
+
   currentClient ={}
   addClient(query){
     this.http.post<any>(this.addr+'/clients', query).subscribe(res =>{{
@@ -142,6 +143,7 @@ export class ApiService {
   }
 
   deleteClient(data){
+    console.log("delete user data ",data)
     this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{      
       this.getClients()
       this.openSnackBar('Client succesfully deleted')      

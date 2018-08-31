@@ -11,13 +11,13 @@ import { Router } from '@angular/router';
 
 
 export class NewOrderComponent {
-    constructor( public api: ApiService, public router: Router,) { }
+  constructor( public api: ApiService, public router: Router,) { }
     
-orderInformation = this.api.newOrderInformation
+  orderInformation = this.api.newOrderInformation
 
-returnToStartPage() {
-  this.router.navigate(['/client'])
-}
+  returnToStartPage() {
+    this.router.navigate(['/client'])
+  }
 }
 
 

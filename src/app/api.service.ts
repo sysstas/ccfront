@@ -4,6 +4,9 @@ import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const helper = new JwtHelperService();
 
 @Injectable()
 export class ApiService {
@@ -164,7 +167,7 @@ export class ApiService {
   }
 
 
-  newOrderInformation = {}
+  newOrderInformation 
   createOrder(newOrder){   
     // console.log("send order", newOrder)
     this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
@@ -252,16 +255,27 @@ export class ApiService {
   }
 
 
+
+ decodedToken
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
     this.http.post<any>(this.addr+'/login', querry)    
     .subscribe(res => {
       if (res){
-        console.log(res)
+        console.log("login: ",res)
         localStorage.setItem('token', res.token)
-        this.router.navigate(['/admin']) 
-        this.IsLoggedIn = true
+        this.decodedToken = helper.decodeToken(res.token);
+        console.log('decodedToken',this.decodedToken)
+        if (this.decodedToken.jsAdmin === 1) {
+          this.router.navigate(['/admin']) 
+          this.IsLoggedIn = true
+        } else {
+          this.router.navigate(['/neworder']) 
+          // this.IsLoggedIn = true
+        }
+        
+        
       }
     })    
   }

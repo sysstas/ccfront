@@ -36,7 +36,7 @@ import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
-import { ClientsComponent, DialogEditClient, DialogDeleteClient  } from './admin/clients/clients.component';
+import { ClientsComponent, DialogEditClient, DialogDeleteClient, IsAdmin, IsReg  } from './admin/clients/clients.component';
 import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 import { OrdersComponent, DialogEditOrder } from './admin/orders/orders.component';
@@ -84,7 +84,9 @@ const routes: Routes = [
     CitiesComponent,
     ClientsComponent,
     ScheduleComponent,
-    OrdersComponent
+    OrdersComponent,
+    IsAdmin,
+    IsReg
     
   ],
   imports: [

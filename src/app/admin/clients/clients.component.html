@@ -3,14 +3,16 @@
   <div class="row">
     
     <div class="col-xl-12">
-      <h1>CLIENTS</h1>
+      <h1>USERS</h1>
       <mat-list> 
-        <mat-list-item *ngFor="let client of api.clients">
-          <h4 mat-line>Name: {{client.clientName}}</h4> 
-          <h3 mat-line>Email: {{client.clientEmail}}</h3>    
-          <button mat-button (click)="openDialog(client)"><mat-icon>edit</mat-icon></button>
+        <mat-list-item *ngFor="let user of api.clients">
+          <h4 mat-line>Name: {{user.userName}}</h4> 
+          <h3 mat-line>Email: {{user.userEmail}}</h3>
+          <h3 mat-line>{{user.isAdmin | isAdmin}}</h3>
+          <h3 mat-line>{{user.isRegistered | isReg}}</h3>    
+          <button mat-button (click)="openDialog(user)"><mat-icon>edit</mat-icon></button>
           <!-- <button mat-button (click)="api.delete(client._id, 'client')"><mat-icon>delete</mat-icon></button>           -->
-          <button mat-button (click)="openDialogDeleteClient(client)"><mat-icon class="red">delete</mat-icon></button>
+          <button mat-button (click)="openDialogDeleteClient(user)"><mat-icon class="red">delete</mat-icon></button>
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list> 

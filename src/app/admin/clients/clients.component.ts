@@ -3,6 +3,20 @@ import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators} from '@angular/forms';
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({name: 'isAdmin'})
+export class IsAdmin implements PipeTransform {
+    transform(value) {
+        return value ? 'Admin' : 'User';
+    }
+}
+@Pipe({name: 'isReg'})
+export class IsReg implements PipeTransform {
+    transform(value) {
+        return value ? 'Registered' : 'Not registered';
+    }
+}
 
 @Component({
   selector: 'clients',

@@ -114,7 +114,7 @@ export class ApiService {
   }
   //////////////////////////////////////
 
-  /////// CRUD Clients ///////////////////////////////
+  /////// CRUD Users ///////////////////////////////
   getClients(){
     this.http.get<any>(this.addr+'/clients').subscribe( res => {
       this.clients = res
@@ -124,6 +124,7 @@ export class ApiService {
   addClient(query){
     this.http.post<any>(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
+        console.log("client creation server response ",res)
         this.currentClient = res
         this.getClients()
         this.openSnackBar('Client succesfully saved')
@@ -256,7 +257,7 @@ export class ApiService {
 
 
 
- decodedToken
+decodedToken
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
@@ -267,15 +268,13 @@ export class ApiService {
         localStorage.setItem('token', res.token)
         this.decodedToken = helper.decodeToken(res.token);
         console.log('decodedToken',this.decodedToken)
-        if (this.decodedToken.jsAdmin === 1) {
+        if (this.decodedToken.isAdmin === 1) {
           this.router.navigate(['/admin']) 
           this.IsLoggedIn = true
         } else {
           this.router.navigate(['/neworder']) 
           // this.IsLoggedIn = true
-        }
-        
-        
+        }       
       }
     })    
   }

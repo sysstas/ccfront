@@ -19,15 +19,15 @@
         <mat-form-field>
           <input  matInput placeholder="Your Name" 
                   [formControl]="name"
-                  [ngModel]="submitedForm.clientName" 
-                  (ngModelChange)="submitedForm.clientName=$event" 
+                  [ngModel]="submitedForm.userName" 
+                  (ngModelChange)="submitedForm.userName=$event" 
                   pattern="...+"
                   name="Name" required>
           <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.clientEmail" name="Email" required>
+          <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.userEmail" name="Email" required>
           <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>  
 

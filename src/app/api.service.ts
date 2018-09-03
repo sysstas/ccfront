@@ -115,18 +115,27 @@ export class ApiService {
   //////////////////////////////////////
 
   /////// CRUD Users ///////////////////////////////
+  initialUserData = {}
+  getInitialRegisterData(data){
+    console.log("API.getInitialRegisterData runs, id - ", data.id)    
+    this.http.get<any>(this.addr+'/register/' + data.id).subscribe(res =>{
+      this.initialUserData = res
+      console.log("API.getInitialRegisterData data received ", this.initialUserData)
+    })
+  }
+
   getClients(){
     this.http.get<any>(this.addr+'/clients').subscribe( res => {
       this.users = res
     })     
   }
 
-  currentClient ={}
+  currentUser ={}
   addClient(query){
     this.http.post<any>(this.addr+'/clients', query).subscribe(res =>{{
       if (res){
         console.log("client creation server response ",res)
-        this.currentClient = res
+        this.currentUser = res
         this.getClients()
         this.openSnackBar('Client succesfully saved')
       }

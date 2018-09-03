@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable'
 import { ApiService } from '../../api.service';
 import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ClientSubmitedForm } from '../../models/clientsubmitedform'
+import { UserSubmitedForm } from '../../models/usersubmitedform'
 
 @Component({
   selector: 'app-orders',
@@ -136,7 +136,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   //// LOGIC PART //////////////////////////////
   isFormSubmitted = false
 
-  submitedForm = new ClientSubmitedForm('','','','','','','')
+  submitedForm = new UserSubmitedForm('','','','','','','')
 
   workHours = [
     {hour: 8},

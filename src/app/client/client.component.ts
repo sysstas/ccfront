@@ -3,7 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatProgressSpinnerModule} from '@angular/material';
 
 import { ApiService } from '../api.service';
-import { ClientSubmitedForm } from '../models/clientsubmitedform'
+import { UserSubmitedForm } from '../models/usersubmitedform'
 
 @Component({
   selector: 'client',
@@ -56,7 +56,7 @@ export class ClientComponent implements OnInit {
   //// LOGIC PART
   isFormSubmitted = false
 
-  submitedForm = new ClientSubmitedForm('','', '','','','','')
+  submitedForm = new UserSubmitedForm('','', '','','','','')
   
   workHours = [
     {hour: 8},
@@ -94,10 +94,10 @@ export class ClientComponent implements OnInit {
       dateMsg: this.submitedForm.date,
       time: this.submitedForm.time,
       duration: this.submitedForm.duration,
-      userName: this.submitedForm.clientName,
-      userEmail: this.submitedForm.clientEmail,
+      userName: this.submitedForm.userName,
+      userEmail: this.submitedForm.userEmail,
       cityID: this.submitedForm.cityID,
-      client: this.api.currentClient
+      user: this.api.currentUser  
     }
     console.log('oderInfo',oderInfo)
     this.api.createOrder(oderInfo)
@@ -105,7 +105,7 @@ export class ClientComponent implements OnInit {
     // Clear form and page to initial state
     
     this.isFormSubmitted = false
-    this.submitedForm = new ClientSubmitedForm('','', '','','','','')
+    this.submitedForm = new UserSubmitedForm('','', '','','','','')
     this.api.arr = []
     this.email = new FormControl('', [Validators.required, Validators.email])
     this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -125,15 +125,14 @@ export class ClientComponent implements OnInit {
   }
 
   find() {     
-    let clientData = {
-      clientName: this.submitedForm.clientName,
-      clientEmail: this.submitedForm.clientEmail
+    let userData = {
+      userName: this.submitedForm.userName,
+      userEmail: this.submitedForm.userEmail
     }
-    console.log('clientData: ',clientData )
+    console.log('userData: ',userData )
     
     // Add new client to database
-    this.api.addClient(clientData)
-
+    this.api.addClient(userData)
      
     // forming query object for free masters search on backend
     let freeMasetersQuery = {
@@ -142,12 +141,9 @@ export class ClientComponent implements OnInit {
       time: this.submitedForm.time,
       duration: this.submitedForm.duration
     }    
+
     console.log('query: ',freeMasetersQuery )
-
-
-    this.api.getFreeMasters(freeMasetersQuery)
-
-    
+    this.api.getFreeMasters(freeMasetersQuery)    
     // this for changing layout when client 
     this.isFormSubmitted = true;
   }

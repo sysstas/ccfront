@@ -1,0 +1,51 @@
+<div class="container">
+  
+  <div class="row">
+    
+    <div class="col-xl-12">
+      <h1>Your orders history</h1>
+      <div class="example-container mat-elevation-z8"  *ngIf="api.userOrders">
+          <!-- <div *ngIf="api.loading">
+            <mat-spinner></mat-spinner>
+          </div> -->
+          <mat-table #table [dataSource]="dataSource" matSort>
+              <ng-container matColumnDef="ID">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="City">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.city.cityName}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Date">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.date | date}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Time">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Start time</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.time}}:00</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Duration">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.duration}} hr</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Master">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Master</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.master.masterName}}</mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+          </mat-table>
+          <mat-paginator #paginator
+          [pageSize]="10"
+          [pageSizeOptions]="[2, 10, 20]"
+          [showFirstLastButtons]="true">
+          </mat-paginator>
+      </div>
+    </div>   
+
+  
+  </div>
+
+</div>

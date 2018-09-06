@@ -44,12 +44,16 @@ import { AuthGuardService } from './auth-guard.service';
 import { AuthInterceptorService } from './authInterceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './client/user-register/user-register.component';
+import { UserAccountComponent } from './client/user-account/user-account.component';
+import { OrderHistoryComponent } from './client/order-history/order-history.component';
 
 
 const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
   { path: 'register/:id', component: UserRegisterComponent},
+  { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
+  { path: 'history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
   { path: 'admin', 
     component: AdminComponent,
     canActivate: [AuthGuardService],
@@ -89,7 +93,9 @@ const routes: Routes = [
     OrdersComponent,
     IsAdmin,
     IsReg,
-    UserRegisterComponent
+    UserRegisterComponent,
+    UserAccountComponent,
+    OrderHistoryComponent
     
   ],
   imports: [

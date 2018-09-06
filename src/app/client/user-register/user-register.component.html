@@ -31,10 +31,12 @@
           <span *ngIf="email.invalid || name.invalid || password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Register</span>
         </button>        
       </div>
-      <div *ngIf='!api.initialUserData.userEmail'>
+      <div *ngIf='!api.initialUserData.userEmail && !api.initialUserData.isRegistered'>
         <h1>Loading...</h1>
       </div>      
-     
+      <div *ngIf='!api.initialUserData.userEmail && api.initialUserData.isRegistered'>
+        <h1>You already registered</h1>
+      </div>
     </div>
 
   </div>

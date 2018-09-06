@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xl-12">
+      <h1>Account information</h1>
+      <div *ngIf='api.userAccountData.userEmail'>        
+        <h1> Hi, {{api.userAccountData.userName}}</h1> 
+        
+
+        <div class="form-container">
+          <mat-form-field>
+              <input matInput placeholder="Your name" [formControl]="name" [(ngModel)]="api.userAccountData.userName" name="name" required>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput type="email" placeholder="Your email" [formControl]="email" [(ngModel)]="api.userAccountData.userEmail" name="email" required>           
+          </mat-form-field> 
+          <br>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Enter password" [formControl]="password" [(ngModel)]="api.userAccountData.password" name="password" required>           
+          </mat-form-field> 
+          <br>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Enter new password" [formControl]="newpassword" [(ngModel)]="api.userAccountData.newPassword" name="password" required>           
+          </mat-form-field> 
+          <br>
+          <mat-form-field>
+            <input matInput type="password" placeholder="Confirm new password" [formControl]="passwordconfirm" [(ngModel)]="api.userAccountData.passwordConfirm" name="passwordConfirm" required>           
+          </mat-form-field> 
+        </div> 
+        <button [disabled]="email.invalid || name.invalid || password.invalid || passwordconfirm.invalid"  (click)="register(); $event.preventDefault()" mat-raised-button color="primary" >
+          <span *ngIf="!(email.invalid || name.invalid || password.invalid || passwordconfirm.invalid)" >Save changes</span>
+          <span *ngIf="email.invalid || name.invalid || password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Save changes</span>
+        </button>        
+      </div>
+      <div *ngIf='!api.userAccountData.userEmail'>
+        <h1>Loading...</h1>
+      </div>      
+
+    </div>
+
+  </div>
+
+</div>

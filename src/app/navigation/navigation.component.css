@@ -5,7 +5,7 @@
     color: rgb(253, 235, 74);
     font-weight: bold;   
     font-size: 20px;
-    text-shadow: 0 0 7px rgba(253, 235, 74, 0.993);
+    cursor: pointer;
 }
 .font-color{
     color: rgb(253, 235, 74);      

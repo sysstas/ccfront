@@ -281,8 +281,8 @@ export class ApiService {
   }
 
 
-
-decodedToken
+/////////////////// LOGIN
+  decodedToken
   IsLoggedIn = false
   Auth(login, password){
     let querry = {login: login, password: password}
@@ -297,12 +297,14 @@ decodedToken
           this.router.navigate(['/admin']) 
           this.IsLoggedIn = true
         } else {
-          this.router.navigate(['/neworder']) 
+          this.IsLoggedIn = true  
+          this.router.navigate(['/account']) 
           // this.IsLoggedIn = true
         }       
       }
     })    
   }
+
   isLoggedIn(){
     return this.IsLoggedIn;
   }
@@ -311,6 +313,30 @@ decodedToken
     this.snackBar.open( message, 'Close', {
       duration: 2000,
     });
+  }
+
+  ////////////////////////////// User account
+  userAccountData = {}
+  getUserAccountData(){
+    console.log("API.getUserAccountData runs")    
+    this.http.get<any>(this.addr+'/account').subscribe(res =>{
+      this.userAccountData = res
+      console.log("API.getUserAccountData data received ", this.userAccountData)
+    })
+  }
+
+  ///////////////////////// User orders history
+  userOrders = []
+  getUserOrders(){
+    console.log("API.getUserOrders runs")    
+    this.http.get<any>(this.addr+'/history').subscribe(res =>{
+      // this.userAccountData = res
+      if (res) {
+          // console.log("API.getUserOrders data received ", res)
+          this.userOrders = res
+      }
+      console.log("API.getUserOrders userOrders", this.userOrders)
+    })
   }
 
 }

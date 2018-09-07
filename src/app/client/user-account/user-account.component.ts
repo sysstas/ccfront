@@ -20,6 +20,7 @@ export class UserAccountComponent implements OnInit {
 
   ngOnInit() {
     this.api.getUserAccountData()    
+    this.api.getUserOrders()
   }
 
 }

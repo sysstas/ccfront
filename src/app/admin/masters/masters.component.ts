@@ -51,7 +51,7 @@ export class MastersComponent implements OnInit {
   clean(): void{
     //
     this.newMaster = {
-      cityID: '',
+      cityId: '',
       masterName : '',
       masterRating: ''
     }
@@ -98,14 +98,14 @@ export class MastersComponent implements OnInit {
 
 
   newMaster = {
-    cityID: '',
+    cityId: '',
     masterName : '',
     masterRating: ''
   }
 
   addNewMaster(){
     // calling addMaster funcnion on API 
-    console.log(this.newMaster)
+    console.log("add new master",this.newMaster)
     this.api.addMaster(this.newMaster)
     // refreshing masters list on page
     this.api.getMasters()

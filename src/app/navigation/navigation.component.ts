@@ -18,6 +18,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
   }
+  
 
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogLogin, {

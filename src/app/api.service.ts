@@ -139,14 +139,14 @@ export class ApiService {
 
 
   getClients(){
-    this.http.get<any>(this.addr+'/clients').subscribe( res => {
+    this.http.get<any>(this.addr+'/users').subscribe( res => {
       this.users = res
     })     
   }
 
   currentUser ={}
   addClient(query){
-    this.http.post<any>(this.addr+'/clients', query).subscribe(res =>{{
+    this.http.post<any>(this.addr+'/users', query).subscribe(res =>{{
       if (res){
         console.log("client creation server response ",res)
         this.currentUser = res
@@ -157,7 +157,7 @@ export class ApiService {
   }
 
   editClient(data){
-    this.http.put(this.addr+'/clients/' + data.id, data).subscribe(res => {
+    this.http.put(this.addr+'/users/' + data.id, data).subscribe(res => {
       if (res){
         this.getClients()
         this.openSnackBar('Client succesfully saved')        // console.log(res)
@@ -167,7 +167,7 @@ export class ApiService {
 
   deleteClient(data){
     console.log("delete user data ",data)
-    this.http.delete(this.addr+'/clients/' + data.id).subscribe(res =>{      
+    this.http.delete(this.addr+'/users/' + data.id).subscribe(res =>{      
       this.getClients()
       this.openSnackBar('Client succesfully deleted')      
     })
@@ -195,7 +195,7 @@ export class ApiService {
 
   newOrderInformation 
   createOrder(newOrder){   
-    // console.log("send order", newOrder)
+    console.log("API send order", newOrder)
     this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
       if (res){
         console.log('order created ', res)
@@ -306,6 +306,7 @@ export class ApiService {
   }
 
   isLoggedIn(){
+    // console.log(this.IsLoggedIn)
     return this.IsLoggedIn;
   }
 

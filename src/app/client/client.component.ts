@@ -87,6 +87,7 @@ export class ClientComponent implements OnInit {
   ]
 
   makeOrder(master) {
+    console.log('CONTROLLER master',master)
     let oderInfo = {
       masterID: master.ID,
       masterName: master.masterName,
@@ -96,14 +97,13 @@ export class ClientComponent implements OnInit {
       duration: this.submitedForm.duration,
       userName: this.submitedForm.userName,
       userEmail: this.submitedForm.userEmail,
-      cityID: this.submitedForm.cityID,
+      cityID: this.submitedForm.cityId,
       user: this.api.currentUser  
     }
-    console.log('oderInfo',oderInfo)
-    this.api.createOrder(oderInfo)
-    // this.api.updateMasterSchedule(oderInfo)
-    // Clear form and page to initial state
+    console.log('CONTROLLER oderInfo',oderInfo)
     
+    this.api.createOrder(oderInfo)    
+    // Clear form and page to initial state    
     this.isFormSubmitted = false
     this.submitedForm = new UserSubmitedForm('','', '','','','','')
     this.api.arr = []
@@ -136,13 +136,13 @@ export class ClientComponent implements OnInit {
      
     // forming query object for free masters search on backend
     let freeMasetersQuery = {
-      cityID: this.submitedForm.cityID,
+      cityID: this.submitedForm.cityId,
       date: Date.parse(this.submitedForm.date.toString()),
       time: this.submitedForm.time,
       duration: this.submitedForm.duration
     }    
 
-    console.log('query: ',freeMasetersQuery )
+    console.log('CONTROLLER freeMasetersQuery: ',freeMasetersQuery )
     this.api.getFreeMasters(freeMasetersQuery)    
     // this for changing layout when client 
     this.isFormSubmitted = true;
@@ -150,20 +150,8 @@ export class ClientComponent implements OnInit {
   
   backToStep1(){
     this.isFormSubmitted = false;
-  }
-    
-  // forms array of busi hours for submitted form data
-  // workiHoursAnalizer(start:any, duration:any){
-  //   let time = []
-  //   time.push(start)
-  //   if (duration === 3) {
-  //     time.push(start+1)
-  //     time.push(start+2) 
-  //   } else if (duration === 2){
-  //     time.push(start+1)      
-  //   } 
-  //   this.submitedForm.busy = time    
-  // }
+  }    
+ 
 }
 
 

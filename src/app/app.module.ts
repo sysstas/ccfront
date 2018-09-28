@@ -22,6 +22,12 @@ import {
   MatProgressSpinnerModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider,
+} from "angular-6-social-login";
 //import {FormControl, Validators} from '@angular/forms';
 
 
@@ -46,7 +52,19 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './client/user-register/user-register.component';
 import { UserAccountComponent } from './client/user-account/user-account.component';
 import { OrderHistoryComponent } from './client/order-history/order-history.component';
-
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+      [
+        
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider("902455189500-mpc1v2qsioej6o17e2no0rc122vh40bh.apps.googleusercontent.com")
+        }
+      ]
+  )
+  return config;
+}
 
 const routes: Routes = [
   { path: '', component: ClientComponent},
@@ -121,7 +139,8 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SocialLoginModule
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 
@@ -133,11 +152,19 @@ const routes: Routes = [
     DialogDeleteCity,
     DialogDeleteClient,
     DialogDeleteMaster],
-  providers: [ApiService, AuthGuardService, { 
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true
-  }],
+  providers: [
+    ApiService, 
+    AuthGuardService, 
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

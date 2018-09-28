@@ -1,11 +1,26 @@
 <nav class="navbar navbar-dark bg-dark">
   <h2 class="home-buttone" routerLink="./" routerLinkActive="active-link">Clockwise Clockwork</h2>  
-  <button mat-button  *ngIf="api.isLoggedIn()" routerLink="./account" routerLinkActive="active-link" ><span class="font-color">Account</span></button>
-  <button mat-button  *ngIf="api.isLoggedIn()" routerLink="./history" routerLinkActive="active-link"><span class="font-color">History</span></button>
-  <span style="flex: 1 1 auto"></span>  
-  <button mat-button  *ngIf="!api.isLoggedIn()" (click)="openDialog()"><span class="font-color">Login</span></button>
-  <button mat-button  *ngIf="api.isLoggedIn()" (click)="logout()"><span class="font-color">Logout</span></button>
-</nav>
 
+  <button mat-button  *ngIf="api.isLoggedIn()" routerLink="./account" routerLinkActive="active-link" >
+    <span class="font-color">Account</span>
+  </button>
 
-  
+  <button mat-button  *ngIf="api.isLoggedIn()" routerLink="./history" routerLinkActive="active-link">
+    <span class="font-color">History</span>
+  </button>
+
+  <span style="flex: 1 1 auto"></span> 
+
+  <button mat-button  *ngIf="!api.isLoggedIn()" (click)="openDialog()">
+    <span class="font-color">Login</span>
+  </button>
+
+  <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+  <button mat-button *ngIf="!api.isLoggedIn()" (click)="socialSignIn('google')">    
+    <span class="font-color">Sign in with Google</span>
+  </button>  
+
+  <button mat-button  *ngIf="api.isLoggedIn()" (click)="logout()">
+    <span class="font-color">Logout</span>
+  </button>
+</nav>  

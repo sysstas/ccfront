@@ -283,9 +283,9 @@ export class ApiService {
 
 /////////////////// LOGIN
   decodedToken
-  IsLoggedIn = false
-  Auth(login, password){
-    let querry = {login: login, password: password}
+  IsLoggedIn: boolean = false
+  Auth(login, password, googleToken): void {
+    let querry = { login, password, googleToken}
     this.http.post<any>(this.addr+'/login', querry)    
     .subscribe(res => {
       if (res){
@@ -299,7 +299,6 @@ export class ApiService {
         } else {
           this.IsLoggedIn = true  
           this.router.navigate(['/account']) 
-          // this.IsLoggedIn = true
         }       
       }
     })    

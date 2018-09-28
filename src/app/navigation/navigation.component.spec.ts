@@ -5,9 +5,7 @@ import { Overlay } from "@angular/cdk/overlay";
 import { ApiService } from "../api.service";
 import { HttpClient, HttpHandler } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { of } from "rxjs/internal/observable/of";
 import { By } from "@angular/platform-browser";
-
 
 describe('Navigation component', () => {
     let fixture: ComponentFixture<NavigationComponent>;
@@ -33,9 +31,6 @@ describe('Navigation component', () => {
             ]
         })
         fixture = TestBed.createComponent(NavigationComponent)
-        // mockApiService.isLoggedIn = function (){return true}
-
-
     })
 
     it('should render button "Login" if user not logged in', () => {
@@ -80,6 +75,5 @@ describe('Navigation component', () => {
 
         const elem = fixture.debugElement.queryAllNodes( By.css('button') )[2].nativeNode.textContent
         expect(elem).toContain('Logout')
-    })
-    
+    })    
 })

@@ -55,7 +55,7 @@ export class CitiesComponent implements OnInit {
   openDialogDeleteCity(city): void {    
     let dialogRef = this.dialog.open(DialogDeleteCity, {
       width: '250px',
-      data: { cityName: city.cityName, ID: city.ID}
+      data: { cityName: city.cityName, ID: city.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -76,7 +76,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuardService],
     children: [
-      {path: '', redirectTo: 'orders', pathMatch: 'full'},
+      {path: '', redirectTo: 'clients', pathMatch: 'full'},
       {path: 'schedule', component: ScheduleComponent},
       {path: 'clients', component: ClientsComponent},
       {path: 'masters', component: MastersComponent},

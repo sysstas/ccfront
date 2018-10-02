@@ -18,7 +18,6 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.api.loadingSetTrue()
     this.api.getOrders()
     this.api.getMasters()
     this.api.getCities()

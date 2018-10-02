@@ -286,6 +286,7 @@ export class ApiService {
   IsLoggedIn: boolean = false
   Auth(login, password, googleToken): void {
     let querry = { login, password, googleToken}
+    console.log(querry)
     this.http.post<any>(this.addr+'/login', querry)    
     .subscribe(res => {
       if (res){

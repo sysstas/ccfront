@@ -100,7 +100,7 @@ export class ApiService {
   editMaster(data){
     this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
       if (res){
-        // console.log(data)
+        console.log("API Master edit data: ",data)
         this.getMasters()
         this.openSnackBar('Master succesfully saved')
       }

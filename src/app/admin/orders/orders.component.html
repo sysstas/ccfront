@@ -44,7 +44,7 @@
               <ng-container matColumnDef="Action">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
+                        <!-- <button mat-icon-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button> -->
                         <button mat-icon-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
                     </mat-cell>
                 </ng-container>
@@ -60,7 +60,7 @@
       </div>
     </div>
     
-    <div class="col-xl-12">
+    <!-- <div class="col-xl-12">
       <h1 >Create</h1>
       <div class="content-item" >  
         <form class="form-container"> 
@@ -98,7 +98,7 @@
           <button mat-button (click)="createNewOrder()">Save</button>
         </form> 
       </div>
-    </div>
+    </div> -->
   
   </div>
 

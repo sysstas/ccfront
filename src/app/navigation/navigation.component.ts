@@ -44,7 +44,9 @@ export class NavigationComponent {
 
   logout(): void {
     this.api.IsLoggedIn = false
+    localStorage.clear()
     this.router.navigate(['/client'])
+    
   }
 
   // onSignIn(googleUser) {

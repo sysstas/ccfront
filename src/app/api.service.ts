@@ -32,8 +32,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-//  addr = "https://apple-pie-41428.herokuapp.com"
-  addr = "http://localhost:5000"
+ addr = "https://blooming-ocean-36906.herokuapp.com"
+  // addr = "http://localhost:5000"
   TOKEN_KEY = 'token'
 
   constructor( private http: HttpClient, 
@@ -116,7 +116,7 @@ export class ApiService {
   //////////////////////////////////////
 
   /////// CRUD Users ///////////////////////////////
-  initialUserData = new UserRegInfo('','','','')
+  initialUserData = new UserRegInfo('','','','', 0)
   getInitialRegisterData(data){
     console.log("API.getInitialRegisterData runs, id - ", data.id)    
     this.http.get<any>(this.addr+'/register/' + data.id).subscribe(res =>{
@@ -135,6 +135,7 @@ export class ApiService {
     this.http.post(this.addr+'/register', userData ).subscribe(res =>{     
       console.log("API.postRegisteredUserData received ", res)
     })
+    this.router.navigate(['/'])
   }
 
 
@@ -317,7 +318,7 @@ export class ApiService {
   }
 
   ////////////////////////////// User account
-  userAccountData = {}
+  userAccountData: any = {}
   getUserAccountData(){
     console.log("API.getUserAccountData runs")    
     this.http.get<any>(this.addr+'/account').subscribe(res =>{

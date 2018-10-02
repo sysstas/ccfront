@@ -26,14 +26,14 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     //console.log(this.dataSource)
   }
 
-  displayedColumns = ['ID', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Action'];
+  displayedColumns = ['id', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Action'];
   dataSource = new MatTableDataSource(this.api.orders);
   
   newOrder = {
-    ID: '',
-    cityID: '',
-    masterID: '',
-    clientID: '',
+    id: '',
+    cityId: '',
+    masterId: '',
+    userId: '',
     date: '',
     time: '',
     duration: ''
@@ -62,9 +62,9 @@ export class OrdersComponent implements OnInit, AfterViewInit {
       width: '250px',
       data: { 
         id: order.id,
-        cityID: order.cityID, 
-        masterID: order.masterID,
-        clientID: order.client.id,
+        cityId: order.cityId, 
+        masterId: order.masterId,
+        userId: order.client.id,
         date:order.date,
         time: order.time,
         duration: order.duration
@@ -72,9 +72,9 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     });
     let       data = { 
       id: order.id,
-      cityID: order.cityID, 
-      masterID: order.masterID,
-      clientID: order.client.id,
+      cityId: order.cityId, 
+      masterId: order.masterId,
+      userId: order.client.id,
       date:order.date,
       time: order.time,
       duration: order.duration
@@ -167,82 +167,9 @@ export class OrdersComponent implements OnInit, AfterViewInit {
   ]
 
 
-  // makeOrder(master) {
-  //    this.api.createOrder()
-    
-  // }
-  // makeOrder(master) {
-  //   let oderInfo = {
-  //     id: master._id,
-  //     masterName: master.name,
-  //     date: Date.parse(this.submitedForm.date.toString()),
-  //     dateMsg: this.submitedForm.date,
-  //     time: this.submitedForm.busy,
-  //     userName: this.submitedForm.name,
-  //     userEmail: this.submitedForm.email,
-  //     city: this.submitedForm.city
-  //   }
-  //   this.api.createOrder(oderInfo)
-  //   .subscribe(res => {
-  //     if (res){
-  //       console.log('master schedule updated')        
-  //        this.api.getOrdersAfterChange().subscribe(res =>{
-  //         if (res){
-  //           this.api.orders = res.json()         
-  //           this.dataSource = new MatTableDataSource(this.api.orders); 
-  //         } 
-  //       })
-  //     }
-  //   })
-    
-    
-  //   // Clear form and page to initial state
-  //   this.isFormSubmitted = false
-  //   this.submitedForm = new ClientSubmitedForm('','', '','','','',[])
-  //   this.api.arr = []
-  //   this.email = new FormControl('', [Validators.required, Validators.email])
-  //   this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
-  //   this.city = new FormControl('', [Validators.required])
-  //   this.date = new FormControl('', [Validators.required])
-  //   this.time = new FormControl('', [Validators.required])
-  //   this.size = new FormControl('', [Validators.required])    
-  // }
-
-  // find() {     
-  //   // this for changing layout when client 
-  //   this.isFormSubmitted = true;
-  //   this.workiHoursAnalizer(this.submitedForm.startHour, this.submitedForm.workTime)    
-  //   // forming query object
-  //   let query = {
-  //     city: this.submitedForm.city,
-  //     date: Date.parse(this.submitedForm.date.toString()),
-  //     time: this.submitedForm.busy
-  //   }
-  //   let clientData = {
-  //     name: this.submitedForm.name,
-  //     email: this.submitedForm.email
-  //   }
-  //   this.api.getFreeMasters(query)
-  //   // Add new client to database
-  //   this.api.addClient(clientData)
-  // }
-
-  backToStep1(){
-    this.isFormSubmitted = false;
-  }
-  
-  // forms array of busi hours for submitted form data
-  // workiHoursAnalizer(start:any, duration:any){
-  //   let time = []
-  //   time.push(start)
-  //   if (duration === 3) {
-  //     time.push(start+1)
-  //     time.push(start+2) 
-  //   } else if (duration === 2){
-  //     time.push(start+1)      
-  //   } 
-  //   this.submitedForm.busy = time    
-  // }
+  // backToStep1(){
+  //   this.isFormSubmitted = false;
+  // }  
 }
 
 /// dialog edit master

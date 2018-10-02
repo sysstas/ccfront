@@ -1,8 +1,6 @@
 <div mat-dialog-content>
   <h1>Login</h1>
-  <h4> Hint:</h4>
-  <p>admin@example.com</p>
-  <p>passwordsecret</p>
+
   <mat-form-field>
     <input  matInput placeholder="Login" [(ngModel)]="submitedForm.login" name="login" required>
   </mat-form-field>
@@ -10,10 +8,9 @@
   <mat-form-field>
     <input matInput placeholder="Password" type="password" [(ngModel)]="submitedForm.password" name="password" required>
   </mat-form-field>  
-
 </div>
 
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close] (click)="login()" cdkFocusInitial>Login</button>
+  <button mat-button  (click)="login()"  cdkFocusInitial>Login</button>
 </div>

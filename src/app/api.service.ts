@@ -12,15 +12,6 @@ const helper = new JwtHelperService();
 @Injectable()
 export class ApiService {
   
-  loadingStatus = true;
-
-  loadingSetTrue(){
-    this.loadingStatus = true;
-  }
-  loadingSetFalse(){
-    this.loadingStatus = false;
-  }
-  
   cities = []
   masters =[]
   users = []

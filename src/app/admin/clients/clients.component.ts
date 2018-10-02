@@ -47,7 +47,7 @@ export class ClientsComponent implements OnInit {
 
   ngOnInit() {
     //this.api.getMasters()     
-   // this.api.getCities()
+    this.api.getOrders()
     this.api.getClients()
   }
   //animal: string;

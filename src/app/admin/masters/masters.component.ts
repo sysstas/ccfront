@@ -74,9 +74,10 @@ export class MastersComponent implements OnInit {
 
   /// open dialog edit master
   openDialogEditMaster(master): void { 
+    console.log("MASTER", master)
     let dialogRef = this.dialog.open(DialogEditMaster, {
       width: '250px',
-      data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.cityID, cityName: master.cityName}
+      data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.city.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

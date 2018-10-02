@@ -40,10 +40,10 @@ export class CitiesComponent implements OnInit {
 
   /// open dialog edit city function
   openDialogEditCity(city): void {  
-    console.log(city)  
+    console.log("openDialogEditCity() says: ", city)  
     let dialogRef = this.dialog.open(DialogEditCity, {
       width: '250px',
-      data: { cityName: city.cityName, ID: city.ID}      
+      data: { cityName: city.cityName, ID: city.id}      
     });
 
     dialogRef.afterClosed().subscribe(result => {

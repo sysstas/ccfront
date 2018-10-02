@@ -1,8 +1,10 @@
 <div class="container">
 
   <div class="row">
-
-    <div class="col-xl-12">
+    <div class="col-xl-12"> 
+      <h1>Under maintaince</h1>
+    </div>
+    <!-- <div class="col-xl-12">
       <h1>SCHEDULE</h1>
       <mat-form-field>
         <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
@@ -21,70 +23,68 @@
       <h2>City: {{ScheduleForm.city}}</h2>     
       <h3>Date: {{ScheduleForm.date | date}}</h3>
       <div class="table-style mat-elevation-z8">
-        <mat-table #table [dataSource]="api.schedule" >      
-          <!--- Note that these columns can be defined in any order.
-                The actual rendered columns are set as a property on the row definition" -->      
-          <!-- Name Column -->
+        <mat-table #table [dataSource]="api.schedule" >   
+
           <ng-container matColumnDef="name" class="width-style">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.masterName}} </mat-cell>
           </ng-container>
-          <!-- 8 Column -->
+
           <ng-container matColumnDef="8">
             <mat-header-cell *matHeaderCellDef> 8:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[0]}} </mat-cell>
           </ng-container>
-          <!-- 9 Column -->
+                    
           <ng-container matColumnDef="9">
             <mat-header-cell *matHeaderCellDef> 9:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[1]}} </mat-cell>
           </ng-container> 
-          <!-- 10 Column -->
+
           <ng-container matColumnDef="10">
             <mat-header-cell *matHeaderCellDef> 10:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[2]}} </mat-cell>
           </ng-container>
-          <!-- 11 Column -->
+
           <ng-container matColumnDef="11">
             <mat-header-cell *matHeaderCellDef> 11:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[3]}} </mat-cell>
           </ng-container> 
-          <!-- 12 Column -->
+
           <ng-container matColumnDef="12">
             <mat-header-cell *matHeaderCellDef> 12:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[4]}} </mat-cell>
           </ng-container> 
-          <!-- 13 Column -->
+
           <ng-container matColumnDef="13">
             <mat-header-cell *matHeaderCellDef> 13:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[5]}} </mat-cell>
           </ng-container> 
-          <!-- 14 Column -->
+
           <ng-container matColumnDef="14">
             <mat-header-cell *matHeaderCellDef> 14:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[6]}} </mat-cell>
-          </ng-container>  
-          <!-- 15 Column -->
+          </ng-container>
+
           <ng-container matColumnDef="15">
             <mat-header-cell *matHeaderCellDef> 15:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[7]}} </mat-cell>
           </ng-container>
-          <!-- 16 Column -->
+
           <ng-container matColumnDef="16">
               <mat-header-cell *matHeaderCellDef> 16:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[8]}} </mat-cell>
             </ng-container>  
-          <!-- 17 Column -->
+
           <ng-container matColumnDef="17">
               <mat-header-cell *matHeaderCellDef> 17:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[9]}} </mat-cell>
             </ng-container>
-          <!-- 18 Column -->
+
           <ng-container matColumnDef="18">
               <mat-header-cell *matHeaderCellDef> 18:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[10]}} </mat-cell>
             </ng-container>  
-          <!-- 19 Column -->
+
           <ng-container matColumnDef="19">
               <mat-header-cell *matHeaderCellDef> 19:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[11]}} </mat-cell>
@@ -95,7 +95,7 @@
         </mat-table>
       </div>
 
-    </div>
+    </div> -->
 
   </div>
 

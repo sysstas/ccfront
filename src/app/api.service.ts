@@ -219,7 +219,6 @@ export class ApiService {
   arr = []
   getFreeMasters(query){
      this.http.post<any>(this.addr+'/freemasters', query).subscribe( res => {
-       this.loadingSetTrue()
        this.arr = res    
     })    
   }

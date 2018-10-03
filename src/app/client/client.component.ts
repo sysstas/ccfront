@@ -119,7 +119,6 @@ export class ClientComponent implements OnInit {
   constructor( public api: ApiService) { }
     
   ngOnInit() {
-   this.api.loadingSetTrue()
    this.api.getMasters()
    this.api.getCities()
   }

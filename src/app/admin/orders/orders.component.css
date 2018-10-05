@@ -1,20 +1,32 @@
 .mat-column-ID{
-    flex: 0 0 20px;
+    flex: 0 0 10px;
 } 
 .mat-column-ClientName{
-    flex: 0 0 200px;
+    flex: 0 0 150px;
+}
+.mat-column-ClientEmail{
+    flex: 0 0 150px;
 }
 .mat-column-City{
-    flex: 0 0 100px;
+    flex: 0 0 90px;
 }
 .mat-column-Time{
-    flex: 0 0 80px;
+    flex: 0 0 70px;
 } 
 .mat-column-Duration{
-    flex: 0 0 80px;
+    flex: 0 0 70px;
 } 
 .mat-column-Date{
     flex: 0 0 100px;
+}
+.mat-column-Master{
+    flex: 0 0 110px;
+}
+.mat-column-Paid{
+    flex: 0 0 70px;
+}
+.mat-column-Completed{
+    flex: 0 0 90px;
 }
 .mat-column-Action{
     flex: 0 0 100px;

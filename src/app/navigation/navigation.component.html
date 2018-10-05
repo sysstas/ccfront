@@ -18,7 +18,7 @@
   <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
   <button mat-button *ngIf="!api.isLoggedIn()" (click)="socialSignIn('google')">    
     <span class="font-color">Sign in with Google</span>
-  </button>  
+  </button>    
 
   <button mat-button  *ngIf="api.isLoggedIn()" (click)="logout()">
     <span class="font-color">Logout</span>

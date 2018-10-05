@@ -1,10 +1,25 @@
-<div class="col-xl-12 center">
-    <h1>Congratulation! You order master!</h1>
-    <h2>Order information:</h2>
-    <p>Order date: {{orderInformation.date | date}}</p>
-    <p>When to begin: {{orderInformation.time}}</p>
-    <p>Master name: {{orderInformation.masterName}}</p>
-    <p>Work Duration: {{orderInformation.duration}}</p>
-    <h2>Thank You for order!</h2>
-    <button mat-raised-button (click)="returnToStartPage()">OK</button>
+<div class="container">
+    <div class="row justify-content-xl-center">
+        <div class="col-xl-12">
+            <h1>Thank you for using our service</h1>
+            <h2>Order information:</h2>
+            <p>Order date: {{orderInformation.date | date}}</p>
+            <p>When to begin: {{orderInformation.time}}</p>
+            <p>Master name: {{orderInformation.masterName}}</p>
+            <p>Work Duration: {{orderInformation.duration}}</p>
+            
+            <h3>This master will be reserved for you for 30 minutes</h3>
+            <h3>To finish order please complete the paynment</h3>           
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-1">
+            <button mat-raised-button (click)="returnToStartPage()">Home</button>
+        </div>
+        <div class="col-xl-2">
+                <!-- <button mat-raised-button (click)="returnToStartPage()">Home1</button> -->
+            <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+        </div>
+    </div>
 </div>
+

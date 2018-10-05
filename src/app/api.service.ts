@@ -23,8 +23,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-//  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = "http://localhost:5000"
+ addr = "https://blooming-ocean-36906.herokuapp.com"
+  // addr = "https://272f4b62.ngrok.io"
   TOKEN_KEY = 'token'
 
   constructor( private http: HttpClient, 
@@ -186,6 +186,7 @@ export class ApiService {
 
 
   newOrderInformation 
+  createdOrdetInformation
   createOrder(newOrder){   
     console.log("API send order", newOrder)
     this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
@@ -193,6 +194,7 @@ export class ApiService {
         console.log('order created ', res)
         console.log('order created full ', newOrder)
         this.newOrderInformation = newOrder
+        this.createdOrdetInformation = res
         this.router.navigate(['/neworder']) 
       }
     }})    
@@ -329,6 +331,22 @@ export class ApiService {
       }
       console.log("API.getUserOrders userOrders", this.userOrders)
     })
+  }
+
+  ///// PAYPAL
+
+  sendPaymentResult(orderId, paymentId):void{
+    console.log("API SAYS: ",orderId, paymentId)
+    let query = {orderId, paymentId}
+    this.http.put(this.addr+'/orders/test', query).subscribe(res =>{{
+      if (res){
+        console.log('order created ', res)
+        // console.log('order created full ', newOrder)
+        // this.newOrderInformation = newOrder
+        // this.createdOrdetInformation = res
+        // this.router.navigate(['/neworder']) 
+      }
+    }}) 
   }
 
 }

@@ -23,8 +23,9 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
- addr = "https://blooming-ocean-36906.herokuapp.com"
+//  addr = "https://blooming-ocean-36906.herokuapp.com"
   // addr = "https://272f4b62.ngrok.io"
+  addr = "http://localhost:5000"
   TOKEN_KEY = 'token'
 
   constructor( private http: HttpClient, 
@@ -71,7 +72,7 @@ export class ApiService {
   }
   ////////////////////////////////////////////////////
 
-  /////// CRUD Masters ///////////////////////////////
+  /////// CRUD Masters /////////////////////////////// asdasd 
   getMasters(){
     this.http.get<any>(this.addr+'/masters').subscribe( res => {
       this.masters = res
@@ -170,8 +171,17 @@ export class ApiService {
   getOrders(){
     return this.http.get<any>(this.addr+'/orders').subscribe(res =>{
       if (res){
+        // console.log('API TEST', res) 
+        res.map( function(x){
+          x.city = x.city.cityName
+          x.master = x.master.masterName
+          x.userName = x.user.userName
+          x.userEmail = x.user.userEmail
+          return x
+        })     
+        // console.log('API TEST arr', arr)
         this.orders = res
-        console.log('get orders: ', this.orders)
+        console.log('API get orders: ', this.orders)
       }
     })
   }

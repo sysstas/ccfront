@@ -41,10 +41,18 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Master</mat-header-cell>
                   <mat-cell *matCellDef="let element">{{element.master}}</mat-cell>
               </ng-container>
+              <ng-container matColumnDef="Paid">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Paid</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.paid | isPaid}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Completed">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Completed</mat-header-cell>
+                  <mat-cell *matCellDef="let element">{{element.completed | isCompleted}}</mat-cell>
+              </ng-container>
               <ng-container matColumnDef="Action">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Action</mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button>
+                        <!-- <button mat-icon-button (click)="openDialogEditOrder(element)"><mat-icon>edit</mat-icon></button> -->
                         <button mat-icon-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
                     </mat-cell>
                 </ng-container>

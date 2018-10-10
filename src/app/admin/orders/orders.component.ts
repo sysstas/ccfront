@@ -1,9 +1,23 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, Inject, Pipe, PipeTransform } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable'
 import { ApiService } from '../../api.service';
 import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserSubmitedForm } from '../../models/usersubmitedform'
+
+@Pipe({name: 'isPaid'})
+export class IsPaid implements PipeTransform {
+    transform(value) {
+        return value ? 'Paid' : 'Not paid';
+    }
+}
+
+@Pipe({name: 'isCompleted'})
+export class IsCompleted implements PipeTransform {
+    transform(value) {
+        return value ? 'Completed' : 'In progress';
+    }
+}
 
 @Component({
   selector: 'app-orders',
@@ -25,23 +39,23 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     //console.log(this.dataSource)
   }
 
-  displayedColumns = ['id', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Action'];
+  displayedColumns = ['id', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Paid', 'Completed','Action'];
   dataSource = new MatTableDataSource(this.api.orders);
   
-  newOrder = {
-    id: '',
-    cityId: '',
-    masterId: '',
-    userId: '',
-    date: '',
-    time: '',
-    duration: ''
-  }
+  // newOrder = {
+  //   id: '',
+  //   cityId: '',
+  //   masterId: '',
+  //   userId: '',
+  //   date: '',
+  //   time: '',
+  //   duration: ''
+  // }
 
-  createNewOrder(){
-    this.api.createOrder(this.newOrder);
-    this.api.getOrders();
-  }
+  // createNewOrder(){
+  //   this.api.createOrder(this.newOrder);
+  //   this.api.getOrders();
+  // }
 
   deleteOrder(id){
     this.api.deleteOrder(id).subscribe(res =>{

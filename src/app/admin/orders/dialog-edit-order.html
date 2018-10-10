@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Edit</h1>
+<!-- <h1 mat-dialog-title>Edit</h1>
 <div mat-dialog-content>  
   <form>
  
@@ -6,7 +6,6 @@
       <mat-select placeholder="ID"  [(ngModel)]="data.id" name="ID" disabled >
         <mat-option *ngFor="let order of api.orders" [value]="order.id" >{{order.id}}</mat-option>
       </mat-select>
-      <!-- <mat-error *ngIf="masterRatingEdit.invalid">{{getMasterRatingMessage()}}</mat-error> -->
     </mat-form-field>
     <mat-form-field>
         <mat-select placeholder="city"  [(ngModel)]="data.cityID" name="cityID" required>
@@ -38,4 +37,4 @@
 <div mat-dialog-actions>
   <button mat-button (click)="onCloseButtonClick()">Cancel</button>
   <button mat-button [mat-dialog-close]  (click)="edit(data)" cdkFocusInitial>Save</button>
-</div>
+</div> -->

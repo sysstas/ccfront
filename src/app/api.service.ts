@@ -23,7 +23,8 @@ export class ApiService {
     {mark: 4},
     {mark: 5}
   ]
-//  addr = "https://apple-pie-41428.herokuapp.com"
+//  addr = "https://blooming-ocean-36906.herokuapp.com"
+  // addr = "https://272f4b62.ngrok.io"
   addr = "http://localhost:5000"
   TOKEN_KEY = 'token'
 
@@ -71,7 +72,7 @@ export class ApiService {
   }
   ////////////////////////////////////////////////////
 
-  /////// CRUD Masters ///////////////////////////////
+  /////// CRUD Masters /////////////////////////////// asdasd 
   getMasters(){
     this.http.get<any>(this.addr+'/masters').subscribe( res => {
       this.masters = res
@@ -107,7 +108,7 @@ export class ApiService {
   //////////////////////////////////////
 
   /////// CRUD Users ///////////////////////////////
-  initialUserData = new UserRegInfo('','','','')
+  initialUserData = new UserRegInfo('','','','', 0)
   getInitialRegisterData(data){
     console.log("API.getInitialRegisterData runs, id - ", data.id)    
     this.http.get<any>(this.addr+'/register/' + data.id).subscribe(res =>{
@@ -126,6 +127,7 @@ export class ApiService {
     this.http.post(this.addr+'/register', userData ).subscribe(res =>{     
       console.log("API.postRegisteredUserData received ", res)
     })
+    this.router.navigate(['/'])
   }
 
 
@@ -169,8 +171,17 @@ export class ApiService {
   getOrders(){
     return this.http.get<any>(this.addr+'/orders').subscribe(res =>{
       if (res){
+        // console.log('API TEST', res) 
+        res.map( function(x){
+          x.city = x.city.cityName
+          x.master = x.master.masterName
+          x.userName = x.user.userName
+          x.userEmail = x.user.userEmail
+          return x
+        })     
+        // console.log('API TEST arr', arr)
         this.orders = res
-        console.log('get orders: ', this.orders)
+        console.log('API get orders: ', this.orders)
       }
     })
   }
@@ -185,6 +196,7 @@ export class ApiService {
 
 
   newOrderInformation 
+  createdOrdetInformation
   createOrder(newOrder){   
     console.log("API send order", newOrder)
     this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
@@ -192,6 +204,7 @@ export class ApiService {
         console.log('order created ', res)
         console.log('order created full ', newOrder)
         this.newOrderInformation = newOrder
+        this.createdOrdetInformation = res
         this.router.navigate(['/neworder']) 
       }
     }})    
@@ -218,7 +231,6 @@ export class ApiService {
   arr = []
   getFreeMasters(query){
      this.http.post<any>(this.addr+'/freemasters', query).subscribe( res => {
-       this.loadingSetTrue()
        this.arr = res    
     })    
   }
@@ -308,7 +320,7 @@ export class ApiService {
   }
 
   ////////////////////////////// User account
-  userAccountData = {}
+  userAccountData: any = {}
   getUserAccountData(){
     console.log("API.getUserAccountData runs")    
     this.http.get<any>(this.addr+'/account').subscribe(res =>{
@@ -329,6 +341,22 @@ export class ApiService {
       }
       console.log("API.getUserOrders userOrders", this.userOrders)
     })
+  }
+
+  ///// PAYPAL
+
+  sendPaymentResult(orderId, paymentId):void{
+    console.log("API SAYS: ",orderId, paymentId)
+    let query = {orderId, paymentId}
+    this.http.put(this.addr+'/orders/test', query).subscribe(res =>{{
+      if (res){
+        console.log('order created ', res)
+        // console.log('order created full ', newOrder)
+        // this.newOrderInformation = newOrder
+        // this.createdOrdetInformation = res
+        // this.router.navigate(['/neworder']) 
+      }
+    }}) 
   }
 
 }

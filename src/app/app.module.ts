@@ -28,6 +28,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider,
 } from "angular-6-social-login";
+import { NgxPayPalModule  } from "ngx-paypal";
 //import {FormControl, Validators} from '@angular/forms';
 
 
@@ -45,7 +46,7 @@ import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/citie
 import { ClientsComponent, DialogEditClient, DialogDeleteClient, IsAdmin, IsReg  } from './admin/clients/clients.component';
 import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
-import { OrdersComponent, DialogEditOrder } from './admin/orders/orders.component';
+import { OrdersComponent, DialogEditOrder, IsPaid, IsCompleted } from './admin/orders/orders.component';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthInterceptorService } from './authInterceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -111,6 +112,8 @@ const routes: Routes = [
     OrdersComponent,
     IsAdmin,
     IsReg,
+    IsPaid,
+    IsCompleted,
     UserRegisterComponent,
     UserAccountComponent,
     OrderHistoryComponent
@@ -140,7 +143,8 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    SocialLoginModule
+    SocialLoginModule,
+    NgxPayPalModule
   ],
   entryComponents: [NavigationComponent, 
     DialogLogin, 

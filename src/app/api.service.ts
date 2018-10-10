@@ -300,11 +300,15 @@ export class ApiService {
         if (this.decodedToken.isAdmin === 1) {
           this.router.navigate(['/admin']) 
           this.IsLoggedIn = true
+          this.openSnackBar('You successfuly loged in as Admin')
         } else {
           this.IsLoggedIn = true  
           this.router.navigate(['/account']) 
+          this.openSnackBar('Successful login')
         }       
       }
+    }, err => {
+      this.openSnackBar('Access denied')
     })    
   }
 

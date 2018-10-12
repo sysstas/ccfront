@@ -19,7 +19,9 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatTableDataSource,
-  MatProgressSpinnerModule} from '@angular/material';
+  MatProgressSpinnerModule,
+  MatCard,
+  MatCardModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -53,6 +55,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UserRegisterComponent } from './client/user-register/user-register.component';
 import { UserAccountComponent } from './client/user-account/user-account.component';
 import { OrderHistoryComponent } from './client/order-history/order-history.component';
+import { UserAccountService } from './services/user-account.service';
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -142,6 +145,7 @@ const routes: Routes = [
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
     MatProgressSpinnerModule,
     SocialLoginModule,
     NgxPayPalModule
@@ -158,6 +162,7 @@ const routes: Routes = [
     DialogDeleteMaster],
   providers: [
     ApiService, 
+    UserAccountService,
     AuthGuardService, 
     { 
       provide: HTTP_INTERCEPTORS,

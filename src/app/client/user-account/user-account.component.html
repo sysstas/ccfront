@@ -2,38 +2,91 @@
   <div class="row">
     <div class="col-xl-12">
       <h1>Account information</h1>
-      <div *ngIf='api.userAccountData.userEmail'>        
-        <h1> Hi, {{api.userAccountData.userName}}</h1> 
-        
+      <div *ngIf='userAccountData.userEmail'>        
+        <h2> Hi, {{userAccountData.userName}}</h2> 
+        <p *ngIf='userAccountData.password'>Here you can change your personal information and change password</p>
+        <p *ngIf='!userAccountData.password'>Here you can change your personal information and add password</p>
 
-        <div class="form-container">
-          <mat-form-field>
-              <input matInput placeholder="Your name" [formControl]="name" [(ngModel)]="api.userAccountData.userName" name="name" required>
-          </mat-form-field>
-          <br>
-          <mat-form-field>
-            <input matInput type="email" placeholder="Your email" [formControl]="email" [(ngModel)]="api.userAccountData.userEmail" name="email" required>           
-          </mat-form-field> 
-          <br>
-          <mat-form-field>
-            <input matInput type="password" placeholder="Enter password" [formControl]="password" [(ngModel)]="api.userAccountData.password" name="password" required>           
-          </mat-form-field> 
-          <br>
-          <mat-form-field>
-            <input matInput type="password" placeholder="Enter new password" [formControl]="newpassword" [(ngModel)]="api.userAccountData.newPassword" name="password" required>           
-          </mat-form-field> 
-          <br>
-          <mat-form-field>
-            <input matInput type="password" placeholder="Confirm new password" [formControl]="passwordconfirm" [(ngModel)]="api.userAccountData.passwordConfirm" name="passwordConfirm" required>           
-          </mat-form-field> 
-        </div> 
-        <button [disabled]="email.invalid || name.invalid || password.invalid || passwordconfirm.invalid"  (click)="register(); $event.preventDefault()" mat-raised-button color="primary" >
-          <span *ngIf="!(email.invalid || name.invalid || password.invalid || passwordconfirm.invalid)" >Save changes</span>
-          <span *ngIf="email.invalid || name.invalid || password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Save changes</span>
-        </button>        
+        <mat-card class="account-card">
+          <mat-card-header>
+            <mat-card-title><b>Personal information</b></mat-card-title>
+          </mat-card-header>          
+          <mat-card-content>
+            <div class="form-container">
+              <mat-form-field>
+                  <input matInput placeholder="Your name" [formControl]="name" [(ngModel)]="userAccountData.userName" name="name" required>
+              </mat-form-field>
+              <br>
+              <mat-form-field>
+                <input matInput type="email" placeholder="Your email" [formControl]="email" [(ngModel)]="userAccountData.userEmail" name="email" required>           
+              </mat-form-field> 
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button [disabled]="email.invalid || name.invalid || (name.untouched && email.untouched)"  (click)="changePersonal(); $event.preventDefault()" mat-raised-button color="accent" >
+              <span *ngIf="!(email.invalid || name.invalid ) && (name.touched || email.touched)" >Save changes</span>
+              <span *ngIf="email.invalid || name.invalid || (name.untouched && email.untouched)" matTooltip="Fill all fields to activate">Save changes</span>
+              
+            </button>
+           
+          </mat-card-actions>
+        </mat-card>
+        
+        <mat-card class="account-card" *ngIf='userAccountData.password'>
+          <mat-card-header>
+            <mat-card-title><b>Change password</b></mat-card-title>
+          </mat-card-header>          
+          <mat-card-content>
+            <div class="form-container">         
+              <mat-form-field>
+                <input matInput type="password" placeholder="Enter old password" [formControl]="password" [(ngModel)]="userAccountData.passwordOld" name="password" required>           
+              </mat-form-field> 
+              <br>
+              <mat-form-field>
+                <input matInput type="password" placeholder="Enter new password" [formControl]="newpassword" [(ngModel)]="userAccountData.newPassword" name="password" required>           
+              </mat-form-field> 
+              <br>
+              <mat-form-field>
+                <input matInput type="password" placeholder="Confirm new password" [formControl]="passwordconfirm" [(ngModel)]="userAccountData.passwordConfirm" name="passwordConfirm" required>           
+              </mat-form-field>  
+            </div> 
+          </mat-card-content>
+          <mat-card-actions>
+            <button [disabled]="password.invalid || passwordconfirm.invalid"  (click)="changePwd(); $event.preventDefault()" mat-raised-button color="accent" >
+              <span *ngIf="!(password.invalid || passwordconfirm.invalid)" >Change password</span>
+              <span *ngIf="password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Change password</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-card class="account-card" *ngIf='!userAccountData.password'>
+          <mat-card-header>
+            <mat-card-title><b>Add password</b></mat-card-title>
+          </mat-card-header>          
+          <mat-card-content>
+            <div class="form-container">
+              <mat-form-field>
+                <input matInput type="password" placeholder="Enter password" [formControl]="newpassword" [(ngModel)]="userAccountData.newPassword" name="password" required>           
+              </mat-form-field> 
+              <br>
+              <mat-form-field>
+                <input matInput type="password" placeholder="Confirm password" [formControl]="passwordconfirm" [(ngModel)]="userAccountData.passwordConfirm" name="passwordConfirm" required>           
+              </mat-form-field>  
+            </div> 
+          </mat-card-content>
+          <mat-card-actions>
+            <button [disabled]="password.invalid || passwordconfirm.invalid"  (click)="addPwd(); $event.preventDefault()" mat-raised-button color="accent" >
+              <span *ngIf="!(password.invalid || passwordconfirm.invalid)" >Add password</span>
+              <span *ngIf="password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Add password</span>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+   
       </div>
-      <div *ngIf='!api.userAccountData.userEmail'>
+
+      <div *ngIf='!userAccountData.userEmail'>
         <h1>Loading...</h1>
+        <mat-spinner color="accent"></mat-spinner>
       </div>      
 
     </div>

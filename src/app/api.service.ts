@@ -12,16 +12,16 @@ const helper = new JwtHelperService();
 @Injectable()
 export class ApiService {
 
-  masters = [];
+  // masters = [];
   users = [];
   orders = [];
-  masterRating = [
-    {mark: 1},
-    {mark: 2},
-    {mark: 3},
-    {mark: 4},
-    {mark: 5}
-  ];
+  // masterRating = [
+  //   {mark: 1},
+  //   {mark: 2},
+  //   {mark: 3},
+  //   {mark: 4},
+  //   {mark: 5}
+  // ];
   initialUserData = new UserRegInfo('', '', '', '', 0);
   currentUser = {};
   newOrderInformation;
@@ -32,7 +32,7 @@ export class ApiService {
   IsLoggedIn = false;
 
 //  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = 'https://15d6591a.ngrok.io';
+  addr = ' https://4b225c15.ngrok.io';
   // addr = "http://localhost:5000"
   TOKEN_KEY = 'token';
 
@@ -47,38 +47,38 @@ export class ApiService {
 
 
   /////// CRUD Masters /////////////////////////////// asdasd
-  getMasters() {
-    this.http.get<any>(this.addr + '/masters').subscribe( res => {
-      this.masters = res;
-      console.log('get masters:', res);
-    });
-  }
+  // getMasters() {
+  //   this.http.get<any>(this.addr + '/masters').subscribe( res => {
+  //     this.masters = res;
+  //     console.log('get masters:', res);
+  //   });
+  // }
 
-  addMaster(newMaster) {
-    this.http.post(this.addr + '/masters', newMaster).subscribe( res => {
-      if (res) {
-        this.getMasters();
-        this.openSnackBar('Master succesfully saved');
-      }
-    });
-  }
+  // addMaster(newMaster) {
+  //   this.http.post(this.addr + '/masters', newMaster).subscribe( res => {
+  //     if (res) {
+  //       this.getMasters();
+  //       this.openSnackBar('Master succesfully saved');
+  //     }
+  //   });
+  // }
 
-  editMaster(data) {
-    this.http.put(this.addr + '/masters/' + data.id, data).subscribe( res => {
-      if (res) {
-        console.log('API Master edit data: ', data);
-        this.getMasters();
-        this.openSnackBar('Master succesfully saved');
-      }
-    });
-  }
+  // editMaster(data) {
+  //   this.http.put(this.addr + '/masters/' + data.id, data).subscribe( res => {
+  //     if (res) {
+  //       console.log('API Master edit data: ', data);
+  //       this.getMasters();
+  //       this.openSnackBar('Master succesfully saved');
+  //     }
+  //   });
+  // }
 
-  deleteMaster(data) {
-    this.http.delete(this.addr + '/masters/' + data.id).subscribe(res => {
-      this.getMasters();
-      this.openSnackBar('Master succesfully deleted');
-    });
-  }
+  // deleteMaster(data) {
+  //   this.http.delete(this.addr + '/masters/' + data.id).subscribe(res => {
+  //     this.getMasters();
+  //     this.openSnackBar('Master succesfully deleted');
+  //   });
+  // }
   //////////////////////////////////////
 
   /////// CRUD Users ///////////////////////////////
@@ -209,52 +209,52 @@ export class ApiService {
   }
 
 
-  getMastersShedule(query) {
-    // console.log('schedule query: ', query)
-    this.http.post<any>(this.addr + '/schedule', query).subscribe( res => {
-      // this.schedule = res.json()
-      // console.log("received schedule data: ",res.json())
-      // this.schedule = [{name:"Alice",hours:['qwe','qwe']}]
-      const temp = res;
-      temp.forEach(element => {
-        element.hours = [];
-        for (let i = 0; i < element.duration; i++) {
-          element.hours[element.time - 8 + i] = element.ID;
-        }
-        // console.log(element)
-      });
-      this.schedule = temp;
-      temp.forEach(element => {
+  // getMastersShedule(query) {
+  //   // console.log('schedule query: ', query)
+  //   this.http.post<any>(this.addr + '/schedule', query).subscribe( res => {
+  //     // this.schedule = res.json()
+  //     // console.log("received schedule data: ",res.json())
+  //     // this.schedule = [{name:"Alice",hours:['qwe','qwe']}]
+  //     const temp = res;
+  //     temp.forEach(element => {
+  //       element.hours = [];
+  //       for (let i = 0; i < element.duration; i++) {
+  //         element.hours[element.time - 8 + i] = element.ID;
+  //       }
+  //       // console.log(element)
+  //     });
+  //     this.schedule = temp;
+  //     temp.forEach(element => {
 
-      });
-      // console.log(temp)
-      // {ID: 15, masterName: "Nastya", time: 8, duration: 3}
-      console.log('received schedule temp: ', temp);
-      // /// making appropriate array of hours when master is busy
-      // this.schedule.forEach((master, index, array) => {
-      //   master.hours = []
-      //   let arr = master.busy[0].time
-      //   let length = arr.length
-      //   for (let index = 0; index < length; index++) {
-      //     const element = arr[index];
-      //     let i = element - 8
-      //     master.hours[i] = "Busy"
-      //   }
-      // })
-    });
-  }
+  //     });
+  //     // console.log(temp)
+  //     // {ID: 15, masterName: "Nastya", time: 8, duration: 3}
+  //     console.log('received schedule temp: ', temp);
+  //     // /// making appropriate array of hours when master is busy
+  //     // this.schedule.forEach((master, index, array) => {
+  //     //   master.hours = []
+  //     //   let arr = master.busy[0].time
+  //     //   let length = arr.length
+  //     //   for (let index = 0; index < length; index++) {
+  //     //     const element = arr[index];
+  //     //     let i = element - 8
+  //     //     master.hours[i] = "Busy"
+  //     //   }
+  //     // })
+  //   });
+  // }
 
-  updateMasterSchedule(orderInfo) {
-    this.http.post(this.addr + '/order', orderInfo).subscribe(res => {
-      if (res) {
-        console.log('master schedule updated');
-        this.openSnackBar('You successfuly order a master');
-        // refreshing masters array after adding new city
-        this.getMasters();
-        this.getOrders();
-      }
-    });
-  }
+  // updateMasterSchedule(orderInfo) {
+  //   this.http.post(this.addr + '/order', orderInfo).subscribe(res => {
+  //     if (res) {
+  //       console.log('master schedule updated');
+  //       this.openSnackBar('You successfuly order a master');
+  //       // refreshing masters array after adding new city
+  //       this.getMasters();
+  //       this.getOrders();
+  //     }
+  //   });
+  // }
 
 
 /////////////////// LOGIN

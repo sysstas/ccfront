@@ -1,23 +1,53 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { Observable } from 'rxjs/Observable'
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {FormControl, Validators} from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators} from '@angular/forms';
 import { CitiesService } from '../../services/cities.service';
+import { MastersService } from '../../services/masters.service';
+import { DialogEditMasterComponent } from './dialog.edit.master.component';
+import { DialogDeleteMasterComponent } from './dialog.delete.master.component';
 
 @Component({
-  selector: 'masters',
   templateUrl: './masters.component.html',
   styleUrls: ['./masters.component.css']
 })
 export class MastersComponent implements OnInit {
-  panelOpenState: boolean = false;
-  public masters  
+  panelOpenState = false;
+  public masters;
+  animal: string;
+  name: string;
+  newCity: string;
+  masterRating = [
+    {mark: 1},
+    {mark: 2},
+    {mark: 3},
+    {mark: 4},
+    {mark: 5}
+  ];
+  newMaster = {
+    cityId: '',
+    masterName : '',
+    masterRating: ''
+  };
+  newMasterName = new FormControl('', [Validators.required]);
+  newMasterRatingEdit = new FormControl('', [Validators.required]);
+  newMasterCity = new FormControl('', [Validators.required]);
 
-  /// CREATE FORM VALIDATION PART
-  newMasterName = new FormControl('', [Validators.required])
-  newMasterRatingEdit = new FormControl('', [Validators.required])
-  newMasterCity = new FormControl('', [Validators.required])
+  //////////////////////////////////////
+
+  constructor(
+    public citiesService: CitiesService,
+    public api: ApiService,
+    public service: MastersService,
+    public dialog: MatDialog
+  ) { }
+
+  ngOnInit() {
+    this.service.getMasters();
+    // this.api.getCities()
+    this.citiesService.getCities();
+    // this.api.getClients()
+  }
 
   getMasterNameErrorMessage() {
     return this.newMasterName.hasError('required') ? 'Name is required' :
@@ -33,39 +63,23 @@ export class MastersComponent implements OnInit {
   return this.newMasterCity.hasError('required') ? 'City is required' :
             '';
   }
-  //////////////////////////////////////
-
-  constructor(
-    public citiesService: CitiesService,
-    public api: ApiService, 
-    public dialog: MatDialog
-  ) { }
-
-  ngOnInit() {
-    this.api.getMasters()     
-    // this.api.getCities()
-    this.citiesService.getCities()
-    //this.api.getClients()
-  }
-  animal: string;
-  name: string;
 
   // Clean after submit
-  clean(): void{
+  clean(): void {
     //
     this.newMaster = {
       cityId: '',
       masterName : '',
       masterRating: ''
-    }
+    };
     this.newMasterName.reset();
     this.newMasterRatingEdit.reset();
     this.newMasterCity.reset();
-  } 
+  }
 
   /// open dialog delete master function
-  openDialogDeleteMaster(master): void { 
-    let dialogRef = this.dialog.open(DialogDeleteMaster, {
+  openDialogDeleteMaster(master): void {
+    const dialogRef = this.dialog.open(DialogDeleteMasterComponent, {
       width: '250px',
       data: { masterName: master.masterName, id: master.id}
     });
@@ -73,12 +87,12 @@ export class MastersComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
-  } 
+  }
 
   /// open dialog edit master
-  openDialogEditMaster(master): void { 
-    console.log("MASTER", master)
-    let dialogRef = this.dialog.open(DialogEditMaster, {
+  openDialogEditMaster(master): void {
+    console.log('MASTER', master);
+    const dialogRef = this.dialog.open(DialogEditMasterComponent, {
       width: '250px',
       data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.city.id}
     });
@@ -89,88 +103,12 @@ export class MastersComponent implements OnInit {
     });
   }
 
-
-  newCity: string
-
-  masterRating = [
-    {mark: 1},
-    {mark: 2},
-    {mark: 3},
-    {mark: 4},
-    {mark: 5}
-  ]
-
-
-  newMaster = {
-    cityId: '',
-    masterName : '',
-    masterRating: ''
-  }
-
-  addNewMaster(){
-    // calling addMaster funcnion on API 
-    console.log("add new master",this.newMaster)
-    this.api.addMaster(this.newMaster)
+  addNewMaster() {
+    // calling addMaster funcnion on API
+    console.log('add new master', this.newMaster);
+    this.service.addMaster(this.newMaster);
     // refreshing masters list on page
-    this.api.getMasters()
+    this.service.getMasters();
   }
 }
 
-/// dialog delete master component
-@Component({
-  templateUrl: 'dialog-delete-master.html',
-})
-export class DialogDeleteMaster {
-  constructor(
-    public api: ApiService,
-    public dialogRef: MatDialogRef<DialogDeleteMaster>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-    onCloseButtonClick(): void {
-    this.dialogRef.close();
-  }
-}
-
-/// dialog edit master
-@Component({
-  selector: 'dialog-edit',
-  templateUrl: 'dialog-edit-master.html',
-})
-export class DialogEditMaster {
-
-  /// EDIT FORM VALIDATION PART
-  masterName = new FormControl('', [Validators.required])
-  masterRatingEdit = new FormControl('', [Validators.required])
-  masterCity = new FormControl('', [Validators.required])
-
-  getMasterNameErrorMessage() {
-    return this.masterName.hasError('required') ? 'Name is required' :
-              '';
-  }
-
-  getMasterRatingMessage() {
-    return this.masterRatingEdit.hasError('required') ? 'Rating is required' :
-              '';
-  }
-
-  getMasterCityMessage() {
-  return this.masterCity.hasError('required') ? 'City is required' :
-            '';
-  }
-  //////////////////////////////////////
-
-  constructor(
-    public api: ApiService,
-    public dialogRef: MatDialogRef<DialogEditMaster>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-    onCloseButtonClick(): void {
-    this.dialogRef.close();
-  }
-
-  edit(data){
-    //console.log("edit is clicked")
-    console.log("edit is clicked ",data)
-    this.api.editMaster(data)
-    
-  }
-}

@@ -38,7 +38,7 @@ import { ClientComponent } from './client/client.component';
 import { AdminComponent} from './admin/admin.component';
 import { NavigationComponent} from './navigation/navigation.component';
 import { DialogLogin } from './navigation/dialog-login';
-import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/masters/masters.component';
+import { MastersComponent } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { CitiesComponent } from './admin/cities/cities.component';
@@ -59,6 +59,9 @@ import { ClientsService } from './services/clients.service';
 import { CitiesService } from './services/cities.service';
 import { DialogEditCityComponent } from './admin/cities/dialog.edit.city.component';
 import { DialogDeleteCityComponent } from './admin/cities/dialog.delete.city.component';
+import { MastersService } from './services/masters.service';
+import { DialogEditMasterComponent } from './admin/masters/dialog.edit.master.component';
+import { DialogDeleteMasterComponent } from './admin/masters/dialog.delete.master.component';
 // Configs
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -106,11 +109,11 @@ const routes: Routes = [
     ChoseMasterComponent,
     DialogLogin,
     DialogEditClientComponent,
-    DialogEditMaster,
+    DialogEditMasterComponent,
     DialogEditOrder,
     DialogDeleteCityComponent,
     DialogDeleteClientComponent,
-    DialogDeleteMaster,
+    DialogDeleteMasterComponent,
     CitiesComponent,
     ClientsComponent,
     ScheduleComponent,
@@ -158,16 +161,17 @@ const routes: Routes = [
     AdminComponent,
     DialogEditClientComponent,
     DialogEditCityComponent,
-    DialogEditMaster,
+    DialogEditMasterComponent,
     DialogEditOrder,
     DialogDeleteCityComponent,
     DialogDeleteClientComponent,
-    DialogDeleteMaster],
+    DialogDeleteMasterComponent],
   providers: [
     ApiService,
     UserAccountService,
     ClientsService,
     CitiesService,
+    MastersService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,

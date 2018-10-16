@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, RouterLinkActive } from '@angular/router' 
+import { Routes, RouterModule } from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatToolbarModule, 
-  MatButtonModule, 
-  MatFormFieldModule, 
+  MatToolbarModule,
+  MatButtonModule,
+  MatFormFieldModule,
   MatSelectModule,
   MatInputModule,
   MatDatepickerModule,
@@ -18,9 +18,7 @@ import {
   MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
-  MatTableDataSource,
   MatProgressSpinnerModule,
-  MatCard,
   MatCardModule} from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,10 +26,9 @@ import {
   SocialLoginModule,
   AuthServiceConfig,
   GoogleLoginProvider,
-  FacebookLoginProvider,
-} from "angular-6-social-login";
-import { NgxPayPalModule  } from "ngx-paypal";
-//import {FormControl, Validators} from '@angular/forms';
+} from 'angular-6-social-login';
+import { NgxPayPalModule  } from 'ngx-paypal';
+// import {FormControl, Validators} from '@angular/forms';
 
 
 
@@ -45,7 +42,7 @@ import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
 import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
-import { ClientsComponent, DialogEditClient, DialogDeleteClient, IsAdmin, IsReg  } from './admin/clients/clients.component';
+import { ClientsComponent, IsAdmin, IsReg } from './admin/clients/clients.component';
 import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
 import { OrdersComponent, DialogEditOrder, IsPaid, IsCompleted } from './admin/orders/orders.component';
@@ -56,17 +53,20 @@ import { UserRegisterComponent } from './client/user-register/user-register.comp
 import { UserAccountComponent } from './client/user-account/user-account.component';
 import { OrderHistoryComponent } from './client/order-history/order-history.component';
 import { UserAccountService } from './services/user-account.service';
-// Configs 
+import { DialogEditClientComponent } from './admin/clients/dialog.edit.client.component';
+import { DialogDeleteClientComponent } from './admin/clients/dialog.delete.client.component';
+import { ClientsService } from './services/clients.service';
+// Configs
 export function getAuthServiceConfigs() {
-  let config = new AuthServiceConfig(
+  const config = new AuthServiceConfig(
       [
-        
+
         {
           id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider("902455189500-mpc1v2qsioej6o17e2no0rc122vh40bh.apps.googleusercontent.com")
+          provider: new GoogleLoginProvider('902455189500-mpc1v2qsioej6o17e2no0rc122vh40bh.apps.googleusercontent.com')
         }
       ]
-  )
+  );
   return config;
 }
 
@@ -76,7 +76,7 @@ const routes: Routes = [
   { path: 'register/:id', component: UserRegisterComponent},
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
-  { path: 'admin', 
+  { path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuardService],
     children: [
@@ -87,10 +87,10 @@ const routes: Routes = [
       {path: 'cities', component: CitiesComponent},
       {path: 'orders', component: OrdersComponent}
     ]
-  },    
+  },
   { path: 'neworder', component: NewOrderComponent},
   { path: '**', redirectTo: 'client'}
-]
+];
 
 @NgModule({
   declarations: [
@@ -102,12 +102,12 @@ const routes: Routes = [
     MastersComponent,
     ChoseMasterComponent,
     DialogLogin,
-    DialogEditClient,
+    DialogEditClientComponent,
     DialogEditCity,
     DialogEditMaster,
     DialogEditOrder,
     DialogDeleteCity,
-    DialogDeleteClient,
+    DialogDeleteClientComponent,
     DialogDeleteMaster,
     CitiesComponent,
     ClientsComponent,
@@ -119,8 +119,8 @@ const routes: Routes = [
     IsCompleted,
     UserRegisterComponent,
     UserAccountComponent,
-    OrderHistoryComponent
-    
+    OrderHistoryComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -128,7 +128,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     FormsModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -150,21 +150,22 @@ const routes: Routes = [
     SocialLoginModule,
     NgxPayPalModule
   ],
-  entryComponents: [NavigationComponent, 
-    DialogLogin, 
+  entryComponents: [NavigationComponent,
+    DialogLogin,
     AdminComponent,
-    DialogEditClient, 
-    DialogEditCity, 
+    DialogEditClientComponent,
+    DialogEditCity,
     DialogEditMaster,
     DialogEditOrder,
     DialogDeleteCity,
-    DialogDeleteClient,
+    DialogDeleteClientComponent,
     DialogDeleteMaster],
   providers: [
-    ApiService, 
+    ApiService,
     UserAccountService,
-    AuthGuardService, 
-    { 
+    ClientsService,
+    AuthGuardService,
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true

@@ -3,8 +3,9 @@ import {FormControl, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatProgressSpinnerModule} from '@angular/material';
 
 import { ApiService } from '../api.service';
-import { UserSubmitedForm } from '../models/usersubmitedform'
+import { UserSubmitedForm } from '../models/usersubmitedform';
 import { CitiesService } from '../services/cities.service';
+import { MastersService } from '../services/masters.service';
 
 @Component({
   selector: 'client',
@@ -13,12 +14,12 @@ import { CitiesService } from '../services/cities.service';
 })
 export class ClientComponent implements OnInit {
   /// FORM VALIDATION PART
-  email = new FormControl('', [Validators.required, Validators.email])
-  name = new FormControl('', [Validators.required, Validators.minLength(3)])
-  city = new FormControl('', [Validators.required])
-  date = new FormControl('', [Validators.required])
-  time = new FormControl('', [Validators.required])
-  size = new FormControl('', [Validators.required])
+  email = new FormControl('', [Validators.required, Validators.email]);
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  city = new FormControl('', [Validators.required]);
+  date = new FormControl('', [Validators.required]);
+  time = new FormControl('', [Validators.required]);
+  size = new FormControl('', [Validators.required]);
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'You must enter email' :
@@ -42,23 +43,23 @@ export class ClientComponent implements OnInit {
 
   getTimeErrorMessage() {
     return this.time.hasError('required') ? 'You must choose time' : '';
-  }  
+  }
 
   getSizeErrorMessage() {
     return this.size.hasError('required') ? 'You must choose size' : '';
-  } 
-  /// Data Picker validation 
-  today = new Date()
-  minDate = new Date(this.today.setDate(this.today.getDate()+1))
-  
+  }
+  /// Data Picker validation
+  today = new Date();
+  minDate = new Date(this.today.setDate(this.today.getDate() + 1));
+
 
   //////////////////////////////////////////////
-  
-  //// LOGIC PART
-  isFormSubmitted = false
 
-  submitedForm = new UserSubmitedForm('','', '','','','','')
-  
+  //// LOGIC PART
+  isFormSubmitted = false;
+
+  submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
+
   workHours = [
     {hour: 8},
     {hour: 9},
@@ -69,27 +70,27 @@ export class ClientComponent implements OnInit {
     {hour: 14},
     {hour: 15},
     {hour: 16},
-    {hour: 17}    
-  ]
+    {hour: 17}
+  ];
 
-  clockSize =[
+  clockSize = [
     {
-      size: "big",
+      size: 'big',
       workTime: 3
     },
     {
-      size: "medium",
+      size: 'medium',
       workTime: 2
     },
     {
-      size: "small",
+      size: 'small',
       workTime: 1
     }
-  ]
+  ];
 
   makeOrder(master) {
-    console.log('CONTROLLER master',master)
-    let oderInfo = {
+    console.log('CONTROLLER master', master);
+    const oderInfo = {
       masterID: master.ID,
       masterName: master.masterName,
       date: Date.parse(this.submitedForm.date.toString()),
@@ -99,62 +100,63 @@ export class ClientComponent implements OnInit {
       userName: this.submitedForm.userName,
       userEmail: this.submitedForm.userEmail,
       cityID: this.submitedForm.cityId,
-      user: this.api.currentUser  
-    }
-    console.log('CONTROLLER oderInfo',oderInfo)
-    
-    this.api.createOrder(oderInfo)    
-    // Clear form and page to initial state    
-    this.isFormSubmitted = false
-    this.submitedForm = new UserSubmitedForm('','', '','','','','')
-    this.api.arr = []
-    this.email = new FormControl('', [Validators.required, Validators.email])
-    this.name = new FormControl('', [Validators.required, Validators.minLength(3)])
-    this.city = new FormControl('', [Validators.required])
-    this.date = new FormControl('', [Validators.required])
-    this.time = new FormControl('', [Validators.required])
-    this.size = new FormControl('', [Validators.required])
-  }
-   
+      user: this.api.currentUser
+    };
+    console.log('CONTROLLER oderInfo', oderInfo);
 
-  constructor( 
+    this.api.createOrder(oderInfo);
+    // Clear form and page to initial state
+    this.isFormSubmitted = false;
+    this.submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
+    this.api.arr = [];
+    this.email = new FormControl('', [Validators.required, Validators.email]);
+    this.name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+    this.city = new FormControl('', [Validators.required]);
+    this.date = new FormControl('', [Validators.required]);
+    this.time = new FormControl('', [Validators.required]);
+    this.size = new FormControl('', [Validators.required]);
+  }
+
+
+  constructor(
     public api: ApiService,
-    public citiesService: CitiesService 
+    public citiesService: CitiesService,
+    public masterService: MastersService
   ) { }
-    
+
   ngOnInit() {
-   this.api.getMasters()
-   this.citiesService.getCities()
+   this.masterService.getMasters();
+   this.citiesService.getCities();
   }
 
-  find() {     
-    let userData = {
+  find() {
+    const userData = {
       userName: this.submitedForm.userName,
       userEmail: this.submitedForm.userEmail
-    }
-    console.log('userData: ',userData )
-    
+    };
+    console.log('userData: ', userData );
+
     // Add new client to database
-    this.api.addClient(userData)
-     
+    this.api.addClient(userData);
+
     // forming query object for free masters search on backend
-    let freeMasetersQuery = {
+    const freeMasetersQuery = {
       cityID: this.submitedForm.cityId,
       date: Date.parse(this.submitedForm.date.toString()),
       time: this.submitedForm.time,
       duration: this.submitedForm.duration
-    }    
+    };
 
-    console.log('CONTROLLER freeMasetersQuery: ',freeMasetersQuery )
-    this.api.getFreeMasters(freeMasetersQuery)    
-    // this for changing layout when client 
+    console.log('CONTROLLER freeMasetersQuery: ', freeMasetersQuery );
+    this.api.getFreeMasters(freeMasetersQuery);
+    // this for changing layout when client
     this.isFormSubmitted = true;
   }
-  
-  backToStep1(){
+
+  backToStep1() {
     this.isFormSubmitted = false;
-  }    
- 
+  }
+
 }
 
 

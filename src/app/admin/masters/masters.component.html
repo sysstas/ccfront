@@ -5,7 +5,7 @@
     <div class="col-xl-12">
       <h1>MASTERS</h1>
       <mat-list >  
-        <mat-list-item *ngFor="let master of api.masters">
+        <mat-list-item *ngFor="let master of service.masters">
           <h4 mat-line>Name: {{master.masterName }}</h4>
           <p mat-line>Rating: {{master.masterRating | json}} stars</p>
           <p mat-line>City: {{master.city.cityName}} </p>

@@ -24,7 +24,7 @@ export class ApiService {
     {mark: 5}
   ]
 //  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = "https://01a5cccd.ngrok.io"
+  addr = "https://15d6591a.ngrok.io"
   // addr = "http://localhost:5000"
   TOKEN_KEY = 'token'
 

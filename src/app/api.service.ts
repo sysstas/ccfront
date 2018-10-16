@@ -12,7 +12,6 @@ const helper = new JwtHelperService();
 @Injectable()
 export class ApiService {
 
-  cities = [];
   masters = [];
   users = [];
   orders = [];
@@ -45,41 +44,7 @@ export class ApiService {
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  //// City CRUD /////////////////////////////
-  getCities() {
-    this.http.get<any>(this.addr + '/cities').subscribe( res => {
-      this.cities = res;
-    });
-  }
 
-  addCity(cityName: string) {
-    const city = {
-      cityName: cityName
-    };
-    this.http.post(this.addr + '/cities', city).subscribe(res => {
-      if (res) {
-        this.getCities();
-        this.openSnackBar('City succesfully saved');
-      }
-    });
-  }
-
-  editCity(data) {
-    this.http.put(this.addr + '/cities/' + data.ID, data).subscribe(res => {
-      if (res) {
-        this.getCities();
-        this.openSnackBar('City succesfully saved');
-      }
-    });
-  }
-
-  deleteCity(data) {
-    this.http.delete(this.addr + '/cities/' + data.ID).subscribe(res => {
-      this.getCities();
-      this.openSnackBar('City succesfully deleted');
-    });
-  }
-  ////////////////////////////////////////////////////
 
   /////// CRUD Masters /////////////////////////////// asdasd
   getMasters() {

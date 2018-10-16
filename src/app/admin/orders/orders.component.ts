@@ -33,9 +33,9 @@ export class OrdersComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.api.getOrders()
-    this.api.getMasters()
-    this.api.getCities()
-    this.api.getClients()
+    // this.api.getMasters()
+    // this.api.getCities()
+    // this.api.getClients()
     //console.log(this.dataSource)
   }
 

@@ -3,6 +3,7 @@ import { ApiService } from '../../api.service';
 import { Observable } from 'rxjs/Observable'
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {FormControl, Validators} from '@angular/forms';
+import { CitiesService } from '../../services/cities.service';
 
 @Component({
   selector: 'masters',
@@ -35,13 +36,15 @@ export class MastersComponent implements OnInit {
   //////////////////////////////////////
 
   constructor(
+    public citiesService: CitiesService,
     public api: ApiService, 
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
     this.api.getMasters()     
-    this.api.getCities()
+    // this.api.getCities()
+    this.citiesService.getCities()
     //this.api.getClients()
   }
   animal: string;

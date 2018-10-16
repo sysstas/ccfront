@@ -41,7 +41,7 @@ import { DialogLogin } from './navigation/dialog-login';
 import { MastersComponent, DialogEditMaster, DialogDeleteMaster } from './admin/masters/masters.component';
 import { ChoseMasterComponent } from './client/choosemaster/choosemaster.component';
 import { ApiService } from './api.service';
-import { CitiesComponent, DialogEditCity, DialogDeleteCity } from './admin/cities/cities.component';
+import { CitiesComponent } from './admin/cities/cities.component';
 import { ClientsComponent, IsAdmin, IsReg } from './admin/clients/clients.component';
 import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
@@ -56,6 +56,9 @@ import { UserAccountService } from './services/user-account.service';
 import { DialogEditClientComponent } from './admin/clients/dialog.edit.client.component';
 import { DialogDeleteClientComponent } from './admin/clients/dialog.delete.client.component';
 import { ClientsService } from './services/clients.service';
+import { CitiesService } from './services/cities.service';
+import { DialogEditCityComponent } from './admin/cities/dialog.edit.city.component';
+import { DialogDeleteCityComponent } from './admin/cities/dialog.delete.city.component';
 // Configs
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -103,10 +106,9 @@ const routes: Routes = [
     ChoseMasterComponent,
     DialogLogin,
     DialogEditClientComponent,
-    DialogEditCity,
     DialogEditMaster,
     DialogEditOrder,
-    DialogDeleteCity,
+    DialogDeleteCityComponent,
     DialogDeleteClientComponent,
     DialogDeleteMaster,
     CitiesComponent,
@@ -120,6 +122,7 @@ const routes: Routes = [
     UserRegisterComponent,
     UserAccountComponent,
     OrderHistoryComponent,
+    DialogEditCityComponent
 
   ],
   imports: [
@@ -154,16 +157,17 @@ const routes: Routes = [
     DialogLogin,
     AdminComponent,
     DialogEditClientComponent,
-    DialogEditCity,
+    DialogEditCityComponent,
     DialogEditMaster,
     DialogEditOrder,
-    DialogDeleteCity,
+    DialogDeleteCityComponent,
     DialogDeleteClientComponent,
     DialogDeleteMaster],
   providers: [
     ApiService,
     UserAccountService,
     ClientsService,
+    CitiesService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,

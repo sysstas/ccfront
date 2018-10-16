@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { MastersService } from '../../services/masters.service';
 
 @Component({
   selector: 'choosemaster',
@@ -7,14 +8,17 @@ import { ApiService } from '../../api.service';
   styleUrls: ['./choosemaster.component.css']
 })
 export class ChoseMasterComponent implements OnInit {
-
-  constructor( private api: ApiService) { }
+  allMasters = this.masterService.getMasters();
+  constructor(
+    private api: ApiService,
+    public masterService: MastersService
+  ) { }
 
   ngOnInit() {
   }
 
-  
-  allMasters = this.api.getMasters()
+
+
 
 
 }

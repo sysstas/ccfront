@@ -5,7 +5,7 @@
     <div class="col-xl-12">
       <h1>USERS</h1>
       <mat-list> 
-        <mat-list-item *ngFor="let user of api.users">
+        <mat-list-item *ngFor="let user of service.users">
           <h4 mat-line>Name: {{user.userName}}</h4> 
           <h3 mat-line>Email: {{user.userEmail}}</h3>
           <h3 mat-line>{{user.isAdmin | isAdmin}}</h3>

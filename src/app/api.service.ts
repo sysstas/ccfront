@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -11,308 +11,315 @@ const helper = new JwtHelperService();
 
 @Injectable()
 export class ApiService {
-  
-  cities = []
-  masters =[]
-  users = []
-  orders = []
+
+  cities = [];
+  masters = [];
+  users = [];
+  orders = [];
   masterRating = [
     {mark: 1},
     {mark: 2},
     {mark: 3},
     {mark: 4},
     {mark: 5}
-  ]
-//  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = "https://15d6591a.ngrok.io"
-  // addr = "http://localhost:5000"
-  TOKEN_KEY = 'token'
+  ];
+  initialUserData = new UserRegInfo('', '', '', '', 0);
+  currentUser = {};
+  newOrderInformation;
+  createdOrdetInformation;
+  arr = [];
+  schedule = [];
+  decodedToken;
+  IsLoggedIn = false;
 
-  constructor( private http: HttpClient, 
-    public router: Router,  
+//  addr = "https://blooming-ocean-36906.herokuapp.com"
+  addr = 'https://15d6591a.ngrok.io';
+  // addr = "http://localhost:5000"
+  TOKEN_KEY = 'token';
+
+  constructor( private http: HttpClient,
+    public router: Router,
     public snackBar: MatSnackBar) { }
 
   get token() {
-    return localStorage.getItem(this.TOKEN_KEY)
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
   //// City CRUD /////////////////////////////
-  getCities(){
-    this.http.get<any>(this.addr+'/cities').subscribe( res => {
-      this.cities = res 
-    })   
+  getCities() {
+    this.http.get<any>(this.addr + '/cities').subscribe( res => {
+      this.cities = res;
+    });
   }
 
-  addCity(cityName: string){    
-    let city = {
+  addCity(cityName: string) {
+    const city = {
       cityName: cityName
-    } 
-    this.http.post(this.addr+'/cities', city).subscribe(res => {
-      if (res){
-        this.getCities()
-        this.openSnackBar('City succesfully saved')
+    };
+    this.http.post(this.addr + '/cities', city).subscribe(res => {
+      if (res) {
+        this.getCities();
+        this.openSnackBar('City succesfully saved');
       }
-    })
+    });
   }
 
-  editCity(data){
-    this.http.put(this.addr+'/cities/' + data.ID, data).subscribe(res => {      
-      if (res){
-        this.getCities()
-        this.openSnackBar('City succesfully saved')
+  editCity(data) {
+    this.http.put(this.addr + '/cities/' + data.ID, data).subscribe(res => {
+      if (res) {
+        this.getCities();
+        this.openSnackBar('City succesfully saved');
       }
-    })
+    });
   }
 
-  deleteCity(data){
-    this.http.delete(this.addr+'/cities/' + data.ID).subscribe(res =>{
-      this.getCities()
-      this.openSnackBar('City succesfully deleted')
-    })
+  deleteCity(data) {
+    this.http.delete(this.addr + '/cities/' + data.ID).subscribe(res => {
+      this.getCities();
+      this.openSnackBar('City succesfully deleted');
+    });
   }
   ////////////////////////////////////////////////////
 
-  /////// CRUD Masters /////////////////////////////// asdasd 
-  getMasters(){
-    this.http.get<any>(this.addr+'/masters').subscribe( res => {
-      this.masters = res
-      console.log('get masters:', res) 
-    })     
+  /////// CRUD Masters /////////////////////////////// asdasd
+  getMasters() {
+    this.http.get<any>(this.addr + '/masters').subscribe( res => {
+      this.masters = res;
+      console.log('get masters:', res);
+    });
   }
 
-  addMaster(newMaster){    
-    this.http.post(this.addr+'/masters', newMaster).subscribe( res => {
-      if (res){
-        this.getMasters()
-        this.openSnackBar('Master succesfully saved')
+  addMaster(newMaster) {
+    this.http.post(this.addr + '/masters', newMaster).subscribe( res => {
+      if (res) {
+        this.getMasters();
+        this.openSnackBar('Master succesfully saved');
       }
-    })
-  } 
-
-  editMaster(data){
-    this.http.put(this.addr+'/masters/' + data.id, data).subscribe( res => {
-      if (res){
-        console.log("API Master edit data: ",data)
-        this.getMasters()
-        this.openSnackBar('Master succesfully saved')
-      }
-    })
+    });
   }
 
-  deleteMaster(data){
-    this.http.delete(this.addr+'/masters/' + data.id).subscribe(res =>{     
-      this.getMasters()
-      this.openSnackBar('Master succesfully deleted')       
-    })
+  editMaster(data) {
+    this.http.put(this.addr + '/masters/' + data.id, data).subscribe( res => {
+      if (res) {
+        console.log('API Master edit data: ', data);
+        this.getMasters();
+        this.openSnackBar('Master succesfully saved');
+      }
+    });
+  }
+
+  deleteMaster(data) {
+    this.http.delete(this.addr + '/masters/' + data.id).subscribe(res => {
+      this.getMasters();
+      this.openSnackBar('Master succesfully deleted');
+    });
   }
   //////////////////////////////////////
 
   /////// CRUD Users ///////////////////////////////
-  initialUserData = new UserRegInfo('','','','', 0)
-  getInitialRegisterData(data){
-    console.log("API.getInitialRegisterData runs, id - ", data.id)    
-    this.http.get<any>(this.addr+'/register/' + data.id).subscribe(res =>{
-      this.initialUserData = res
-      console.log("API.getInitialRegisterData data received ", this.initialUserData)
-    })
+
+  getInitialRegisterData(data) {
+    console.log('API.getInitialRegisterData runs, id - ', data.id);
+    this.http.get<any>(this.addr + '/register/' + data.id).subscribe(res => {
+      this.initialUserData = res;
+      console.log('API.getInitialRegisterData data received ', this.initialUserData);
+    });
   }
 
-  postRegisteredUserData(){
-    console.log("API.postRegisteredUserData runs ")   
-    let userData ={
+  postRegisteredUserData() {
+    console.log('API.postRegisteredUserData runs ');
+    const userData = {
       email: this.initialUserData.userEmail,
       password: this.initialUserData.password
-    }  
-    
-    this.http.post(this.addr+'/register', userData ).subscribe(res =>{     
-      console.log("API.postRegisteredUserData received ", res)
-    })
-    this.router.navigate(['/'])
+    };
+
+    this.http.post(this.addr + '/register', userData ).subscribe(res => {
+      console.log('API.postRegisteredUserData received ', res);
+    });
+    this.router.navigate(['/']);
   }
 
 
-  getClients(){
-    this.http.get<any>(this.addr+'/users').subscribe( res => {
-      this.users = res
-    })     
+  getClients() {
+    this.http.get<any>(this.addr + '/users').subscribe( res => {
+      this.users = res;
+    });
   }
 
-  currentUser ={}
-  addClient(query){
-    this.http.post<any>(this.addr+'/users', query).subscribe(res =>{{
-      if (res){
-        console.log("client creation server response ",res)
-        this.currentUser = res
-        this.getClients()
-        this.openSnackBar('Client succesfully saved')
+
+  addClient(query) {
+    this.http.post<any>(this.addr + '/users', query).subscribe(res => {{
+      if (res) {
+        console.log('client creation server response ', res);
+        this.currentUser = res;
+        this.getClients();
+        this.openSnackBar('Client succesfully saved');
       }
-    }})
+    }});
   }
 
-  editClient(data){
-    this.http.put(this.addr+'/users/' + data.id, data).subscribe(res => {
-      if (res){
-        this.getClients()
-        this.openSnackBar('Client succesfully saved')        // console.log(res)
+  editClient(data) {
+    this.http.put(this.addr + '/users/' + data.id, data).subscribe(res => {
+      if (res) {
+        this.getClients();
+        this.openSnackBar('Client succesfully saved');        // console.log(res)
       }
-    })
+    });
   }
 
-  deleteClient(data){
-    console.log("delete user data ",data)
-    this.http.delete(this.addr+'/users/' + data.id).subscribe(res =>{      
-      this.getClients()
-      this.openSnackBar('Client succesfully deleted')      
-    })
+  deleteClient(data) {
+    console.log('delete user data ', data);
+    this.http.delete(this.addr + '/users/' + data.id).subscribe(res => {
+      this.getClients();
+      this.openSnackBar('Client succesfully deleted');
+    });
   }
   //////////////////////////////////////
 
   /////// CRUD Orders //////////////////////
-  getOrders(){
-    return this.http.get<any>(this.addr+'/orders').subscribe(res =>{
-      if (res){
-        // console.log('API TEST', res) 
-        res.map( function(x){
-          x.city = x.city.cityName
-          x.master = x.master.masterName
-          x.userName = x.user.userName
-          x.userEmail = x.user.userEmail
-          return x
-        })     
+  getOrders() {
+    return this.http.get<any>(this.addr + '/orders').subscribe(res => {
+      if (res) {
+        // console.log('API TEST', res)
+        res.map( function(x) {
+          x.city = x.city.cityName;
+          x.master = x.master.masterName;
+          x.userName = x.user.userName;
+          x.userEmail = x.user.userEmail;
+          return x;
+        });
         // console.log('API TEST arr', arr)
-        this.orders = res
-        console.log('API get orders: ', this.orders)
+        this.orders = res;
+        console.log('API get orders: ', this.orders);
       }
-    })
+    });
   }
 
-  getOrdersAfterChange(): Observable<any>{
-    return this.http.get(this.addr+'/orders')   
+  getOrdersAfterChange(): Observable<any> {
+    return this.http.get(this.addr + '/orders');
   }
 
-  deleteOrder(id): Observable<any>{
-    return this.http.delete(this.addr+'/orders/' + id)
+  deleteOrder(id): Observable<any> {
+    return this.http.delete(this.addr + '/orders/' + id);
   }
 
 
-  newOrderInformation 
-  createdOrdetInformation
-  createOrder(newOrder){   
-    console.log("API send order", newOrder)
-    this.http.post(this.addr+'/orders', newOrder).subscribe(res =>{{
-      if (res){
-        console.log('order created ', res)
-        console.log('order created full ', newOrder)
-        this.newOrderInformation = newOrder
-        this.createdOrdetInformation = res
-        this.router.navigate(['/neworder']) 
+
+  createOrder(newOrder) {
+    console.log('API send order', newOrder);
+    this.http.post(this.addr + '/orders', newOrder).subscribe(res => {{
+      if (res) {
+        console.log('order created ', res);
+        console.log('order created full ', newOrder);
+        this.newOrderInformation = newOrder;
+        this.createdOrdetInformation = res;
+        this.router.navigate(['/neworder']);
       }
-    }})    
+    }});
   }
-  
-  editOrder(data){    
-    let orderInfo = {
-      cityID: data.cityID, 
+
+  editOrder(data) {
+    const orderInfo = {
+      cityID: data.cityID,
       masterID: data.masterID,
       clientID: data.clientID,
-      date:data.date,
+      date: data.date,
       time: data.time,
       duration: data.duration
-    }
-    console.log("send order ", data)
-    this.http.put(this.addr+'/orders/' + data.id, orderInfo).subscribe(res =>{{
-        console.log(res) 
-        this.getOrders()     
-    }})    
+    };
+    console.log('send order ', data);
+    this.http.put(this.addr + '/orders/' + data.id, orderInfo).subscribe(res => {{
+        console.log(res);
+        this.getOrders();
+    }});
   }
   /////////////////////////////////////
 
   ////// App logic ///////////////////
-  arr = []
-  getFreeMasters(query){
-     this.http.post<any>(this.addr+'/freemasters', query).subscribe( res => {
-       this.arr = res    
-    })    
+
+  getFreeMasters(query) {
+     this.http.post<any>(this.addr + '/freemasters', query).subscribe( res => {
+       this.arr = res;
+    });
   }
-  
-  schedule = []
-  getMastersShedule(query){
+
+
+  getMastersShedule(query) {
     // console.log('schedule query: ', query)
-    this.http.post<any>(this.addr+'/schedule', query).subscribe( res => {
-      //this.schedule = res.json()
+    this.http.post<any>(this.addr + '/schedule', query).subscribe( res => {
+      // this.schedule = res.json()
       // console.log("received schedule data: ",res.json())
       // this.schedule = [{name:"Alice",hours:['qwe','qwe']}]
-      let temp = res
-      temp.forEach(element => {      
-        element.hours=[]
+      const temp = res;
+      temp.forEach(element => {
+        element.hours = [];
         for (let i = 0; i < element.duration; i++) {
-          element.hours[element.time - 8 + i]=element.ID 
+          element.hours[element.time - 8 + i] = element.ID;
         }
         // console.log(element)
-      })
-      this.schedule = temp
+      });
+      this.schedule = temp;
       temp.forEach(element => {
-        
-      })
+
+      });
       // console.log(temp)
-      //{ID: 15, masterName: "Nastya", time: 8, duration: 3}
-      console.log("received schedule temp: ",temp)
+      // {ID: 15, masterName: "Nastya", time: 8, duration: 3}
+      console.log('received schedule temp: ', temp);
       // /// making appropriate array of hours when master is busy
       // this.schedule.forEach((master, index, array) => {
       //   master.hours = []
       //   let arr = master.busy[0].time
       //   let length = arr.length
       //   for (let index = 0; index < length; index++) {
-      //     const element = arr[index];         
+      //     const element = arr[index];
       //     let i = element - 8
-      //     master.hours[i] = "Busy"         
+      //     master.hours[i] = "Busy"
       //   }
       // })
-    })
+    });
   }
 
-  updateMasterSchedule(orderInfo){    
-    this.http.post(this.addr+'/order', orderInfo).subscribe(res => {
-      if (res){
-        console.log('master schedule updated')
-        this.openSnackBar('You successfuly order a master')
+  updateMasterSchedule(orderInfo) {
+    this.http.post(this.addr + '/order', orderInfo).subscribe(res => {
+      if (res) {
+        console.log('master schedule updated');
+        this.openSnackBar('You successfuly order a master');
         // refreshing masters array after adding new city
-        this.getMasters()      
-        this.getOrders()  
+        this.getMasters();
+        this.getOrders();
       }
-    })    
+    });
   }
 
 
 /////////////////// LOGIN
-  decodedToken
-  IsLoggedIn: boolean = false
+
   Auth(login, password, googleToken): void {
-    let querry = { login, password, googleToken}
-    console.log(querry)
-    this.http.post<any>(this.addr+'/login', querry)    
+    const querry = { login, password, googleToken};
+    console.log(querry);
+    this.http.post<any>(this.addr + '/login', querry)
     .subscribe(res => {
-      if (res){
-        console.log("login: ",res)
-        localStorage.setItem('token', res.token)
+      if (res) {
+        console.log('login: ', res);
+        localStorage.setItem('token', res.token);
         this.decodedToken = helper.decodeToken(res.token);
-        console.log('decodedToken',this.decodedToken)
+        console.log('decodedToken', this.decodedToken);
         if (this.decodedToken.isAdmin === 1) {
-          this.router.navigate(['/admin']) 
-          this.IsLoggedIn = true
-          this.openSnackBar('You successfuly loged in as Admin')
+          this.router.navigate(['/admin']);
+          this.IsLoggedIn = true;
+          this.openSnackBar('You successfuly loged in as Admin');
         } else {
-          this.IsLoggedIn = true  
-          this.router.navigate(['/account']) 
-          this.openSnackBar('Successful login')
-        }       
+          this.IsLoggedIn = true;
+          this.router.navigate(['/account']);
+          this.openSnackBar('Successful login');
+        }
       }
     }, err => {
-      this.openSnackBar('Access denied')
-    })    
+      this.openSnackBar('Access denied');
+    });
   }
 
-  isLoggedIn(){
+  isLoggedIn() {
     // console.log(this.IsLoggedIn)
     return this.IsLoggedIn;
   }
@@ -323,44 +330,21 @@ export class ApiService {
     });
   }
 
-  ////////////////////////////// User account
-  userAccountData: any = {}
-  getUserAccountData(){
-    console.log("API.getUserAccountData runs")    
-    this.http.get<any>(this.addr+'/account').subscribe(res =>{
-      this.userAccountData = res
-      console.log("API.getUserAccountData data received ", this.userAccountData)
-    })
-  }
 
-  ///////////////////////// User orders history
-  userOrders = []
-  getUserOrders(){
-    console.log("API.getUserOrders runs")    
-    this.http.get<any>(this.addr+'/history').subscribe(res =>{
-      // this.userAccountData = res
-      if (res) {
-          // console.log("API.getUserOrders data received ", res)
-          this.userOrders = res
-      }
-      console.log("API.getUserOrders userOrders", this.userOrders)
-    })
-  }
 
   ///// PAYPAL
-
-  sendPaymentResult(orderId, paymentId):void{
-    console.log("API SAYS: ",orderId, paymentId)
-    let query = {orderId, paymentId}
-    this.http.put(this.addr+'/orders/test', query).subscribe(res =>{{
-      if (res){
-        console.log('order created ', res)
+  sendPaymentResult(orderId, paymentId): void {
+    console.log('API SAYS: ', orderId, paymentId);
+    const query = {orderId, paymentId};
+    this.http.put(this.addr + '/orders/test', query).subscribe(res => {{
+      if (res) {
+        console.log('order created ', res);
         // console.log('order created full ', newOrder)
         // this.newOrderInformation = newOrder
         // this.createdOrdetInformation = res
-        // this.router.navigate(['/neworder']) 
+        // this.router.navigate(['/neworder'])
       }
-    }}) 
+    }});
   }
 
 }

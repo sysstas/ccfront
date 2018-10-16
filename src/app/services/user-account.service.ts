@@ -20,14 +20,6 @@ export class UserAccountService {
   getUserOrders() {
     console.log('Service.getUserOrders runs');
     return this.http.get<any>(this.api.addr + '/history');
-    // .subscribe(res =>{
-    //   // this.userAccountData = res
-    //   if (res) {
-    //       // console.log("API.getUserOrders data received ", res)
-    //       this.userOrders = res
-    //   }
-    //   console.log("Service.getUserOrders userOrders", this.userOrders)
-    // })
   }
 
   sendNewPwd() {
@@ -38,7 +30,9 @@ export class UserAccountService {
     console.log('New pwd and old one are sent');
   }
 
-  sendNewPersonal() {
-    console.log('New personal is sent');
+  sendNewPersonal(data) {
+    console.log('New personal is sent', data);
+    console.log('New personal is sent ' + this.api.addr + '/account/change-personal/' + data.id);
+    return this.http.put(this.api.addr + '/account/change-personal/' + data.id, data);
   }
 }

@@ -2,10 +2,10 @@
     flex: 0 0 10px;
 } 
 .mat-column-ClientName{
-    flex: 0 0 150px;
+    flex: 0 0 100px;
 }
 .mat-column-ClientEmail{
-    flex: 0 0 150px;
+    flex: 0 0 170px;
 }
 .mat-column-City{
     flex: 0 0 90px;
@@ -20,7 +20,7 @@
     flex: 0 0 100px;
 }
 .mat-column-Master{
-    flex: 0 0 110px;
+    flex: 0 0 70px;
 }
 .mat-column-Paid{
     flex: 0 0 70px;
@@ -29,7 +29,7 @@
     flex: 0 0 90px;
 }
 .mat-column-Action{
-    flex: 0 0 100px;
+    flex: 0 0 40px;
 }
 .red{    
     color: crimson;

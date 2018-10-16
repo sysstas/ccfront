@@ -23,16 +23,21 @@
             </div>
           </mat-card-content>
           <mat-card-actions>
-            <button [disabled]="email.invalid || name.invalid || (name.untouched && email.untouched)"  (click)="changePersonal(); $event.preventDefault()" mat-raised-button color="accent" >
+            <button *ngIf="!isLoading" [disabled]="email.invalid || name.invalid || (name.untouched && email.untouched)"  (click)="changePersonal(); $event.preventDefault()" mat-raised-button color="accent" >
               <span *ngIf="!(email.invalid || name.invalid ) && (name.touched || email.touched)" >Save changes</span>
-              <span *ngIf="email.invalid || name.invalid || (name.untouched && email.untouched)" matTooltip="Fill all fields to activate">Save changes</span>
-              
+              <span *ngIf="email.invalid || name.invalid || (name.untouched && email.untouched)" matTooltip="Fill all fields to activate">Save changes</span>              
+            </button>
+            <!-- <div *ngIf="isLoading">
+              <mat-spinner color="accent" [diameter]="70"></mat-spinner>
+            </div> -->
+            <button *ngIf="isLoading" [disabled]="true" mat-raised-button >
+              Loading... <mat-spinner color="accent" [diameter]="35" style="float:right"></mat-spinner>
             </button>
            
           </mat-card-actions>
         </mat-card>
         
-        <mat-card class="account-card" *ngIf='userAccountData.password'>
+        <!-- <mat-card class="account-card" *ngIf='userAccountData.password'>
           <mat-card-header>
             <mat-card-title><b>Change password</b></mat-card-title>
           </mat-card-header>          
@@ -57,9 +62,9 @@
               <span *ngIf="password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Change password</span>
             </button>
           </mat-card-actions>
-        </mat-card>
+        </mat-card> -->
 
-        <mat-card class="account-card" *ngIf='!userAccountData.password'>
+        <!-- <mat-card class="account-card" *ngIf='!userAccountData.password'>
           <mat-card-header>
             <mat-card-title><b>Add password</b></mat-card-title>
           </mat-card-header>          
@@ -80,7 +85,7 @@
               <span *ngIf="password.invalid || passwordconfirm.invalid" matTooltip="Fill all fields to activate">Add password</span>
             </button>
           </mat-card-actions>
-        </mat-card>
+        </mat-card> -->
    
       </div>
 

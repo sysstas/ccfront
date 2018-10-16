@@ -15,8 +15,8 @@ export class UserAccountComponent implements OnInit {
     newpassword = new FormControl('', [Validators.required]);
     passwordconfirm = new FormControl('', [Validators.required]);
     userAccountData: any = {};
-    userOrders: any = {};
-
+    // userOrders: any = {};
+    isLoading = false;
   constructor( public service: UserAccountService) {}
 
 
@@ -26,15 +26,20 @@ export class UserAccountComponent implements OnInit {
       this.userAccountData = res;
       console.log('Component getUserAccountData data received ', this.userAccountData);
     });
-    this.service.getUserOrders().subscribe(res => {
-      this.userOrders = res;
-      console.log('Component userOrders data received', this.userOrders);
-    });
+    // this.service.getUserOrders().subscribe(res => {
+    //   this.userOrders = res;
+    //   console.log('Component userOrders data received', this.userOrders);
+    // });
   }
 
   changePersonal() {
-    console.log('User-acc.c changePersonal');
-    this.service.sendNewPersonal();
+    this.isLoading = true;
+    this.service.sendNewPersonal(this.userAccountData).subscribe(res => {
+      this.isLoading = false;
+      this.name.markAsUntouched();
+      this.email.markAsUntouched();
+      console.log('API.getUserOrders data received ', res);
+    });
   }
 
   changePwd() {

@@ -1,9 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Inject } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable'
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { MatPaginator, MatTableDataSource, MatSort, MatProgressSpinnerModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { UserSubmitedForm } from '../../models/usersubmitedform'
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
+import { UserAccountService } from '../../services/user-account.service';
 
 
 @Component({
@@ -13,20 +11,24 @@ import { UserSubmitedForm } from '../../models/usersubmitedform'
 })
 export class OrderHistoryComponent implements OnInit {
 
-  constructor(public api: ApiService) { }
-
-  ngOnInit() {
-    this.api.getUserOrders()
-  }
-
-  displayedColumns = ['ID', 'City', 'Date','Time','Duration','Master'];
-  dataSource = new MatTableDataSource(this.api.userOrders);
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {  
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  userOrders = [];
+  displayedColumns = ['id', 'cityName', 'date', 'time', 'duration', 'masterName'];
+  dataSource = new MatTableDataSource();
+
+  constructor(public api: ApiService,  public service: UserAccountService) { }
+
+  ngOnInit() {
+    this.service.getUserOrders()
+    .subscribe(res => {
+      this.service.userOrders = res;
+
+      this.dataSource = new MatTableDataSource(this.service.userOrders);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      console.log('Component.getUserOrders ',  this.dataSource);
+    });
+
   }
 }
-  

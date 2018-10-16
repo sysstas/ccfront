@@ -39,7 +39,7 @@ export class OrdersComponent implements OnInit, AfterViewInit {
     //console.log(this.dataSource)
   }
 
-  displayedColumns = ['id', 'City', 'ClientEmail', 'ClientName', 'Date','Time','Duration','Master', 'Paid', 'Completed','Action'];
+  displayedColumns = ['id', 'city', 'userEmail', 'ClientName', 'Date','Time','Duration','Master', 'Paid', 'Completed','Action'];
   dataSource = new MatTableDataSource(this.api.orders);
   
   // newOrder = {

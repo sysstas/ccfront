@@ -4,6 +4,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatProgressSpinnerModule} from
 
 import { ApiService } from '../api.service';
 import { UserSubmitedForm } from '../models/usersubmitedform'
+import { CitiesService } from '../services/cities.service';
 
 @Component({
   selector: 'client',
@@ -116,11 +117,14 @@ export class ClientComponent implements OnInit {
   }
    
 
-  constructor( public api: ApiService) { }
+  constructor( 
+    public api: ApiService,
+    public citiesService: CitiesService 
+  ) { }
     
   ngOnInit() {
    this.api.getMasters()
-   this.api.getCities()
+   this.citiesService.getCities()
   }
 
   find() {     

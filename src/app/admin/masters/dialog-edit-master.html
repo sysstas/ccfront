@@ -13,7 +13,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-select placeholder="City" [formControl]="masterCity" [(ngModel)]="data.cityID" name="city" required>
-        <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
+        <mat-option *ngFor="let city of citiesService.cities" [value]="city.id" >{{city.cityName}}</mat-option>
       </mat-select>
       <mat-error *ngIf="masterCity.invalid">{{getMasterCityMessage()}}</mat-error>
     </mat-form-field>

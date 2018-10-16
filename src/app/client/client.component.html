@@ -33,7 +33,7 @@
 
         <mat-form-field>
           <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.cityId" name="city" required>
-            <mat-option *ngFor="let city of api.cities" [value]="city.id" >{{city.cityName}}</mat-option>
+            <mat-option *ngFor="let city of citiesService.cities" [value]="city.id" >{{city.cityName}}</mat-option>
           </mat-select>
           <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
         </mat-form-field>

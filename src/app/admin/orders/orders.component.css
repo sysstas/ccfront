@@ -1,0 +1,82 @@
+.mat-column-id{
+    flex: 0 0 65px;
+} 
+.mat-column-userName{
+    flex: 0 0 170px;
+}
+.mat-column-userEmail{
+    flex: 0 0 190px;
+}
+.mat-column-city{
+    flex: 0 0 110px;
+}
+.mat-column-time{
+    flex: 0 0 70px;
+} 
+.mat-column-duration{
+    flex: 0 0 70px;
+} 
+.mat-column-date{
+    flex: 0 0 100px;
+}
+.mat-column-master{
+    flex: 0 0 130px;
+}
+.mat-column-paid{
+    flex: 0 0 75px;
+}
+.mat-column-completed{
+    flex: 0 0 80px;
+}
+.mat-column-Action{
+    flex: 0 0 40px;
+}
+.red{    
+    color: crimson;
+}
+
+.row-justify-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+  }
+  .column {
+    flex-direction: column;
+    border-style: solid;
+    border-color: rgba(153, 180, 180, 0.575);
+    background-color: ghostwhite
+  }
+  .content-item {
+    flex-direction: column;
+    width: 800px;  
+    text-align: center;
+    color: darkcyan;
+    margin-top: 20px;
+  }
+  .form-container{ 
+    flex-direction: column;
+    width: 300px;  
+    padding: 5px;
+    margin: 20px;
+    border-style: solid;
+    border-color: rgba(153, 180, 180, 0.575);
+    background-color: rgba(247, 255, 255, 0.952);
+  }
+  
+  
+  .masters-container{
+    flex-direction: column;
+    width: 300px;  
+    justify-content: flex-start;
+  }
+  
+  
+  .form-container> * {
+    width: 100%;
+  }
+  
+  .master-font{
+    color: darkcyan;
+    font-weight: bold;
+  }
+  

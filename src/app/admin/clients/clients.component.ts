@@ -37,7 +37,7 @@ export class ClientsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.api.getOrders();
+    // this.api.getOrders();
     this.service.getClients();
   }
 

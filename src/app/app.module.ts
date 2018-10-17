@@ -45,7 +45,9 @@ import { CitiesComponent } from './admin/cities/cities.component';
 import { ClientsComponent, IsAdmin, IsReg } from './admin/clients/clients.component';
 import { NewOrderComponent } from './client/neworder.component';
 import { ScheduleComponent } from './admin/schedule/schedule.component';
-import { OrdersComponent, DialogEditOrder, IsPaid, IsCompleted } from './admin/orders/orders.component';
+import { OrdersComponent, 
+  // DialogEditOrder, 
+  IsPaid, IsCompleted } from './admin/orders/orders.component';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthInterceptorService } from './authInterceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -62,6 +64,7 @@ import { DialogDeleteCityComponent } from './admin/cities/dialog.delete.city.com
 import { MastersService } from './services/masters.service';
 import { DialogEditMasterComponent } from './admin/masters/dialog.edit.master.component';
 import { DialogDeleteMasterComponent } from './admin/masters/dialog.delete.master.component';
+import { OrdersService } from './services/orders.service';
 // Configs
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig(
@@ -110,7 +113,7 @@ const routes: Routes = [
     DialogLogin,
     DialogEditClientComponent,
     DialogEditMasterComponent,
-    DialogEditOrder,
+    // DialogEditOrder,
     DialogDeleteCityComponent,
     DialogDeleteClientComponent,
     DialogDeleteMasterComponent,
@@ -162,7 +165,7 @@ const routes: Routes = [
     DialogEditClientComponent,
     DialogEditCityComponent,
     DialogEditMasterComponent,
-    DialogEditOrder,
+    // DialogEditOrder,
     DialogDeleteCityComponent,
     DialogDeleteClientComponent,
     DialogDeleteMasterComponent],
@@ -172,6 +175,7 @@ const routes: Routes = [
     ClientsService,
     CitiesService,
     MastersService,
+    OrdersService,
     AuthGuardService,
     {
       provide: HTTP_INTERCEPTORS,

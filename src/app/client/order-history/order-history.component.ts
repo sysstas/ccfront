@@ -27,6 +27,7 @@ export class OrderHistoryComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.service.userOrders);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+      console.log("z1:", this.sort)
       console.log('Component.getUserOrders ',  this.dataSource);
     });
 

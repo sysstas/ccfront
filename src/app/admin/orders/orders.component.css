@@ -1,32 +1,32 @@
-.mat-column-ID{
-    flex: 0 0 10px;
+.mat-column-id{
+    flex: 0 0 65px;
 } 
-.mat-column-ClientName{
-    flex: 0 0 100px;
-}
-.mat-column-ClientEmail{
+.mat-column-userName{
     flex: 0 0 170px;
 }
-.mat-column-City{
-    flex: 0 0 90px;
+.mat-column-userEmail{
+    flex: 0 0 190px;
 }
-.mat-column-Time{
+.mat-column-city{
+    flex: 0 0 110px;
+}
+.mat-column-time{
     flex: 0 0 70px;
 } 
-.mat-column-Duration{
+.mat-column-duration{
     flex: 0 0 70px;
 } 
-.mat-column-Date{
+.mat-column-date{
     flex: 0 0 100px;
 }
-.mat-column-Master{
-    flex: 0 0 70px;
+.mat-column-master{
+    flex: 0 0 130px;
 }
-.mat-column-Paid{
-    flex: 0 0 70px;
+.mat-column-paid{
+    flex: 0 0 75px;
 }
-.mat-column-Completed{
-    flex: 0 0 90px;
+.mat-column-completed{
+    flex: 0 0 80px;
 }
 .mat-column-Action{
     flex: 0 0 40px;

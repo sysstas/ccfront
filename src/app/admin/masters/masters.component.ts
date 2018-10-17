@@ -66,8 +66,7 @@ export class MastersComponent implements OnInit {
 
   // Clean after submit
   clean(): void {
-    //
-    this.newMaster = {
+      this.newMaster = {
       cityId: '',
       masterName : '',
       masterRating: ''
@@ -111,4 +110,3 @@ export class MastersComponent implements OnInit {
     this.service.getMasters();
   }
 }
-

@@ -67,6 +67,9 @@
 
     <div class="" *ngIf="isFormSubmitted">
       <div class="  col-xl-12">
+        
+        <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button> 
+        
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -80,7 +83,7 @@
         </mat-form-field>
 
         <button (click)="find()" mat-raised-button color="primary" type="submit" >Find Free Masters</button>
-        <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button>  
+         
       </div>
 
       

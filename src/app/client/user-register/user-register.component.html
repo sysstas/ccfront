@@ -4,11 +4,7 @@
       <h1>Register</h1>
       <div *ngIf='api.initialUserData.userEmail'>        
         <h1> Hi, {{api.initialUserData.userName}}</h1> 
-        <p>please, fill the form below</p>
-        <div>
-          DATA:
-          {{api.initialUserData | json}}
-        </div> 
+        <p>please, fill the form below</p>        
         <div class="form-container">
           <mat-form-field>
               <input matInput placeholder="Your name" [formControl]="name" [(ngModel)]="api.initialUserData.userName" name="name" required>
@@ -33,6 +29,7 @@
       </div>
       <div *ngIf='!api.initialUserData.userEmail && !api.initialUserData.isRegistered'>
         <h1>Loading...</h1>
+        <mat-spinner color="accent"></mat-spinner>
       </div>      
       <div *ngIf='!api.initialUserData.userEmail && api.initialUserData.isRegistered'>
         <h1>You already registered</h1>

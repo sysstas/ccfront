@@ -23,7 +23,7 @@ export class ApiService {
   IsLoggedIn = false;
 
 //  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = 'https://b6d91318.ngrok.io';
+  addr = 'https://956232cc.ngrok.io';
   // addr = "http://localhost:5000"
   TOKEN_KEY = 'token';
 

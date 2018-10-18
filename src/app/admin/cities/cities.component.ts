@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import {FormControl, Validators} from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 import { CitiesService } from '../../services/cities.service';
 import { DialogEditCityComponent } from './dialog.edit.city.component';
 import { DialogDeleteCityComponent } from './dialog.delete.city.component';
@@ -27,14 +27,11 @@ export class CitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-   // this.api.getMasters()
     this.service.getCities();
-   // this.api.getClients()
   }
 
   // Clean after submit
   clean(): void {
-    //
     this.newCity = '';
     this.city.reset();
   }
@@ -47,7 +44,7 @@ export class CitiesComponent implements OnInit {
       data: { cityName: city.cityName, ID: city.id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
@@ -59,13 +56,13 @@ export class CitiesComponent implements OnInit {
       data: { cityName: city.cityName, ID: city.id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
 
   addNewCity() {
-    // calling addCity funcnion on API
+    // calling addCity function on API
     this.service.addCity(this.newCity);
     // refreshing cities list on page
     this.service.getCities();

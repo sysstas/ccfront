@@ -12,11 +12,8 @@ import { DialogDeleteMasterComponent } from './dialog.delete.master.component';
   styleUrls: ['./masters.component.css']
 })
 export class MastersComponent implements OnInit {
-  panelOpenState = false;
   public masters;
-  animal: string;
   name: string;
-  newCity: string;
   masterRating = [
     {mark: 1},
     {mark: 2},
@@ -33,8 +30,6 @@ export class MastersComponent implements OnInit {
   newMasterRatingEdit = new FormControl('', [Validators.required]);
   newMasterCity = new FormControl('', [Validators.required]);
 
-  //////////////////////////////////////
-
   constructor(
     public citiesService: CitiesService,
     public api: ApiService,
@@ -44,9 +39,7 @@ export class MastersComponent implements OnInit {
 
   ngOnInit() {
     this.service.getMasters();
-    // this.api.getCities()
     this.citiesService.getCities();
-    // this.api.getClients()
   }
 
   getMasterNameErrorMessage() {
@@ -83,7 +76,7 @@ export class MastersComponent implements OnInit {
       data: { masterName: master.masterName, id: master.id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
@@ -96,14 +89,13 @@ export class MastersComponent implements OnInit {
       data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.city.id}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
-      this.animal = result;
     });
   }
 
   addNewMaster() {
-    // calling addMaster funcnion on API
+    // calling addMaster function on API
     console.log('add new master', this.newMaster);
     this.service.addMaster(this.newMaster);
     // refreshing masters list on page

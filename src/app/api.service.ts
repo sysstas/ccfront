@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
@@ -73,15 +72,6 @@ export class ApiService {
     }});
   }
 
-  editClient(data) {
-    this.http.put(this.addr + '/users/' + data.id, data).subscribe(res => {
-      if (res) {
-        this.getClients();
-        this.openSnackBar('Client succesfully saved');        // console.log(res)
-      }
-    });
-  }
-
   deleteClient(data) {
     console.log('delete user data ', data);
     this.http.delete(this.addr + '/users/' + data.id).subscribe(res => {
@@ -129,13 +119,12 @@ export class ApiService {
           this.openSnackBar('Successful login');
         }
       }
-    }, err => {
+    }, () => {
       this.openSnackBar('Access denied');
     });
   }
 
   isLoggedIn() {
-    // console.log(this.IsLoggedIn)
     return this.IsLoggedIn;
   }
 
@@ -144,22 +133,4 @@ export class ApiService {
       duration: 2000,
     });
   }
-
-
-
-  ///// PAYPAL
-  sendPaymentResult(orderId, paymentId): void {
-    console.log('API SAYS: ', orderId, paymentId);
-    const query = {orderId, paymentId};
-    this.http.put(this.addr + '/orders/test', query).subscribe(res => {{
-      if (res) {
-        console.log('order created ', res);
-        // console.log('order created full ', newOrder)
-        // this.newOrderInformation = newOrder
-        // this.createdOrdetInformation = res
-        // this.router.navigate(['/neworder'])
-      }
-    }});
-  }
-
 }

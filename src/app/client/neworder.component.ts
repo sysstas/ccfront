@@ -4,15 +4,16 @@ import { Router } from '@angular/router';
 import { PayPalConfig, PayPalEnvironment, PayPalIntegrationType } from 'ngx-paypal';
 
 @Component({
-  selector: 'newOrder',
   templateUrl: './newOrder.component.html',
   styleUrls: ['./newOrder.component.css']
 })
 
 
 export class NewOrderComponent implements OnInit {
-  constructor( public api: ApiService, public router: Router,) { }
-  
+  orderInformation = this.api.newOrderInformation;
+
+  constructor( public api: ApiService, public router: Router, ) { }
+
   public payPalConfig?: PayPalConfig;
 
   private initConfig(): void {
@@ -24,14 +25,14 @@ export class NewOrderComponent implements OnInit {
       button: {
         label: 'paypal',
       },
-      onPaymentComplete: (data, actions) => {
+      onPaymentComplete: () => {
         console.log('OnPaymentComplete SUCCESS');
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
       },
-      onCancel: (data, actions) => {
+      onCancel: () => {
         console.log('OnCancel');
       },
-      onError: (err) => {
+      onError: () => {
         console.log('OnError');
       },
       transactions: [{
@@ -42,7 +43,7 @@ export class NewOrderComponent implements OnInit {
         description: `Order #${this.api.createdOrdetInformation.id}`,
         custom: `${this.api.createdOrdetInformation.id}`,
         item_list: {
-          items: [{    
+          items: [{
             name: 'MASTER DN1',
             currency: 'USD',
             price: 10.57,
@@ -58,13 +59,8 @@ export class NewOrderComponent implements OnInit {
     this.initConfig();
   }
 
-  // test(){
-  //   console.log(this.api.createdOrdetInformation)
-  // }
-  orderInformation = this.api.newOrderInformation
-
   returnToStartPage() {
-    this.router.navigate(['/client'])
+    this.router.navigate(['/client']);
   }
 }
 

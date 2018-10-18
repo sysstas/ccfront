@@ -9,8 +9,6 @@ import { ApiService } from '../api.service';
 export class MastersService {
   masters = [];
 
-
-
   constructor(
     public api: ApiService,
     private http: HttpClient

@@ -6,6 +6,6 @@ export class UserSubmitedForm {
         public cityId: string,
         public cityName: string,
         public userEmail: string,
-        public userName: string               
-    ){}
+        public userName: string
+    ) {}
 }

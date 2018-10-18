@@ -7,7 +7,6 @@ import { ApiService } from '../api.service';
 })
 export class ClientsService {
   users = [];
-  currentUser = {};
 
   constructor(
     public api: ApiService,
@@ -26,10 +25,7 @@ export class ClientsService {
     this.http.post<any>(this.api.addr + '/users', query).subscribe(res => {{
       if (res) {
         this.getClients();
-        // this.currentUser = res;
-        this.api.openSnackBar('Client succesfully saved');
-        // // this.users.push(res);
-        // console.log('SERVICE client creation server response ', res);
+        this.api.openSnackBar('Client successfully saved');
       }
     }});
   }
@@ -38,7 +34,7 @@ export class ClientsService {
     this.http.put(this.api.addr + '/users/' + data.id, data).subscribe(res => {
       if (res) {
         this.getClients();
-        this.api.openSnackBar('Client succesfully saved');
+        this.api.openSnackBar('Client successfully saved');
       }
     });
   }
@@ -47,7 +43,7 @@ export class ClientsService {
     console.log('delete user data ', data);
     this.http.delete(this.api.addr + '/users/' + data.id).subscribe(res => {
       this.getClients();
-      this.api.openSnackBar('Client succesfully deleted');
+      this.api.openSnackBar('Client successfully deleted');
     });
   }
 }

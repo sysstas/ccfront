@@ -1,25 +1,51 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatProgressSpinnerModule} from '@angular/material';
-
 import { ApiService } from '../api.service';
 import { UserSubmitedForm } from '../models/usersubmitedform';
 import { CitiesService } from '../services/cities.service';
 import { MastersService } from '../services/masters.service';
 
 @Component({
-  selector: 'client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-  /// FORM VALIDATION PART
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   city = new FormControl('', [Validators.required]);
   date = new FormControl('', [Validators.required]);
   time = new FormControl('', [Validators.required]);
   size = new FormControl('', [Validators.required]);
+  today = new Date();
+  minDate = new Date(this.today.setDate(this.today.getDate() + 1));
+  isFormSubmitted = false;
+  submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
+  workHours = [
+    {hour: 8},
+    {hour: 9},
+    {hour: 10},
+    {hour: 11},
+    {hour: 12},
+    {hour: 13},
+    {hour: 14},
+    {hour: 15},
+    {hour: 16},
+    {hour: 17}
+  ];
+  clockSize = [
+    {
+      size: 'big',
+      workTime: 3
+    },
+    {
+      size: 'medium',
+      workTime: 2
+    },
+    {
+      size: 'small',
+      workTime: 1
+    }
+  ];
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'You must enter email' :
@@ -48,45 +74,7 @@ export class ClientComponent implements OnInit {
   getSizeErrorMessage() {
     return this.size.hasError('required') ? 'You must choose size' : '';
   }
-  /// Data Picker validation
-  today = new Date();
-  minDate = new Date(this.today.setDate(this.today.getDate() + 1));
 
-
-  //////////////////////////////////////////////
-
-  //// LOGIC PART
-  isFormSubmitted = false;
-
-  submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
-
-  workHours = [
-    {hour: 8},
-    {hour: 9},
-    {hour: 10},
-    {hour: 11},
-    {hour: 12},
-    {hour: 13},
-    {hour: 14},
-    {hour: 15},
-    {hour: 16},
-    {hour: 17}
-  ];
-
-  clockSize = [
-    {
-      size: 'big',
-      workTime: 3
-    },
-    {
-      size: 'medium',
-      workTime: 2
-    },
-    {
-      size: 'small',
-      workTime: 1
-    }
-  ];
 
   makeOrder(master) {
     console.log('CONTROLLER master', master);
@@ -140,15 +128,15 @@ export class ClientComponent implements OnInit {
     this.api.addClient(userData);
 
     // forming query object for free masters search on backend
-    const freeMasetersQuery = {
+    const freeMastersQuery = {
       cityID: this.submitedForm.cityId,
       date: Date.parse(this.submitedForm.date.toString()),
       time: this.submitedForm.time,
       duration: this.submitedForm.duration
     };
 
-    console.log('CONTROLLER freeMasetersQuery: ', freeMasetersQuery );
-    this.api.getFreeMasters(freeMasetersQuery);
+    console.log('CONTROLLER freeMastersQuery: ', freeMastersQuery );
+    this.api.getFreeMasters(freeMastersQuery);
     // this for changing layout when client
     this.isFormSubmitted = true;
   }

@@ -12,7 +12,7 @@ import { DialogDeleteMasterComponent } from './dialogs/dialog.delete.master.comp
   styleUrls: ['./masters.component.css']
 })
 export class MastersComponent implements OnInit {
-  public masters;
+  masters = [];
   cities = [];
   name: string;
   masterRating = [
@@ -39,11 +39,14 @@ export class MastersComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.getMasters();
+    this.service.getMasters()
+    .subscribe(res => {
+      this.masters = res;
+    });
     this.citiesService.getCities()
-      .subscribe(res => {
-        this.cities = res;
-      });
+    .subscribe(res => {
+      this.cities = res;
+    });
   }
 
   getMasterNameErrorMessage() {
@@ -63,7 +66,7 @@ export class MastersComponent implements OnInit {
 
   // Clean after submit
   clean(): void {
-      this.newMaster = {
+    this.newMaster = {
       cityId: '',
       masterName : '',
       masterRating: ''

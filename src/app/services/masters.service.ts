@@ -16,14 +16,12 @@ export class MastersService {
   ) { }
 
   getMasters() {
-    this.http.get<any>(`${this.api.addr}/masters`).subscribe(res => {
-      this.masters = res;
-      // console.log('get masters:', res);
-    });
+    return this.http.get<any>(`${this.api.addr}/masters`);
   }
 
   addMaster(newMaster) {
-    this.http.post(`${this.api.addr}/masters`, newMaster).subscribe(res => {
+    this.http.post(`${this.api.addr}/masters`, newMaster)
+    .subscribe(res => {
       if (res) {
         this.getMasters();
         this.api.openSnackBar(consts.msg.MasterSavedS);
@@ -32,9 +30,9 @@ export class MastersService {
   }
 
   editMaster(data) {
-    this.http.put(`${this.api.addr}/masters/${data.id}`, data).subscribe(res => {
+    this.http.put(`${this.api.addr}/masters/${data.id}`, data)
+    .subscribe(res => {
       if (res) {
-        // console.log('API Master edit data: ', data);
         this.getMasters();
         this.api.openSnackBar(consts.msg.MasterSavedS);
       }
@@ -42,7 +40,8 @@ export class MastersService {
   }
 
   deleteMaster(data) {
-    this.http.delete(`${this.api.addr}/masters/${data.id}`).subscribe(() => {
+    this.http.delete(`${this.api.addr}/masters/${data.id}`)
+    .subscribe(() => {
       this.getMasters();
       this.api.openSnackBar(consts.msg.MasterDeletedS);
     });

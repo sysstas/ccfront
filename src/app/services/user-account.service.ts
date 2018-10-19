@@ -13,14 +13,14 @@ export class UserAccountService {
   ) {}
 
   getUserAccountData() {
-    return this.http.get<any>(this.api.addr + '/account');
+    return this.http.get<any>(`${this.api.addr}/account`);
   }
 
   getUserOrders() {
-    return this.http.get<any>(this.api.addr + '/history');
+    return this.http.get<any>(`${this.api.addr}/history`);
   }
 
   sendNewPersonal(data) {
-    return this.http.put(this.api.addr + '/account/change-personal/' + data.id, data);
+    return this.http.put(`${this.api.addr}/account/change-personal/${data.id}`, data);
   }
 }

@@ -36,33 +36,33 @@ export class ApiService {
 
   getInitialRegisterData(data) {
     // console.log('API.getInitialRegisterData runs, id - ', data.id);
-    this.http.get<any>(this.addr + '/register/' + data.id).subscribe(res => {
+    this.http.get<any>(`${this.addr}/register/${data.id}`).subscribe(res => {
       this.initialUserData = res;
       // console.log('API.getInitialRegisterData data received ', this.initialUserData);
     });
   }
 
   postRegisteredUserData() {
-    console.log('API.postRegisteredUserData runs ');
+    // console.log('API.postRegisteredUserData runs ');
     const userData = {
       email: this.initialUserData.userEmail,
       password: this.initialUserData.password
     };
 
-    this.http.post(this.addr + '/register', userData ).subscribe(res => {
+    this.http.post(`${this.addr}/register`, userData ).subscribe(res => {
       // console.log('API.postRegisteredUserData received ', res);
     });
     this.router.navigate(['/']);
   }
 
   getClients() {
-    this.http.get<any>(this.addr + '/users').subscribe( res => {
+    this.http.get<any>(`${this.addr}/users`).subscribe(res => {
       this.users = res;
     });
   }
 
   addClient(query) {
-    this.http.post<any>(this.addr + '/users', query).subscribe(res => {{
+    this.http.post<any>(`${this.addr}/users`, query).subscribe(res => {{
       if (res) {
         // console.log('client creation server response ', res);
         this.currentUser = res;
@@ -74,7 +74,7 @@ export class ApiService {
 
   deleteClient(data) {
     // console.log('delete user data ', data);
-    this.http.delete(this.addr + '/users/' + data.id).subscribe(res => {
+    this.http.delete(`${this.addr}/users/${data.id}`).subscribe(res => {
       this.getClients();
       this.openSnackBar(consts.msg.UserSavedS);
     });
@@ -82,7 +82,7 @@ export class ApiService {
 
   createOrder(newOrder) {
     // console.log('API send order', newOrder);
-    this.http.post(this.addr + '/orders', newOrder).subscribe(res => {{
+    this.http.post(`${this.addr}/orders`, newOrder).subscribe(res => {{
       if (res) {
         // console.log('order created ', res);
         // console.log('order created full ', newOrder);
@@ -94,7 +94,7 @@ export class ApiService {
   }
 
   getFreeMasters(query) {
-     this.http.post<any>(this.addr + '/freemasters', query).subscribe( res => {
+     this.http.post<any>(`${this.addr}/freemasters`, query).subscribe(res => {
        this.arr = res;
     });
   }
@@ -102,7 +102,7 @@ export class ApiService {
   Auth(login, password, googleToken): void {
     const querry = { login, password, googleToken};
     // console.log(querry);
-    this.http.post<any>(this.addr + '/login', querry)
+    this.http.post<any>(`${this.addr}/login`, querry)
     .subscribe(res => {
       if (res) {
         // console.log('login: ', res);

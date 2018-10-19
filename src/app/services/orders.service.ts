@@ -17,11 +17,11 @@ export class OrdersService {
   ) { }
 
   getOrders() {
-    return this.http.get<any>(this.api.addr + '/orders');
+    return this.http.get<any>(`${this.api.addr}/orders`);
   }
 
   deleteOrder(id): Observable<any> {
-    return this.http.delete(this.api.addr + '/orders/' + id);
+    return this.http.delete(`${this.api.addr}/orders/${id}`);
   }
 
 }

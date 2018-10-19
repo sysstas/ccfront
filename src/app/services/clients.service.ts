@@ -15,7 +15,7 @@ export class ClientsService {
   ) { }
 
   getClients() {
-    this.http.get<any>(this.api.addr + '/users').subscribe( res => {
+    this.http.get<any>(`${this.api.addr}/users`).subscribe(res => {
       // console.log('SERVICE client GET response ', res);
       this.users = res;
       // console.log('SERVICE ', this.users);
@@ -23,7 +23,7 @@ export class ClientsService {
   }
 
   addClient(query) {
-    this.http.post<any>(this.api.addr + '/users', query).subscribe(res => {{
+    this.http.post<any>(`${this.api.addr}/users`, query).subscribe(res => {{
       if (res) {
         this.getClients();
         this.api.openSnackBar(consts.msg.ClientSavedS);
@@ -32,7 +32,7 @@ export class ClientsService {
   }
 
   editClient(data) {
-    this.http.put(this.api.addr + '/users/' + data.id, data).subscribe(res => {
+    this.http.put(`${this.api.addr}/users/${data.id}`, data).subscribe(res => {
       if (res) {
         this.getClients();
         this.api.openSnackBar(consts.msg.ClientSavedS);
@@ -42,7 +42,7 @@ export class ClientsService {
 
   deleteClient(data) {
     // console.log('delete user data ', data);
-    this.http.delete(this.api.addr + '/users/' + data.id).subscribe(res => {
+    this.http.delete(`${this.api.addr}/users/${data.id}`).subscribe(res => {
       this.getClients();
       this.api.openSnackBar(consts.msg.ClientDeletedS);
     });

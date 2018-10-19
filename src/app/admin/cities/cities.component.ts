@@ -38,26 +38,18 @@ export class CitiesComponent implements OnInit {
 
   /// open dialog edit city function
   openDialogEditCity(city): void {
-    console.log('openDialogEditCity() says: ', city);
-    const dialogRef = this.dialog.open(DialogEditCityComponent, {
+    // console.log('openDialogEditCity() says: ', city);
+    this.dialog.open(DialogEditCityComponent, {
       width: '250px',
       data: { cityName: city.cityName, ID: city.id}
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
     });
   }
 
   /// open dialog delete city function
   openDialogDeleteCity(city): void {
-    const dialogRef = this.dialog.open(DialogDeleteCityComponent, {
+    this.dialog.open(DialogDeleteCityComponent, {
       width: '250px',
       data: { cityName: city.cityName, ID: city.id}
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
     });
   }
 

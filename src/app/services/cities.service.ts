@@ -15,7 +15,7 @@ export class CitiesService {
   ) { }
 
   getCities() {
-    this.http.get<any>(this.api.addr + '/cities').subscribe( res => {
+    this.http.get<any>(`${this.api.addr}/cities`).subscribe(res => {
       this.cities = res;
     });
   }
@@ -24,7 +24,7 @@ export class CitiesService {
     const city = {
       cityName: cityName
     };
-    this.http.post(this.api.addr + '/cities', city).subscribe(res => {
+    this.http.post(`${this.api.addr}/cities`, city).subscribe(res => {
       if (res) {
         this.getCities();
         this.api.openSnackBar(consts.msg.CitySavedS);
@@ -33,7 +33,7 @@ export class CitiesService {
   }
 
   editCity(data) {
-    this.http.put(this.api.addr + '/cities/' + data.ID, data).subscribe(res => {
+    this.http.put(`${this.api.addr}/cities/${data.ID}`, data).subscribe(res => {
       if (res) {
         this.getCities();
         this.api.openSnackBar(consts.msg.CitySavedS);
@@ -42,7 +42,7 @@ export class CitiesService {
   }
 
   deleteCity(data) {
-    this.http.delete(this.api.addr + '/cities/' + data.ID).subscribe(res => {
+    this.http.delete(`${this.api.addr}/cities/${data.ID}`).subscribe(res => {
       this.getCities();
       this.api.openSnackBar(consts.msg.CityDeletedS);
     });

@@ -4,5 +4,8 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // backEndUrl: 'https://e20a91ad.ngrok.io',
+  // backEndUrl: 'https://blooming-ocean-36906.herokuapp.com',
+  backEndUrl: 'http://localhost:5000'
 };

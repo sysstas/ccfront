@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegInfo } from './models/userRegInfo';
+import { environment} from '../environments/environment';
 
 const helper = new JwtHelperService();
 
@@ -21,9 +22,7 @@ export class ApiService {
   decodedToken;
   IsLoggedIn = false;
 
-//  addr = "https://blooming-ocean-36906.herokuapp.com"
-  addr = 'https://956232cc.ngrok.io';
-  // addr = "http://localhost:5000"
+  addr = environment.backEndUrl;
   TOKEN_KEY = 'token';
 
   constructor( private http: HttpClient,

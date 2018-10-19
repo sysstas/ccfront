@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CitiesService } from '../../../services/cities.service';
+import {consts} from '../../../cosntants';
 
 @Component({
   templateUrl: 'dialog-edit-city.html',
@@ -16,6 +17,9 @@ export class DialogEditCityComponent {
     this.dialogRef.close();
   }
   edit(data) {
-    this.service.editCity(data);
+    this.service.editCity(data)
+      .subscribe(() => {
+          this.dialogRef.close(data.cityName);
+      });
   }
 }

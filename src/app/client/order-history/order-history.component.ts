@@ -16,7 +16,10 @@ export class OrderHistoryComponent implements OnInit {
   displayedColumns = ['id', 'cityName', 'date', 'time', 'duration', 'masterName'];
   dataSource = new MatTableDataSource();
 
-  constructor(public api: ApiService,  public service: UserAccountService) { }
+  constructor(
+    public api: ApiService,
+    public service: UserAccountService
+  ) { }
 
   ngOnInit() {
     this.service.getUserOrders()

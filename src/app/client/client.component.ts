@@ -10,6 +10,7 @@ import { MastersService } from '../services/masters.service';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
+  cities = [];
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   city = new FormControl('', [Validators.required]);
@@ -114,7 +115,10 @@ export class ClientComponent implements OnInit {
 
   ngOnInit() {
    this.masterService.getMasters();
-   this.citiesService.getCities();
+   this.citiesService.getCities()
+     .subscribe(res => {
+       this.cities = res;
+     });
   }
 
   find() {

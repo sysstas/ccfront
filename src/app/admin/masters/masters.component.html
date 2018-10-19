@@ -22,7 +22,7 @@
         <h1>Add new master</h1>
         <mat-form-field>
           <mat-select placeholder="City" [formControl]="newMasterCity" [(ngModel)]="newMaster.cityId" name="city" required>
-            <mat-option *ngFor="let city of citiesService.cities" [value]="city.id" >{{city.cityName}}</mat-option>
+            <mat-option *ngFor="let city of cities" [value]="city.id" >{{city.cityName}}</mat-option>
           </mat-select>
           <mat-error *ngIf="newMasterCity.invalid">{{getMasterCityMessage()}}</mat-error>
         </mat-form-field>
@@ -46,4 +46,3 @@
 
         
       
-    

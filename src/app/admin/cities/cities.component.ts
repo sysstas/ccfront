@@ -5,6 +5,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { CitiesService } from '../../services/cities.service';
 import { DialogEditCityComponent } from './dialogs/dialog.edit.city.component';
 import { DialogDeleteCityComponent } from './dialogs/dialog.delete.city.component';
+import { consts } from '../../cosntants';
+import {NGXLogger} from 'ngx-logger';
+import {_if} from 'rxjs-compat/observable/if';
 
 @Component({
   templateUrl: './cities.component.html',
@@ -13,11 +16,12 @@ import { DialogDeleteCityComponent } from './dialogs/dialog.delete.city.componen
 export class CitiesComponent implements OnInit {
   newCity: string;
   city = new FormControl('', [Validators.required, Validators.minLength(2)]);
-
+  cities = [];
   constructor(
     public api: ApiService,
     public service: CitiesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private logger: NGXLogger
   ) { }
 
   getCityErrorMessage() {
@@ -27,7 +31,10 @@ export class CitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service.getCities();
+    this.service.getCities()
+      .subscribe(res => {
+        this.cities = res;
+      });
   }
 
   // Clean after submit
@@ -35,29 +42,51 @@ export class CitiesComponent implements OnInit {
     this.newCity = '';
     this.city.reset();
   }
+  addNewCity() {
+    // calling addCity function on API
+    this.service.addCity(this.newCity)
+      .subscribe(res => {
+        this.cities.push(res);
+        this.logger.debug(`city "${this.cities[this.cities.length - 1].cityName}" successfully added`);
+        this.api.openSnackBar(consts.msg.CitySavedS);
+      });
+  }
 
   /// open dialog edit city function
   openDialogEditCity(city): void {
-    // console.log('openDialogEditCity() says: ', city);
-    this.dialog.open(DialogEditCityComponent, {
+    // Call dialog
+    const editProcessingResult = this.dialog.open(DialogEditCityComponent, {
       width: '250px',
       data: { cityName: city.cityName, ID: city.id}
+    });
+    // Changing cities array after deletion of city for refreshing view
+    editProcessingResult.afterClosed().subscribe( res => {
+      if ( res ) {
+        this.logger.debug(`city "${city.cityName}" successfully changed to "${res}"`);
+        const  changedArrayElement = this.cities.findIndex((obj => obj.id === city.id));
+        this.cities[changedArrayElement].cityName = res;
+        this.api.openSnackBar(consts.msg.CitySavedS);
+      }
     });
   }
 
   /// open dialog delete city function
   openDialogDeleteCity(city): void {
-    this.dialog.open(DialogDeleteCityComponent, {
+    // Call dialog
+    const deleteProcessingResult = this.dialog.open(DialogDeleteCityComponent, {
       width: '250px',
       data: { cityName: city.cityName, ID: city.id}
     });
-  }
-
-  addNewCity() {
-    // calling addCity function on API
-    this.service.addCity(this.newCity);
-    // refreshing cities list on page
-    this.service.getCities();
+    // Changing cities array after deletion of city for refreshing view
+    deleteProcessingResult.afterClosed().subscribe( res => {
+      if (res === true) {
+        this.cities = this.cities.filter(function(item) {
+          return item.id !== city.id;
+        });
+        this.logger.debug(`city "${city.cityName}" successfully deleted`);
+        this.api.openSnackBar(consts.msg.CityDeletedS);
+      }
+    });
   }
 }
 

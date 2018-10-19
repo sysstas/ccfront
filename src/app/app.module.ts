@@ -54,6 +54,9 @@ import {MastersService} from './services/masters.service';
 import {DialogEditMasterComponent} from './admin/masters/dialogs/dialog.edit.master.component';
 import {DialogDeleteMasterComponent} from './admin/masters/dialogs/dialog.delete.master.component';
 import {OrdersService} from './services/orders.service';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { environment } from '../environments/environment';
+environment
 // Configs
 export function getAuthServiceConfigs() {
   return new AuthServiceConfig(
@@ -142,7 +145,8 @@ const routes: Routes = [
     MatCardModule,
     MatProgressSpinnerModule,
     SocialLoginModule,
-    NgxPayPalModule
+    NgxPayPalModule,
+    LoggerModule.forRoot({level: environment.logger})
   ],
   entryComponents: [NavigationComponent,
     DialogLogin,

@@ -13,6 +13,7 @@ import { DialogDeleteMasterComponent } from './dialogs/dialog.delete.master.comp
 })
 export class MastersComponent implements OnInit {
   public masters;
+  cities = [];
   name: string;
   masterRating = [
     {mark: 1},
@@ -39,7 +40,10 @@ export class MastersComponent implements OnInit {
 
   ngOnInit() {
     this.service.getMasters();
-    this.citiesService.getCities();
+    this.citiesService.getCities()
+      .subscribe(res => {
+        this.cities = res;
+      });
   }
 
   getMasterNameErrorMessage() {

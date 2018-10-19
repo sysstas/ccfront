@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { CitiesService } from '../../services/cities.service';
+import { CitiesService } from '../../../services/cities.service';
 
 @Component({
   templateUrl: 'dialog-delete-city.html',

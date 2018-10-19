@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { LoginSubmitedForm } from '../models/loginsubmitedform';
+import { LoginSubmitedForm } from '../../models/loginsubmitedform';
 import { Router } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from '../../api.service';
 
 @Component({
   templateUrl: 'dialog-login.html',

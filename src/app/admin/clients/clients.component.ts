@@ -3,8 +3,8 @@ import { ApiService } from '../../api.service';
 import { MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { Pipe, PipeTransform } from '@angular/core';
-import { DialogEditClientComponent } from './dialog.edit.client.component';
-import { DialogDeleteClientComponent } from './dialog.delete.client.component';
+import { DialogEditClientComponent } from './dialogs/dialog.edit.client.component';
+import { DialogDeleteClientComponent } from './dialogs/dialog.delete.client.component';
 import { ClientsService } from '../../services/clients.service';
 
 @Pipe({name: 'isAdmin'})

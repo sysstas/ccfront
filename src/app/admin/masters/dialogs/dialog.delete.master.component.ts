@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MastersService } from '../../services/masters.service';
+import { MastersService } from '../../../services/masters.service';
 
 @Component({
   templateUrl: 'dialog-delete-master.html',

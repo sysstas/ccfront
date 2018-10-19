@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { DialogLogin } from './dialog-login';
+import { DialogLogin } from './dialogs/dialog-login';
 import { ApiService } from '../api.service';
 import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 

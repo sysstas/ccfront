@@ -3,8 +3,8 @@ import { ApiService } from '../../api.service';
 import { MatDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { CitiesService } from '../../services/cities.service';
-import { DialogEditCityComponent } from './dialog.edit.city.component';
-import { DialogDeleteCityComponent } from './dialog.delete.city.component';
+import { DialogEditCityComponent } from './dialogs/dialog.edit.city.component';
+import { DialogDeleteCityComponent } from './dialogs/dialog.delete.city.component';
 
 @Component({
   templateUrl: './cities.component.html',
@@ -22,7 +22,7 @@ export class CitiesComponent implements OnInit {
 
   getCityErrorMessage() {
     return this.city.hasError('required') ? 'You must enter city name' :
-        this.city.hasError('minlength') ? 'Min length is 2 char' :
+        this.city.hasError('minLength') ? 'Min length is 2 char' :
             '';
   }
 

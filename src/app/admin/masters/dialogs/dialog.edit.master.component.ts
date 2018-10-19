@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
-import { CitiesService } from '../../services/cities.service';
-import { MastersService } from '../../services/masters.service';
+import { CitiesService } from '../../../services/cities.service';
+import { MastersService } from '../../../services/masters.service';
 
 /// dialog edit master
 @Component({

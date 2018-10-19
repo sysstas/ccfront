@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../api.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { FormControl, Validators} from '@angular/forms';
 import { CitiesService } from '../../services/cities.service';
 import { MastersService } from '../../services/masters.service';
-import { DialogEditMasterComponent } from './dialog.edit.master.component';
-import { DialogDeleteMasterComponent } from './dialog.delete.master.component';
+import { DialogEditMasterComponent } from './dialogs/dialog.edit.master.component';
+import { DialogDeleteMasterComponent } from './dialogs/dialog.delete.master.component';
 
 @Component({
   templateUrl: './masters.component.html',

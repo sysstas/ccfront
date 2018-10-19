@@ -29,7 +29,7 @@ import {AppComponent} from './app.component';
 import {ClientComponent} from './client/client.component';
 import {AdminComponent} from './admin/admin.component';
 import {NavigationComponent} from './navigation/navigation.component';
-import {DialogLogin} from './navigation/dialog-login';
+import {DialogLogin} from './navigation/dialogs/dialog-login';
 import {MastersComponent} from './admin/masters/masters.component';
 import {ApiService} from './api.service';
 import {CitiesComponent} from './admin/cities/cities.component';
@@ -44,15 +44,15 @@ import {UserRegisterComponent} from './client/user-register/user-register.compon
 import {UserAccountComponent} from './client/user-account/user-account.component';
 import {OrderHistoryComponent} from './client/order-history/order-history.component';
 import {UserAccountService} from './services/user-account.service';
-import {DialogEditClientComponent} from './admin/clients/dialog.edit.client.component';
-import {DialogDeleteClientComponent} from './admin/clients/dialog.delete.client.component';
+import {DialogEditClientComponent} from './admin/clients/dialogs/dialog.edit.client.component';
+import {DialogDeleteClientComponent} from './admin/clients/dialogs/dialog.delete.client.component';
 import {ClientsService} from './services/clients.service';
 import {CitiesService} from './services/cities.service';
-import {DialogEditCityComponent} from './admin/cities/dialog.edit.city.component';
-import {DialogDeleteCityComponent} from './admin/cities/dialog.delete.city.component';
+import {DialogEditCityComponent} from './admin/cities/dialogs/dialog.edit.city.component';
+import {DialogDeleteCityComponent} from './admin/cities/dialogs/dialog.delete.city.component';
 import {MastersService} from './services/masters.service';
-import {DialogEditMasterComponent} from './admin/masters/dialog.edit.master.component';
-import {DialogDeleteMasterComponent} from './admin/masters/dialog.delete.master.component';
+import {DialogEditMasterComponent} from './admin/masters/dialogs/dialog.edit.master.component';
+import {DialogDeleteMasterComponent} from './admin/masters/dialogs/dialog.delete.master.component';
 import {OrdersService} from './services/orders.service';
 // Configs
 export function getAuthServiceConfigs() {

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ClientsService } from '../../services/clients.service';
+import { ClientsService } from '../../../services/clients.service';
 
 @Component({
   templateUrl: 'dialog-delete-client.html',

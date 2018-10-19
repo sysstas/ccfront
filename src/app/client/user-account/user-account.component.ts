@@ -18,7 +18,7 @@ export class UserAccountComponent implements OnInit {
   ngOnInit() {
     this.service.getUserAccountData().subscribe(res => {
       this.userAccountData = res;
-      console.log('Component getUserAccountData data received ', this.userAccountData);
+      // console.log('Component getUserAccountData data received ', this.userAccountData);
     });
   }
 
@@ -28,7 +28,7 @@ export class UserAccountComponent implements OnInit {
       this.isLoading = false;
       this.name.markAsUntouched();
       this.email.markAsUntouched();
-      console.log('API.getUserOrders data received ', res);
+      // console.log('API.getUserOrders data received ', res);
     });
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api.service';
-
+import { consts } from '../cosntants';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class CitiesService {
     this.http.post(this.api.addr + '/cities', city).subscribe(res => {
       if (res) {
         this.getCities();
-        this.api.openSnackBar('City succesfully saved');
+        this.api.openSnackBar(consts.msg.CitySavedS);
       }
     });
   }
@@ -36,7 +36,7 @@ export class CitiesService {
     this.http.put(this.api.addr + '/cities/' + data.ID, data).subscribe(res => {
       if (res) {
         this.getCities();
-        this.api.openSnackBar('City succesfully saved');
+        this.api.openSnackBar(consts.msg.CitySavedS);
       }
     });
   }
@@ -44,7 +44,7 @@ export class CitiesService {
   deleteCity(data) {
     this.http.delete(this.api.addr + '/cities/' + data.ID).subscribe(res => {
       this.getCities();
-      this.api.openSnackBar('City succesfully deleted');
+      this.api.openSnackBar(consts.msg.CityDeletedS);
     });
   }
 }

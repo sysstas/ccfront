@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { ApiService } from '../api.service';
+import { consts } from '../cosntants';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class MastersService {
   getMasters() {
     this.http.get<any>(this.api.addr + '/masters').subscribe( res => {
       this.masters = res;
-      console.log('get masters:', res);
+      // console.log('get masters:', res);
     });
   }
 
@@ -25,7 +26,7 @@ export class MastersService {
     this.http.post(this.api.addr + '/masters', newMaster).subscribe( res => {
       if (res) {
         this.getMasters();
-        this.api.openSnackBar('Master succesfully saved');
+        this.api.openSnackBar(consts.msg.MasterSavedS);
       }
     });
   }
@@ -33,17 +34,17 @@ export class MastersService {
   editMaster(data) {
     this.http.put(this.api.addr + '/masters/' + data.id, data).subscribe( res => {
       if (res) {
-        console.log('API Master edit data: ', data);
+        // console.log('API Master edit data: ', data);
         this.getMasters();
-        this.api.openSnackBar('Master succesfully saved');
+        this.api.openSnackBar(consts.msg.MasterSavedS);
       }
     });
   }
 
   deleteMaster(data) {
-    this.http.delete(this.api.addr + '/masters/' + data.id).subscribe(res => {
+    this.http.delete(this.api.addr + '/masters/' + data.id).subscribe(() => {
       this.getMasters();
-      this.api.openSnackBar('Master succesfully deleted');
+      this.api.openSnackBar(consts.msg.MasterDeletedS);
     });
   }
 

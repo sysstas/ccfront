@@ -3,6 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { OrdersService } from '../../services/orders.service';
+import {consts} from '../../cosntants';
+
 
 @Pipe({name: 'isPaid'})
 export class IsPaid implements PipeTransform {
@@ -54,12 +56,12 @@ export class OrdersComponent implements OnInit {
           return x;
         });
         this.orders = res;
-        console.log('Component get 1: ', this.dataSource.data.length);
+        // console.log('Component get 1: ', this.dataSource.data.length);
         this.dataSource = new MatTableDataSource(this.orders);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-        console.log('Component get 1: ',  this.dataSource.sort);
-        console.log('Component get orders: ', this.dataSource);
+        // console.log('Component get 1: ',  this.dataSource.sort);
+        // console.log('Component get orders: ', this.dataSource);
       }
     });
   }
@@ -67,11 +69,12 @@ export class OrdersComponent implements OnInit {
   deleteOrder(id) {
     console.log(id);
     this.service.deleteOrder(id).subscribe(() => {
-      console.log('COMPONENT Order deleted: ', id);
+      // console.log('COMPONENT Order deleted: ', id);
       function remove(array, element) {
         return array.filter(e => e.id !== element);
       }
       this.dataSource.data = remove(this.dataSource.data, id);
+      this.api.openSnackBar(consts.msg.OrderDeletedS);
     });
   }
 

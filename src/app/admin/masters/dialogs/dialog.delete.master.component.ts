@@ -13,7 +13,11 @@ export class DialogDeleteMasterComponent {
     onCloseButtonClick(): void {
     this.dialogRef.close();
   }
+
+  deleteMaster(data) {
+    this.service.deleteMaster(data)
+    .subscribe(() => {
+      this.dialogRef.close(true);
+    });
+  }
 }
-
-
-

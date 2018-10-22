@@ -6,6 +6,9 @@ import { CitiesService } from '../../services/cities.service';
 import { MastersService } from '../../services/masters.service';
 import { DialogEditMasterComponent } from './dialogs/dialog.edit.master.component';
 import { DialogDeleteMasterComponent } from './dialogs/dialog.delete.master.component';
+import {consts} from '../../cosntants';
+import {NGXLogger} from 'ngx-logger';
+import { Master} from '../../models/master';
 
 @Component({
   templateUrl: './masters.component.html',
@@ -35,7 +38,8 @@ export class MastersComponent implements OnInit {
     public citiesService: CitiesService,
     public api: ApiService,
     public service: MastersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private logger: NGXLogger
   ) { }
 
   ngOnInit() {
@@ -76,36 +80,71 @@ export class MastersComponent implements OnInit {
     this.newMasterCity.reset();
   }
 
-  /// open dialog delete master function
+  // Add master
+  addNewMaster() {
+    // calling addMaster function on API
+    this.service.addMaster(this.newMaster)
+      .subscribe(res => {
+        // Because we don't want to do additional http call for get all masters after change
+        // and we need to display new master information, but in returned object we don't have cityName - only cityId.
+        // we need to change in masters array proper element to display new data filling it with proper city property
+        //
+        // Creating temporary array
+        const arr = [];
+        arr.push(res);
+        // Add cityName to master instance for correct displaying
+        arr[0].city = this.cities.find( elem => {
+          return elem.id === arr[0].cityId;
+        });
+        // refreshing masters list on page
+        this.masters.push(arr[0]);
+        this.logger.debug(`Master "${arr[0].masterName}" successfully added`);
+        this.api.openSnackBar(consts.msg.MasterSavedS);
+      });
+  }
+
+  /// Edit master
+  openDialogEditMaster(master): void {
+    const dialogRef = this.dialog.open(DialogEditMasterComponent, {
+      width: '250px',
+      data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.city.id, cities: this.cities }
+    });
+    dialogRef.afterClosed().subscribe(res => {
+      // Because we don't want to do additional http call for get all masters after change
+      // and we need to display new master information, but in returned object we don't have cityName - only cityId.
+      // we need to change in masters array proper element to display new data filling it with proper city property
+      //
+      // Creating temporary array
+      const arr = [];
+      arr.push(res);
+      // Adding property city to changed element
+      arr[0].city = this.cities.find( elem => {
+        return elem.id === arr[0].cityID;
+      });
+      // Finding necessary element index
+      const  changedArrayElement = this.masters.findIndex((obj => obj.id === master.id));
+      // Changing element in masters array to new element
+      this.masters[changedArrayElement] = arr[0];
+      this.api.openSnackBar(consts.msg.MasterSavedS);
+      this.logger.debug(`Master "${arr[0].masterName}" successfully changed`);
+    });
+  }
+
+  /// Delete master
   openDialogDeleteMaster(master): void {
     const dialogRef = this.dialog.open(DialogDeleteMasterComponent, {
       width: '250px',
       data: { masterName: master.masterName, id: master.id}
     });
 
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
+    dialogRef.afterClosed().subscribe(res => {
+      if (res === true) {
+        this.masters = this.masters.filter(function (item) {
+          return item.id !== master.id;
+        });
+        this.logger.debug(`Master "${master.masterName}" successfully deleted`);
+        this.api.openSnackBar(consts.msg.MasterDeletedS);
+      }
     });
-  }
-
-  /// open dialog edit master
-  openDialogEditMaster(master): void {
-    console.log('MASTER', master);
-    const dialogRef = this.dialog.open(DialogEditMasterComponent, {
-      width: '250px',
-      data: { masterName: master.masterName, id: master.id, masterRating: master.masterRating, cityID: master.city.id}
-    });
-
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    });
-  }
-
-  addNewMaster() {
-    // calling addMaster function on API
-    console.log('add new master', this.newMaster);
-    this.service.addMaster(this.newMaster);
-    // refreshing masters list on page
-    this.service.getMasters();
   }
 }

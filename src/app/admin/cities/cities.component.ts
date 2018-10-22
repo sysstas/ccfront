@@ -42,6 +42,8 @@ export class CitiesComponent implements OnInit {
     this.newCity = '';
     this.city.reset();
   }
+
+  // Add new city
   addNewCity() {
     // calling addCity function on API
     this.service.addCity(this.newCity)
@@ -52,21 +54,22 @@ export class CitiesComponent implements OnInit {
       });
   }
 
-  /// open dialog edit city function
+  /// Edit city
   openDialogEditCity(city): void {
     // Call dialog
-    const editProcessingResult = this.dialog.open(DialogEditCityComponent, {
+    const dialogRef = this.dialog.open(DialogEditCityComponent, {
       width: '250px',
       data: { cityName: city.cityName, ID: city.id}
     });
-    // Changing cities array after deletion of city for refreshing view
-    editProcessingResult.afterClosed().subscribe( res => {
-      if ( res ) {
-        this.logger.debug(`city "${city.cityName}" successfully changed to "${res}"`);
-        const  changedArrayElement = this.cities.findIndex((obj => obj.id === city.id));
-        this.cities[changedArrayElement].cityName = res;
-        this.api.openSnackBar(consts.msg.CitySavedS);
-      }
+    dialogRef.afterClosed().subscribe( res => {
+      // Refresh view without http call
+      const arr = [];
+      arr.push(city);
+      arr[0].cityName = res.cityName;
+      // logging result
+      this.logger.debug(`city "${city.cityName}" successfully changed to "${res}"`);
+      // displaying result to user
+      this.api.openSnackBar(consts.msg.CitySavedS);
     });
   }
 

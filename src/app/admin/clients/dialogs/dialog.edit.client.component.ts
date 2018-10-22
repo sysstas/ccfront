@@ -20,6 +20,13 @@ export class DialogEditClientComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
+  edit() {
+    this.service.editClient(this.data)
+      .subscribe(() => {
+        this.dialogRef.close(this.data);
+      });
+  }
+
   onCloseButtonClick(): void {
     this.dialogRef.close();
   }
@@ -33,9 +40,5 @@ export class DialogEditClientComponent {
     return this.userEmail.hasError('required') ? 'You must enter email' :
     this.userEmail.hasError('email') ? 'Not a valid email' :
     '';
-  }
-
-  edit() {
-    this.service.editClient(this.data);
   }
 }

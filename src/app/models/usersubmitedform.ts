@@ -1,4 +1,4 @@
-export class UserSubmitedForm {
+export class Client {
     constructor(
         public time: string,
         public duration: string,
@@ -8,4 +8,10 @@ export class UserSubmitedForm {
         public userEmail: string,
         public userName: string
     ) {}
+}
+
+export class ClientBuilder {
+  static  build(): Client {
+    return  new Client('', '', '', '', '', '', '');
+  }
 }

@@ -19,41 +19,41 @@
         <mat-form-field>
           <input  matInput placeholder="Your Name" 
                   [formControl]="name"
-                  [ngModel]="submitedForm.userName" 
-                  (ngModelChange)="submitedForm.userName=$event" 
+                  [ngModel]="submittedForm.userName"
+                  (ngModelChange)="submittedForm.userName=$event"
                   pattern="...+"
                   name="Name" required>
           <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>        
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submitedForm.userEmail" name="Email" required>
+          <input matInput placeholder="Your Email" type="email" [formControl]="email" [(ngModel)]="submittedForm.userEmail" name="Email" required>
           <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
         </mat-form-field>  
 
         <mat-form-field>
-          <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submitedForm.cityId" name="city" required>
+          <mat-select placeholder="Choose Your City" [formControl]="city" [(ngModel)]="submittedForm.cityId" name="city" required>
             <mat-option *ngFor="let city of cities" [value]="city.id" >{{city.cityName}}</mat-option>
           </mat-select>
           <mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>
         </mat-form-field>
         
         <mat-form-field>
-          <input matInput [formControl]="date" [min]="minDate" [matDatepicker]="picker" placeholder="Choose date when master to come" [(ngModel)]="submitedForm.date" name="date" required>
+          <input matInput [formControl]="date" [min]="minDate" [matDatepicker]="picker" placeholder="Choose date when master to come" [(ngModel)]="submittedForm.date" name="date" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <mat-error *ngIf="date.invalid">{{getDateErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submitedForm.time" name="workhour" required>
+          <mat-select placeholder="Choose time when to start" [formControl]="time" [(ngModel)]="submittedForm.time" name="workhour" required>
             <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
           </mat-select>
           <mat-error *ngIf="time.invalid">{{getTimeErrorMessage()}}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submitedForm.duration" name="clocksize" required>
+          <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submittedForm.duration" name="clocksize" required>
             <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
           </mat-select>
           <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
@@ -71,13 +71,13 @@
         <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button> 
         
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submitedForm.date" name="date1" required>
+          <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submittedForm.date" name="date1" required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select placeholder="Change time" [(ngModel)]="submitedForm.time" name="workhour1" required>
+          <mat-select placeholder="Change time" [(ngModel)]="submittedForm.time" name="workhour1" required>
             <mat-option *ngFor="let hour of workHours" [value]="hour.hour" >{{hour.hour +":00"}}</mat-option>
           </mat-select>
         </mat-form-field>

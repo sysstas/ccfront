@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { ApiService } from '../api.service';
-import { UserSubmitedForm } from '../models/usersubmitedform';
+import { Client, ClientBuilder } from '../models/usersubmitedform';
 import { CitiesService } from '../services/cities.service';
 import { MastersService } from '../services/masters.service';
 
@@ -20,7 +20,7 @@ export class ClientComponent implements OnInit {
   today = new Date();
   minDate = new Date(this.today.setDate(this.today.getDate() + 1));
   isFormSubmitted = false;
-  submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
+  submittedForm: Client =  ClientBuilder.build();
   workHours = [
     {hour: 8},
     {hour: 9},
@@ -82,13 +82,13 @@ export class ClientComponent implements OnInit {
     const oderInfo = {
       masterID: master.ID,
       masterName: master.masterName,
-      date: Date.parse(this.submitedForm.date.toString()),
-      dateMsg: this.submitedForm.date,
-      time: this.submitedForm.time,
-      duration: this.submitedForm.duration,
-      userName: this.submitedForm.userName,
-      userEmail: this.submitedForm.userEmail,
-      cityID: this.submitedForm.cityId,
+      date: Date.parse(this.submittedForm.date.toString()),
+      dateMsg: this.submittedForm.date,
+      time: this.submittedForm.time,
+      duration: this.submittedForm.duration,
+      userName: this.submittedForm.userName,
+      userEmail: this.submittedForm.userEmail,
+      cityID: this.submittedForm.cityId,
       user: this.api.currentUser
     };
     console.log('CONTROLLER oderInfo', oderInfo);
@@ -96,7 +96,7 @@ export class ClientComponent implements OnInit {
     this.api.createOrder(oderInfo);
     // Clear form and page to initial state
     this.isFormSubmitted = false;
-    this.submitedForm = new UserSubmitedForm('', '', '', '', '', '', '');
+    this.submittedForm = ClientBuilder.build();
     this.api.arr = [];
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.name = new FormControl('', [Validators.required, Validators.minLength(3)]);
@@ -123,8 +123,8 @@ export class ClientComponent implements OnInit {
 
   find() {
     const userData = {
-      userName: this.submitedForm.userName,
-      userEmail: this.submitedForm.userEmail
+      userName: this.submittedForm.userName,
+      userEmail: this.submittedForm.userEmail
     };
     console.log('userData: ', userData );
 
@@ -133,10 +133,10 @@ export class ClientComponent implements OnInit {
 
     // forming query object for free masters search on backend
     const freeMastersQuery = {
-      cityID: this.submitedForm.cityId,
-      date: Date.parse(this.submitedForm.date.toString()),
-      time: this.submitedForm.time,
-      duration: this.submitedForm.duration
+      cityID: this.submittedForm.cityId,
+      date: Date.parse(this.submittedForm.date.toString()),
+      time: this.submittedForm.time,
+      duration: this.submittedForm.duration
     };
 
     console.log('CONTROLLER freeMastersQuery: ', freeMastersQuery );

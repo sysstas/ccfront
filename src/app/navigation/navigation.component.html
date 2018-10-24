@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-dark">
-  <h2 class="home-buttone" routerLink="./" routerLinkActive="active-link">Clockwise Clockwork</h2>  
+  <h2 class="home-buttone" routerLink="./" routerLinkActive="active-link">Clockwise Clockwork</h2>
 
   <button mat-button  *ngIf="api.isLoggedIn()" routerLink="./account" routerLinkActive="active-link" >
     <span class="font-color">Account</span>
@@ -9,18 +9,31 @@
     <span class="font-color">History</span>
   </button>
 
-  <span style="flex: 1 1 auto"></span> 
+  <span style="flex: 1 1 auto"></span>
+  <button
+    class="btn btn-outline-warning btn-margin"
+    *ngIf="auth0.isAuthenticated()"
+    (click)="auth0.logout()">
+    Log Out Auth0
+  </button>
+
+  <button
+    class="btn btn-outline-success btn-margin"
+    (click)="auth0.login()"
+    *ngIf="!auth0.isAuthenticated()">
+    Auth0 login
+  </button>
 
   <button mat-button  *ngIf="!api.isLoggedIn()" (click)="openDialog()">
     <span class="font-color">Login</span>
   </button>
 
   <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
-  <button mat-button *ngIf="!api.isLoggedIn()" (click)="socialSignIn('google')">    
+  <button mat-button *ngIf="!api.isLoggedIn()" (click)="socialSignIn('google')">
     <span class="font-color">Sign in with Google</span>
-  </button>    
+  </button>
 
   <button mat-button  *ngIf="api.isLoggedIn()" (click)="logout()">
     <span class="font-color">Logout</span>
   </button>
-</nav>  
+</nav>

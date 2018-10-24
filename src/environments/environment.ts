@@ -10,5 +10,6 @@ export const environment = {
   // backEndUrl: 'https://e20a91ad.ngrok.io',
   // backEndUrl: 'https://blooming-ocean-36906.herokuapp.com',
   backEndUrl: 'http://localhost:5000',
-  logger: NgxLoggerLevel.DEBUG
+  logger: NgxLoggerLevel.DEBUG,
+  logouturl: 'https://clockwiseclockwork.eu.auth0.com/v2/logout'
 };

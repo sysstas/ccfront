@@ -56,7 +56,9 @@ import {DialogDeleteMasterComponent} from './admin/masters/dialogs/dialog.delete
 import {OrdersService} from './services/orders.service';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from '../environments/environment';
-environment
+import {Auth0Service} from './auth/auth.service';
+import { CallbackComponent } from './callback/callback.component';
+
 // Configs
 export function getAuthServiceConfigs() {
   return new AuthServiceConfig(
@@ -73,6 +75,7 @@ const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
   { path: 'register/:id', component: UserRegisterComponent},
+  { path: 'callback', component: CallbackComponent},
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
   { path: 'admin',
@@ -116,7 +119,8 @@ const routes: Routes = [
     UserRegisterComponent,
     UserAccountComponent,
     OrderHistoryComponent,
-    DialogEditCityComponent
+    DialogEditCityComponent,
+    CallbackComponent
 
   ],
   imports: [
@@ -165,6 +169,7 @@ const routes: Routes = [
     MastersService,
     OrdersService,
     AuthGuardService,
+    Auth0Service,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

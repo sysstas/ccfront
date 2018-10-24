@@ -21,10 +21,12 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",              
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+//              "node_modules/auth0-js/build/auth0.js"
+            ]
           },
           "configurations": {
             "production": {

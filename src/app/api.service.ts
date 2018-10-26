@@ -108,16 +108,7 @@ export class ApiService {
         // console.log('login: ', res);
         localStorage.setItem('token', res.token);
         this.decodedToken = helper.decodeToken(res.token);
-        ///////////////////////////////////
-        //////////////////////////////////
-        let testx;
-        testx = helper.decodeToken(localStorage.getItem('id_token'));
-        console.log('xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxxxxx', testx);
-        // let testy;
-        // testy = helper.decodeToken(localStorage.getItem('access_token'));
-        // console.log('xyyyyyyyyyyyyyyyyyyyyyyyyyyxxxxxxxxxxxxxx', testy)
-        ///////////////////////////
-        ////////////////////////////
+
         // console.log('decodedToken', this.decodedToken);
         if (this.decodedToken.isAdmin === 1) {
           this.router.navigate(['/admin']);

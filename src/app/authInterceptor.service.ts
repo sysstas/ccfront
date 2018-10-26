@@ -8,9 +8,9 @@ export class AuthInterceptorService implements HttpInterceptor {
   intercept(req, next) {
     const authRequest = req.clone({
       headers: req.headers
-        .set('Authorization', 'token ' + this.auth.token)
-        .set('access_token', localStorage.getItem('access_token'))
-        .set('access_token', localStorage.getItem('id_token'))
+        .set('Authorization', `Bearer ${localStorage.getItem('id_token')}` )
+        // .set('access_token', localStorage.getItem('access_token'))
+        // .set('id_token', localStorage.getItem('id_token'))
     });
     return next.handle(authRequest);
   }

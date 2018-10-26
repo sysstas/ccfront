@@ -11,5 +11,8 @@ export const environment = {
   // backEndUrl: 'https://blooming-ocean-36906.herokuapp.com',
   backEndUrl: 'http://localhost:5000',
   logger: NgxLoggerLevel.DEBUG,
-  logouturl: 'https://clockwiseclockwork.eu.auth0.com/v2/logout'
+  logoutUrl: 'https://clockwiseclockwork.eu.auth0.com/v2/logout',
+  currentUrl: 'localhost:4200',
+  auth0tenant: 'clockwiseclockwork.eu.auth0.com',
+  auth0ClientId: '38arKe47zBt0ZGILpZBfgaMIBSsrpt8Y'
 };

@@ -58,6 +58,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 import { environment } from '../environments/environment';
 import {Auth0Service} from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -170,6 +171,7 @@ const routes: Routes = [
     OrdersService,
     AuthGuardService,
     Auth0Service,
+    JwtHelperService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

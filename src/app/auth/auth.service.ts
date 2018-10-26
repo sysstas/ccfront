@@ -6,7 +6,7 @@ import * as auth0 from 'auth0-js';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import {environment} from '../../environments/environment';
-
+const helper = new JwtHelperService();
 // const helper = new JwtHelperService();
 
 (window as any).global = window;
@@ -63,9 +63,12 @@ export class Auth0Service {
     return new Date().getTime() < expiresAt;
   }
 
-  // public isAdmin(): boolean {
-  //   const isAdmin this.decodedToken = helper.decodeToken(res.token);
-  // }
+
+  public isAdmin(): boolean {
+    const token = helper.decodeToken(localStorage.getItem('id_token'));
+    const isAdmin = token['http://isAdmin/'];
+    return !!isAdmin;
+  }
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage

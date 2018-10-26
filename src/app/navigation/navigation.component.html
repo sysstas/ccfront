@@ -22,7 +22,7 @@
 
   <button
     mat-button
-    *ngIf="auth0.isAuthenticated()"
+    *ngIf="auth0.isAuthenticated()&&auth0.isAdmin()"
     routerLink="./admin"
     routerLinkActive="active-link" >
     <span class="font-color">Admin</span>

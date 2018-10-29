@@ -33,7 +33,7 @@ import {DialogLogin} from './navigation/dialogs/dialog-login';
 import {MastersComponent} from './admin/masters/masters.component';
 import {ApiService} from './api.service';
 import {CitiesComponent} from './admin/cities/cities.component';
-import {ClientsComponent, IsAdmin, IsReg} from './admin/clients/clients.component';
+import {ClientsComponent, IsAdmin} from './admin/clients/clients.component';
 import {NewOrderComponent} from './client/neworder.component';
 import {ScheduleComponent} from './admin/schedule/schedule.component';
 import {IsCompleted, IsPaid, OrdersComponent} from './admin/orders/orders.component';
@@ -115,7 +115,7 @@ const routes: Routes = [
     ScheduleComponent,
     OrdersComponent,
     IsAdmin,
-    IsReg,
+    // IsReg,
     IsPaid,
     IsCompleted,
     UserRegisterComponent,

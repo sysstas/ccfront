@@ -15,12 +15,12 @@ export class IsAdmin implements PipeTransform {
         return value ? 'Admin' : 'User';
     }
 }
-@Pipe({name: 'isReg'})
-export class IsReg implements PipeTransform {
-    transform(value) {
-        return value ? 'Registered' : 'Not registered';
-    }
-}
+// @Pipe({name: 'isReg'})
+// export class IsReg implements PipeTransform {
+//     transform(value) {
+//         return value ? 'Registered' : 'Not registered';
+//     }
+// }
 
 @Component({
   templateUrl: './clients.component.html',

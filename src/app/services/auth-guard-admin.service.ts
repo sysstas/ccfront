@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from './api.service';
+// import { ApiService } from './api.service';
 import { Router, CanActivate } from '@angular/router';
-import {Auth0Service} from './auth/auth.service';
+// import {Auth0Service} from './auth/auth.service';
 import {NGXLogger} from 'ngx-logger';
 import {MatDialog} from '@angular/material';
+import {ApiService} from '../api.service';
+import {Auth0Service} from '../auth/auth.service';
 
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AuthGuardAdminService implements CanActivate {
 
   constructor(
     public api: ApiService,
@@ -18,7 +20,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate() {
     // if ( this.api.isLoggedIn() ) {
-    if ( this.auth.isAuthenticated()) {
+    if ( this.auth.isAuthenticated() && this.auth.isAdmin()) {
       this.logger.debug(`Access granted`);
       return true;
     }

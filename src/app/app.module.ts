@@ -59,6 +59,7 @@ import { environment } from '../environments/environment';
 import {Auth0Service} from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {AuthGuardAdminService} from './services/auth-guard-admin.service';
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -81,7 +82,7 @@ const routes: Routes = [
   { path: 'history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
   { path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AuthGuardAdminService],
     children: [
       {path: '', redirectTo: 'clients', pathMatch: 'full'},
       {path: 'schedule', component: ScheduleComponent},
@@ -170,6 +171,7 @@ const routes: Routes = [
     MastersService,
     OrdersService,
     AuthGuardService,
+    AuthGuardAdminService,
     Auth0Service,
     JwtHelperService,
     {

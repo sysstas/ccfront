@@ -1,6 +1,6 @@
 export class LoginSubmitedForm {
-    constructor(       
+    constructor(
         public login: string,
-        public password: string   
-    ){}
+        public password: string
+    ) {}
 }

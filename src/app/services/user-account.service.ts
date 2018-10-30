@@ -13,26 +13,14 @@ export class UserAccountService {
   ) {}
 
   getUserAccountData() {
-    console.log('Service.getUserAccountData runs');
-    return this.http.get<any>(this.api.addr + '/account');
+    return this.http.get<any>(`${this.api.addr}/account`);
   }
 
   getUserOrders() {
-    console.log('Service.getUserOrders runs');
-    return this.http.get<any>(this.api.addr + '/history');
-  }
-
-  sendNewPwd() {
-    console.log('New pwd is sent');
-  }
-
-  changeCurrentPwd() {
-    console.log('New pwd and old one are sent');
+    return this.http.get<any>(`${this.api.addr}/history`);
   }
 
   sendNewPersonal(data) {
-    console.log('New personal is sent', data);
-    console.log('New personal is sent ' + this.api.addr + '/account/change-personal/' + data.id);
-    return this.http.put(this.api.addr + '/account/change-personal/' + data.id, data);
+    return this.http.put(`${this.api.addr}/account/change-personal/${data.id}`, data);
   }
 }

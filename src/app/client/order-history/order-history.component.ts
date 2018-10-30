@@ -3,7 +3,6 @@ import { ApiService } from '../../api.service';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { UserAccountService } from '../../services/user-account.service';
 
-
 @Component({
   selector: 'app-order-history',
   templateUrl: './order-history.component.html',
@@ -17,19 +16,18 @@ export class OrderHistoryComponent implements OnInit {
   displayedColumns = ['id', 'cityName', 'date', 'time', 'duration', 'masterName'];
   dataSource = new MatTableDataSource();
 
-  constructor(public api: ApiService,  public service: UserAccountService) { }
+  constructor(
+    public api: ApiService,
+    public service: UserAccountService
+  ) { }
 
   ngOnInit() {
     this.service.getUserOrders()
     .subscribe(res => {
       this.service.userOrders = res;
-
       this.dataSource = new MatTableDataSource(this.service.userOrders);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      console.log("z1:", this.sort)
-      console.log('Component.getUserOrders ',  this.dataSource);
     });
-
   }
 }

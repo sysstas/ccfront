@@ -17,26 +17,11 @@ export class OrdersService {
   ) { }
 
   getOrders() {
-    return this.http.get<any>(this.api.addr + '/orders');
-    // .subscribe(res => {
-    //   if (res) {
-    //     // console.log('API TEST', res)
-    //     res.map( function(x) {
-    //       x.city = x.city.cityName;
-    //       x.master = x.master.masterName;
-    //       x.userName = x.user.userName;
-    //       x.userEmail = x.user.userEmail;
-    //       return x;
-    //     });
-    //     // console.log('API TEST arr', arr)
-    //     this.orders = res;
-    //     console.log('API get orders: ', this.orders);
-    //   }
-    // });
+    return this.http.get<any>(`${this.api.addr}/orders`);
   }
 
   deleteOrder(id): Observable<any> {
-    return this.http.delete(this.api.addr + '/orders/' + id);
+    return this.http.delete(`${this.api.addr}/orders/${id}`);
   }
 
 }

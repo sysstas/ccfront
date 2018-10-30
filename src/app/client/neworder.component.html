@@ -9,7 +9,7 @@
             <p>Work Duration: {{orderInformation.duration}}</p>
             
             <h3>This master will be reserved for you for 30 minutes</h3>
-            <h3>To finish order please complete the paynment</h3>           
+            <h3>To finish order please complete the payment</h3>
         </div>
     </div>
     <div class="row">
@@ -17,7 +17,6 @@
             <button mat-raised-button (click)="returnToStartPage()">Home</button>
         </div>
         <div class="col-xl-2">
-                <!-- <button mat-raised-button (click)="returnToStartPage()">Home1</button> -->
             <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </div>
     </div>

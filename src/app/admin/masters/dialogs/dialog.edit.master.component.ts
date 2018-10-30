@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
-import { CitiesService } from '../../services/cities.service';
-import { MastersService } from '../../services/masters.service';
+import { CitiesService } from '../../../services/cities.service';
+import { MastersService } from '../../../services/masters.service';
+import {consts} from '../../../cosntants';
 
 /// dialog edit master
 @Component({
@@ -26,7 +27,7 @@ export class DialogEditMasterComponent {
     public citiesService: CitiesService,
     public service: MastersService,
     public dialogRef: MatDialogRef<DialogEditMasterComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+  @Inject(MAT_DIALOG_DATA) public data: any) { }
 
     onCloseButtonClick(): void {
     this.dialogRef.close();
@@ -48,6 +49,11 @@ export class DialogEditMasterComponent {
   }
 
   edit(data) {
-    this.service.editMaster(data);
+    this.service.editMaster(data)
+    .subscribe(() => {
+      // Cleaning returning "data" from cities property
+      delete data.cities;
+      this.dialogRef.close(data);
+    });
   }
 }

@@ -2,49 +2,29 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class CitiesService {
-  cities = [];
-
   constructor(
     public api: ApiService,
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getCities() {
-    this.http.get<any>(this.api.addr + '/cities').subscribe( res => {
-      this.cities = res;
-    });
+    return this.http.get<any>(`${this.api.addr}/cities`);
   }
 
   addCity(cityName: string) {
-    const city = {
-      cityName: cityName
-    };
-    this.http.post(this.api.addr + '/cities', city).subscribe(res => {
-      if (res) {
-        this.getCities();
-        this.api.openSnackBar('City succesfully saved');
-      }
-    });
+    const city = { cityName: cityName };
+    return this.http.post(`${this.api.addr}/cities`, city);
   }
 
   editCity(data) {
-    this.http.put(this.api.addr + '/cities/' + data.ID, data).subscribe(res => {
-      if (res) {
-        this.getCities();
-        this.api.openSnackBar('City succesfully saved');
-      }
-    });
+    return this.http.put(`${this.api.addr}/cities/${data.ID}`, data);
   }
 
   deleteCity(data) {
-    this.http.delete(this.api.addr + '/cities/' + data.ID).subscribe(res => {
-      this.getCities();
-      this.api.openSnackBar('City succesfully deleted');
-    });
+    return this.http.delete(`${this.api.addr}/cities/${data.ID}`);
   }
 }

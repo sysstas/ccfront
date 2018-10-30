@@ -6,6 +6,7 @@ import * as auth0 from 'auth0-js';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import {environment} from '../../environments/environment';
+import {StorageService} from '../services/storage.service';
 const helper = new JwtHelperService();
 // const helper = new JwtHelperService();
 
@@ -24,6 +25,7 @@ export class Auth0Service {
 
   constructor(
     public router: Router,
+    public storageService: StorageService
     // public helper: JwtHelperService
     // private http: HttpClient
     ) {}
@@ -51,30 +53,28 @@ export class Auth0Service {
   private setSession(authResult): void {
     // Set the time that the Access Token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
+    this.storageService.SetItem('access_token', authResult.accessToken);
+    this.storageService.SetItem('id_token', authResult.idToken);
+    this.storageService.SetItem('expires_at', expiresAt);
   }
 
   public isAuthenticated(): boolean {
     // Check whether the current time is past the
     // Access Token's expiry time
-    const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
+    const expiresAt = JSON.parse(this.storageService.GetItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }
 
 
   public isAdmin(): boolean {
-    const token = helper.decodeToken(localStorage.getItem('id_token'));
+    const token = helper.decodeToken(this.storageService.GetItem('id_token'));
     const isAdmin = token['http://isAdmin/'];
     return !!isAdmin;
   }
 
   public logout(): void {
     // Remove tokens and expiry time from localStorage
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
+    this.storageService.Clear();
     document.location.href = `${environment.logoutUrl}?returnTo=http%3A%2F%2F${environment.currentUrl}`;
   }
 }

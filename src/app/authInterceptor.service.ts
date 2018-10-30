@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor } from '@angular/common/http';
-import { ApiService } from './api.service';
+import {StorageService} from './services/storage.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-  constructor(private auth: ApiService) {}
+  constructor(
+    public storageService: StorageService
+  ) {}
   intercept(req, next) {
     const authRequest = req.clone({
       headers: req.headers
-        .set('Authorization', `Bearer ${localStorage.getItem('id_token')}` )
-        // .set('access_token', localStorage.getItem('access_token'))
-        // .set('id_token', localStorage.getItem('id_token'))
+        .set('Authorization', `Bearer ${this.storageService.GetItem('id_token')}` )
     });
     return next.handle(authRequest);
   }

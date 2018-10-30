@@ -60,6 +60,7 @@ import {Auth0Service} from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthGuardAdminService} from './services/auth-guard-admin.service';
+import {StorageService} from './services/storage.service';
 
 // Configs
 export function getAuthServiceConfigs() {
@@ -115,7 +116,6 @@ const routes: Routes = [
     ScheduleComponent,
     OrdersComponent,
     IsAdmin,
-    // IsReg,
     IsPaid,
     IsCompleted,
     UserRegisterComponent,
@@ -174,6 +174,7 @@ const routes: Routes = [
     AuthGuardAdminService,
     Auth0Service,
     JwtHelperService,
+    StorageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

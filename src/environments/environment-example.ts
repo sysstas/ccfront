@@ -7,13 +7,11 @@ import {NgxLoggerLevel} from 'ngx-logger';
 
 export const environment = {
   production: false,
-  // backEndUrl: 'https://e20a91ad.ngrok.io',
-  // backEndUrl: 'https://blooming-ocean-36906.herokuapp.com',
   backEndUrl: 'http://localhost:5000',
   logger: NgxLoggerLevel.DEBUG,
-  logoutUrl: 'https://clockwiseclockwork.eu.auth0.com/v2/logout',
+  logoutUrl: 'https://[your app name on Auth0].auth0.com/v2/logout',
   currentUrl: 'localhost:4200',
-  auth0tenant: 'clockwiseclockwork.eu.auth0.com',
-  auth0ClientId: '38arKe47zBt0ZGILpZBfgaMIBSsrpt8Y',
-  sandbox: 'AYX-oFJ7-9A2WO4MsT2b2PNfgqvzk3ZHMoIN5HzmcIcBF7Y6dBpn3N1PosyElkwdel8lWi3fGTHEwz6v'
+  auth0tenant: '[your Auth0 tenant].auth0.com',
+  auth0ClientId: '[your Auth0 client id]',
+  sandbox: '[paypal sandbox id]'
 };

@@ -23,7 +23,7 @@ import {
 } from '@angular/material';
 import {MatSortModule} from '@angular/material/sort';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule,} from 'angular-6-social-login';
+// import {AuthServiceConfig, GoogleLoginProvider, SocialLoginModule,} from 'angular-6-social-login';
 import {NgxPayPalModule} from 'ngx-paypal';
 import {AppComponent} from './app.component';
 import {ClientComponent} from './client/client.component';
@@ -54,7 +54,7 @@ import {MastersService} from './services/masters.service';
 import {DialogEditMasterComponent} from './admin/masters/dialogs/dialog.edit.master.component';
 import {DialogDeleteMasterComponent} from './admin/masters/dialogs/dialog.delete.master.component';
 import {OrdersService} from './services/orders.service';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { LoggerModule } from 'ngx-logger';
 import { environment } from '../environments/environment';
 import {Auth0Service} from './auth/auth.service';
 import { CallbackComponent } from './callback/callback.component';
@@ -62,17 +62,7 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthGuardAdminService} from './services/auth-guard-admin.service';
 import {StorageService} from './services/storage.service';
 
-// Configs
-export function getAuthServiceConfigs() {
-  return new AuthServiceConfig(
-    [
-      {
-        id: GoogleLoginProvider.PROVIDER_ID,
-        provider: new GoogleLoginProvider('902455189500-mpc1v2qsioej6o17e2no0rc122vh40bh.apps.googleusercontent.com')
-      }
-    ]
-  );
-}
+
 
 const routes: Routes = [
   { path: '', component: ClientComponent},
@@ -150,7 +140,6 @@ const routes: Routes = [
     MatSortModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    SocialLoginModule,
     NgxPayPalModule,
     LoggerModule.forRoot({level: environment.logger})
   ],
@@ -180,10 +169,7 @@ const routes: Routes = [
       useClass: AuthInterceptorService,
       multi: true
     },
-    {
-      provide: AuthServiceConfig,
-      useFactory: getAuthServiceConfigs
-    }
+
   ],
   bootstrap: [AppComponent]
 })

@@ -3,30 +3,33 @@ mat-toolbar {
 }
 .active-link{
     color: rgb(237, 240, 66);
-    font-weight: bold;  
+    font-weight: bold;
     text-shadow: 0 0 4px rgba(13, 114, 109, 0.466);
 }
 .sidebar {
     z-index: 1;
     margin-top: 0px;
     border-radius: 0;
-    position: fixed;    
+    position: fixed;
     top: 0;
     left: 235px;
     width: 235px;
     margin-left: -235px;
- 
+
     border: none;
-    border-radius: 0;   
+    border-radius: 0;
     background-color: gray;
     bottom: 0;
     padding-top: 60px;
-    padding-bottom: 40px; 
+    padding-bottom: 40px;
     color: azure;
 }
 .main-container{
     margin-left: 237px;
 }
 .list-group-item{
- outline: none;    
+    outline: none;
+    text-align: left;
+    padding-left: 80px;
+
 }

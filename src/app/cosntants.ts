@@ -11,5 +11,6 @@ export const consts = {
     MasterSavedS: 'Master successfully saved',
     MasterDeletedS: 'Master successfully deleted',
     OrderDeletedS: 'Order successfully deleted',
+    OrderCanceledS: 'Order cancelled. Successfully refunded'
   }
 };

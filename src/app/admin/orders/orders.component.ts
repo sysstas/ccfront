@@ -5,19 +5,42 @@ import { MatPaginator, MatTableDataSource, MatSort, MatDialog } from '@angular/m
 import { OrdersService } from '../../services/orders.service';
 import {consts} from '../../cosntants';
 
-
+@Pipe({name: 'colorPipe'})
+export class ColorPipe implements PipeTransform {
+  transform(value) {
+    if (value === 0) {
+      return 'orange';
+    } else if (value === 1) {
+      return 'green';
+    } else if (value === 2) {
+      return 'red';
+    }
+  }
+}
 @Pipe({name: 'isPaid'})
 export class IsPaid implements PipeTransform {
     transform(value) {
-        return value ? 'Paid' : 'Not paid';
+        if (value === 1) {
+          return 'Paid';
+        } else if (value === 0) {
+          return 'Not paid';
+        } else if (value === 2) {
+          return 'Refunded';
+        }
     }
 }
 
 @Pipe({name: 'isCompleted'})
 export class IsCompleted implements PipeTransform {
-    transform(value) {
-        return value ? 'Completed' : 'In progress';
+  transform(value) {
+    if (value === 1) {
+      return 'Completed';
+    } else if (value === 0) {
+      return 'In progress';
+    } else if (value === 2) {
+      return 'Canceled';
     }
+  }
 }
 
 @Component({
@@ -78,5 +101,21 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  cancelOrder(id) {
+    console.log(id);
+    this.service.cancelOrder(id).subscribe(() => {
+      console.log('refunded');
+      function edit(array, el) {
+        return array.find(e => {
+          if ( e.id === el ) {
+            e.paid = 2;
+            e.completed = 2;
+          }
+        });
+      }
+      this.dataSource = edit(this.dataSource, id);
+      this.api.openSnackBar(consts.msg.OrderCanceledS);
+    });
+  }
 }
 

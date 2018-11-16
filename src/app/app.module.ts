@@ -36,7 +36,7 @@ import {CitiesComponent} from './admin/cities/cities.component';
 import {ClientsComponent, IsAdmin} from './admin/clients/clients.component';
 import {NewOrderComponent} from './client/neworder.component';
 import {ScheduleComponent} from './admin/schedule/schedule.component';
-import {IsCompleted, IsPaid, OrdersComponent} from './admin/orders/orders.component';
+import {IsCompleted, IsPaid, ColorPipe, OrdersComponent} from './admin/orders/orders.component';
 import {AuthGuardService} from './auth-guard.service';
 import {AuthInterceptorService} from './authInterceptor.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -61,6 +61,7 @@ import { CallbackComponent } from './callback/callback.component';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthGuardAdminService} from './services/auth-guard-admin.service';
 import {StorageService} from './services/storage.service';
+import { SettingsComponent } from './admin/settings/settings.component';
 
 
 
@@ -107,12 +108,14 @@ const routes: Routes = [
     OrdersComponent,
     IsAdmin,
     IsPaid,
+    ColorPipe,
     IsCompleted,
     UserRegisterComponent,
     UserAccountComponent,
     OrderHistoryComponent,
     DialogEditCityComponent,
-    CallbackComponent
+    CallbackComponent,
+    SettingsComponent
 
   ],
   imports: [

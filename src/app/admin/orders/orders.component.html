@@ -1,4 +1,4 @@
-<div class="container">  
+<div class="container">
   <div class="row">
     <div class="col-xl-12">
       <h1>ORDERS</h1>
@@ -41,16 +41,17 @@
               </ng-container>
               <ng-container matColumnDef="paid">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Paid</mat-header-cell>
-                  <mat-cell *matCellDef="let element">{{element.paid | isPaid}}</mat-cell>
+                  <mat-cell *matCellDef="let element" class="{{element.paid | colorPipe}}">{{element.paid | isPaid}}</mat-cell>
               </ng-container>
               <ng-container matColumnDef="completed">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Completed</mat-header-cell>
-                  <mat-cell *matCellDef="let element">{{element.completed | isCompleted}}</mat-cell>
+                  <mat-cell *matCellDef="let element" class="{{element.completed | colorPipe}}">{{element.completed | isCompleted}}</mat-cell>
               </ng-container>
               <ng-container matColumnDef="Action">
                     <mat-header-cell *matHeaderCellDef>Action</mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-icon-button (click)="deleteOrder(element.id)"><mat-icon class="red">delete</mat-icon></button>
+                        <button mat-icon-button (click)="deleteOrder(element.id)"><mat-icon class="delete">delete</mat-icon></button>
+                        <button mat-icon-button (click)="cancelOrder(element.id)"><mat-icon class="cancel">cancel</mat-icon></button>
                     </mat-cell>
                 </ng-container>
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -64,7 +65,7 @@
           </mat-paginator>
       </div>
     </div>
-  
+
   </div>
 
 </div>

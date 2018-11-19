@@ -81,7 +81,8 @@ const routes: Routes = [
       {path: 'clients', component: ClientsComponent},
       {path: 'masters', component: MastersComponent},
       {path: 'cities', component: CitiesComponent},
-      {path: 'orders', component: OrdersComponent}
+      {path: 'orders', component: OrdersComponent},
+      {path: 'settings', component: SettingsComponent},
     ]
   },
   { path: 'neworder', component: NewOrderComponent},

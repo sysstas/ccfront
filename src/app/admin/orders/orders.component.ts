@@ -103,8 +103,9 @@ export class OrdersComponent implements OnInit {
 
   cancelOrder(id) {
     console.log(id);
-    this.service.cancelOrder(id).subscribe(() => {
+    this.service.cancelOrder(id).subscribe(res => {
       console.log('refunded');
+      console.log('response ', res);
       function edit(array, el) {
         return array.find(e => {
           if ( e.id === el ) {

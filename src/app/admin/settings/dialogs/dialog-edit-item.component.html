@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Edit item parameters</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Clock size" [formControl]="clockSize" [(ngModel)]="data.clockSize"  name="clockSize" required>
+      <mat-error *ngIf="clockSize.invalid">{{getClockSizeErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Hours of work" [formControl]="workHours" [(ngModel)]="data.workHours"  name="clockSize" required>
+      <mat-error *ngIf="workHours.invalid">{{getWorkHoursMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Price" [formControl]="price" [(ngModel)]="data.price"  name="clockSize" required>
+      <mat-error *ngIf="price.invalid">{{getPriceMessage()}}</mat-error>
+    </mat-form-field>
+  </form>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCloseButtonClick()">Cancel</button>
+  <button mat-button [mat-dialog-close] [disabled]="clockSize.invalid || workHours.invalid || price.invalid" (click)="edit(data)" cdkFocusInitial>Save</button>
+</div>
+

@@ -40,15 +40,15 @@ export class NewOrderComponent implements OnInit {
       transactions: [{
         amount: {
           currency: 'USD',
-          total: 10.57
+          total: this.orderInformation.price
         },
         description: `Order #${this.api.createdOrdetInformation.id}`,
         custom: `${this.api.createdOrdetInformation.id}`,
         item_list: {
           items: [{
-            name: 'MASTER DN1',
+            name: this.orderInformation.masterName,
             currency: 'USD',
-            price: 10.57,
+            price: this.orderInformation.price,
             quantity: 1,
             description: `${this.api.createdOrdetInformation.id}`
           }]

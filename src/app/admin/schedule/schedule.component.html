@@ -1,29 +1,29 @@
 <div class="container">
-
-  <div class="row">
-    <div class="col-xl-12"> 
-      <h1>Under maintaince</h1>
-    </div>
-    <!-- <div class="col-xl-12">
+  <div class="row" *ngIf="!cities[0]">Loading...</div>
+  <div class="row" *ngIf="cities[0]">
+    <!--<div class="col-xl-12"> -->
+      <!--<h1>Under maintaince</h1>-->
+    <!--</div>-->
+    <div class="col-xl-12">
       <h1>SCHEDULE</h1>
       <mat-form-field>
         <mat-select  placeholder="City" [(ngModel)]="ScheduleForm.city" name="city" required>
-          <mat-option  *ngFor="let city of api.cities" [value]="city.ID" >{{city.cityName}}</mat-option>
+          <mat-option  *ngFor="let city of cities" [value]="city" >{{city.cityName}}</mat-option>
         </mat-select>
-      </mat-form-field>        
+      </mat-form-field>
       <mat-form-field>
         <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="ScheduleForm.date" name="date" required>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button (click)="schelulefilter()" mat-raised-button color="primary" type="submit" >Find</button>
+      <button (click)="find()" mat-raised-button color="primary" type="submit" >Find</button>
     </div>
 
     <div class="col-xl-12">
-      <h2>City: {{ScheduleForm.city}}</h2>     
+      <h2>City: {{ ScheduleForm.city.cityName }}</h2>
       <h3>Date: {{ScheduleForm.date | date}}</h3>
       <div class="table-style mat-elevation-z8">
-        <mat-table #table [dataSource]="api.schedule" >   
+        <mat-table #table [dataSource]="schedule" >
 
           <ng-container matColumnDef="name" class="width-style">
             <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -34,11 +34,11 @@
             <mat-header-cell *matHeaderCellDef> 8:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[0]}} </mat-cell>
           </ng-container>
-                    
+
           <ng-container matColumnDef="9">
             <mat-header-cell *matHeaderCellDef> 9:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[1]}} </mat-cell>
-          </ng-container> 
+          </ng-container>
 
           <ng-container matColumnDef="10">
             <mat-header-cell *matHeaderCellDef> 10:00 </mat-header-cell>
@@ -48,17 +48,17 @@
           <ng-container matColumnDef="11">
             <mat-header-cell *matHeaderCellDef> 11:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[3]}} </mat-cell>
-          </ng-container> 
+          </ng-container>
 
           <ng-container matColumnDef="12">
             <mat-header-cell *matHeaderCellDef> 12:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[4]}} </mat-cell>
-          </ng-container> 
+          </ng-container>
 
           <ng-container matColumnDef="13">
             <mat-header-cell *matHeaderCellDef> 13:00 </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.hours[5]}} </mat-cell>
-          </ng-container> 
+          </ng-container>
 
           <ng-container matColumnDef="14">
             <mat-header-cell *matHeaderCellDef> 14:00 </mat-header-cell>
@@ -73,7 +73,7 @@
           <ng-container matColumnDef="16">
               <mat-header-cell *matHeaderCellDef> 16:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[8]}} </mat-cell>
-            </ng-container>  
+            </ng-container>
 
           <ng-container matColumnDef="17">
               <mat-header-cell *matHeaderCellDef> 17:00 </mat-header-cell>
@@ -83,7 +83,7 @@
           <ng-container matColumnDef="18">
               <mat-header-cell *matHeaderCellDef> 18:00 </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.hours[10]}} </mat-cell>
-            </ng-container>  
+            </ng-container>
 
           <ng-container matColumnDef="19">
               <mat-header-cell *matHeaderCellDef> 19:00 </mat-header-cell>
@@ -95,8 +95,7 @@
         </mat-table>
       </div>
 
-    </div> -->
-
+    </div>
   </div>
 
 </div>
@@ -105,4 +104,3 @@
 
 
 
-    

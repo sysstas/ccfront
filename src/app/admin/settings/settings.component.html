@@ -1,32 +1,46 @@
 <div class="container">
-
   <div class="row">
-
     <div class="col-xl-12">
       <h1>SETTINGS</h1>
       <mat-list>
-        <!--<mat-list-item *ngFor="let city of cities">-->
-          <!--<h4 mat-line>{{city.cityName}}</h4>-->
-          <!--<button mat-button (click)="openDialogEditCity(city)"><mat-icon>edit</mat-icon></button>-->
-          <!--<button mat-button (click)="openDialogDeleteCity(city)"><mat-icon class="red">delete</mat-icon></button>-->
-          <!--<mat-divider></mat-divider>-->
-        <!--</mat-list-item>-->
+      <h2>Prices for different clock sizes</h2>
+      <mat-list-item *ngFor="let item of clockSize">
+        <h4 mat-line>Size of a clock - <b>{{item.clockSize}}</b></h4>
+        <p mat-line>Duration of work: <b>{{item.workHours}}</b>hr </p>
+        <p mat-line>Price: <b>${{item.price}}</b> </p>
+        <button mat-button (click)="openDialogEditItem(item)"><mat-icon>edit</mat-icon></button>
+        <button mat-button (click)="openDialogDeleteItem(item)"><mat-icon class="red">delete</mat-icon></button>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+
+
+<!--        <form #form="ngForm" novalidate name="form">
+          <div class="col-xl-12">
+            <mat-form-field>
+              <input matInput placeholder="Small clock, $" type="number" [ngModel]="clockSize[2].price" [formControl]="small" name="small" required>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-12">
+            <mat-form-field>
+              <input matInput placeholder="Medium clock, $" type="number" [ngModel]="clockSize[1].price" [formControl]="medium" name="medium" required>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-12">
+            <mat-form-field>
+              <input matInput placeholder="Big clock, $" type="number" [ngModel]="clockSize[0].price" [formControl]="big" name="big" required>
+            </mat-form-field>
+          </div>
+          <div class="col-xl-12">
+            <button (click)="changePrices()"
+                    [disabled]="small.invalid || medium.invalid || big.invalid"
+                    mat-raised-button color="primary"
+                    type="submit" >Change prices
+            </button>
+          </div>
+        </form>-->
       </mat-list>
     </div>
-
-    <!--<div class="col-xl-12">-->
-      <!--<form #form="ngForm" novalidate name="form">-->
-        <!--<h3>Add new city</h3>-->
-        <!--<mat-form-field>-->
-          <!--<input matInput placeholder="Add new city" [formControl]="city" [(ngModel)]="newCity" name="newCity" required>-->
-          <!--<mat-error *ngIf="city.invalid">{{getCityErrorMessage()}}</mat-error>-->
-        <!--</mat-form-field>-->
-        <!--<button [disabled]="city.invalid" (click)="addNewCity()" (click)="clean()" mat-raised-button color="primary" type="submit" >Add new city</button>-->
-      <!--</form>-->
-    <!--</div>-->
-
   </div>
-
 </div>
 
 

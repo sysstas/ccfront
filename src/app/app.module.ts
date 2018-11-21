@@ -65,6 +65,7 @@ import { SettingsComponent } from './admin/settings/settings.component';
 import {SettingsService} from './services/settings.service';
 import { DialogEditItemComponent } from './admin/settings/dialogs/dialog-edit-item.component';
 import { DialogDeleteItemComponent } from './admin/settings/dialogs/dialog-delete-item.component';
+import {ScheduleService} from './services/schedule.service';
 
 
 
@@ -176,6 +177,7 @@ const routes: Routes = [
     JwtHelperService,
     StorageService,
     SettingsService,
+    ScheduleService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

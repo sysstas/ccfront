@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CitiesService} from '../../services/cities.service';
 import {ScheduleService} from '../../services/schedule.service';
+import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -15,15 +16,11 @@ export class ScheduleComponent implements OnInit {
       id: '',
       cityName: ''
     },
-    date: ((thedate) => {
-              const thisDate = thedate.setHours(0,0,0,0);
-              // console.log('Date', thisDate);
-              const thisDate1 = new Date(thisDate);
-              return thisDate1;
-          })(new Date()),
+    date: this.buildCurrentDate(),
   };
-  displayedColumns = ['name', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
-
+  displayedColumns = this.buildDisplayedColumns();
+  workingHours = environment.workingHours.finish - environment.workingHours.start;
+  start = environment.workingHours.start;
   constructor(
     public citiesService: CitiesService,
     public service: ScheduleService
@@ -37,12 +34,11 @@ export class ScheduleComponent implements OnInit {
           this.ScheduleForm.city = res[0];
         }
         this.find();
-        // console.log('data', ({cityId: this.ScheduleForm.city.id, date: this.ScheduleForm.date }));
       });
   }
 
   find() {
-    console.log('data123', ({cityId: this.ScheduleForm.city.id, date: this.ScheduleForm.date }))
+    console.log('data123', ({cityId: this.ScheduleForm.city.id, date: this.ScheduleForm.date }));
 
     this.service.getSchedule({cityId: this.ScheduleForm.city.id, date: Date.parse(this.ScheduleForm.date.toString())})
       .subscribe( resp => {
@@ -68,8 +64,7 @@ export class ScheduleComponent implements OnInit {
 
   constructElement( element, duration, start, id) {
     for (let i = 0; i < duration; i++) {
-      element.hours[start - 8 + i] = id;
-      // console.log('element', element);
+      element.hours[start - environment.workingHours.start + i] = id;
     }
   }
 
@@ -77,9 +72,33 @@ export class ScheduleComponent implements OnInit {
     const mastersArray = [];
     for (let i = 0; i < arr.length; i++) {
       const name = arr[i].masterName;
-      mastersArray[i] = { masterName: name, hours: [null, null, null, null, null, null, null, null, null, null, null, null]};
+      mastersArray[i] = { masterName: name, hours: this.emptyHoursArrayBuilder()};
     }
     console.log('mastersArray', mastersArray);
     return mastersArray;
+  }
+
+  emptyHoursArrayBuilder() {
+    const arr = [];
+    for (let i = 0; i <= environment.workingHours.finish - environment.workingHours.start; i++) {
+      arr[i] = null;
+    }
+    return arr;
+  }
+
+  buildDisplayedColumns() {
+    const arr = [];
+    arr[0] = 'name';
+    for (let i = 0; i <= environment.workingHours.finish - environment.workingHours.start; i++) {
+      arr[ i + 1 ] = ( i + environment.workingHours.start ).toString();
+    }
+    return arr;
+  }
+
+  buildCurrentDate() {
+    const thedate = new Date();
+    const justDateNumber = thedate.setHours(0, 0, 0, 0);
+    const justDate = new Date(justDateNumber);
+    return justDate;
   }
 }

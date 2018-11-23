@@ -17,7 +17,7 @@ export class ScheduleComponent implements OnInit {
     },
     date: ((thedate) => {
               const thisDate = thedate.setHours(0,0,0,0);
-              console.log('Date', thisDate);
+              // console.log('Date', thisDate);
               const thisDate1 = new Date(thisDate);
               return thisDate1;
           })(new Date()),
@@ -37,54 +37,8 @@ export class ScheduleComponent implements OnInit {
           this.ScheduleForm.city = res[0];
         }
         this.find();
-        console.log('data', ({cityId: this.ScheduleForm.city.id, date: this.ScheduleForm.date }));
+        // console.log('data', ({cityId: this.ScheduleForm.city.id, date: this.ScheduleForm.date }));
       });
-  }
-
-  scheduleConstruct(masters, orders) {
-    // console.log('masters', masters)
-    const sch = this.constructBlankSchedule(masters);
-    // console.log('orders', orders)
-    for (let i = 0; i < orders.length; i++) {
-      const name = orders[i].master.masterName;
-      const element = sch.filter((el) => {
-        return el.masterName === name;
-      });
-      const duration = orders[i].duration;
-      const start = orders[i].time;
-      const id = orders[i].id;
-      // console.log('bulk', element)
-      this.constructSchelement(element, duration, start, id );
-      // console.log(orders[i]);
-    }
-    return sch;
-  }
-
-  constructSchelement( element, duration, start, id) {
-    for (let i = 0; i < duration; i++) {
-      element[0].hours[start - 8 + i] = id;
-      // console.log('element', element);
-    }
-  }
-
-  constructBlankSchedule(arr) {
-    const mastersArray = this.constructMastersNamesArray(arr);
-    const blanSchkArray = [];
-    for (let i = 0; i < mastersArray.length; i++ ) {
-      mastersArray[i].hours = [null, null, null, null, null, null, null, null, null, null, null, null];
-      blanSchkArray[i] = mastersArray[i];
-    }
-    // console.log('Blank Schedule Array', blanSchkArray);
-    return blanSchkArray;
-  }
-
-  constructMastersNamesArray(arr): any {
-    let mastersArray: any[];
-    mastersArray = arr.map((obj) => {
-      return {masterName: obj.masterName};
-    });
-    // console.log('mastersArray', mastersArray);
-    return mastersArray;
   }
 
   find() {
@@ -98,5 +52,34 @@ export class ScheduleComponent implements OnInit {
         this.schedule = this.scheduleConstruct(resp.masters, orders);
         console.log('schedule123', this.schedule);
       });
+  }
+
+  scheduleConstruct(masters, orders) {
+    const sched = this.constructBlankSchedule(masters);
+    for (let i = 0; i < orders.length; i++) {
+      const element = sched[i];
+      const duration = orders[i].duration;
+      const start = orders[i].time;
+      const id = orders[i].id;
+      this.constructElement(element, duration, start, id );
+    }
+    return sched;
+  }
+
+  constructElement( element, duration, start, id) {
+    for (let i = 0; i < duration; i++) {
+      element.hours[start - 8 + i] = id;
+      // console.log('element', element);
+    }
+  }
+
+  constructBlankSchedule(arr): any {
+    const mastersArray = [];
+    for (let i = 0; i < arr.length; i++) {
+      const name = arr[i].masterName;
+      mastersArray[i] = { masterName: name, hours: [null, null, null, null, null, null, null, null, null, null, null, null]};
+    }
+    console.log('mastersArray', mastersArray);
+    return mastersArray;
   }
 }

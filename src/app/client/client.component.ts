@@ -4,6 +4,7 @@ import { ApiService } from '../api.service';
 import { Client, ClientBuilder } from '../models/usersubmitedform';
 import { CitiesService } from '../services/cities.service';
 import { MastersService } from '../services/masters.service';
+import {SettingsService} from '../services/settings.service';
 
 @Component({
   templateUrl: './client.component.html',
@@ -33,20 +34,7 @@ export class ClientComponent implements OnInit {
     {hour: 16},
     {hour: 17}
   ];
-  clockSize = [
-    {
-      size: 'big',
-      workTime: 3
-    },
-    {
-      size: 'medium',
-      workTime: 2
-    },
-    {
-      size: 'small',
-      workTime: 1
-    }
-  ];
+  clockSize;
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? 'You must enter email' :
@@ -85,11 +73,12 @@ export class ClientComponent implements OnInit {
       date: Date.parse(this.submittedForm.date.toString()),
       dateMsg: this.submittedForm.date,
       time: this.submittedForm.time,
-      duration: this.submittedForm.duration,
+      duration: this.submittedForm.duration.workHours,
       userName: this.submittedForm.userName,
       userEmail: this.submittedForm.userEmail,
       cityID: this.submittedForm.cityId,
-      user: this.api.currentUser
+      user: this.api.currentUser,
+      price: this.submittedForm.duration.price
     };
     console.log('CONTROLLER oderInfo', oderInfo);
 
@@ -110,7 +99,8 @@ export class ClientComponent implements OnInit {
   constructor(
     public api: ApiService,
     public citiesService: CitiesService,
-    public masterService: MastersService
+    public masterService: MastersService,
+    public settings: SettingsService
   ) { }
 
   ngOnInit() {
@@ -118,6 +108,10 @@ export class ClientComponent implements OnInit {
    this.citiesService.getCities()
      .subscribe(res => {
        this.cities = res;
+     });
+   this.settings.getItems()
+     .subscribe(res => {
+       this.clockSize = res;
      });
   }
 
@@ -127,7 +121,7 @@ export class ClientComponent implements OnInit {
       userEmail: this.submittedForm.userEmail
     };
     console.log('userData: ', userData );
-
+    console.log('duration: ', this.submittedForm.duration );
     // Add new client to database
     this.api.addClient(userData);
 
@@ -136,7 +130,7 @@ export class ClientComponent implements OnInit {
       cityID: this.submittedForm.cityId,
       date: Date.parse(this.submittedForm.date.toString()),
       time: this.submittedForm.time,
-      duration: this.submittedForm.duration
+      duration: this.submittedForm.duration.workHours
     };
 
     console.log('CONTROLLER freeMastersQuery: ', freeMastersQuery );
@@ -150,5 +144,4 @@ export class ClientComponent implements OnInit {
   }
 
 }
-
 

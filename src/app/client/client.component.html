@@ -54,7 +54,9 @@
 
         <mat-form-field>
           <mat-select placeholder="Choose your clock size" [formControl]="size" [(ngModel)]="submittedForm.duration" name="clocksize" required>
-            <mat-option *ngFor="let clock of clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>
+            <!--<mat-option *ngFor="let clock of api.clockSize" [value]="clock.workTime" >{{clock.size}}</mat-option>-->
+            <mat-option *ngFor="let clock of clockSize" [value]="clock" >{{clock.clockSize}}</mat-option>
+
           </mat-select>
           <mat-error *ngIf="size.invalid">{{getSizeErrorMessage()}}</mat-error>
         </mat-form-field>  

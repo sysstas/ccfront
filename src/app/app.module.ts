@@ -62,6 +62,10 @@ import {JwtHelperService} from '@auth0/angular-jwt';
 import {AuthGuardAdminService} from './services/auth-guard-admin.service';
 import {StorageService} from './services/storage.service';
 import { SettingsComponent } from './admin/settings/settings.component';
+import {SettingsService} from './services/settings.service';
+import { DialogEditItemComponent } from './admin/settings/dialogs/dialog-edit-item.component';
+import { DialogDeleteItemComponent } from './admin/settings/dialogs/dialog-delete-item.component';
+import {ScheduleService} from './services/schedule.service';
 
 
 
@@ -81,7 +85,8 @@ const routes: Routes = [
       {path: 'clients', component: ClientsComponent},
       {path: 'masters', component: MastersComponent},
       {path: 'cities', component: CitiesComponent},
-      {path: 'orders', component: OrdersComponent}
+      {path: 'orders', component: OrdersComponent},
+      {path: 'settings', component: SettingsComponent},
     ]
   },
   { path: 'neworder', component: NewOrderComponent},
@@ -115,7 +120,9 @@ const routes: Routes = [
     OrderHistoryComponent,
     DialogEditCityComponent,
     CallbackComponent,
-    SettingsComponent
+    SettingsComponent,
+    DialogEditItemComponent,
+    DialogDeleteItemComponent
 
   ],
   imports: [
@@ -154,7 +161,9 @@ const routes: Routes = [
     DialogEditMasterComponent,
     DialogDeleteCityComponent,
     DialogDeleteClientComponent,
-    DialogDeleteMasterComponent],
+    DialogDeleteMasterComponent,
+    DialogEditItemComponent,
+    DialogDeleteItemComponent],
   providers: [
     ApiService,
     UserAccountService,
@@ -167,6 +176,8 @@ const routes: Routes = [
     Auth0Service,
     JwtHelperService,
     StorageService,
+    SettingsService,
+    ScheduleService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

@@ -19,9 +19,9 @@ export class ApiService {
   newOrderInformation;
   createdOrdetInformation;
   arr = [];
-  schedule = [];
   decodedToken;
   IsLoggedIn = false;
+
 
   addr = environment.backEndUrl;
   TOKEN_KEY = 'token';

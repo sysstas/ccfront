@@ -103,18 +103,24 @@ export class OrdersComponent implements OnInit {
 
   cancelOrder(id) {
     console.log(id);
+    console.log('dataSource1', this.dataSource.data);
+    function edit(arr, value) {
+       for (const i in arr) {
+        if ( arr[i].id === value ) {
+          console.log('good deal')
+          arr[i].paid = 2;
+          arr[i].completed = 2;
+          break;
+        }
+      }
+    }
+    this.api.openSnackBar(consts.msg.OrderCanceledS);
     this.service.cancelOrder(id).subscribe(() => {
       console.log('refunded');
-      function edit(array, el) {
-        return array.find(e => {
-          if ( e.id === el ) {
-            e.paid = 2;
-            e.completed = 2;
-          }
-        });
-      }
-      this.dataSource = edit(this.dataSource, id);
-      this.api.openSnackBar(consts.msg.OrderCanceledS);
+      edit(this.dataSource.data, id);
+      // console.log('response ', res);
+      // console.log('dataSource', this.dataSource);
+
     });
   }
 }

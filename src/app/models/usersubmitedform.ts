@@ -1,7 +1,7 @@
 export class Client {
     constructor(
         public time: string,
-        public duration: string,
+        public duration: any,
         public date: string,
         public cityId: string,
         public cityName: string,
@@ -12,6 +12,6 @@ export class Client {
 
 export class ClientBuilder {
   static  build(): Client {
-    return  new Client('', '', '', '', '', '', '');
+    return  new Client('', {}, '', '', '', '', '');
   }
 }

@@ -18,6 +18,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onCloseButtonClick()">Cancel</button>
-  <button mat-button [mat-dialog-close] [disabled]="clockSize.invalid || workHours.invalid || price.invalid" (click)="edit(data)" cdkFocusInitial>Save</button>
+  <button mat-button [mat-dialog-close] [disabled]="clockSize.invalid || workHours.invalid || price.invalid" (click)="edit()" cdkFocusInitial>Save</button>
 </div>
 

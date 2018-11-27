@@ -34,17 +34,17 @@ export class DialogEditMasterComponent {
   }
 
   getMasterNameErrorMessage() {
-    return this.masterName.hasError('required') ? 'Name is required' :
+    return this.masterName.hasError('required') ? consts.valMsg.NameIsRequired :
               '';
   }
 
   getMasterRatingMessage() {
-    return this.masterRatingEdit.hasError('required') ? 'Rating is required' :
+    return this.masterRatingEdit.hasError('required') ? consts.valMsg.RatingIsRequired :
               '';
   }
 
   getMasterCityMessage() {
-  return this.masterCity.hasError('required') ? 'City is required' :
+  return this.masterCity.hasError('required') ? consts.valMsg.MustChooseCity :
             '';
   }
 

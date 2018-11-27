@@ -5,6 +5,9 @@ import { Client, ClientBuilder } from '../models/usersubmitedform';
 import { CitiesService } from '../services/cities.service';
 import { MastersService } from '../services/masters.service';
 import {SettingsService} from '../services/settings.service';
+import { consts } from '../cosntants';
+import {environment} from '../../environments/environment';
+
 
 @Component({
   templateUrl: './client.component.html',
@@ -22,46 +25,33 @@ export class ClientComponent implements OnInit {
   minDate = new Date(this.today.setDate(this.today.getDate() + 1));
   isFormSubmitted = false;
   submittedForm: Client =  ClientBuilder.build();
-  workHours = [
-    {hour: 8},
-    {hour: 9},
-    {hour: 10},
-    {hour: 11},
-    {hour: 12},
-    {hour: 13},
-    {hour: 14},
-    {hour: 15},
-    {hour: 16},
-    {hour: 17}
-  ];
+  workHours = this.buildHoursAvailableForOrder();
   clockSize;
 
   getEmailErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter email' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
+    return this.email.hasError('required') ? consts.valMsg.MustEnterEmail :
+        this.email.hasError('email') ? consts.valMsg.NotValidEmail : '';
   }
 
   getNameErrorMessage() {
-    return this.name.hasError('required') ? 'Name is required' :
-        this.name.hasError('minlength') ? 'Should be at least 3 characters' :
-            '';
+    return this.name.hasError('required') ? consts.valMsg.NameIsRequired :
+        this.name.hasError('minlength') ? consts.valMsg.AtLeast3Chars : '';
   }
 
   getCityErrorMessage() {
-    return this.city.hasError('required') ? 'You must choose city' : '';
+    return this.city.hasError('required') ? consts.valMsg.MustChooseCity : '';
   }
 
   getDateErrorMessage() {
-    return this.date.hasError('required') ? 'You must choose date' : '';
+    return this.date.hasError('required') ? consts.valMsg.MustChooseDate : '';
   }
 
   getTimeErrorMessage() {
-    return this.time.hasError('required') ? 'You must choose time' : '';
+    return this.time.hasError('required') ? consts.valMsg.MustChooseTime : '';
   }
 
   getSizeErrorMessage() {
-    return this.size.hasError('required') ? 'You must choose size' : '';
+    return this.size.hasError('required') ? consts.valMsg.MustChooseSize : '';
   }
 
 
@@ -143,5 +133,13 @@ export class ClientComponent implements OnInit {
     this.isFormSubmitted = false;
   }
 
+  buildHoursAvailableForOrder() {
+    const arr = [];
+    const duration = environment.availableForOrderHours.finish - environment.availableForOrderHours.start;
+    for (let i = 0; i <= duration; i++) {
+      arr[ i ] = {'hour': ( i + environment.workingHours.start )};
+    }
+    return arr;
+  }
 }
 

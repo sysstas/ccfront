@@ -17,6 +17,10 @@ export const environment = {
   availableToOrderHours: {
     start: 8,
     finish: 17
+  },
+  masterRatingScale: {
+    start: 1,
+    finish: 5
   }
   ///
 };

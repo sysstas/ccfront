@@ -9,6 +9,7 @@ import { DialogDeleteMasterComponent } from './dialogs/dialog.delete.master.comp
 import {consts} from '../../cosntants';
 import {NGXLogger} from 'ngx-logger';
 import { Master} from '../../models/master';
+import {environment} from '../../../environments/environment';
 
 @Component({
   templateUrl: './masters.component.html',
@@ -18,13 +19,7 @@ export class MastersComponent implements OnInit {
   masters = [];
   cities = [];
   name: string;
-  masterRating = [
-    {mark: 1},
-    {mark: 2},
-    {mark: 3},
-    {mark: 4},
-    {mark: 5}
-  ];
+  masterRating = this.buildMasterRating();
   newMaster = {
     cityId: '',
     masterName : '',
@@ -146,5 +141,14 @@ export class MastersComponent implements OnInit {
         this.api.openSnackBar(consts.msg.MasterDeletedS);
       }
     });
+  }
+
+  buildMasterRating() {
+    const arr = [];
+    const range = environment.masterRatingScale.finish - environment.masterRatingScale.start;
+    for (let i = 0; i <= range; i++) {
+      arr[ i ] = {'mark': ( i + environment.masterRatingScale.start )};
+    }
+    return arr;
   }
 }

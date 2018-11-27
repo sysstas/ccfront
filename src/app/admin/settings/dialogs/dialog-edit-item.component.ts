@@ -3,6 +3,7 @@ import {ApiService} from '../../../api.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {SettingsService} from '../../../services/settings.service';
 import {FormControl, Validators} from '@angular/forms';
+import {consts} from '../../../cosntants';
 
 @Component({
   templateUrl: './dialog-edit-item.component.html'
@@ -30,17 +31,17 @@ export class DialogEditItemComponent {
   }
 
   getClockSizeErrorMessage() {
-    return this.clockSize.hasError('required') ? 'Name is required' :
+    return this.clockSize.hasError('required') ? consts.valMsg.SizeIsRequired :
       '';
   }
 
   getWorkHoursMessage() {
-    return this.workHours.hasError('required') ? 'Rating is required' :
+    return this.workHours.hasError('required') ? consts.valMsg.MustSpecifyHours :
       '';
   }
 
   getPriceMessage() {
-    return this.price.hasError('required') ? 'City is required' :
+    return this.price.hasError('required') ? consts.valMsg.PriseIsRequired :
       '';
   }
 

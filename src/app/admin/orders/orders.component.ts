@@ -52,7 +52,7 @@ export class OrdersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   orders = [];
-  displayedColumns = ['id', 'city', 'userEmail', 'userName', 'date', 'time', 'duration', 'master', 'paid', 'completed', 'Action'];
+  displayedColumns = Order.order
   dataSource = new MatTableDataSource();
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);

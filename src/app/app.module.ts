@@ -40,7 +40,6 @@ import {IsCompleted, IsPaid, ColorPipe, OrdersComponent} from './admin/orders/or
 import {AuthGuardService} from './auth-guard.service';
 import {AuthInterceptorService} from './authInterceptor.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {UserRegisterComponent} from './client/user-register/user-register.component';
 import {UserAccountComponent} from './client/user-account/user-account.component';
 import {OrderHistoryComponent} from './client/order-history/order-history.component';
 import {UserAccountService} from './services/user-account.service';
@@ -72,7 +71,6 @@ import {ScheduleService} from './services/schedule.service';
 const routes: Routes = [
   { path: '', component: ClientComponent},
   { path: 'client', component: ClientComponent},
-  { path: 'register/:id', component: UserRegisterComponent},
   { path: 'callback', component: CallbackComponent},
   { path: 'account', component: UserAccountComponent, canActivate: [AuthGuardService]},
   { path: 'history', component: OrderHistoryComponent, canActivate: [AuthGuardService]},
@@ -115,7 +113,6 @@ const routes: Routes = [
     IsPaid,
     ColorPipe,
     IsCompleted,
-    UserRegisterComponent,
     UserAccountComponent,
     OrderHistoryComponent,
     DialogEditCityComponent,

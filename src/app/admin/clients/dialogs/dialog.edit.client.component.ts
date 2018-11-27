@@ -3,6 +3,7 @@ import { ApiService } from '../../../api.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { ClientsService } from '../../../services/clients.service';
+import {consts} from '../../../cosntants';
 
 @Component({
   selector: 'app-dialog-edit',
@@ -32,13 +33,13 @@ export class DialogEditClientComponent {
   }
 
   getUserNameErrorMessage() {
-    return this.userName.hasError('required') ? 'You must enter user name' :
+    return this.userName.hasError('required') ? consts.valMsg.NameIsRequired :
               '';
   }
 
   getUserEmailErrorMessage() {
-    return this.userEmail.hasError('required') ? 'You must enter email' :
-    this.userEmail.hasError('email') ? 'Not a valid email' :
+    return this.userEmail.hasError('required') ? consts.valMsg.MustEnterEmail :
+    this.userEmail.hasError('email') ? consts.valMsg.NotValidEmail :
     '';
   }
 }

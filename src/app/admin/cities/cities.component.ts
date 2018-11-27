@@ -7,7 +7,6 @@ import { DialogEditCityComponent } from './dialogs/dialog.edit.city.component';
 import { DialogDeleteCityComponent } from './dialogs/dialog.delete.city.component';
 import { consts } from '../../cosntants';
 import {NGXLogger} from 'ngx-logger';
-import {_if} from 'rxjs-compat/observable/if';
 
 @Component({
   templateUrl: './cities.component.html',
@@ -25,8 +24,8 @@ export class CitiesComponent implements OnInit {
   ) { }
 
   getCityErrorMessage() {
-    return this.city.hasError('required') ? 'You must enter city name' :
-        this.city.hasError('minLength') ? 'Min length is 2 char' :
+    return this.city.hasError('required') ? consts.valMsg.MustEnterCityName :
+        this.city.hasError('minLength') ? consts.valMsg.MinLength2Chars :
             '';
   }
 

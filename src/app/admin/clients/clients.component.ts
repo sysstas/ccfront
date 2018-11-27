@@ -118,13 +118,13 @@ export class ClientsComponent implements OnInit {
   }
 
   getUserNameErrorMessage() {
-    return this.userName.hasError('required') ? 'You must enter user name' :
+    return this.userName.hasError('required') ? consts.valMsg.NameIsRequired :
               '';
   }
 
   getUserEmailErrorMessage() {
-    return this.userEmail.hasError('required') ? 'You must enter email' :
-    this.userEmail.hasError('email') ? 'Not a valid email' :
+    return this.userEmail.hasError('required') ? consts.valMsg.MustEnterEmail :
+    this.userEmail.hasError('email') ? consts.valMsg.NotValidEmail :
     '';
   }
 

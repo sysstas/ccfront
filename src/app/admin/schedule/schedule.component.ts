@@ -19,7 +19,6 @@ export class ScheduleComponent implements OnInit {
     date: this.buildCurrentDate(),
   };
   displayedColumns = this.buildDisplayedColumns();
-  workingHours = environment.workingHours.finish - environment.workingHours.start;
   start = environment.workingHours.start;
   constructor(
     public citiesService: CitiesService,

@@ -35,6 +35,14 @@
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Duration</mat-header-cell>
                   <mat-cell *matCellDef="let element">{{element.duration}} hr</mat-cell>
               </ng-container>
+              <ng-container matColumnDef="item">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Item</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.item}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="price">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Price</mat-header-cell>
+                <mat-cell *matCellDef="let element">${{element.price}}</mat-cell>
+              </ng-container>
               <ng-container matColumnDef="master">
                   <mat-header-cell *matHeaderCellDef mat-sort-header>Master</mat-header-cell>
                   <mat-cell *matCellDef="let element">{{element.master}}</mat-cell>

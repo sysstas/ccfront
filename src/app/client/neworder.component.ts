@@ -34,8 +34,9 @@ export class NewOrderComponent implements OnInit {
       onCancel: () => {
         console.log('OnCancel');
       },
-      onError: () => {
-        console.log('OnError');
+      onError: ( error ) => {
+        console.log('OnError', error);
+        console.log('asdfffffffffffffff', this.orderInformation.price, this.api.createdOrdetInformation.id, this.orderInformation.masterName, this.orderInformation.price, this.api.createdOrdetInformation.id)
       },
       transactions: [{
         amount: {

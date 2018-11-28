@@ -68,7 +68,8 @@ export class ClientComponent implements OnInit {
       userEmail: this.submittedForm.userEmail,
       cityID: this.submittedForm.cityId,
       user: this.api.currentUser,
-      price: this.submittedForm.duration.price
+      price: this.submittedForm.duration.price,
+      item: this.submittedForm.duration
     };
     console.log('CONTROLLER oderInfo', oderInfo);
 

@@ -16,6 +16,12 @@
 .mat-column-duration{
     flex: 0 0 70px;
 }
+.mat-column-item{
+  flex: 0 0 70px;
+}
+.mat-column-price{
+  flex: 0 0 70px;
+}
 .mat-column-date{
     flex: 0 0 100px;
 }
@@ -53,7 +59,7 @@
   font-size: 14px;
 }
 .row{
-  width: 1250px;
+  width: 1350px;
 }
 
 

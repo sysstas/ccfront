@@ -4,6 +4,7 @@ import { ApiService } from '../../api.service';
 import { MatPaginator, MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { OrdersService } from '../../services/orders.service';
 import {consts} from '../../cosntants';
+import {Order} from '../../models/order';
 
 @Pipe({name: 'colorPipe'})
 export class ColorPipe implements PipeTransform {
@@ -52,7 +53,7 @@ export class OrdersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   orders = [];
-  displayedColumns = Order.order
+  displayedColumns = Order.getOrderColumns();
   dataSource = new MatTableDataSource();
   email = new FormControl('', [Validators.required, Validators.email]);
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
@@ -76,10 +77,12 @@ export class OrdersComponent implements OnInit {
           x.master = x.master.masterName;
           x.userName = x.user.userName;
           x.userEmail = x.user.userEmail;
+          x.item = x.serviceItem.id;
+          x.price = x.serviceItem.price;
           return x;
         });
         this.orders = res;
-        // console.log('Component get 1: ', this.dataSource.data.length);
+        console.log('Orders', res);
         this.dataSource = new MatTableDataSource(this.orders);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Client, ClientBuilder } from '../models/usersubmitedform';
@@ -27,6 +27,7 @@ export class ClientComponent implements OnInit {
   submittedForm: Client =  ClientBuilder.build();
   workHours = this.buildHoursAvailableForOrder();
   clockSize;
+  masterName;
 
   getEmailErrorMessage() {
     return this.email.hasError('required') ? consts.valMsg.MustEnterEmail :
@@ -53,7 +54,6 @@ export class ClientComponent implements OnInit {
   getSizeErrorMessage() {
     return this.size.hasError('required') ? consts.valMsg.MustChooseSize : '';
   }
-
 
   makeOrder(master) {
     console.log('CONTROLLER master', master);
@@ -107,6 +107,7 @@ export class ClientComponent implements OnInit {
   }
 
   find() {
+    this.masterName = null;
     const userData = {
       userName: this.submittedForm.userName,
       userEmail: this.submittedForm.userEmail

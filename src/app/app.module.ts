@@ -65,6 +65,7 @@ import {SettingsService} from './services/settings.service';
 import { DialogEditItemComponent } from './admin/settings/dialogs/dialog-edit-item.component';
 import { DialogDeleteItemComponent } from './admin/settings/dialogs/dialog-delete-item.component';
 import {ScheduleService} from './services/schedule.service';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -148,7 +149,8 @@ const routes: Routes = [
     MatCardModule,
     MatProgressSpinnerModule,
     NgxPayPalModule,
-    LoggerModule.forRoot({level: environment.logger})
+    LoggerModule.forRoot({level: environment.logger}),
+    MatRadioModule
   ],
   entryComponents: [NavigationComponent,
     DialogLogin,

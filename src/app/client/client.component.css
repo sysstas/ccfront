@@ -49,6 +49,12 @@
   color: darkcyan;
   font-weight: bold;
 }
+
+.list-group-item{
+  outline: none;
+  text-align: left;
+  padding-left: 10px;
+}
 button{
   margin: 5px;
 }

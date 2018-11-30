@@ -70,7 +70,7 @@
     <div class="" *ngIf="isFormSubmitted">
       <div class="  col-xl-12">
         
-        <button (click)="backToStep1()" mat-raised-button color="primary" type="submit" >Back to Step 1</button> 
+        <button (click)="backToStep1()" mat-raised-button color="accent" type="submit" >Back</button>
         
         <mat-form-field>
           <input matInput [matDatepicker]="picker" placeholder="Change date" [(ngModel)]="submittedForm.date" name="date1" required>
@@ -84,27 +84,58 @@
           </mat-select>
         </mat-form-field>
 
-        <button (click)="find()" mat-raised-button color="primary" type="submit" >Find Free Masters</button>
+        <button (click)="find()" mat-raised-button color="accent" type="submit" >Find Free Masters</button>
          
       </div>
 
       
       <mat-divider></mat-divider>
-
       <div class="content-item col-xl-12 center">
+        <!--<div *ngIf="api.arr?.length" class="form-container">-->
+          <!--<h1>Step 2</h1>-->
+          <!--<h3>Choose master</h3>-->
+          <!--<mat-list *ngFor="let master of api.arr" class="masters-container">-->
+            <!--<mat-list-item>-->
+              <!--<h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>-->
+
+              <!--<p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p>-->
+              <!--<button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>-->
+            <!--</mat-list-item>-->
+          <!--</mat-list>-->
+          <!--<mat-divider></mat-divider>-->
+        <!--</div>-->
+
         <div *ngIf="api.arr?.length" class="form-container">
           <h1>Step 2</h1>
           <h3>Choose master</h3>
-          <mat-list *ngFor="let master of api.arr" class="masters-container">  
-            <mat-list-item>
-              <h4 mat-line>Name:<span class="master-font">{{master.masterName }}</span> </h4>
-
-              <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p> 
-              <button  mat-line (click)="makeOrder(master)" mat-raised-button color="accent" type="submit" >Order this master</button>   
-            </mat-list-item>
-          </mat-list>
-          <mat-divider></mat-divider>
+          <mat-radio-group [(ngModel)]="masterName">
+            <div class="list-group masters-container">
+              <div *ngFor="let master of api.arr" class="list-group-item list-group-item-action list-group-item-warning">
+                <div class="col-xl-12">
+                  <mat-radio-button   [value]=master>
+                    <p mat-line>Name:<span class="master-font">{{master.masterName }}</span> </p>
+                    <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p>
+                  </mat-radio-button>
+                </div>
+              </div>
+            </div>
+          </mat-radio-group>
+          <div class="masters-container" *ngIf="masterName">
+            <div class="example-selected-value">Your choose: {{masterName.masterName}}</div>
+            <button  mat-line (click)="makeOrder(masterName)" mat-raised-button color="primary" type="submit" >Order this master</button>
+          </div>
+          <div class="masters-container" *ngIf="!masterName">
+            <button mat-line (click)="makeOrder(masterName)" mat-raised-button disabled type="submit" >Order this master</button>
+          </div>
         </div>
+
+        <!--<div class="form-container">-->
+          <!--<-->
+            <!--<a  href="#" class="list-group-item list-group-item-action list-group-item-warning">{{master.masterName }}</a>-->
+
+        <!--</div>-->
+
+
         <div *ngIf="!api.arr?.length" >
           <h1>Sorry, all masters are busy at this time. Choose another time or date</h1>
         </div>

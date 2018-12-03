@@ -4,7 +4,6 @@ import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserRegInfo } from './models/userRegInfo';
 import { environment} from '../environments/environment';
 import { consts } from './cosntants';
 
@@ -14,7 +13,6 @@ const helper = new JwtHelperService();
 export class ApiService {
 
   users = [];
-  initialUserData = new UserRegInfo('', '', '', '', 0);
   currentUser = {};
   newOrderInformation;
   createdOrdetInformation;
@@ -32,27 +30,6 @@ export class ApiService {
 
   get token() {
     return localStorage.getItem(this.TOKEN_KEY);
-  }
-
-  getInitialRegisterData(data) {
-    // console.log('API.getInitialRegisterData runs, id - ', data.id);
-    this.http.get<any>(`${this.addr}/register/${data.id}`).subscribe(res => {
-      this.initialUserData = res;
-      // console.log('API.getInitialRegisterData data received ', this.initialUserData);
-    });
-  }
-
-  postRegisteredUserData() {
-    // console.log('API.postRegisteredUserData runs ');
-    const userData = {
-      email: this.initialUserData.userEmail,
-      password: this.initialUserData.password
-    };
-
-    this.http.post(`${this.addr}/register`, userData ).subscribe(res => {
-      // console.log('API.postRegisteredUserData received ', res);
-    });
-    this.router.navigate(['/']);
   }
 
   getClients() {

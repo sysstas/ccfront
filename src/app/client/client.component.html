@@ -112,7 +112,7 @@
             <div class="list-group masters-container">
               <div *ngFor="let master of api.arr" class="list-group-item list-group-item-action list-group-item-warning">
                 <div class="col-xl-12">
-                  <mat-radio-button   [value]=master>
+                  <mat-radio-button  color="primary" [value]=master>
                     <p mat-line>Name:<span class="master-font">{{master.masterName }}</span> </p>
                     <p mat-line>Rating:<span class="master-font"> {{master.masterRating | json}}</span> </p>
                   </mat-radio-button>

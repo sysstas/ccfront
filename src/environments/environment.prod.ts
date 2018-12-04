@@ -3,7 +3,7 @@ import {NgxLoggerLevel} from 'ngx-logger';
 export const environment = {
   production: true,
   // backEndUrl: 'https://blooming-ocean-36906.herokuapp.com',
-  backEndUrl: 'https://ccback.cf',
+  backEndUrl: 'https://ec2-52-49-177-72.eu-west-1.compute.amazonaws.com',
   logger: NgxLoggerLevel.OFF,
   logoutUrl: 'http://clockwiseclockwork.eu.auth0.com/v2/logout',
   currentUrl: 'clockwise-clockwork.s3-website-eu-west-1.amazonaws.com',

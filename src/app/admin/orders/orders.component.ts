@@ -15,6 +15,8 @@ export class ColorPipe implements PipeTransform {
       return 'green';
     } else if (value === 2) {
       return 'red';
+    } else if (value === 3) {
+      return 'redBlink';
     }
   }
 }
@@ -27,6 +29,8 @@ export class IsPaid implements PipeTransform {
           return 'Not paid';
         } else if (value === 2) {
           return 'Refunded';
+        } else if (value === 3) {
+          return 'Fraud';
         }
     }
 }

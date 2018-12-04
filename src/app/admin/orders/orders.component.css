@@ -61,7 +61,20 @@
 .row{
   width: 1350px;
 }
+.redBlink{
+  animation:blinkingText 1s 5;
+  color: crimson;
+  flex: 0 0 90px;
+  font-size: 14px;
+}
 
+@keyframes blinkingText{
+  0%{     color: crimson;  }
+  49%{    color: transparent; }
+  50%{    color: transparent;  }
+  75%{    color: transparent;  text-shadow: 0 0 1px crimson;   }
+  100%{   color: crimson;  text-shadow: 0 0 2px crimson; }
+}
 
 
 
